@@ -1,0 +1,24 @@
+# Jupyter Book / MyST build output
+_build/
+.myst/
+
+# Emacs backup and lock files
+*~
+\#*\#
+.\#*
+
+# Python / Environment virtual folders
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Node / Dependency caches
+node_modules/
+.npm/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
