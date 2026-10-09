@@ -28,13 +28,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Jupyter Book / MyST
+      - name: Install MyST
         run: |
-          npm install -g mystmd jupyter-book
+          npm install -g mystmd
 
       - name: Build HTML Site
         run: |
-          jupyter-book build --html --base-url /termis/
+          myst build --html
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
