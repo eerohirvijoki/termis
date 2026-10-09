@@ -11,5 +11,3 @@ project:
 
 site:
   template: book-theme
-  options:
-    url: /termis/
