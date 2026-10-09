@@ -34,7 +34,7 @@ jobs:
 
       - name: Build HTML Site
         run: |
-          jupyter-book build --html
+          jupyter-book build --html --base-url /termis/
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
