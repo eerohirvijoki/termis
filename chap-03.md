@@ -8,36 +8,36 @@ The equations of motion describing the evolution of simple fluids, as those ofte
 - learning goals
 
 
-## The flow map of a vector field
+## <span class="intermediate"></span> The flow map of a vector field
 Assume the vector field 
 
-## Differential line-, surface, and volume elements
+## <span class="intermediate"></span> Differential line-, surface, and volume elements
 Consider a coordinate triplet 
 
-## Rank-2 tensors
+## <span class="advanced"></span> Rank-2 tensors
 Similarly as the initial position of a pollen grain dropped into a flowing fluid is mapped into a new position over time, also the vectors 
 
-## Evolution of differential elements
+## <span class="advanced"></span> Evolution of differential elements
 Now return to the expression 
 
-## Leibniz rule for differentiating integrals
+## <span class="advanced"></span> Leibniz rule for differentiating integrals
 Deriving equations for the evolution of fluid quantities requires differentiating volume integrals over domains that flow with the fluid velocity 
 
-## Conservation of mass
+## <span class="elementary"></span> Conservation of mass
 Consider a volume 
 
-## Conservation of momentum
+## <span class="elementary"></span> Conservation of momentum
 According to Newton's second law, the rate of change of linear momentum of a body equals the net forces acting on it. The forces acting on a volume of fluid include gravity that is distributed throughout the fluid volume, and mechanical contact force that is distributed on the surface of the body. Since the total force must be finite, yet distributed over the body volume and surface, both the body and surface force need to be treated differentially while the total force is an integral of the differential force. 
 
 
-## Conservation of angular momentum
+## <span class="elementary"></span> Conservation of angular momentum
 For point masses, the definition 
 
-## Conservation of energy
+## <span class="elementary"></span> Conservation of energy
 A differential volume 
 
-## Constitutive relations for stress and heat flux
+## <span class="elementary"></span> Constitutive relations for stress and heat flux
 The conservation principles of mass, momentum, and energy discussed above lead to local differential equations from which the local time rate of change of fluid's density, velocity, and internal energy ought to be computed. 
 
-## Summary
+## <span class="elementary"></span> Summary
 The motion of a fluid can be described by following individual points along the flow and studying how differential line, surface, and volume elements evolve. 

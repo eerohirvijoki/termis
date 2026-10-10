@@ -13,3 +13,6 @@ project:
 
 site:
   template: book-theme
+  
+  options:
+    style: ./_snippets/custom.css
