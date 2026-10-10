@@ -8,6 +8,8 @@ project:
   toc:
     - file: index.md
     - file: chap-01.md
+    - file: chap-02.md
+    - file: chap-03.md
 
 site:
   template: book-theme
