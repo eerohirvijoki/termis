@@ -4,6 +4,29 @@ This chapter first discusses how macroscopic matter is built from its microscopi
 ## <span class="elementary"></span> Internal energy and equilibrium state 
 Under close inspection, ordinary matter is observed to consist of particles such as atoms, molecules, and ions. All of these particles interact through forces that have origins in the Coulomb interactions between their charged constituents, namely electrons and nuclei. Even when particles carry no net electric charge, the internal distribution of positive and negative charge gives rise to effective interactions that can be attractive at moderate separations and strongly repulsive at very short separations. As a result, the interaction between two individual particles can be understood as a consequence of potential energy that has a minimum at a characteristic distance.
 
+For a collection of particles, the collective effect of different interaction strengths and geometries leads to different macroscopic states. In a solid, particles typically reside close to each other and their preferred separations vibrating about equilibrium positions. In a liquid, particles reside close together and near their preferred separations but continually rearrange over time. In a gas, the average separation is large and interactions are weak except when particles briefly pass each other close by in an event that can be described as an instantaneous collision. For an illustration, the sketches in {numref}`fig-water-solid-liquid-vapor-molecules` show collections of water particles in various configurations. The macroscopic state of matter is therefore governed by a competition between the interparticle potential energy, which favours certain separations and arrangements, and the kinetic energy of the particles, which includes contributions from translational, rotational, and vibrational motion. The microscopic kinetic and interaction potential energies of the particles, excluding the center-of-mass kinetic energy, gravitational energy, and nuclear binding energy, are referred to as internal energy.
+
+:::{figure} 
+:label: fig-water-solid-liquid-vapor-molecules
+:align: center
+:class: grid grid-cols-5 gap-2 items-end
+
+![Solid water](./figs/fig-water-frozen.png)
+
+![Melting water](./figs/fig-water-melting.png)
+
+![Liquid water](./figs/fig-water-liquid.png)
+
+![Evaporating water](./figs/fig-water-evaporating.png)
+
+![Gaseous water](./figs/fig-water-gaseous.png)
+
+Left to right: solid, melting, liquid, evaporating, and gaseous water with hydrogen bonds (cyan dashed lines) illustrated.
+:::
+
+As the motion of the particles in classical sense is governed by Newton's laws, the particles continually exchange energy and momentum through their interactions, the forces between them. A collection of particles is said to be in a thermodynamic equilibrium state when this exchange has led to a distribution of energies and configurations that appears time-independent when averaged over a short period of time. Although individual particles continue to move, interact, and exchange energy and momentum, the overall distribution of energies and configurations in an equilibrium state remains approximately steady in time.
+
+
 ## <span class="elementary"></span> Boundary types, heat, and work
 Consider two collections of particles, each of which has settled into its own equilibrium state. Regard each such collection as a system. A boundary between systems is any surface that separates them and determines the mechanisms by which energy can be transferred between the systems.
 
@@ -17,21 +40,38 @@ In general, work is any energy transfer across a boundary that is not heat, incl
 ## <span class="elementary"></span> Density, specific volume, and molar volume
 A macroscopic description of matter should be consistent with experimental observations while remaining as simple as possible and expressible in terms of a small number of variables. Although the state of matter is determined from the microscopic energy and configuration distributions, a macroscopic description should not depend on the detailed positions and motions of individual particles, but instead capture their collective effect.
 
-As the forces between particles depend strongly on the distances between them, and the motion of each particle in response to these forces depends on its mass, the macroscopic state of matter can be expected to depend on the mass--volume ratio of the system. This motivates introducing macroscopic variables referred to as density and specific volume
+As the forces between particles depend strongly on the distances between them, and the motion of each particle in response to these forces depends on its mass, the macroscopic state of matter can be expected to depend on the mass--volume ratio of the system. This motivates introducing macroscopic variables referred to as density $\rho$ and specific volume $v$ via
 
-```{math}
-:label: eq-a
-a=f(x)
-```
-```{math}
-:label: eq-b
-b=\int_{0}^{1}g(x)dx
-```
-
-This is a citation to an equation [](#eq-a).
+:::{math}
+:label: eq:chap-01:density-specific-volume
+\rho&=\frac{m}{V}, \qquad  v=\frac{V}{m} 
+:::
 
 Density measures how closely packed the particles are within the boundary, while specific volume indicates how much space is available per unit mass of matter. 
 
+As different materials consist of different types of particles with different particle masses, it is sometimes useful to describe the ratio of volume $V$ to the number of particles $N$ rather than to the total mass. The typical number of particles in a macroscopic volume, however, is large, so one uses the Avogadro constant $N_A=6.02214076\times 10^{23}\,\text{mol}^{-1}$ and the number of moles $n$ instead of the absolute number of particles. This leads to a macroscopic variable definition referred to as molar volume 
+:::{math}
+:label: eq:chap-01:molar-volume
+    V_m=\frac{V}{n}=N_A\frac{V}{N}=Mv,
+:::
+where the link to specific volume is provided by the molar mass $M=m/n$ of the matter. 
+
+Although macroscopic quantities, density, specific volume, and molar volume can be defined for a collection of particles whether or not it is in an equilibrium state. The SI-units for the space and mass related quantities are listed in {numref}`tab:chap-01:-volume-mass-related-units`
+
+:::{table} Units of volume and mass related quantities.
+:label: tab:chap-01:-volume-mass-related-units
+:align: center
+:class: booktabs
+
+| Symbol | Name | SI unit |
+|:---:|:---|:---:|
+| $V$ | Volume | $\text{m}^3$ |
+| $m$ | Mass | $\text{kg}$ |
+| $\rho$ | Density | $\text{kg}\,\text{m}^{-3}$ |
+| $v$ | Specific volume | $\text{m}^3\,\text{kg}^{-1}$ |
+| $M$ | Molar mass | $\text{kg}\,\text{mol}^{-1}$ |
+| $V_m$ | Molar volume | $\text{m}^3\,\text{mol}^{-1}$ |
+:::
 
 ## <span class="elementary"></span> Pressure
 Consider then a cylinder filled with gas and closed with a piston, as in
