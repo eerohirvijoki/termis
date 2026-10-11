@@ -6,23 +6,28 @@ Under close inspection, ordinary matter is observed to consist of particles such
 
 For a collection of particles, the collective effect of different interaction strengths and geometries leads to different macroscopic states. In a solid, particles typically reside close to each other and their preferred separations vibrating about equilibrium positions. In a liquid, particles reside close together and near their preferred separations but continually rearrange over time. In a gas, the average separation is large and interactions are weak except when particles briefly pass each other close by in an event that can be described as an instantaneous collision. For an illustration, the sketches in {numref}`fig-water-solid-liquid-vapor-molecules` show collections of water particles in various configurations. The macroscopic state of matter is therefore governed by a competition between the interparticle potential energy, which favours certain separations and arrangements, and the kinetic energy of the particles, which includes contributions from translational, rotational, and vibrational motion. The microscopic kinetic and interaction potential energies of the particles, excluding the center-of-mass kinetic energy, gravitational energy, and nuclear binding energy, are referred to as internal energy.
 
-:::{figure} 
+:::::{figure}
 :label: fig-water-solid-liquid-vapor-molecules
 :align: center
-:class: grid grid-cols-5 gap-2 items-end
+:class: my-subfigures grid grid-cols-5 items-end gap-2 
 
+(water-solid)=
 ![Solid water](./figs/fig-water-frozen.png)
 
+(water-melting)=
 ![Melting water](./figs/fig-water-melting.png)
 
+(water-liquid)=
 ![Liquid water](./figs/fig-water-liquid.png)
 
+(water-evaporating)=
 ![Evaporating water](./figs/fig-water-evaporating.png)
 
+(water-gas)=
 ![Gaseous water](./figs/fig-water-gaseous.png)
 
-Left to right: solid, melting, liquid, evaporating, and gaseous water with hydrogen bonds (cyan dashed lines) illustrated.
-:::
+Water in different configurations, with hydrogen bonds illustrated (cyan dashed lines).
+:::::
 
 As the motion of the particles in classical sense is governed by Newton's laws, the particles continually exchange energy and momentum through their interactions, the forces between them. A collection of particles is said to be in a thermodynamic equilibrium state when this exchange has led to a distribution of energies and configurations that appears time-independent when averaged over a short period of time. Although individual particles continue to move, interact, and exchange energy and momentum, the overall distribution of energies and configurations in an equilibrium state remains approximately steady in time.
 
@@ -44,7 +49,7 @@ As the forces between particles depend strongly on the distances between them, a
 
 :::{math}
 :label: eq:chap-01:density-specific-volume
-\rho&=\frac{m}{V}, \qquad  v=\frac{V}{m} 
+\rho=\frac{m}{V}, \qquad  v=\frac{V}{m} 
 :::
 
 Density measures how closely packed the particles are within the boundary, while specific volume indicates how much space is available per unit mass of matter. 

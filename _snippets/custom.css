@@ -1,10 +1,13 @@
+/* For illustrating the different levels of content depth */
+
 .elementary {
   display: inline-block;
   width: 12px;
   height: 12px;
   background-color: #58CC0B;
   margin-right: 8px;
-  vertical-align: middle;
+  margin-left: 8px;
+  border-radius: 3px;
 }
 
 .intermediate {
@@ -13,7 +16,9 @@
   height: 12px;
   background-color: #FFA500;
   margin-right: 8px;
+  margin-left: 8px;
   vertical-align: middle;
+  border-radius: 3px;
 }
 
 .advanced {
@@ -22,5 +27,34 @@
   height: 12px;
   background-color: #CC0B58;
   margin-right: 8px;
+  margin-left: 8px;
   vertical-align: middle;
+  border-radius: 3px;
+}
+
+/* For multipanel figure caption to span the entire width */
+.my-subfigures > figcaption {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+
+/* for custom lists to replace bullets */
+.level-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
+}
+
+.level-list-item > span {
+  flex: 0 0 12px;
+  margin: 0;
+  margin-top: 0.3em;
+}
+
+.level-list-item > div {
+  flex: 1;
+  min-width: 0;
 }
