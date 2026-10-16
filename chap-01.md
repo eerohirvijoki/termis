@@ -1,5 +1,19 @@
 # Introduction
-This chapter first discusses how macroscopic matter is built from its microscopic constituents and how it interacts with its surroundings. The discussion leads to the concepts of internal energy and equilibrium state, to the definitions for different boundary types, and to concepts of heat and work. The chapter then describes the state variables that are needed for a macroscopic description of matter. While doing so, the zeroth law of thermodynamics is encountered. Finally, the chapter closes by providing a roadmap to these lecture notes and a brief discussion on how thermodynamics and continuum mechanics are positioned with respect to each other and with respect to other classical fields of engineering.
+This chapter first discusses how macroscopic matter is built from its microscopic constituents and how it interacts with its surroundings. The discussion leads to the concepts of internal energy and equilibrium state, to the definitions for different boundary types, and to concepts of heat and work. Here, these concepts are introduced without any equations. Later, mathematics will provide the language for quantitative interpretation of the same ideas. The chapter then proceeds to describe the state variables that are needed for the macroscopic description of matter. While doing so, the zeroth law of thermodynamics is encountered, providing an interpretation for temperature. Before closing, the chapter briefly discusses how description for the motion of matter can take two different viewpoints, setting the premise for later analysis of fluid motion. Finally, a roadmap to these notes is provided, together with a brief discussion on how thermodynamics and continuum mechanics are positioned with respect to each other. Below one may also find the learning goals for this chapter.
+
+## Learning goals
+
+- <span class="elementary"></span> The reader recognizes the microscopic origin of internal energy.
+- <span class="elementary"></span> The reader differentiates a thermal equilibrium state from a non-equilibrium state.
+- <span class="elementary"></span> The reader recognizes heat and work as energy in transfer and differentiates between the two.
+- <span class="elementary"></span> The reader lists the different boundary types a system can have, and classifies interaction of systems with their surroundings with the help of the boundary types.
+- <span class="elementary"></span> The reader is able to convert between the different volume-variable variants (density, specific volume, molar volume).
+- <span class="elementary"></span> The reader provides an interpretation for pressure.
+- <span class="intermediate"></span> The reader recognizes the difference between pressure and stress.
+- <span class="elementary"></span> The reader recalls the zeroth law of thermodynamics
+- <span class="elementary"></span> The reader uses a gas thermometer to estimate temperature with respect to a reference temperature.
+- <span class="advanced"></span> The reader differentiates between the Eulerian rate of change of velocity and the material rate of change of velocity for a flow.
+
 
 ## <span class="elementary"></span> Internal energy and equilibrium state 
 Under close inspection, ordinary matter is observed to consist of particles such as atoms, molecules, and ions. All of these particles interact through forces that have origins in the Coulomb interactions between their charged constituents, namely electrons and nuclei. Even when particles carry no net electric charge, the internal distribution of positive and negative charge gives rise to effective interactions that can be attractive at moderate separations and strongly repulsive at very short separations. As a result, the interaction between two individual particles can be understood as a consequence of potential energy that has a minimum at a characteristic distance.
