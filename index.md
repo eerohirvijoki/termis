@@ -10,12 +10,12 @@ Finally, instead of steam tables or non-standard spreadsheets, modern programmin
 
 Consequently, certain prerequisites are expected of the reader. Standard single- and multivariable calculus provide the baseline on which the mathematical aspects of thermodynamics and fluid mechanics are built on. Comprehension of Python scripts helps in following the computational examples. In both areas, use of large language models as personal AI study assistants is strongly encouraged. For an enthuastic reader, such tools can explain code excerpts and derivations of equations with exhaustive detail, as well as help recall the baseline calculus tools.
 
-This somewhat unique approach of combining thermodynamics and fluid mechanics is acknowledged pedagogically. To make the book as accessible as possible yet appropriately challenging, each section heading is color-coded to indicate the depth of the discussion to come:
+This somewhat unique approach of combining thermodynamics and fluid mechanics is acknowledged pedagogically. To make the notes as accessible as possible yet appropriately challenging, each section heading is color-coded to indicate the depth of the discussion that follows:
 
 <div class="level-list">
   <div class="level-list-item">
     <span class="elementary"></span>
-    <div>Covers core content such as thermodynamic diagrams,local fluid equations, simplified control-volume balance equations, and rudimentary power-plant analysis.</div>
+    <div>Covers core content such as thermodynamic diagrams, interpretation of local fluid equations, simplified control-volume balance equations, and rudimentary power-plant analysis.</div>
   </div>
   <div class="level-list-item">
     <span class="intermediate"></span>
@@ -27,6 +27,8 @@ This somewhat unique approach of combining thermodynamics and fluid mechanics is
   </div>
 </div>
 
-Some sections unavoidably contain material at varying depths. Nevertheless, a reader interested in traditional energy engineering ranging from the basic properties of pure substance, interpretation of the fluid equations, computation substance properties from thermodynamic state to steady-flow analysis of power plant and refrigeration cycles may well follow only the <span class="elementary"></span>-colored sections. A reader interested in the rigorous derivation of the fluid equations, explanations for why surface-force density is expressed with a stress tensor, how entropy emerges from analysis of quasistatic processes, and how control-volume analysis of the fluid equations reduces to the everyday engineering formulae for energy and entropy balances usable in power plant analysis is encouraged to study the <span class="intermediate"></span>- and <span class="advanced"></span>-colored sections as well. To help readers gauge their progress on which ever path they choose to follow, the beginning of each chapter contains a list of learning goals to aim for, with core, intermediate, and advanced levels indicated in color.
+Some sections unavoidably contain material at varying depths. Nevertheless, a reader interested in traditional energy engineering topics such as computation of pure-substance properties from thermodynamic state, interpretation of the fluid equations, and steady-flow analysis of power plant and refrigeration cycles may well follow only the <span class="elementary"></span>-colored sections. A reader interested in the rigorous derivation of the fluid equations, explanations for why surface-force density is expressed with a stress tensor, how entropy emerges from analysis of quasistatic processes, and how control-volume analysis of the fluid equations combined with fundamenta thermodynamic identities reduces to the everyday engineering formulae for energy and entropy balances usable in power plant analysis is encouraged to study the <span class="intermediate"></span>- and <span class="advanced"></span>-colored sections as well. To help readers gauge their progress on which ever path they choose to follow, the beginning of each chapter contains a list of learning goals to aim for, with core, intermediate, and advanced levels indicated in color.
+
+With these words, I wish you an interesting journey to the world of engineering.
 
 
