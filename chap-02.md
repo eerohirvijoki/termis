@@ -16,6 +16,27 @@ Most engineering applications involve fluids at pressures above that of the trip
 ## <span class="elementary"></span> Equations of state
 Mathematically, a general two-dimensional surface in a three-dimensional space with coordinates 
 
+::::{proof:example}
+:label: vdw-ideal-gas-limit
+Writing the Van der Waals model as
+
+$$
+(p+a_s\rho^2)(v-b_s)=R_sT,
+$$
+
+one can interpret the parameter $a_s$ as a correction to pressure associated with intermolecular interactions that scale quadratically with respect to gas density. The parameter $b_s$ can be interpreted to account for reduction in accessible volume due to finite molecular size.
+
+Writing the equation further as
+
+$$
+pv\left(1+\frac{a_s\rho^2}{p}\right)
+\left(1-\frac{b_s}{v}\right)=R_sT,
+$$
+
+one observes the Van der Waals model to reduce to the ideal gas equation when both $p\gg a_s\rho^2$ and $v\gg b_s$ hold true.
+::::
+
+
 ## <span class="advanced"></span> Numerical libraries
 Engineering applications such as steam power plants and heat pumps involve not only the gaseous phase of substances but also the liquid phase and the liquid-vapor phase mixture. While the two-parameter models have historical value in predicting parameter regimes needed for designing experimental measurements, they lack the accuracy needed in the most demanding of the applications. Fortunately, the theoretical framework of thermodynamics enables constructing multiparameter substance models that can be fitted to experimental data with good accuracy. Several libraries and software implementations of such models exist. 
 

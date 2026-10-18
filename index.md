@@ -15,15 +15,15 @@ This somewhat unique approach of combining thermodynamics and fluid mechanics is
 <div class="level-list">
   <div class="level-list-item">
     <span class="elementary"></span>
-    <div>Covers core content such as thermodynamic diagrams, interpretation of local fluid equations, simplified control-volume balance equations, and rudimentary power-plant analysis.</div>
+    <div>Core: essential concepts, governing equations, and standard engineering applications.</div>
   </div>
   <div class="level-list-item">
     <span class="intermediate"></span>
-    <div>Covers intermediate content such as short programming examples and certain mathematical core ideas.</div>
+    <div>Intermediate: additional reasoning and examples that deepen understanding of the core material.</div>
   </div>
   <div class="level-list-item">
     <span class="advanced"></span>
-    <div>Covers advanced content such as more involved programming examples and deeper mathematical explanations.</div>
+    <div>Advanced: extended derivations, more demanding mathematical arguments, and further computational exploration.</div>
   </div>
 </div>
 
