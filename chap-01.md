@@ -149,20 +149,26 @@ The surface on which pressure is defined therefore need not be a solid wall, suc
 
 
 ## <span class="intermediate"></span> A remark on solids and stress
-While the interparticle forces acting across an imaginary surface within an equilibrium gas or liquid are strictly normal to that surface, regardless of the surface orientation, this is generally not true for solids, nor for liquids and gases in nonuniform motion. In a solid body, the forces transmitted across an internal imaginary surface through a point depend explicitly on the surface orientation. Consequently, the force per unit area at a given point is no longer invariant with direction and cannot be fully described by a single scalar value. Instead, a tensor-valued quantity $\bm{\sigma}$ called stress is introduced to account for both the magnitude and the direction of the force $\bm{F}$ relative to the orientation of the surface normal $\bm{\hat{n}}$.
+
+While the macroscopic force per unit area acting across an imaginary surface within a fluid undergoing uniform motion is normal to the surface, regardless of the surface orientation, this need not be true for solids in general or for fluids undergoing nonuniform motion. In a solid at rest or a fluid in nonuniform motion, the macroscopic force transmitted across an internal imaginary surface through a point can depend on the surface orientation. Consequently, the force per unit area cannot, in general, be characterized by a single scalar independent of the surface orientation. Instead, a tensor-valued quantity $\bm{\sigma}$, called the stress tensor, is introduced to describe the force $\bm{F}$ per unit area in terms of the surface normal $\bm{\hat{n}}$:
+
 :::{math}
-    \lim_{A\to 0}\frac{\bm{F}}{A}=\bm{\sigma}\cdot\bm{\hat{n}}
+    \lim_{A\to 0}\frac{\bm{F}}{A}=\bm{\sigma}\cdot\bm{\hat{n}},
 :::
 
-This directional dependence of internal forces is a result of a non-isotropic microscopic structure. For instance, extruded plastics possess molecular arrangements that are preferentially aligned with the direction of extrusion. Similarly, in cold-rolled steels, the microscopic metallic grains are mechanically forced to orient along the rolling direction. This microstructural realignment induces macroscopic anisotropy, rendering the material's mechanical strength, elasticity, and thermal response direction-dependent.
+where $A$ is the area of a surface element shrinking around the point of interest, with its orientation held fixed.
 
-For an isotropic solid in an unloaded equilibrium state, such as unworked cast iron, the stress is isotropic and represented by pressure. However, the experimental measurement of this pressure differs from how one measures pressure in liquids and gases. Because a solid cannot rearrange its particles freely to transmit forces uniformly, one cannot submerge a sensor inside it. Instead, a surrounding gas or liquid is typically used as an intermediary. The gas or liquid transmits a uniform force over the solid's external boundary, ensuring that the induced internal force per unit area corresponds uniformly to the applied gas or liquid pressure. 
+The stress state of a material depends on the applied forces and constraints, and can be direction-dependent even in an isotropic material. Material anisotropy, by contrast, means that the material's mechanical response depends on direction because of features of its microscopic structure. For example, extrusion can produce preferential molecular alignment in plastics, while cold rolling can produce preferred crystallographic orientations and elongated grain structures in steel.
+
+A solid can also be subjected to a uniform hydrostatic pressure, which applies an isotropic compressive stress at the solid's external boundary. This differs from the general stress state of a solid, which can include shear stresses and unequal normal stresses. In practice, hydrostatic pressure can be applied by surrounding a solid with a gas or liquid at a prescribed pressure. The surrounding fluid exerts a normal force per unit area on the solid's external boundary, providing a known mechanical loading. The resulting internal stress state depends on the loading conditions and the mechanical constraints imposed on the solid.
+
+In these notes, the stress tensor will be encountered again when the equations describing fluid motion are derived. It also appears implicitly in the mechanical work rate terms of the engineering formulas used in power plant and refrigeration cycle analysis.
 
 ## <span class="elementary"></span> The zeroth law and temperature
-Where pressure, more generally stress, characterizes macroscopic description of the mechanical interactions within a system and across a boundary, one can ask whether a macroscopic characterization exists for interactions across a thermal contact.  To explore this, suppose two systems are separated by a diathermal boundary and are otherwise isolated from external influences. The systems are able to exchange heat. After some time, the interaction across the boundary no longer produces any net heat exchange and the systems settle into a mutual equilibrium. The two systems are then said to be in thermal equilibrium. 
 
-The zeroth law of thermodynamics states that thermal equilibrium is transitive: if system A is in thermal equilibrium with system C, and system B is also in thermal equilibrium with system C, then A and B are in thermal equilibrium with each other. 
-The zeroth law enables defining a system property referred to as temperature: two systems are in thermal equilibrium if and only if they have the same temperature. The symbol usually chosen for the temperature defined in this way is $T$.
+Where pressure, and more generally stress, characterizes the macroscopic description of mechanical interactions within a system and across a boundary, one can ask whether a macroscopic property also characterizes thermal interactions across a boundary. To explore this, suppose two systems are separated by a diathermal boundary and are otherwise isolated from external influences. The systems can exchange heat. After some time, the net heat transfer between them ceases, and they reach thermal equilibrium. The two systems are then said to be in thermal equilibrium with each other.
+
+The zeroth law of thermodynamics states that thermal equilibrium is transitive: if system A is in thermal equilibrium with system C, and system B is also in thermal equilibrium with system C, then systems A and B are in thermal equilibrium with each other. The zeroth law allows one to introduce a macroscopic property called temperature, denoted by $T$, which has the same value for systems in thermal equilibrium. Conversely, systems with the same temperature are in thermal equilibrium with each other.
 
 ## <span class="elementary"></span> A gas thermometer
 While the zeroth law enables defining the concept of temperature, it does not directly provide a way to measure or calculate it. A detour is needed. To quantify the temperature $T$ of a system, one may place a gas-filled bulb in thermal contact with the system, connect the gas to a manometer, as illustrated in {numref}`fig-gas-thermometer`, and make experimental observations.
@@ -176,39 +182,47 @@ While the zeroth law enables defining the concept of temperature, it does not di
 A gas-filled bulb in thermal contact with a system and connected to a manometer. The manometer measures the gas pressure and volume.
 :::::
 
-According to the zeroth law, the gas in the bulb will reach thermal equilibrium with the system and thus have the same temperature $T$. By changing the volume of the gas by adjusting the amount of liquid in the manometer, while keeping the state of the system unchanged, one observes many different pairs of gas pressure $p$ and volume $V$ that all correspond to the same system temperature. This demonstrates that the temperature of the gas, which is the same as that of the system, depends on its pressure and volume in a reproducible way, justifying the existence of a functional relation
+According to the zeroth law, the gas in the bulb will reach thermal equilibrium with the system and thus have the same temperature $T$. 
+
+By changing the gas volume while keeping the system's state unchanged, one can observe different pairs of gas pressure $p$ and volume $V$, all corresponding to the same system temperature. Repeating such measurements at different system temperatures provides the basis for establishing a reproducible relationship between the gas state and temperature:
+
 :::{math}
     T = f(p,V).
 :::
-Further experiments with sufficiently dilute gases show that, while the gas remains in thermal equilibrium with the system, its pressure and volume are inversely proportional to each other. This empirical observation implies the existence of a relation of the form
+
+Experiments with sufficiently dilute gases show that, for a fixed amount of gas at a fixed temperature, the product $pV$ is approximately constant. As the gas density tends to zero, this product approaches a limiting value that depends on temperature and the amount of gas but not on the particular gas used. This motivates a relation of the form
+
 :::{math}
     pV = g(T),
 :::
-where $g(T)$ depends only on the temperature.
+
+where $g(T)$ is a function of temperature (and the gas amount) alone.
 
 One may now choose a reference state for the gas and label its temperature, pressure, and volume as $T_\text{ref}$, $p_\text{ref}$, and $V_\text{ref}$, respectively. For any other state of the gas with pressure $p$ and volume $V$, the temperature $T$ then satisfies
 :::{math}
     \frac{g(T)}{g(T_\text{ref})} = \frac{pV}{p_\text{ref}V_\text{ref}}.
 :::
-Since temperature has not yet been assigned a numerical scale, the functional form of $g(T)$ may be chosen by convention. A convenient choice is
+Since the zeroth law does not uniquely determine a numerical temperature scale, one may choose the scale so that $g(T)$ is proportional to \(T\): 
 :::{math}
     g(T) = \text{const}\times T,
 :::
-where the constant depends on the chosen gas and the specific experimental setup. This choice defines a temperature scale such that the temperature of the system can be determined by measuring the pressure and volume of the gas and comparing them to the reference values
+This choice defines a temperature scale such that the temperature of the system can be determined by measuring the pressure and volume of the gas and comparing them to the reference values
 :::{math}
     \frac{T}{T_\text{ref}} = \frac{pV}{p_\text{ref}V_\text{ref}}.
 :::
 
-It is common to choose the reference temperature to correspond to the state at which water can exist simultaneously in solid, liquid, and gas phases, and to assign it the value $T_\text{ref} = 273.16\,text{K}$. With this choice, the gas thermometer measures temperature on the Kelvin scale (K) which serves also as the SI-unit for temperature. Another commonly used temperature scale is the Celsius scale that is related to the Kelvin scale by a constant
+A convenient reference temperature is the temperature of the triple state of water, at which solid, liquid, and gaseous water coexist in equilibrium. Historically, this temperature was assigned the exact value $T_\text{ref}=273.16\,\text{K}$, providing a reference for the Kelvin temperature scale. Another commonly used temperature scale is the Celsius scale, related to the Kelvin scale by
+
 :::{math}
-    T[^\circ\text{C}]=T[\text{K}]-273.15.
+T[^\circ\text{C}]=T[\text{K}]-273.15.
 :::
+
 
 ::::{proof:example}
 :label: example:chap-01:gas-thermometer
-A gas thermometer uses mercury with a density of $\rho_\text{Hg}=13.59\,\text{g}\,\text{cm}^{-3}$ as the liquid substance. The inner diameter of thermometer capillary is $d=1\,\text{m}$. With an ambient pressure of $p_\text{atm}=1.013\,\text{bar}$, a reference measurement corresponding to a temperature of $T_\text{red}=273.15\,\text{K}$ provides a value of $V_\text{ref}=4.19\,\text{cm}^3$ for the gas volume and a value of $h_\text{ref}=89\,\text{mm}$ for the mercury column height difference in the capillary. A measurement of a different sample provides a value of $h=45\,\text{mm}$ for the mercury column height difference.
+A gas thermometer uses mercury with a density of $\rho_\text{Hg}=13.59\,\text{g}\,\text{cm}^{-3}$ as the liquid substance. The inner diameter of thermometer capillary is $d=1\,\text{mm}$. With an ambient pressure of $p_\text{atm}=1.013\,\text{bar}$, a reference measurement corresponding to a temperature of $T_\text{ref}=273.16\,\text{K}$ provides a value of $V_\text{ref}=4.19\,\text{cm}^3$ for the gas volume and a value of $h_\text{ref}=89\,\text{mm}$ for the mercury column height difference in the capillary. A measurement of a different sample provides a value of $h=45\,\text{mm}$ for the mercury column height difference.
 
-To determine the sample temperature, one calculates the pressure inside the thermometer bulb implied by the measurements. As it equals the sum of ambient pressure and the hydrostatic pressure of the mercury column height, one finds
+To determine the sample temperature, one calculates the pressure inside the thermometer bulb implied by the measurements. Assuming the gas pressure exceeds atmospheric pressure, the pressure inside the thermometer is the atmospheric pressure plus the hydrostatic pressure corresponding to the mercury-level difference. Thus,
 
 :::{math}
 :enumerated: false
@@ -223,7 +237,7 @@ The change in the gas volume from the reference state \(V_\text{ref}\) is calcul
 V=V_\text{ref}+\frac{1}{4}\pi d^2(h-h_\text{ref})=4.155\,\text{cm}^3.
 :::
 
-The temperature of the sample, as measured by the gas thermometer, then is
+The sample temperature inferred from the gas-thermometer measurements then is
 :::{math}
 :enumerated: false
 T=T_\text{ref}\frac{pV}{p_\text{ref}V_\text{ref}}=256.86\,\text{K}=-16.29^\circ\text{C}
@@ -231,7 +245,10 @@ T=T_\text{ref}\frac{pV}{p_\text{ref}V_\text{ref}}=256.86\,\text{K}=-16.29^\circ\
 
 
 ## <span class="elementary"></span> Extensive and intensive quantities
-The volume, mass, and internal energy of a system are extensive quantities, meaning they depend on the amount of matter in the system. In contrast, density, specific volume, molar volume, pressure, specific internal energy, and temperature are intensive quantities, which do not depend on the system size. If two systems with identical properties are combined, the extensive variables sum, while the intensive variables remain unchanged. Theories describing the behaviour of matter usually rely on intensive quantities and variables. That in mind, plain upper-case symbols are reserved for extensive variables, upper-case symbols with a subscript $m$ are reserved for intensive variables expressed relative to the number of moles, and plain lower-case symbols are reserved for intensive variables expressed relative to the mass, as in {numref}`tab:chap-01:extensive-intensive-convention`. Temperature ($T$), pressure ($p$), and mass ($m$) are the primary exceptions to this symbolic convention.
+
+The volume, mass, and internal energy of a system are extensive quantities: when two systems in the same state are combined, their values add. In contrast, density, specific volume, molar volume, pressure, specific internal energy, and temperature are intensive quantities: their values remain unchanged when identical systems in the same state are combined.
+
+Descriptions of matter often use intensive quantities to characterize its state, while extensive quantities account for the total amount of matter and energy in a system. To distinguish these quantities, these notes use plain upper-case symbols for extensive quantities, plain lower-case symbols for quantities expressed per unit mass, and upper-case symbols with a subscript $m$ for quantities expressed per mole, as summarized in {numref}`tab:chap-01:extensive-intensive-convention`. Temperature $T$ and pressure $p$ are exceptions to the symbol-case convention; mass $m$ is an extensive quantity denoted by a lower-case symbol.
 
 :::{table} Extensive and intensive symbol conventions for matter-related quantities.
 :label: tab:chap-01:extensive-intensive-convention
@@ -241,50 +258,77 @@ The volume, mass, and internal energy of a system are extensive quantities, mean
 | Type | Symbol | unit |
 |:---|:---:|:---:|
 | Extensive | $A$ | $[A]$ |
-| Intensive (specific to mass) | $a$ | $[A]\,\text{kg}^{-1}$ |
-| Intensive (specific to amount of substance) | $A_m$ | $[A]\,\text{mol}^{-1}$ |
+| Intensive (per unit mass) | $a$ | $[A]\,\text{kg}^{-1}$ |
+| Intensive (per mole) | $A_m$ | $[A]\,\text{mol}^{-1}$ |
 :::
 
 ## <span class="advanced"></span> Matter in motion
-Matter, be it gas, liquid, or solid, doesn't have to remain still. Also its shape can change. Liquids and gases flow, hence they are called fluids, while solids may bend elastically and oscillate back and forth, or deform inelastically. Typically the macroscopic scale of the volume the matter occupies is vast in comparison to the interparticle distances, and the time scale of motion one observes is orders of magnitudes longer than the average time between inter-particle collisions. Under such conditions, different parts of macroscopic volumes of matter can be treated as individual systems connected by boundaries, with each system remaining in thermodynamic equilibrium state but potentially in a different one from the neighbouring system's state. The matter then is said to remain in a local thermodynamic equilibrium and thermodynamic relations between state variables are assumed to hold locally.
 
-In such macroscopic continuum approximation of matter, each subsystem of the macroscopic volume is assumed infinitesimally small. The state properties are described as continuous fields that smoothly depend on the point-wise location $\boldsymbol{x}$ and time $t$. To track matter in motion, one supplements the thermodynamic state fields with a velocity field, $\boldsymbol{v}(\boldsymbol{x},t)$, which describes the macroscopic speed and direction of matter at any given point and time. Evolution equations for the state fields are derived by applying conservation laws of mass, momentum, and energy to these moving subvolumes.
+Matter, whether gas, liquid, or solid, can move and change shape. Liquids and gases can flow and are therefore called fluids, whereas solids resist deformation and may respond elastically or undergo permanent deformation. The description of matter at macroscopic scales relies on the fact that the characteristic length and time scales of interest are typically much larger than microscopic scales associated with interparticle distances and collisions. This scale separation allows matter to be described as a continuum, with macroscopic properties varying over space and time rather than being specified separately for individual particles.
 
-In classical mechanics of point particles and rigid bodies, one is accustomed to tracking the motion of a fixed mass subjected to a force. In continuum mechanics, this corresponds to tracking a volume containing a fixed mass, referred to as material volume, subject to a distribution of remote forces such as gravity acting through out the volume and local contact forces acting on the surface of the volume. In case of solids, the deformation of the object is limited by the material strength and an approach of trackin the point-wise deformation of the volume from its initial configuration is practical. Such view is generally referred to as Lagrangian view. In case of fluids that may flow indefinitely, tracking the deformation becomes cumbersome and eventually impossible. Due to lack of structural strength, a continuous flow may deform an initially well described cubic volume into an infinitely elongated and infinitesimally thin volume. As a remedy, one switches to observing how the properties of the fluid change when it flows through a fixed location chosen to make the observations convenient. Such view is referred to as Eulerian. 
+In the continuum approximation, the state of matter is described by fields that depend on position $\bm{x}$ and time $t$. These include thermodynamic properties such as density, pressure, and temperature, as well as the velocity field $\bm{v}(\bm{x},t)$, which describes the local macroscopic motion of matter. When local thermodynamic equilibrium is a valid approximation, equilibrium thermodynamic relations can be applied to the local state. The evolution of the fields is then described by conservation laws for mass, momentum, and energy, together with appropriate constitutive relations.
 
-In Lagrangian view, the velocity field $\boldsymbol{v}(\boldsymbol{x},t)$ is interpreted to move a point $\boldsymbol{x}(t)$ according to an ordinary differential equation
+In classical mechanics, one often studies the motion of a body with a fixed mass under the action of forces. The corresponding material description in continuum mechanics follows a volume containing the same matter as it moves and deforms. Such a volume is called a material volume. Remote forces, such as gravity, act throughout the volume, whereas contact forces act across its boundary. This description is particularly convenient for solids, whose deformation can often be described relative to an initial configuration.
 
-:::{math}
-	\frac{d\boldsymbol{x}(t)}{dt}=\boldsymbol{v}(\boldsymbol{x}(t),t),
-:::
+An alternative is to describe the fields at fixed locations in space. This is called the Eulerian description. Rather than following a particular material volume, one observes how matter flows through a chosen spatial region and how its properties change there. This description is often convenient for fluids, which can undergo substantial deformation and continuously exchange matter with a fixed region of space. The Lagrangian and Eulerian descriptions are complementary ways of describing the same continuum motion.
 
-generating integral curves of the velocity field that depend on the initial location for the point. The connection to Eulerian view is established through the acceleration of the point $\boldsymbol{x}(t)$
+In the Lagrangian description, the trajectory $\bm{x}(t)$ of a material point is determined by the velocity field through the ordinary differential equation
 
 :::{math}
-	\frac{d^2\boldsymbol{x}(t)}{dt^2}=\frac{d\boldsymbol{v}(\boldsymbol{x}(t),t)}{dt}=\partial_t\boldsymbol{v}(\boldsymbol{x}(t),t)+\boldsymbol{v}(\boldsymbol{x}(t),t)\cdot\nabla\boldsymbol{v}(\boldsymbol{x}(t),t).
+\frac{d\bm{x}(t)}{dt}=\bm{v}(\bm{x}(t),t).
 :::
 
-The first term $\partial_t\boldsymbol{v}$ on the right describes the local Eulerian rate of change of the velocity at a point while the second term $\boldsymbol{v}\cdot\nabla\boldsymbol{v}$ describes the additional local acceleration the moving point $\boldsymbol{x}(t)$ is subjected to in the Lagrangian view.
+The solution specifies the position of the material point at each time, given its initial position. For a steady velocity field, these trajectories coincide with the integral curves of the field. For an unsteady field, the trajectories depend on the time evolution of the field. Differentiating the velocity along a trajectory gives the material acceleration,
+
+:::{math}
+\frac{d^2\bm{x}(t)}{dt^2}&=\frac{d}{dt}\bm{v}(\bm{x}(t),t)=(\partial_t\bm{v}+(\bm{v}\cdot\nabla)\bm{v})\big|_{(\bm{x}(t),t)},
+:::
+
+where the notation indicates the fields on the right-hand side are evaluated at $(\bm{x}(t),t)$. The first term, $\partial_t\bm{v}$, describes the local time rate of change of the velocity at a fixed spatial location. The second term, $(\bm{v}\cdot\nabla)\bm{v}$, accounts for spatial variation of the velocity field along the trajectory. Thus, the material acceleration can be nonzero even when the velocity field does not change with time at any fixed location.
 
 ::::{proof:example}
 :label: example:chap-01:lagrangian-acceleration
 
-Consider the velocity field
+Consider the steady two-dimensional velocity field
 
 :::{math}
 :enumerated: false
-\boldsymbol{v}(\boldsymbol{x})=v_0\boldsymbol{\hat{x}}+v_0\frac{xy}{L^2}\boldsymbol{\hat{y}}
+\bm{v}(\bm{x})=v_0\bm{\hat{x}}+ v_0\frac{xy}{L^2}\bm{\hat{y}},
 :::
 
-For a person watching the liquids or gases flowing according to the field, the flow appears stationary, unchanging as $\partial_t\boldsymbol{v}=0$ everywhere. A point $\boldsymbol{x}(t)=x(t)\boldsymbol{\hat{x}}+y(t)\boldsymbol{\hat{y}}$ moving with the flow of the velocity field nevertheless experiences the acceleration
+where $v_0$ and $L$ are positive constants.
+
+The velocity field is independent of time, so $\partial_t\bm{v}=0$. Nevertheless, the material acceleration is generally nonzero because the velocity varies with position. For a trajectory $\bm{x}(t)=x(t)\bm{\hat{x}}+y(t)\bm{\hat{y}}$, the acceleration is
+
 :::{math}
 :enumerated: false
-\frac{d^2\boldsymbol{x}(t)}{dt^2}=(\boldsymbol{v}\cdot\nabla\boldsymbol{v})\big|_{\boldsymbol{x}(t)}=\frac{v_0^2}{L}\left(1+\frac{x(t)^2}{L^2}\right)\frac{y(t)}{L}\boldsymbol{\hat{y}}
+\frac{d^2\bm{x}(t)}{dt^2}=((\bm{v}\cdot\nabla)\bm{v})\big|_{\bm{x}(t)}=\frac{v_0^2}{L}\left(1+\frac{x(t)^2}{L^2}\right)\frac{y(t)}{L}\bm{\hat{y}}.
 :::
 
+This example illustrates that a steady Eulerian velocity field does not imply zero material acceleration. A material point can experience a change in velocity as it moves through regions where the velocity field varies spatially.
 ::::
 
 
-## <span class="elementary"></span> A roadmap for the course
-The continuum mechanics framework can be built on three core principles: the measurement of observable quantities; the fundamental conservation laws of mass, momentum, and energy; and the natural tendency of local differences in macroscopic quantities to smooth out over time in the absence of external influences. 
 
+## <span class="elementary"></span> A roadmap to the notes
+
+The study of fluids and energy conversion brings together three kinds of knowledge: measurements of observable properties, conservation laws governing macroscopic motion, and constitutive relations describing how matter responds to changes in its state and surroundings. Measurements establish the relations between thermodynamic properties, conservation laws determine how macroscopic quantities evolve, and constitutive relations describe the transport of momentum and energy and the response of matter to deformation and heating.
+
+For fluids in thermodynamic equilibrium, measurements provide values of pressure $p$, specific volume $v$ or density $\rho$, and temperature $T$. Further measurements establish how these properties depend on one another, for example through the thermal expansion coefficient $\beta_p$ and the isothermal compressibility $\kappa_T$. Such information provides the starting point for constructing thermodynamic state relations.
+
+Applying conservation laws to material volumes yields the governing equations for the evolution of mass, momentum, and energy. In a continuum description, these equations involve fields such as density $\rho$, velocity $\bm{v}$, and specific internal energy $u$. However, conservation laws alone do not provide a closed predictive model. Constitutive relations for stresses and heat fluxes, together with thermodynamic relations between state properties, are also required.
+
+The thermodynamic relations needed for this closure are developed by studying measurements and energy conservation in quasistatic processes. These processes provide a way to investigate how heat transfer and mechanical work relate to changes in the thermodynamic state. The analysis introduces the specific heat capacities $c_p$ and $c_v$, establishes internal energy $u$ as a state function, and leads to an additional state function, the specific enthalpy $h$. These quantities describe how a substance stores energy and how its thermodynamic state responds to changes in temperature, pressure, and volume.
+
+Further analysis of quasistatic processes reveals restrictions on the transformations between thermodynamic states. The mathematical structure of these restrictions leads to the introduction of entropy $s$, followed by the thermodynamic potentials known as the specific Helmholtz free energy $f$ and the specific Gibbs free energy $g$. These state functions provide alternative descriptions of the same thermodynamic system and are particularly useful for constructing computational models of fluid properties.
+
+With thermodynamic and constitutive closure established, the continuum equations become a predictive framework for fluid motion and energy transfer. Thermodynamic property models, including those implemented in numerical property libraries, supply the state relations needed to evaluate fluid properties from suitable combinations of temperature, pressure, and volume. The resulting framework combines mass, momentum, and energy balances with thermodynamic relations to analyze engineering systems. Together, fluid mechanics and thermodynamics provide the foundations for understanding and designing pumps, fans, compressors, turbines, heat exchangers, heat pumps, power plants, and internal combustion engines, though mass-flow rates $\dot{m}$, heat rates $dot{Q}$, and mechanical work rates $\dot{W}$. As a whole this process path is illustrated in {numref}`fig-roadmap`. 
+
+:::::{figure}
+:label: fig-roadmap
+:align: center
+
+![](./figs/fig-roadmap.svg)
+
+A roadmap to the notes.
+:::::
