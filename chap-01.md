@@ -22,9 +22,11 @@ In addition, one intermediate and one advanced goal are included to prepare also
 
 
 ## <span class="elementary"></span> Internal energy and equilibrium state 
-Under close inspection, ordinary matter is observed to consist of particles such as atoms, molecules, and ions. All of these particles interact through forces that have origins in the Coulomb interactions between their charged constituents, namely electrons and nuclei. Even when particles carry no net electric charge, the internal distribution of positive and negative charge gives rise to effective interactions that can be attractive at moderate separations and strongly repulsive at very short separations. As a result, the interaction between two individual particles can be understood as a consequence of potential energy that has a minimum at a characteristic distance.
+Ordinary matter consists of particles such as atoms, molecules, and ions, which interact through forces ultimately originating in electromagnetic interactions between their charged constituents. Even electrically neutral particles can attract or repel one another because of their internal charge distributions. These interactions give rise to a potential energy that depends on the relative positions and configurations of the particles, typically favouring certain separations over others.
 
-For a collection of particles, the collective effect of different interaction strengths and geometries leads to different macroscopic states. In a solid, particles typically reside close to each other and their preferred separations vibrating about equilibrium positions. In a liquid, particles reside close together and near their preferred separations but continually rearrange over time. In a gas, the average separation is large and interactions are weak except when particles briefly pass each other close by in an event that can be described as an instantaneous collision. For an illustration, the sketches in {numref}`fig-water-solid-liquid-vapor-molecules` show collections of water particles in various configurations. The macroscopic state of matter is therefore governed by a competition between the interparticle potential energy, which favours certain separations and arrangements, and the kinetic energy of the particles, which includes contributions from translational, rotational, and vibrational motion. The microscopic kinetic and interaction potential energies of the particles, excluding the center-of-mass kinetic energy, gravitational energy, and nuclear binding energy, are referred to as internal energy. In these notes, the symbol reserved to denote internal energy of a collection of particles is $U$. 
+The collective behaviour of many interacting particles gives rise to different macroscopic states of matter. In a solid, particles typically remain close to preferred positions, vibrating around them. In a liquid, particles remain close together but continually rearrange. In a gas, particles are typically far apart, with interactions becoming significant mainly during close encounters. The sketches in {numref}fig-water-solid-liquid-vapor-molecules illustrate water in these different configurations. The macroscopic state thus reflects the interplay between interaction potential energy, which favours certain particle arrangements, and kinetic energy associated with translational, rotational, and vibrational motion.
+
+The microscopic kinetic and interaction potential energies of the particles, excluding the kinetic energy of the system's centre of mass, its gravitational potential energy, and nuclear binding energy, constitute its internal energy. The symbol $U$ is reserved for the internal energy of a collection of particles.
 
 :::::{figure}
 :label: fig-water-solid-liquid-vapor-molecules
@@ -49,39 +51,45 @@ For a collection of particles, the collective effect of different interaction st
 Water in different configurations, with hydrogen bonds illustrated (cyan dashed lines).
 :::::
 
-As the motion of the particles in classical sense is governed by Newton's laws, the particles continually exchange energy and momentum through their interactions, the forces between them. A collection of particles is said to be in a thermodynamic equilibrium state when this exchange has led to a distribution of energies and configurations that appears time-independent when averaged over a short period of time. Although individual particles continue to move, interact, and exchange energy and momentum, the overall distribution of energies and configurations in an equilibrium state remains approximately steady in time. As the internal energy of a system describes the total kinetic and interaction potential energy in the system's rest frame, not the details of how the energy is distributed between the particles, it is defined for both equilibrium and non-equilibrium systems.
+As the particles move and interact, they exchange energy and momentum according to the laws of classical mechanics. A collection of particles is said to be in a thermodynamic equilibrium when its macroscopic properties and statistical distributions remain stationary in time, despite the continuing microscopic motion and interactions. In equilibrium, individual particles still exchange energy and momentum, but the overall statistical description remains unchanged.
+
+Internal energy describes the total microscopic kinetic and interaction potential energy in the particle collection's centre-of-mass frame; it does not, by itself, specify how that energy is distributed among the particles. Consequently, internal energy can be defined for both equilibrium and non-equilibrium collections, although a collection away from equilibrium may require additional variables to describe its state.
 
 
 ## <span class="elementary"></span> Boundary types, heat, and work
-Consider two collections of particles, each of which has settled into its own equilibrium state. Regard each such collection as a system. A boundary between systems is any surface that separates them and determines the mechanisms by which energy can be transferred between the systems.
 
-A diathermal boundary allows energy to be transferred in a way that can change the energy or configuration distributions of the particles within systems, without requiring macroscopic motion of the boundary in system's rest frame. When two systems are separated by a diathermal boundary, they are said to be in thermal contact. Typical examples include two solid objects touching each other, a thin metal wall separating two volumes of liquid, and a solid object surrounded by air or liquid water. The portion of net energy transfer across a diathermal boundary that is mediated by microscopic motion of particles is referred to as heat. Heat therefore describes energy in transfer and is not a property contained within a system. Energy transfer across a diathermal boundary can be mediated also by, e.g, electromagnetic fields. By contrast, an adiabatic boundary prevents all energy transfer that would alter the energy or configuration distributions of the particles within the systems without macroscopic motion of the boundary between them. Practical examples include thick insulation, vacuum gaps, Faraday cages, or thin highly reflective material layers.
+Consider two collections of particles, each of which has settled into its own equilibrium state. Regard each collection as a system. A boundary separates a system from its surroundings or another system and determines the mechanisms by which energy can be transferred across it.
 
-When two systems are separated by a movable boundary, they are said to be in mechanical contact. A typical example is a movable piston in a cylinder that separates the volume of gas inside the cylinder chamber from the outsides of it. By contrast, a stationary rigid boundary does not move, preventing mechanical contact. The energy transferred across a mechanical contact through macroscopic motion of the boundary is referred to as mechanical work. Like heat, mechanical work is energy in transfer and is not a property contained within a system.
+A diathermal boundary permits energy transfer that changes the microscopic energy or configuration distributions of the particles without requiring macroscopic displacement of the boundary in the system's rest frame. Two systems separated by such a boundary are said to be in thermal contact. Examples include two solid objects touching each other and a thin metal wall separating two volumes of liquid. The portion of energy transferred across a diathermal boundary through microscopic interactions between particles or through radiation that is emitted by a system in thermal equilibrium is referred to as heat. Heat is energy in transfer, not a property contained within a system.
 
-In general, work is any energy transfer across a boundary that is not heat, including mechanical and electromagnetic field work. A boundary can also combine different types, allowing both heat and work to be exchanged, or neither.
+An adiabatic boundary prevents heat transfer. This idealization can be approximated by sufficiently thick insulation, although perfect insulation cannot be achieved in practice. An adiabatic boundary does not necessarily prevent other forms of energy transfer across the boundary.
 
+When two systems interact through forces acting across a movable boundary, energy can be transferred through the macroscopic displacement of that boundary. This mode of energy transfer is referred to as mechanical work. A typical example is a movable piston in a cylinder, separating the gas inside the cylinder from its surroundings. As the piston moves under the action of forces, energy is transferred through work at the boundary. A boundary that is stationary with respect to the system's rest frame and rigid cannot transfer energy through its own displacement. Like heat, mechanical work is energy in transfer rather than a property of a system.
+
+More generally, work denotes energy transfer by mechanisms other than heat. Besides mechanical work, it includes energy transfer associated with electromagnetic fields. A boundary may permit both heat and work transfer, or prevent one or both, depending on its properties.
 
 ## <span class="elementary"></span> Density, specific volume, and molar volume
-A macroscopic description of matter should be consistent with experimental observations while remaining as simple as possible and expressible in terms of a small number of variables. Although the state of matter is determined from the microscopic energy and configuration distributions, a macroscopic description should not depend on the detailed positions and motions of individual particles, but instead capture their collective effect.
 
-As the forces between particles depend strongly on the distances between them, and the motion of each particle in response to these forces depends on its mass, the macroscopic state of matter can be expected to depend on the mass--volume ratio of the system. This motivates introducing macroscopic variables referred to as density $\rho$ and specific volume $v$ via
+A macroscopic description of matter should be consistent with experimental observations while remaining as simple as possible and expressible in terms of a small number of variables. Although the state of matter is determined by its microscopic energy and configuration distributions, a macroscopic description should not depend on the detailed positions and motions of individual particles, but instead capture their collective effects.
+
+For a given material, the mass and volume of a system scale together as the amount of matter changes. This motivates introducing the mass per unit volume, called density $\rho$, and the volume per unit mass, called specific volume $v$, as macroscopic variables:
 
 :::{math}
 :label: eq:chap-01:density-specific-volume
 \rho=\frac{m}{V}, \qquad  v=\frac{V}{m} 
 :::
 
-Density measures how closely packed the particles are within the boundary, while specific volume indicates how much space is available per unit mass of matter. 
+Density and specific volume are reciprocals. They describe the amount of mass associated with a given volume, and the volume associated with a given mass, respectively.
 
-As different materials consist of different types of particles with different particle masses, it is sometimes useful to describe the ratio of volume $V$ to the number of particles $N$ rather than to the total mass. The typical number of particles in a macroscopic volume, however, is large, so one uses the Avogadro constant $N_A=6.02214076\times 10^{23}\,\text{mol}^{-1}$ and the number of moles $n$ instead of the absolute number of particles. This leads to a macroscopic variable definition referred to as molar volume 
+As different materials consist of different types of particles with different particle masses, it is sometimes useful to describe the ratio of volume $V$ to the number of particles $N$, rather than to the total mass. Since the number of particles in a macroscopic system is typically very large, the amount of substance $n$ is used instead, with the Avogadro constant $N_A=6.02214076\times 10^{23}\,\text{mol}^{-1}$ relating the two through $n=N/N_A$. This motivates the definition of molar volume:
+
 :::{math}
 :label: eq:chap-01:molar-volume
     V_m=\frac{V}{n}=N_A\frac{V}{N}=Mv,
 :::
-where the link to specific volume is provided by the molar mass $M=m/n$ of the matter. 
+where $M=m/n$ is the molar mass. 
 
-Although macroscopic quantities, density, specific volume, and molar volume can be defined for a collection of particles whether or not it is in an equilibrium state. The SI-units for the space and mass related quantities are listed in {numref}`tab:chap-01:volume-mass-related-units`.
+Density, specific volume, and molar volume can be defined for a collection of particles whether or not it is in thermodynamic equilibrium. The SI units of these and the related mass and volume quantities are listed in {numref}`tab:chap-01:volume-mass-related-units`.
 
 :::{table} Units of volume and mass related quantities.
 :label: tab:chap-01:volume-mass-related-units
@@ -115,12 +123,13 @@ Consider then a cylinder filled with gas and closed with a piston, as in {numref
 (a) A gas particle imparts impulse on a piston. (b) A force equivalent to the effect of the impulses is need to keep the piston in place.
 :::::
 
-The magnitude of this force depends on both the state of the gas and the area of the boundary over which the particles interact. This motivates defining pressure as a macroscopic property to characterize the mechanical effect of a system on its boundary. For a system, pressure is therefore defined as the normal component of the macroscopic force per unit area exerted by the particles of the system on a surface, namely
+The magnitude of this force depends on both the state of the gas and the area of the boundary over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a fluid in equilibrium, pressure is the normal force per unit area exerted by the fluid on a surface. Locally at a point, it is defined as
+
 :::{math}
 :label: eq:chap-01:pressure-as-normal-force
     \lim_{A\to 0}\frac{F_n}{A}=p.
 :::
-The SI-units for the pressure related quantities are listed in {numref}`tab:chap-01:pressure-related-units`. While the SI-unit for pressure is $\text{Pa}$, in engineering applications a more common unit is $1\,\text{bar}=10^5\,\text{Pa}$.
+where $F_n$ is the normal force exerted on a surface element of area $A$ containing the point of interest. The SI-units for the pressure related quantities are listed in {numref}`tab:chap-01:pressure-related-units`. While the SI-unit for pressure is $\text{Pa}$, in engineering applications a more common unit is $1\,\text{bar}=10^5\,\text{Pa}$.
 
 :::{table} Units of pressure related quantities.
 :label: tab:chap-01:pressure-related-units
@@ -134,8 +143,9 @@ The SI-units for the pressure related quantities are listed in {numref}`tab:chap
 | $p$ | Pressure | $\text{Pa}\,(=\text{N}\,\text{m}^{-2})$ |
 :::
 
-If the piston is pushed inward by increasing the applied force, the volume of the gas decreases. For a sufficiently large compression, part of the gas may condense into a liquid, so that the cylinder contains both gas and liquid. Because of different densities for liquid and gas, gravity ultimately separates them, forming an interface. In equilibrium, the pressure in the gas on a flat interface is equal to the pressure in the liquid at the same location. Otherwise, a net force would act on the interface and it would move until equilibrium is restored. On a strongly curved liquid-gas interfaces, as in small bubbles or dropplets, also the surface tension playes a role, allowing for a small pressure difference between the liquid and gas phases. On both flat and curved surfaces, this shows that the surface on which pressure is defined does not need to be a solid wall like the surface of a piston. An imaginary surface, drawn within gas or liquid, suffices as well. In thermal equilibrium, the particles on either side of such a surface exchange momentum through the interparticle forces, giving rise to a normal force per unit area. Pressure is therefore a macroscopic property, not a property of a particular container wall enclosing the gas or liquid. In gases and liquids, it can nevertheless be applied and measured directly by compressing them in a cylinder with a piston. 
+If the piston is pushed inward by increasing the applied force, the volume of the gas decreases. Under sufficiently strong compression, part of the gas may condense into a liquid, so that the cylinder contains both liquid and gas. Because the liquid and gas have different densities, gravity can cause them to stratify, forming an interface. For a flat interface at rest, the pressures in the liquid and gas at the interface are equal, neglecting the effect of other interfacial forces. At a curved liquid–gas interface, such as the surface of a small droplet or bubble, surface tension can balance a pressure difference between the two phases.
 
+The surface on which pressure is defined therefore need not be a solid wall, such as the piston surface. An imaginary surface drawn within a gas or liquid also suffices. Momentum is transferred across such a surface through the microscopic motion and interactions of particles, giving rise to a macroscopic normal force per unit area. Pressure is thus a macroscopic property of the fluid, not a property of a particular container wall. It can nevertheless be measured using a piston that compresses the gas or liquid.
 
 
 ## <span class="intermediate"></span> A remark on solids and stress
