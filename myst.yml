@@ -8,6 +8,7 @@ project:
     binder:
       repo: https://github.com/eerohirvijoki/termis
       ref: main
+      url: https://mybinder.org
 
   toc:
     - file: index.md
