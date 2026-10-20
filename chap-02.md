@@ -304,6 +304,25 @@ At a specific volume of $v=0.10\,\text{m}^3/\text{kg}$, the pressure of methane 
 
 ## <span class="advanced"></span> Estimation of saturation properties with analytical equations of state
 
+```{code-cell} python
+import numpy as np
+import matplotlib.pyplot as plt
+import pyromat as pm
+
+h2o=pm.get('mp.H2O')
+print(h2o.critical())
+
+T=273.15+400 # K
+nv=101
+v=np.logspace(np.log10(1.1e-3),np.log10(1.0e-1),nv)
+p=h2o.p(T=T,v=v)
+
+fig,ax=plt.subplots(figsize=(6,5))
+ax.plot(v,p)
+ax.set_xscale('log')
+ax.set_yscale('log')
+plt.show()
+```
 
 ## <span class="intermediate"></span> Numerical libraries
 Engineering applications such as steam power plants and heat pumps involve not only the gaseous phase of substances but also the liquid phase and the liquid-vapor phase mixture. While the two-parameter models have historical value in predicting parameter regimes needed for designing experimental measurements, they lack the accuracy needed in the most demanding of the applications. Fortunately, the theoretical framework of thermodynamics enables constructing multiparameter substance models that can be fitted to experimental data with good accuracy. Several libraries and software implementations of such models exist. 

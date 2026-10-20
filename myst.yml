@@ -3,8 +3,12 @@ version: 1
 project:
   id: 4220bab4-822a-4613-bc5c-99b217219988
   title: "TERMIS"
-  #authors:
-  #  - name: "Eero Hirvijoki"
+
+  jupyter:
+    binder:
+      repo: https://github.com/eerohirvijoki/termis
+      ref: main
+
   toc:
     - file: index.md
     - file: chap-01.md
