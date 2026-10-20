@@ -1,0 +1,858 @@
+\documentclass[border=10pt,tikz]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usetikzlibrary{patterns,decorations.pathmorphing}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{intersections}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadings}
+\usetikzlibrary{positioning}
+\tikzset{>=latex}
+
+
+
+\begin{document}
+
+
+
+% HTML colors
+\definecolor{lb50}{HTML}{E1F5FE}
+\definecolor{lb100}{HTML}{B3E5FC}
+\definecolor{lb150}{HTML}{CAEDFD}
+\definecolor{lb200}{HTML}{81D4FA}
+\definecolor{lb300}{HTML}{4FC3F7}
+\definecolor{lb400}{HTML}{29B6F6}
+\definecolor{lb500}{HTML}{03A9F4}
+\definecolor{lb600}{HTML}{039BE5}
+\definecolor{lb700}{HTML}{0288D1}
+\definecolor{lb750}{HTML}{0C77C9}
+\definecolor{lb800}{HTML}{1565C0}
+\definecolor{lb850}{HTML}{0B5EAE}
+\definecolor{lb900}{HTML}{01579B}
+\definecolor{CadetBlue}{HTML}{5F9EA0}
+\definecolor{SteelBlue}{HTML}{4682B4}
+\definecolor{LightSteelBlue}{HTML}{B0C4DE}
+\definecolor{LightSkyBlue}{HTML}{87CEFA}
+% Phase colors
+\colorlet{solid}{lb900}         
+\colorlet{solidliquid}{lb750}%{lb700}   
+\colorlet{liquid}{lb600}
+\colorlet{solidvapor}{SteelBlue}
+\colorlet{vapor}{lb100}
+\colorlet{supercritical}{lb300}
+\colorlet{superheated}{lb200}
+\colorlet{liquidvapor}{LightSteelBlue}
+% Phase boundary colors
+\colorlet{solidsolidliquid}{red!70!white}
+\colorlet{solidliquidliquid}{lime}
+\colorlet{liquidliquidvapor}{red}
+\colorlet{liquidvaporvapor}{green!60!black}
+\colorlet{solidsolidvapor}{red!60!black}
+\colorlet{solidvaporvapor}{olive}
+
+
+% \begin{tikzpicture}
+
+%     \coordinate (A) at (0,0);
+%      %%% COLORLABELS:
+%     \node[draw,rounded corners=5pt,fill=solid,text=white,inner sep=6pt,text width=4cm,align=center] (SSS) at (A) {Solid};
+    
+%     \node[draw,rounded corners=5pt,fill=solidliquid,text=white,inner sep=6pt,text width=4cm,align=center,right = 1cm of SSS] (LLLSSS) {Solid + liquid};
+    
+%     \node[draw,rounded corners=5pt,fill=liquid,text=white,inner sep=6pt,text width=4cm,align=center,right = 1cm of LLLSSS] (LLL) {Liquid};
+
+%     \node[draw,rounded corners=5pt,fill=liquidvapor,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of LLL] (LLLVVV) {Liquid + vapor};
+
+%     \node[draw,rounded corners=5pt,fill=solidvapor,text=white,inner sep=6pt,text width=4cm,align=center,below = 0.5cm of SSS] (SSSVVV) {Solid + vapor};
+    
+%     \node[draw,rounded corners=5pt,fill=vapor,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of SSSVVV] (VVV) {Vapor};
+
+%     \node[draw,rounded corners=5pt,fill=superheated,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of VVV] (SHSH) {Superheated vapor};
+    
+%     \node[draw,rounded corners=5pt,fill=supercritical,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of SHSH] (SCSC) {Supercritical fluid};
+
+% \end{tikzpicture}
+
+
+\begin{tikzpicture}
+    
+    \coordinate (A) at (0,0);
+
+    % solid
+    \node[draw,rounded corners=5pt,fill=solid,text=white,inner sep=6pt,text width=5cm,minimum height=1.2cm,align=center] (SSS) at (A) {Solid};
+
+    % liquid
+    \node[draw,rounded corners=5pt,fill=liquid,text=white,inner sep=6pt,text width=5cm,minimum height=1.2cm,align=center,below left = 3cm and 1.5cm of SSS] (LLL) {Liquid};
+
+    % superheated vapor
+    \node[draw,rounded corners=5pt,fill=vapor,text=black,inner sep=6pt,text width=5cm,minimum height=1.2cm,align=center, below right = 3cm and 1.5cm of SSS] (SHV) {Superheated vapor\\(gas-like behaviour)};
+
+    % freezing - melting
+    \draw[latex-latex,line width=3pt,solidliquid] (SSS)--node[pos=0.5,sloped,rounded corners,fill=solidliquid,text=white,align=center] {Solid + Liquid} node[pos=0.15,below=0.1cm,sloped] {Freezing} node[pos=0.85,above=0.1cm,sloped] {Melting} (LLL);    
+        
+    % sublimation - deposition
+    \draw[latex-latex,line width=3pt,solidvapor] (SSS)--node[pos=0.5,sloped,rounded corners,fill=solidvapor,text=white,align=center] {Solid + Vapor} node[pos=0.15,below=0.1cm,sloped] {Deposition} node[pos=0.85,above=0.2cm,sloped]{Sublimation} (SHV);
+
+    % vaporization - condensing
+    \draw[latex-latex,line width=3pt,liquidvapor] (LLL)--node[pos=0.5,sloped,rounded corners,fill=liquidvapor,text=black,align=center] {Saturated liquid + saturated vapor} node[pos=0.18,below=0.4cm,sloped] {Condensing} node[pos=0.82,above=0.4cm,sloped]{Vaporization} (SHV);
+
+    % gas
+    \node[draw,rounded corners=5pt,fill=superheated,text=black,inner sep=6pt,text width=5cm,minimum height=1.2cm,align=center,below right = 6cm and -1cm of SSS] (GAS) {Gas};
+
+    % supercritical 
+    \node[draw,rounded corners=5pt,fill=supercritical,text=black,inner sep=6pt,text width=5cm,minimum height=1.2cm,align=center,below left = 6cm and -1cm of SSS] (SCSC) {Supercritical fluid\\ (liquid- and gas-like behaviour)};
+
+    \draw[latex-latex,line width=3pt,supercritical] (SHV)--node[pos=0.8,above=0.2cm,sloped,align=center] {Temperature\\change} (GAS);
+    
+    \draw[latex-latex,line width=3pt,supercritical] (GAS)--node[pos=0.5,above=0.1cm,align=center] {Pressure\\change} (SCSC);
+    
+    \draw[latex-latex,line width=3pt,supercritical] (LLL.south)--node[pos=0.8,above=0.1cm,sloped,align=center] {Temperature\\change} node[pos=0.4,below=0.cm,sloped,align=center] {(and pressure\\ change)} (SCSC.north);
+    
+\end{tikzpicture}
+
+\begin{tikzpicture}
+
+    \def\deltav{5};
+    \def\deltap{5};
+    \def\deltaT{3.57};
+    %\def\deltav{7};
+    %\def\deltap{7};
+    %\def\deltaT{5};
+
+    
+    \def\angT{20};
+    \def\angv{-20};
+
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ($(A)+(\angT:\deltaT)$);
+    \coordinate (C) at ($(B)+(\angv:0.45*\deltav)$);
+    \coordinate (TC1) at ($(A)+(\angT:0.6*\deltaT)+(\angv:0.17*\deltav)$);
+    
+    \coordinate (D) at ($(A)+(\angT:0.2*\deltaT)+(\angv:0.1*\deltav)$);
+    \coordinate (E) at ($(A)+(\angT:0.2*\deltaT)+(\angv:0.2*\deltav)$);
+    \coordinate (F) at ($(A)+(\angv:0.15*\deltav)$);
+    \coordinate (G) at ($(A)+(0,-\deltap)$);
+    \coordinate (H) at ($(G)+(\angv:\deltav)$);
+    \coordinate (I) at ($(H)+(0,0.05*\deltap)$);
+    \coordinate (J) at ($(F)+(-88:0.9*\deltap)$);
+    \coordinate (K) at ($(D)+(0,-0.8*\deltap)+(\angT:0.1*\deltaT)$);
+    \coordinate (L) at ($(E)+(0,-0.8*\deltap)+(\angT:0.1*\deltaT)$);
+    \coordinate (M) at ($(L)+(95:0.12*\deltav)$);
+    \coordinate (N) at ($(L)+(\angv:0.5*\deltav)$);
+    \coordinate (CRIT) at ($(A)+(\angT:0.65*\deltaT)+(0,-0.35*\deltap)+(\angv:0.25*\deltav)$);
+    \coordinate (O) at ($(H)+(\angT:\deltaT)$);
+    \coordinate (P) at ($(O)+(0,0.3*\deltap)$);
+    \coordinate (TC2) at ($(P)+(\angT+10:-0.5*\deltaT)$);
+    \coordinate (Q) at ($(P)+(\angT+10:-\deltaT)$);
+    \coordinate (PC1) at ($(C)+(\angv:0.07*\deltav)+(0,-0.3*\deltap)$);
+    \coordinate (T12) at ($(A)+(\angT:0.5*\deltaT)+(\angv:0.15*\deltav)+(0,-0.6*\deltap)+(\angv:0.07*\deltav)$);
+    \coordinate (T13) at ($(T12)+(\angv:0.25*\deltav)$);
+    \coordinate (T14) at ($(P)+(\angT+10:-0.7*\deltaT)$);
+    \coordinate (T21) at ($(A)+(\angT:0.8*\deltaT)+(\angv:0.3*\deltav)$);
+
+    %%% FILL THE REGIONS %%%
+    % v-T plane at the top (gray)
+    \path[draw,fill=gray!20,opacity=1.0] (A)--(B)--(C) to[bend right=5] coordinate[pos=0.6] (T21) (TC1) to [bend right=5] coordinate[pos=0.5] (T11) (D)--(E)--(F)--cycle;
+    % p-v plane at the front (gray)
+    \path[draw,fill=gray!20] (A)--(G)--(H)--(I)--(J) to[bend left=2] (F)--cycle;
+    % p-T plane at the side (gray)
+    \path[draw,fill=gray!20] (H)--(O)--(P)-- coordinate[pos=0.55] (T23) (TC2)--(Q) to[bend left=5] (I)--cycle;
+    % solid region 
+    \path[draw,fill=solid] (E) to[bend right=2] (M)--(L) to[bend left=10] (J) to[bend left = 2] coordinate[pos=0.59] (PC4) coordinate[pos=0.82] (P14) coordinate[pos=0.36] (P26) (F)--cycle;
+    % liquid - vapor region (part is behind the solid - liquid region    
+    \path[fill=liquidvapor] (M) .. controls ($(M)+(\angT+30:0.1*\deltaT)$) and ($(CRIT)+(180+\angv:0.05*\deltav)$) .. coordinate[pos=0.4] (T12) coordinate[pos=0.5] (P23)  (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(N)+(120:0.3*\deltav)$) ..(N)--(L)--cycle;
+    \path[name path=T12T13] (T12)--++(\angv:\deltav);
+    \path[name path=satvapor] (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(N)+(120:0.3*\deltav)$) ..(N);
+    \path[name intersections={of=T12T13 and satvapor, by=T13}];
+    \path[name path=P23P22] (P23)--++(\angv:\deltav);
+    \path[name intersections={of=P23P22 and satvapor, by=P22}];
+   
+    % solid - vapor region
+    \path[fill=solidvapor] (J) to [bend right=10] (L)--(N) to[bend right=5] (Q) to[bend left=5] (I)--cycle;
+    % liquid region
+    \path[black,fill=liquid] (TC1) .. controls ($(TC1)+(-88:0.3*\deltaT)$) and ($(CRIT)+(180:0.05*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(180+\angv:0.05*\deltav)$) and ($(M)+(\angT+30:0.1*\deltaT)$) .. (M) to[bend left=2] (E)--(D) to[bend left=5] cycle;
+
+    
+    % vapor region 
+    \path[fill=vapor] (CRIT) .. controls ($(CRIT)+(0:0.13*\deltav)$) and ($(TC2)+(145:0.5*\deltav)$) .. (TC2) -- (Q) to[bend left=5] (N) .. controls ($(N)+(120:0.3*\deltav)$) and ($(CRIT)+(\angv:0.1*\deltav)$) .. cycle;
+    % superheated vapor region
+    \path[fill=superheated] (PC1) to [bend right=10] coordinate[pos=0.45] (P21) (P)--(TC2)..controls ($(TC2)+(145:0.5*\deltav)$) and ($(CRIT)+(0:0.13*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(0:0.1*\deltav)$) and ($(PC1)+(180:0.4*\deltav)$) .. cycle;
+    % supercritical region
+    \path[fill=supercritical] (C) to[bend right=10] coordinate[pos=0.4] (P11) (PC1) .. controls  ($(PC1)+(180:0.4*\deltav)$) and ($(CRIT)+(0:0.1*\deltav)$) .. coordinate[pos=0.35] (T22) (CRIT) .. controls ($(CRIT)+(180:0.05*\deltav)$) and ($(TC1)+(-88:0.3*\deltaT)$) .. (TC1) to[bend left=5] (C);
+    % solid - liquid region (dashed)
+    \path[draw,dashed](D) to[bend right=2] coordinate[pos=0.45] (PC2) coordinate[pos=0.36] (PC2mid) coordinate[pos=0.2] (P12) coordinate[pos=0.12] (P12mid) coordinate[pos=0.7] (P24) coordinate[pos=0.61] (P24mid) (K)--(L);
+    \path[draw,dashed](K) to[bend right=3](M);
+    \coordinate (PC3) at ($(PC2)+(\angv:0.1*\deltav)$);
+    \coordinate (P13) at ($(P12)+(\angv:0.1*\deltav)$);
+    \coordinate (P25) at ($(P24)+(\angv:0.1*\deltav)$);
+    \coordinate (PC2mid) at ($(PC2mid)+(\angv:0.1*\deltav)$);
+    \coordinate (P12mid) at ($(P12mid)+(\angv:0.1*\deltav)$);
+    \coordinate (P24mid) at ($(P24mid)+(\angv:0.1*\deltav)$);
+    
+    %%% PHASE BOUNDARIRES
+    \draw[solidliquidliquid!60!black, dashed,line width = 2pt,shorten <=1.5*\deltap] (D) to[bend right=2] (K);
+    \draw[liquidliquidvapor,line width=3pt] (M) .. controls ($(M)+(\angT+30:0.1*\deltaT)$) and ($(CRIT)+(180+\angv:0.05*\deltav)$) .. (CRIT);
+    \draw[liquidvaporvapor,line width=3pt] (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(N)+(120:0.3*\deltav)$) ..(N);
+    \path[draw=liquidliquidvapor!60!black,dashed,line width=3pt](K) to[bend right=3](M);
+    \draw[solidsolidvapor, line width=3pt] (J) to [bend right=10] (L);
+    \draw[solidvaporvapor, line width=3pt] (N) to[bend right=5] (Q);        
+
+    
+    %%% temperature isocontours %%%
+    \path[draw,dashed] (T11) .. controls ($(T11)+(-88:0.2*\deltap)$) and ($(T12)+(110:0.05*\deltav)$) .. (T12)--(T13) to[bend right=10] (T14);
+    \path[draw,dashed] (T21) to[bend right=5] (T22) to[bend right=10] (T23);
+    \path[draw,dashed] (TC1) .. controls ($(TC1)+(-88:0.3*\deltaT)$) and ($(CRIT)+(180:0.05*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(0:0.13*\deltav)$) and ($(TC2)+(145:0.5*\deltav)$) .. (TC2);
+
+    % Pressure isocontours
+    \draw[white,dashed] (PC4)--(PC3);
+    \draw[white!70!black,dashed] (PC3)--(PC2)--(PC2mid);
+    \draw[white,dashed] (PC2mid) .. controls ($(PC2mid)+(\angT:0.1*\deltaT)$) and ($(CRIT)+(\angv:-0.08*\deltav)$) .. (CRIT) .. controls  ($(CRIT)+(0:0.1*\deltav)$) and ($(PC1)+(180:0.4*\deltav)$) .. (PC1);
+    
+    \draw[white,dashed] (P14)--(P13);
+    \draw[white!70!black,dashed] (P13)--(P12)--(P12mid);
+    \draw[white,dashed] (P12mid) to[bend left=7] (P11);
+
+    \draw[white,dashed] (P26)--(P25);
+    \draw[white!70!black,dashed] (P25)--(P24)--(P24mid);
+    \draw[white,dashed] (P24mid) to[bend left=5] (P23)--(P22) to[bend left=10] (P21);
+
+
+    \draw[solidsolidliquid, line width = 3pt] (E) to[bend right=2] (M)--(L);
+    
+    
+    % HELPER POINTS
+    % \fill (A) circle (2pt) node[above] {A};
+    % \fill (B) circle (2pt) node[above] {B};
+    % \fill (C) circle (2pt) node[above] {C};
+    % \fill (D) circle (2pt) node[above] {D};
+    % \fill (E) circle (2pt) node[above] {E};
+    % \fill (F) circle (2pt) node[above] {F}; 
+    % \fill (G) circle (2pt) node[above] {G}; 
+    % \fill (H) circle (2pt) node[above] {H}; 
+    % \fill (I) circle (2pt) node[above] {I}; 
+
+    % \fill (J) circle (2pt) node[above] {J}; 
+    % \fill (K) circle (2pt) node[above] {K}; 
+    % \fill (L) circle (2pt) node[above] {L}; 
+    % \fill (M) circle (2pt) node[above] {M}; 
+    % \fill (N) circle (2pt) node[above] {N}; 
+    % \fill (TC1) circle (2pt) node[above] {$T_{c,1}$}; 
+    % \fill (T11) circle (2pt) node[above] {$T_{1,1}$}; 
+    % \fill (T12) circle (2pt) node[above] {$T_{1,2}$}; 
+    % \fill (T13) circle (2pt) node[above] {$T_{1,3}$}; 
+    % \fill (T14) circle (2pt) node[above] {$T_{1,4}$}; 
+
+    % \fill (T21) circle (2pt) node[above] {$T_{2,1}$}; 
+    % \fill (T22) circle (2pt) node[above] {$T_{2,2}$}; 
+    % \fill (T23) circle (2pt) node[above] {$T_{2,3}$}; 
+    % \fill (O) circle (2pt) node[above] {O}; 
+    % \fill (P) circle (2pt) node[above] {P}; 
+    % \fill (TC2) circle (2pt) node[above] {$T_{c,2}$}; 
+    % \fill (Q) circle (2pt) node[above] {Q}; 
+    % \fill (PC1) circle (2pt) node[above] {$p_{c,1}$}; 
+    % \fill (PC2) circle (2pt) node[above] {$p_{c,2}$};
+    % \fill (PC2mid) circle (2pt) node[above] {$p_{c,2mid}$}; 
+    % \fill (PC3) circle (2pt) node[above] {$p_{c,3}$}; 
+    % \fill (PC4) circle (2pt) node[above] {$p_{c,4}$}; 
+
+    % \fill (P11) circle (2pt) node[above] {$p_{1,1}$};
+    % \fill (P12) circle (2pt) node[above] {$p_{1,2}$};
+    % \fill (P12mid) circle (2pt) node[above] {$p_{1,2mid}$};
+    % \fill (P13) circle (2pt) node[above] {$p_{1,3}$};
+    % \fill (P14) circle (2pt) node[above] {$p_{1,4}$};
+    % \fill (P21) circle (2pt) node[above] {$p_{2,1}$};
+    % \fill (P22) circle (2pt) node[above] {$p_{2,2}$};
+    % \fill (P23) circle (2pt) node[above] {$p_{2,3}$};
+    % \fill (P24) circle (2pt) node[above] {$p_{2,4}$};
+    % \fill (P24mid) circle (2pt) node[above] {$p_{2,4mid}$};
+    % \fill (P25) circle (2pt) node[above] {$p_{2,5}$};
+    % \fill (P26) circle (2pt) node[above] {$p_{2,6}$};
+
+    \fill (CRIT) circle (2pt) node[right,align=center,rotate=10] {Critical\\point}; 
+    \draw[dashed,line width=2pt] (K)--(L);
+    \draw[line width=2pt] (L)--(N) node[pos=0.4,above=-0.02*\deltav, rotate=\angv] {Triple line};
+
+    \node[black] at ($(CRIT)+(-35:0.6*\deltav)$) {Gas};
+    \node[rotate=-45,black, align=left] at ($(CRIT)+(-63:0.7*\deltav)$) {Superheated\\vapor};
+    \node[rotate=\angv,black, align=left] at ($(CRIT)+(82:-0.29*\deltav)$) {Liquid\\+ vapor};
+    \node[rotate=-80,align=left,white] at ($(CRIT)+(-0.18*\deltav,0.*\deltav)$) {Liquid};
+    %\node[rotate=87,align=left,white] at ($(CRIT)+(-0.36*\deltav,-0.0*\deltav)$) {Solid + liquid};
+    \node[rotate=-85,align=left,white] at ($(CRIT)+(-0.45*\deltav,-0.45*\deltav)$) {Solid};
+    \node[rotate=\angv-2,align=left,white] at ($(CRIT)+(-0.1*\deltav,-0.77*\deltav)$) {Solid + vapor};
+    \node[rotate=1,align=left,black] at ($(CRIT)+(0.17*\deltav,0.30*\deltav)$) {Supercritical\\fluid};
+
+
+    %%%%%%%%%% PROJECTIONS %%%%%%%%
+    % p-T projection
+    \coordinate (Hpt) at ($(H)+(\angv:0.9*\deltav)$); 
+    \coordinate (Opt) at ($(Hpt)+(\angT:\deltaT)$);
+    \coordinate (Qpt) at ($(Hpt)+(0,0.1*\deltap)$);
+    
+    \coordinate (TRIPLE) at ($(Hpt)+(\angT:0.3*\deltaT)+(0,0.2*\deltap)$);
+    \coordinate (CRITpt) at ($(Hpt)+(\angT:0.65*\deltaT)+(0,0.65*\deltap)$);
+    \coordinate (PC1pt) at ($(CRITpt)+(\angT:0.35*\deltaT)$);
+    \coordinate (Fpt) at ($(Hpt)+(0,\deltap)$);
+    \coordinate (Cpt) at ($(Fpt)+(\angT:\deltaT)$);
+    \coordinate (TC1pt) at ($(Fpt)+(\angT:0.65*\deltaT)$);
+    \coordinate (TC2pt) at ($(Hpt)+(\angT:0.65*\deltaT)$);
+    \coordinate (Ept) at ($(Hpt)+(\angT:0.2*\deltaT)+(0,\deltap)$);
+
+    % PHASE REGIONS
+    \path[fill=superheated] (Opt)--(TC2pt)--(CRITpt)--(PC1pt)--cycle;
+    \path[fill=supercritical] (CRITpt)--(TC1pt)--(Cpt)--(PC1pt)--cycle;
+    \path[fill=liquid] (TRIPLE) to[bend right=10] (CRITpt)--(TC1pt)--(Ept) to[bend right=5] cycle;
+    \path[fill=solid] (Qpt) to[bend right=10] (TRIPLE) to[bend left=5] (Ept)--(Fpt)--cycle;
+    \path[fill=vapor] (Hpt)--(Qpt) to[bend right=10] (TRIPLE) to[bend right=10] (CRITpt)--(TC2pt)--cycle;
+
+    % temperature and pressure isocontours
+    \draw[dashed] (TC1pt)--(TC2pt);
+    \draw[dashed] ($(TC1pt)!0.5!(Cpt)$)--++(0,-\deltap);
+    \draw[dashed] ($(Ept)!0.5!(TC1pt)$)--++(0,-\deltap);
+    \draw[dashed, white] ($(Hpt)+(0,0.65*\deltap)$)--++(\angT:\deltaT);
+    \draw[dashed, white] ($(Hpt)+(0,0.83*\deltap)$)--++(\angT:\deltaT);
+    \draw[dashed, white] ($(Hpt)+(0,0.44*\deltap)$)--++(\angT:\deltaT);
+    
+
+    % PHASE BOUNDARY CURVES
+    \draw[solidsolidliquid, line width=3pt] (TRIPLE) to[bend left=5] (Ept);
+    \draw[solidliquidliquid, line width=3pt,dashed, dash pattern=on 8pt off 8pt] (TRIPLE) to[bend left=5] (Ept);
+    \draw[solidsolidvapor, line width =3pt] (Qpt) to[bend right=10] (TRIPLE);
+    \draw[solidvaporvapor, line width =3pt,dashed, dash pattern=on 8pt off 8pt] (Qpt) to[bend right=10] (TRIPLE);
+    \draw[liquidliquidvapor, line width=3pt] (TRIPLE) to[bend right=10] (CRITpt);
+    \draw[liquidvaporvapor, line width=3pt,dashed, dash pattern=on 8pt off 8pt] (TRIPLE) to[bend right=10] (CRITpt);
+
+    % draw helper lines
+    \path[draw, dashed] (H)--(Hpt);
+    \path[draw, dashed] (C)--(Cpt);
+
+    
+
+    % Annotations
+    \fill (TRIPLE) circle (2pt) node[below right=0.03*\deltav and -0.04*\deltav,align=left,rotate=\angT] {Triple\\point}; 
+    \fill (CRITpt) circle (2pt) node[right,align=left,rotate=\angT] {Critical\\point};
+
+    
+    
+    % Additional guidance points
+    % \fill (Hpt) circle (2pt) node[above] {Hpt}; 
+    % \fill (Opt) circle (2pt) node[above] {Opt}; 
+    % \fill (Qpt) circle (2pt) node[above] {Qpt}; 
+     
+    % \fill (Ept) circle (2pt) node[above] {Ept}; 
+    % \fill (Cpt) circle (2pt) node[above] {Cpt}; 
+    % \fill (Fpt) circle (2pt) node[above] {Fpt}; 
+    % \fill (TC1pt) circle (2pt) node[above] {TC1pt}; 
+    % \fill (TC2pt) circle (2pt) node[above] {TC2pt}; 
+    
+    % p-v projection
+    \coordinate (Apv) at ($(A)+(\angT:-1.5*\deltaT)$);
+    \coordinate (Gpv) at ($(Apv)+(0,-\deltap)$);
+    \coordinate (Dpv) at ($(Apv)+(\angv:0.1*\deltav)$);
+    \coordinate (Kpv) at ($(Dpv)+(0,-0.8*\deltap)$);
+    \coordinate (Npv) at ($(Kpv)+(\angv:0.6*\deltav)$);
+    \coordinate (TC2pv) at ($(Kpv)+(\angv:0.8*\deltav)$);
+    \coordinate (PC1pv) at ($(Apv)+(\angv:\deltav)+(0,-0.35*\deltap)$);
+    \coordinate (CRITpv) at ($(Apv)+(0,-0.35*\deltap)+(\angv:0.25*\deltav)$);
+    \coordinate (TC1pv) at ($(Apv)+(\angv:0.16*\deltav)$);
+    \coordinate (T11pv) at ($(Dpv)!0.5!(TC1pv)$);
+    \coordinate (T14pv) at ($(Npv)+(\angv:0.1*\deltav)$);
+    \coordinate (T21pv) at ($(TC1pv)+(\angv:0.1*\deltav)$);
+    \coordinate (T22pv) at ($(T22)+(\angT:-2.3*\deltaT)$);
+    \coordinate (T23pv) at ($(TC2pv)+(\angv:0.1*\deltav)+(0,0.05*\deltap)$);
+
+
+    %\path[draw,dashed] (N)--++(\angT:-2.5*\deltaT);
+    %\path[draw,dashed] (L)--++(\angT:-2.5*\deltaT);
+
+    % PHASE REGIONS IN THE FIRST PLANE
+    \path[fill=liquidvapor] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. coordinate[pos=0.2] (T12pv) (CRITpv) .. controls ($(CRITpv)+(-10:0.07*\deltav)$) and ($(Npv)+(135:0.4*\deltav)$) .. (Npv)--cycle;
+    \path[name path=T12T13pv] (T12pv)--++(\angv:\deltav);
+    \path[name path=satvapor] (CRITpv) .. controls ($(CRITpv)+(-10:0.07*\deltav)$) and ($(Npv)+(135:0.4*\deltav)$) .. (Npv);
+    \path[name intersections={of=T12T13pv and satvapor, by=T13pv}];
+    
+    
+    \path[fill=liquid] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. (CRITpv) .. controls ($(CRITpv)+(140:0.05*\deltav)$) and ($(TC1pv)+(-88:0.3*\deltap)$) .. (TC1pv)--(Dpv)--cycle;
+    \path[fill=supercritical] (CRITpv) .. controls ($(CRITpv)+(140:0.05*\deltav)$) and ($(TC1pv)+(-88:0.3*\deltap)$) .. (TC1pv)--($(Apv)+(\angv:\deltav)$)--(PC1pv)--cycle;
+    \path[fill=superheated] (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.5*\deltav)$) .. (TC2pv)--++(\angv:0.1*\deltav)--(PC1pv)--cycle;    
+    \path[fill=vapor] (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.5*\deltav)$) .. (TC2pv)--(Npv) .. controls ($(Npv)+(135:0.4*\deltav)$) and ($(CRITpv)+(-10:0.07*\deltav)$) .. cycle;
+    
+    
+    % PHASE BOUNDARIES IN THE FIRST PLANE
+    \draw[solidliquidliquid, line width=2pt] (Dpv)--(Kpv);
+    \draw[liquidliquidvapor, line width=3pt] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. (CRITpv);
+    \draw[liquidvaporvapor, line width=3pt] (CRITpv) .. controls ($(CRITpv)+(-10:0.07*\deltav)$) and ($(Npv)+(135:0.4*\deltav)$) .. (Npv);
+    
+    % temperature isocontours
+    \path[draw=black,dashed]  (TC1pv) .. controls ($(TC1pv)+(-88:0.3*\deltap)$) and ($(CRITpv)+(140:0.05*\deltav)$) .. (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.5*\deltav)$) .. (TC2pv);
+    \draw[dashed] (T11pv) to[bend right=2] (T12pv)--(T13pv) to[bend right=2] (T14pv);
+    \draw[dashed] (T21pv) to[out=-90,in=110] (T22pv) to[out=-55,in=145] (T23pv);
+    % pressure isocontours
+    \draw[dashed,white] ($(Dpv)+(0,-0.2*\deltap)$)--++(\angv:0.9*\deltav);
+    \draw[dashed,white] ($(Dpv)+(0,-0.35*\deltap)$)--++(\angv:0.9*\deltav);
+    \draw[dashed,white] ($(Dpv)+(0,-0.55*\deltap)$)--++(\angv:0.9*\deltav);
+    
+
+    % COORDINATES FOR THE THIRD PLANE    
+    \coordinate (AApv) at ($(Apv)+(\angT:-0.4*\deltaT)$);
+    \coordinate (GGpv) at ($(AApv)+(0,-\deltap)$);
+    \coordinate (JJpv) at ($(GGpv)+(\angv:0.1*\deltav)$);
+    \coordinate (HHpv) at ($(GGpv)+(\angv:\deltav)$);
+    \coordinate (IIpv) at ($(HHpv)+(0,0.05*\deltap)$);
+    \coordinate (EEpv) at ($(AApv)+(\angv:0.2*\deltav)$);
+    \coordinate (LLpv) at ($(EEpv)+(0,-0.8*\deltap)$);
+    \coordinate (NNpv) at ($(LLpv)+(\angv:0.5*\deltav)$);
+    \coordinate (TC22pv) at ($(NNpv)+(\angv:0.2*\deltav)$);
+    \coordinate (T15pv) at ($(NNpv)+(\angv:0.1*\deltav)$);
+    \coordinate (T16pv) at ($(IIpv)+(0,0.05*\deltap)$);
+
+    \path[draw,dashed] (Kpv)--++(\angT:-0.4*\deltaT);
+    \path[draw,dashed] (Dpv)--++(\angT:-0.4*\deltaT);
+
+    % PHASE REGIONS IN THE THIRD PLANE
+    \path[fill=solid] (AApv)--(EEpv)--(LLpv) to[bend left=10] (JJpv)--(GGpv)--cycle;
+    \path[fill=solidvapor] (LLpv)--(NNpv) to[bend right=10] (IIpv)--(HHpv)--(JJpv) to[bend right=10] cycle;
+    \path[fill=vapor] (NNpv)--(TC22pv) to[bend right=5] ($(IIpv)+(0,0.1*\deltap)$)--(IIpv) to [bend left=10] cycle;
+    \path[fill=superheated] (TC22pv) to [bend right=5] ($(IIpv)+(0,0.1*\deltap)$)--($(TC22pv)+(\angv:0.1*\deltav)$)--cycle;
+    \path[draw,dashed,very thick] (TC22pv) to [bend right=5] ($(IIpv)+(0,0.1*\deltap)$);
+    % PHASE BOUNDARIES
+    \draw[solidsolidliquid, line width=3pt] (EEpv)--(LLpv);
+    \draw[solidsolidvapor, line width=3pt] (LLpv) to[bend left=10] (JJpv);
+    \draw[solidvaporvapor, line width=3pt] (NNpv) to[bend right=10] (IIpv);
+
+    % temperature isocontours
+    \draw[dashed] (T15pv) to[bend right=5] (T16pv);
+    % pressure isocontours
+    \draw[dashed,white] ($(AApv)+(0,-0.2*\deltap)$)--++(\angv:0.2*\deltav);
+    \draw[dashed,white] ($(AApv)+(0,-0.35*\deltap)$)--++(\angv:0.2*\deltav);
+    \draw[dashed,white] ($(AApv)+(0,-0.55*\deltap)$)--++(\angv:0.2*\deltav);
+
+    % PHASE REGIONS IN THE SECOND PLANE
+    \path[fill=solidliquid] ($(Dpv)+(\angT:-0.2*\deltaT)$)--++(\angv:0.1*\deltav)--++(0,-0.8*\deltap)--++(\angv:-0.1*\deltav)--cycle;
+    % PHASE BOUNDARIES
+    \draw[solidsolidliquid, line width=3pt] ($(Dpv)+(\angT:-0.2*\deltaT)+(\angv:0.1*\deltav)$)--++(0,-0.8*\deltap); 
+    \draw[solidliquidliquid, line width=3pt] ($(Dpv)+(\angT:-0.2*\deltaT)$)--++(0,-0.8*\deltap);
+
+    \draw[white,dashed] ($(Dpv)+(\angT:-0.2*\deltaT)+(0,-0.2*\deltap)$)--++(\angv:0.1*\deltav);
+    \draw[white,dashed] ($(Dpv)+(\angT:-0.2*\deltaT)+(0,-0.35*\deltap)$)--++(\angv:0.1*\deltav);
+    \draw[white,dashed] ($(Dpv)+(\angT:-0.2*\deltaT)+(0,-0.55*\deltap)$)--++(\angv:0.1*\deltav);
+
+    % \draw[dashed,black,thick] ($(Dpv)+(0,-0.2*\deltap)+(\angT,-0.2*\deltaT)$)--++(\angv:0.1*\deltav);
+    % \draw[dashed,black,very thick] ($(Dpv)+(0,-0.35*\deltap)+(\angT,-0.2*\deltaT)$)--++(\angv:0.1*\deltav);
+    % \draw[dashed,white,thick] ($(Dpv)+(0,-0.55*\deltap)+(\angT,-0.2*\deltaT)$)--++(\angv:0.1*\deltav);
+
+    % draw helper lines
+    \path[draw,dashed] (A)--++(\angT:-1.9*\deltaT);
+    \path[draw,dashed] (H)--++(\angT:-1.9*\deltaT);
+    \path[draw,dashed] (Npv)--++(\angT:-0.4*\deltaT);
+    \path[draw,dashed] (TC2pv)--++(\angT:-0.4*\deltaT);
+    \path[draw,dashed] (T14pv)--++(\angT:-0.4*\deltaT);
+    %\path[draw,dashed] (Dpv)--++(\angT:-0.2*\deltaT);
+    %\path[draw,dashed] (Apv)--(Dpv);
+    \path[draw,dashed] (LLpv)--++(\angT:0.4*\deltaT);
+    \path[draw,dashed] (EEpv)--++(\angT:0.4*\deltaT);
+    \path[draw,dashed] ($(HHpv)+(0,0.2*\deltap)$)--++(\angT:0.4*\deltaT);
+    \path[draw,line width=2pt] (Kpv)--(Npv) node[pos=0.35,above=-0.02*\deltav,rotate=\angv] {Triple line};
+    \path[draw,line width=2pt] ($(Kpv)+(\angT:-0.2*\deltaT)$)--++(\angv:0.1*\deltav);
+    \path[draw,line width=2pt] (LLpv)--++(\angv:0.5*\deltav);
+
+    %\path[draw,dashed] (T23)--++(\angT:-2.3*\deltaT);
+    %\path[draw,dashed] (T22)--++(\angT:-2.3*\deltaT);
+    
+    % \fill (Apv) circle (2pt) node[above] {Apv}; 
+    % \fill (Gpv) circle (2pt) node[above] {Gpv}; 
+    % \fill (Dpv) circle (2pt) node[above] {Dpv}; 
+    % \fill (Kpv) circle (2pt) node[above] {Kpv}; 
+    % \fill (Npv) circle (2pt) node[above] {Npv};     
+    % \fill (TC1pv) circle (2pt) node[above] {$T_{c,1}$}; 
+    % \fill (PC1pv) circle (2pt) node[above] {$p_{c,1}$}; 
+    % \fill (AApv) circle (2pt) node[above] {AA}; 
+    % \fill (EEpv) circle (2pt) node[above] {EE};         
+    % \fill (LLpv) circle (2pt) node[above] {LL};         
+    % \fill (GGpv) circle (2pt) node[above] {GG}; 
+    % \fill (JJpv) circle (2pt) node[above] {JJ}; 
+    % \fill (HHpv) circle (2pt) node[above] {HH};
+    % \fill (IIpv) circle (2pt) node[above] {II};         
+    % \fill (NNpv) circle (2pt) node[above] {NN};
+    
+    % \fill (T11pv) circle (2pt) node[above] {$T_{1,1}$};
+    % \fill (T12pv) circle (2pt) node[above] {$T_{1,2}$};
+    % \fill (T13pv) circle (2pt) node[above] {$T_{1,3}$};
+    % \fill (T14pv) circle (2pt) node[above] {$T_{1,4}$};
+    % \fill (T15pv) circle (2pt) node[above] {$T_{1,5}$};
+    % \fill (T16pv) circle (2pt) node[above] {$T_{1,6}$};
+
+    % \fill (T21pv) circle (2pt) node[above] {$T_{2,1}$};
+    % \fill (T22pv) circle (2pt) node[above] {$T_{2,2}$};
+    % \fill (T23pv) circle (2pt) node[above] {$T_{2,3}$};
+
+    \fill (CRITpv) circle (2pt) node[above right,align=center,rotate=\angv] {Critical\\point}; 
+
+    
+    % %%% COLORLABELS:
+    % \node[draw,rounded corners=5pt,fill=solid,text=white,inner sep=6pt,text width=4cm,align=center] (SSS) at ($(A)+(-0.5*\deltav,0.6*\deltap)$) {Solid};
+    
+    % \node[draw,rounded corners=5pt,fill=solidliquid,text=white,inner sep=6pt,text width=4cm,align=center,right = 1cm of SSS] (LLLSSS) {Solid + liquid};
+    
+    % \node[draw,rounded corners=5pt,fill=liquid,text=white,inner sep=6pt,text width=4cm,align=center,right = 1cm of LLLSSS] (LLL) {Liquid};
+
+    % \node[draw,rounded corners=5pt,fill=liquidvapor,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of LLL] (LLLVVV) {Liquid + vapor};
+
+    % \node[draw,rounded corners=5pt,fill=solidvapor,text=white,inner sep=6pt,text width=4cm,align=center,below = 0.5cm of SSS] (SSSVVV) {Solid + vapor};
+    
+    % \node[draw,rounded corners=5pt,fill=vapor,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of SSSVVV] (VVV) {Vapor};
+
+    % \node[draw,rounded corners=5pt,fill=superheated,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of VVV] (SHSH) {Superheated vapor};
+    
+    % \node[draw,rounded corners=5pt,fill=supercritical,text=black,inner sep=6pt,text width=4cm,align=center,right = 1cm of SHSH] (SCSC) {Supercritical fluid};
+
+    
+    %%%% AXES %%%%
+    \draw[->,very thick] ($(G)+(\angT:-0.05*\deltaT)$)--++(\angv:\deltav) node[pos=0.5,rotate=\angv,below] {Specific volume};
+    \draw[->,very thick] ($(GGpv)+(\angT:-0.05*\deltaT)$)--++(\angv:\deltav) node[pos=0.5,rotate=\angv,below] {Specific volume};
+    \draw[->,very thick] ($(H)+(\angv:0.05*\deltav)$)--++(\angT:\deltaT) node[pos=0.5,rotate=\angT,below] {Temperature};
+    \draw[->,very thick] ($(Hpt)+(\angv:0.05*\deltav)$)--++(\angT:\deltaT) node[pos=0.5,rotate=\angT,below] {Temperature};
+    \draw[->,very thick] ($(G)+(\angT:-0.05*\deltaT)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+    \draw[->,very thick] ($(GGpv)+(\angT:-0.05*\deltaT)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+    \draw[->,very thick] ($(Hpt)+(\angv:-0.05*\deltav)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+    
+\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tikzpicture}
+
+    \def\deltav{5};
+    \def\deltap{5};
+    \def\deltaT{3.57};
+
+    %\def\deltav{7};
+    %\def\deltap{7};
+    %\def\deltaT{5};
+    \def\angT{20};
+    \def\angv{-20};
+
+    % main coordinates (some of the coordinates will be defined later placing them along paths)
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ($(A)+(\angT:\deltaT)$);
+    \coordinate (C) at ($(B)+(\angv:0.55*\deltav)$);
+    \coordinate (TC1) at ($(A)+(\angT:0.6*\deltaT)+(\angv:0.3*\deltav)$);
+    \coordinate (D) at ($(A)+(\angT:0.3*\deltaT)+(\angv:0.25*\deltav)$);
+    \coordinate (E) at ($(A)+(\angT:0.3*\deltaT)+(\angv:0.15*\deltav)$);
+    \coordinate (F) at ($(A)+(\angv:0.1*\deltav)$);
+    \coordinate (G) at ($(A)+(0,-\deltap)$);
+    \coordinate (H) at ($(G)+(\angv:\deltav)$);
+    \coordinate (I) at ($(H)+(0,0.05*\deltap)$);
+    \coordinate (J) at ($(F)+(-89:0.9*\deltap)$);
+    \coordinate (K) at ($(D)+(0,-0.8*\deltap)+(\angT:-0.05*\deltaT)$);
+    \coordinate (L) at ($(E)+(0,-0.8*\deltap)+(\angT:-0.05*\deltaT)$);
+    \coordinate (M) at ($(K)+(\angv:0.5*\deltav)$);
+    \coordinate (CRIT) at ($(A)+(\angT:0.55*\deltaT)+(0,-0.35*\deltap)+(\angv:0.4*\deltav)$);
+    \coordinate (O) at ($(H)+(\angT:\deltaT)$);
+    \coordinate (P) at ($(O)+(0,0.3*\deltap)$);
+    \coordinate (TC2) at ($(P)+(\angT+10:-0.5*\deltaT)$);
+    \coordinate (Q) at ($(P)+(\angT+10:-\deltaT)$);
+
+    \coordinate (T14) at ($(P)+(\angT+10:-0.7*\deltaT)$);
+    \coordinate (T21) at ($(A)+(\angT:0.8*\deltaT)+(\angv:0.3*\deltav)$);
+    \coordinate (PC1) at ($(C)+(\angv:0.1*\deltav)+(0,-0.35*\deltap)$);
+
+    %%% FILL THE REGIONS %%%
+    % v-T plane at the top (gray)
+    \path[draw,fill=gray!20,opacity=1.0] (A)--(B)--(C) to[bend right=5] coordinate[pos=0.55] (T21) (TC1) to [bend right=5] coordinate[pos=0.5] (T11) (D)--(E)--(F)--cycle;
+    % p-v plane at the front (gray)
+    \path[draw,fill=gray!20] (A)--(G)--(H)--(I)--(J) to[bend left=2] (F)--cycle;
+    % p-T plane at the side (gray)
+    \path[draw,fill=gray!20] (H)--(O)--(P)-- coordinate[pos=0.55] (T23) (TC2)--(Q) to[bend left=5] (I)--cycle;
+    % solid region 
+    \path[draw,fill=solid] (F) to[bend right=2] coordinate[pos=0.4] (PC4) coordinate[pos=0.2] (P14) coordinate[pos=0.75] (P26) (J) to[bend right=10] (L) to[bend right=2] (E)--cycle;
+     % solid - vapor region
+    \path[fill=solidvapor] (J) to [bend right=10] (L)--(K)--(M) to[bend right=5] (Q) to[bend left=5] (I)--cycle;
+    % solid - liquid region
+    \path[fill=solidliquid] (L) to[bend right=2] (E)--(D) to[bend left=2] coordinate[pos=0.44] (PC2) coordinate[pos=0.22] (P12) coordinate[pos=0.82] (P24) (K)--cycle;
+    \coordinate (PC3) at ($(PC2)+(\angv:-0.1*\deltav)$);
+    \coordinate (P13) at ($(P12)+(\angv:-0.1*\deltav)$);
+    \coordinate (P25) at ($(P24)+(\angv:-0.1*\deltav)$);
+    
+
+    
+    % liquid - vapor region (part is behind the solid - liquid region    
+    \path[fill=liquidvapor] (K) .. controls ($(K)+(\angT:0.1*\deltaT)$) and ($(CRIT)+(\angv:-0.07*\deltav)$) .. coordinate[pos=0.55] (T12) coordinate[pos=0.45] (P23) (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(M)+(120:0.3*\deltav)$) ..(M)--cycle;
+    \path[name path=T12T13] (T12)--++(\angv:\deltav);
+    \path[name path=satvapor] (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(M)+(120:0.3*\deltav)$) ..(M);
+    \path[name intersections={of=T12T13 and satvapor, by=T13}];
+    
+    \path[name path=P23P22] (P23)--++(\angv:\deltav);
+    \path[name intersections={of=P23P22 and satvapor, by=P22}];
+
+   
+    % liquid region
+    \path[black,fill=liquid] (TC1) .. controls ($(TC1)+(-88:0.3*\deltaT)$) and ($(CRIT)+(180:0.05*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(\angv:-0.07*\deltav)$) and ($(K)+(\angT:0.1*\deltaT)$) .. (K) to[bend right=2] (D) to[bend left=5] cycle;
+    % supercritical region
+    \path[fill=supercritical] (PC1) .. controls ($(PC1)+(175:0.4*\deltav)$) and ($(CRIT)+(\angv:0.05*\deltav)$) .. coordinate[pos=0.3] (T22) (CRIT) .. controls ($(CRIT)+(180:0.05*\deltav)$) and ($(TC1)+(-88:0.3*\deltaT)$) .. (TC1) to[bend left=5] (C) to [bend right=5] coordinate[pos=0.45] (P11) cycle;
+    % superheated region
+    \path[fill=superheated] (PC1) .. controls ($(PC1)+(175:0.4*\deltav)$) and ($(CRIT)+(\angv:0.05*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(\angv:0.15*\deltav)$) and ($(TC2)+(140:0.5*\deltav)$) .. (TC2)--(P) to[bend left=5] coordinate[pos=0.3] (P21) cycle;
+    % vapor region
+    \path[fill=vapor] (CRIT) .. controls ($(CRIT)+(\angv:0.15*\deltav)$) and ($(TC2)+(140:0.5*\deltav)$) .. (TC2)--(Q) to[bend left=5] (M) .. controls ($(M)+(120:0.3*\deltav)$) and ($(CRIT)+(\angv:0.1*\deltav)$) .. cycle;
+
+    %%%% phase boundaries %%%%%
+    \draw[liquidliquidvapor, line width=3pt] (K) .. controls ($(K)+(\angT:0.1*\deltaT)$) and ($(CRIT)+(\angv:-0.07*\deltav)$) .. (CRIT);
+    \draw[liquidvaporvapor,line width=3pt] (CRIT) .. controls ($(CRIT)+(\angv:0.1*\deltav)$) and ($(M)+(120:0.3*\deltav)$) ..(M);
+    \draw[solidsolidliquid, line width=3pt]  (L) to[bend right=2] (E);
+    \draw[solidliquidliquid, line width=3pt]  (D) to[bend left=2] (K);
+    \draw[solidsolidvapor,line width=3pt] (J) to [bend right=10] (L);
+    \draw[solidvaporvapor,line width=3pt] (M) to[bend right=5] (Q);
+    
+        
+
+    % temperature isocontours
+    \path[draw=black,dashed] (TC1) .. controls ($(TC1)+(-88:0.3*\deltaT)$) and ($(CRIT)+(180:0.05*\deltav)$) .. (CRIT) .. controls ($(CRIT)+(\angv:0.15*\deltav)$) and ($(TC2)+(140:0.5*\deltav)$) .. (TC2); 
+    \path[draw=black,dashed] (T11) .. controls ($(T11)+(-88:0.4*\deltap)$) and ($(T12)+(\angv:-0.02*\deltav)$) .. (T12)--(T13) .. controls ($(T13)+(-50:0.1*\deltav)$) and ($(T14)+(140:0.4*\deltav)$) .. (T14);
+    \path[draw=black,dashed] (T21) to[bend right=5] (T22) to[bend right=5] (T23); 
+
+    % pressure isocontours
+    \draw[white, dashed] (PC4) to[bend left=2] (PC3)--(PC2) ..controls ($(PC2)+(\angT:0.1*\deltaT)$) and ($(CRIT)+(\angv:-0.1*\deltav)$) .. (CRIT)  .. controls ($(CRIT)+(\angv:0.05*\deltav)$) and ($(PC1)+(175:0.4*\deltav)$) .. (PC1);
+    \draw[white,dashed] (P14)--(P13)--(P12) to[bend left=8] (P11);
+    \draw[white,dashed] (P26)--(P25)--(P24)--(P23)--(P22) to[bend left=10] (P21);
+    
+
+    %%% Labels %%%
+    \fill (CRIT) circle (2pt) node[right,align=center,rotate=10] {Critical\\point}; 
+    \draw[black, line width=2] (L)--(M) node[pos=0.55,above=-0.03*\deltav,rotate=\angv] {Triple line};
+    
+    \node[black] at ($(CRIT)+(-30:0.56*\deltav)$) {Gas};
+    \node[rotate=-50,black, align=left] at ($(CRIT)+(-65:0.6*\deltav)$) {Superheated\\vapor};
+    \node[rotate=\angv,black, align=left] at ($(CRIT)+(79:-0.32*\deltav)$) {Liquid\\+ vapor};
+    \node[rotate=-86,align=left,white] at ($(CRIT)+(-0.14*\deltav,0.02*\deltav)$) {Liquid};
+    \node[rotate=87,align=left,white] at ($(CRIT)+(-0.36*\deltav,-0.0*\deltav)$) {Solid + liquid};
+    \node[rotate=-85,align=left,white] at ($(CRIT)+(-0.57*\deltav,-0.17*\deltav)$) {Solid};
+    \node[rotate=\angv-2,align=left,white] at ($(CRIT)+(-0.3*\deltav,-0.65*\deltav)$) {Solid + vapor};
+    \node[rotate=3,align=left,black] at ($(CRIT)+(0.2*\deltav,0.31*\deltav)$) {Supercritical\\fluid};
+
+    %\node[rotate,black] at ($(CRIT)+(-30:0.2*\deltav)$) {Gas};
+
+    % Helper points, comment from final
+    % \fill (A) circle (2pt) node[above] {A};
+    % \fill (B) circle (2pt) node[above] {B};
+    % \fill (C) circle (2pt) node[above] {C};
+    % \fill (D) circle (2pt) node[above] {D};
+    % \fill (E) circle (2pt) node[above] {E};
+    % \fill (F) circle (2pt) node[above] {F}; 
+    % \fill (TC1) circle (2pt) node[above] {$T_{c,1}$}; 
+    % \fill (G) circle (2pt) node[above] {G}; 
+    % \fill (H) circle (2pt) node[above] {H}; 
+    % \fill (I) circle (2pt) node[above] {I}; 
+    % \fill (J) circle (2pt) node[above] {J}; 
+    % \fill (K) circle (2pt) node[above] {K}; 
+    % \fill (L) circle (2pt) node[above] {L}; 
+    % \fill (M) circle (2pt) node[above] {M}; 
+    % \fill (O) circle (2pt) node[above] {O}; 
+    % \fill (P) circle (2pt) node[above] {P}; 
+    % \fill (TC2) circle (2pt) node[above] {$T_{c,2}$}; 
+    % \fill (Q) circle (2pt) node[above] {Q}; 
+    % \fill (TC1) circle (2pt) node[above] {$T_{c,1}$}; 
+    % \fill (T11) circle (2pt) node[above] {$T_{1,1}$}; 
+    % \fill (T12) circle (2pt) node[above] {$T_{1,2}$}; 
+    % \fill (T13) circle (2pt) node[above] {$T_{1,3}$}; 
+    % \fill (T14) circle (2pt) node[above] {$T_{1,4}$}; 
+    % \fill (T21) circle (2pt) node[above] {$T_{2,1}$}; 
+    % \fill (T22) circle (2pt) node[above] {$T_{2,2}$}; 
+    % \fill (T23) circle (2pt) node[above] {$T_{2,3}$}; 
+    % \fill (PC1) circle (2pt) node[above] {$p_{c,1}$}; 
+    % \fill (PC2) circle (2pt) node[above] {$p_{c,2}$}; 
+    % \fill (PC3) circle (2pt) node[above] {$p_{c,3}$}; 
+    % \fill (PC4) circle (2pt) node[above] {$p_{c,4}$}; 
+    % \fill (P11) circle (2pt) node[above] {$p_{1,1}$};
+    % \fill (P12) circle (2pt) node[above] {$p_{1,2}$};
+    % \fill (P13) circle (2pt) node[above] {$p_{1,3}$};
+    % \fill (P14) circle (2pt) node[above] {$p_{1,4}$};
+
+    % \fill (P21) circle (2pt) node[above] {$p_{2,1}$};
+    % \fill (P22) circle (2pt) node[above] {$p_{2,2}$};
+    % \fill (P23) circle (2pt) node[above] {$p_{2,3}$};
+    % \fill (P24) circle (2pt) node[above] {$p_{2,4}$};
+    % \fill (P25) circle (2pt) node[above] {$p_{2,5}$};
+    % \fill (P26) circle (2pt) node[above] {$p_{2,6}$};
+
+    
+    %%%%%%%%%% PROJECTIONS %%%%%%%%
+    % p-T projection
+    \coordinate (Hpt) at ($(H)+(\angv:0.9*\deltav)$); 
+    \coordinate (Opt) at ($(Hpt)+(\angT:\deltaT)$);
+    \coordinate (Qpt) at ($(Hpt)+(0,0.1*\deltap)$);
+    \coordinate (TRIPLE) at ($(Hpt)+(\angT:0.25*\deltaT)+(0,0.2*\deltap)$);
+    \coordinate (CRITpt) at ($(Hpt)+(\angT:0.6*\deltaT)+(0,0.65*\deltap)$);
+    \coordinate (PC1pt) at ($(CRITpt)+(\angT:0.4*\deltaT)$);
+    \coordinate (Fpt) at ($(Hpt)+(0,\deltap)$);
+    \coordinate (Cpt) at ($(Fpt)+(\angT:\deltaT)$);
+    \coordinate (TC1pt) at ($(Fpt)+(\angT:0.6*\deltaT)$);
+    \coordinate (TC2pt) at ($(Hpt)+(\angT:0.6*\deltaT)$);
+    \coordinate (Ept) at ($(Hpt)+(\angT:0.3*\deltaT)+(0,\deltap)$);
+
+    % superheated vapor region
+    \path[fill=superheated] (Opt)--(TC2pt)--(CRITpt)--(PC1pt)--cycle;
+    % supercritical fluid region
+    \path[fill=supercritical] (CRITpt)--(TC1pt)--(Cpt)--(PC1pt)--cycle;
+    % liquid region
+    \path[fill=liquid] (TRIPLE) to[bend right=10] (CRITpt)--(TC1pt)--(Ept) to[bend left=5] cycle;
+    
+    % solid region
+    \path[fill=solid] (Qpt) to[bend right=10] (TRIPLE) to[bend right=5] (Ept)--(Fpt)--cycle;
+    % vapor region
+    \path[fill=vapor] (Hpt)--(Qpt) to[bend right=10] (TRIPLE) to[bend right=10] (CRITpt)--(TC2pt)--cycle;
+
+    % Temperature and pressure isocontours
+    \draw[dashed] (TC1pt)--(TC2pt);
+    \draw[dashed] ($(TC1pt)!0.4!(Cpt)$)--++(0,-\deltap);
+    \draw[dashed] ($(Ept)!0.6!(TC1pt)$)--++(0,-\deltap);
+    \draw[dashed,white] ($(Hpt)+(0,0.65*\deltap)$)--++(\angT:\deltaT);
+    \draw[dashed,white] ($(Hpt)+(0,0.82*\deltap)$)--++(\angT:\deltaT);
+    \draw[dashed,white] ($(Hpt)+(0,0.38*\deltap)$)--++(\angT:\deltaT);
+
+    %\draw[dashed] (P22) --++(\angv:2.5*\deltav);
+    %\draw[dashed] (PC4) --++(\angv:2.5*\deltav);
+
+    % phase boundary curves
+    \draw[liquidliquidvapor,line width=3pt] (TRIPLE) to[bend right=10] (CRITpt);
+    \draw[liquidvaporvapor,dashed, dash pattern=on 8pt off 8pt,line width=3pt] (TRIPLE) to[bend right=10] (CRITpt);
+    \draw[solidsolidliquid, line width=3pt]  (TRIPLE) to[bend right=5] (Ept);
+    \draw[solidliquidliquid, line width=3pt,dashed, dash pattern=on 8pt off 8pt]  (TRIPLE) to[bend right=5] (Ept);
+    \draw[solidsolidvapor,line width=3pt] (Qpt) to[bend right=10] (TRIPLE);
+    \draw[solidvaporvapor,line width=3pt,dashed, dash pattern=on 8pt off 8pt] (Qpt) to[bend right=10] (TRIPLE);
+    
+    % helper lines
+    \draw[dashed] (C)--(Cpt);
+    \draw[dashed] (H)--(Hpt);
+
+    % labels
+    \fill (TRIPLE) circle (2pt) node[below right=0.03*\deltav and -0.04*\deltav,align=left,rotate=\angT] {Triple\\point}; 
+    \fill (CRITpt) circle (2pt) node[right,align=left,rotate=\angT] {Critical\\point}; 
+    
+    % Helper point (to be commented out from the final)
+    % \fill (Hpt) circle (2pt) node[above] {Hpt}; 
+    % \fill (Opt) circle (2pt) node[above] {Opt}; 
+    % \fill (Qpt) circle (2pt) node[above] {Qpt}; 
+    % \fill (Ept) circle (2pt) node[above] {Ept}; 
+    % \fill (Cpt) circle (2pt) node[above] {Cpt}; 
+    % \fill (Fpt) circle (2pt) node[above] {Fpt}; 
+    % \fill (TC1pt) circle (2pt) node[above] {TC1pt}; 
+    % \fill (TC2pt) circle (2pt) node[above] {TC2pt}; 
+
+    %%%%%%%%%%%%%%%%
+    % p-v projection    
+    \coordinate (Apv) at ($(A)+(\angT:-1.5*\deltaT)$);
+    \coordinate (Gpv) at ($(Apv)+(0,-\deltap)$);
+    \coordinate (Jpv) at ($(Gpv)+(\angv:0.05*\deltav)$);
+    \coordinate (Hpv) at ($(Gpv)+(\angv:\deltav)$);
+    \coordinate (Qpv) at ($(Hpv)+(0,0.05*\deltap)$);   
+    \coordinate (Epv) at ($(Apv)+(\angv:0.15*\deltav)$);
+    \coordinate (Dpv) at ($(Apv)+(\angv:0.25*\deltav)$);
+    \coordinate (TC1pv) at ($(Apv)+(\angv:0.31*\deltav)$); 
+    \coordinate (TC2pv) at ($(Hpv)+(0,0.15*\deltap)$); 
+    \coordinate (CRITpv) at ($(Apv)+(\angv:0.4*\deltav)+(0,-0.35*\deltap)$); 
+    \coordinate (Lpv) at ($(Epv)+(0,-0.8*\deltap)$);
+    \coordinate (Kpv) at ($(Dpv)+(0,-0.8*\deltap)$);
+    \coordinate (Mpv) at ($(Kpv)+(\angv:0.5*\deltav)$);
+    \coordinate (T11pv) at ($(Apv)+(\angv:0.28*\deltav)$); 
+    \coordinate (T14pv) at ($(Qpv)+(0,0.05*\deltap)$); 
+    \coordinate (T21pv) at ($(Apv)+(\angv:0.4*\deltav)$);
+    \coordinate (T22pv) at ($(Apv)+(\angv:0.52*\deltav)+(0,-0.35*\deltap)$);
+    \coordinate (T23pv) at ($(Qpv)+(0,0.2*\deltap)$);
+
+    % solid region
+    \path[fill=solid] (Apv)--(Gpv)--(Jpv) to[bend right=10] (Lpv)--(Epv)-- cycle;
+    % solid - liquid region
+    \path[fill=solidliquid] (Epv)--(Dpv)--(Kpv)--(Lpv)--cycle;
+    % solid - vapor region
+    \path[fill=solidvapor] (Jpv) to[bend right=10] (Lpv)--(Mpv) to[bend right=5] (Qpv)--(Hpv)--cycle;
+    % liquid - vapor region
+    \path[fill=liquidvapor] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. coordinate[pos=0.28] (T12pv) (CRITpv) .. controls ($(CRITpv)+(-10:0.09*\deltav)$) and ($(Mpv)+(130:0.3*\deltav)$) .. (Mpv)--cycle;
+    \path[name path=T12T13pv] (T12pv)--++(\angv:\deltav);
+    \path[name path=satvapor] (CRITpv) .. controls ($(CRITpv)+(-10:0.09*\deltav)$) and ($(Mpv)+(130:0.3*\deltav)$) .. (Mpv);
+    \path[name intersections={of=T12T13pv and satvapor, by=T13pv}];
+        
+    % liquid region
+    \path[fill=liquid] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. (CRITpv) .. controls ($(CRITpv)+(180:0.05*\deltav)$) and ($(TC1pv)+(-88:0.3*\deltaT)$) .. (TC1pv) --(Dpv)--cycle;
+    % supercritical region
+    \path[fill=supercritical] (CRITpv) .. controls ($(CRITpv)+(180:0.05*\deltav)$) and ($(TC1pv)+(-88:0.3*\deltaT)$) .. (TC1pv) -- ($(Hpv)+(0,\deltap)$)--($(Hpv)+(0,0.65*\deltap)$)--cycle;
+    % superheated region
+    \path[fill=superheated] (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.3*\deltav)$) .. (TC2pv)--($(Hpv)+(0,0.65*\deltap)$)--cycle;
+    % vapor region
+    \path[fill=vapor] (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.3*\deltav)$) .. (TC2pv)--(Qpv) to[bend left=5] (Mpv) .. controls ($(Mpv)+(130:0.3*\deltav)$) and ($(CRITpv)+(-10:0.09*\deltav)$) .. cycle;
+
+    
+    % PHASE BOUNDARIES
+    \draw[solidliquidliquid,line width=3pt] (Kpv)--(Dpv);
+    \draw[solidsolidliquid,line width=3pt] (Lpv)--(Epv);
+    \draw[liquidliquidvapor, line width=3pt] (Kpv)..controls ($(Kpv)+(80:0.4*\deltap)$) and ($(CRITpv)+(-10:-0.02*\deltav)$) .. (CRITpv);
+    \draw[liquidvaporvapor,line width=3pt] (CRITpv) .. controls ($(CRITpv)+(-10:0.09*\deltav)$) and ($(Mpv)+(130:0.3*\deltav)$) .. (Mpv);
+    \draw[solidsolidvapor,line width=3pt] (Jpv) to[bend right=10] (Lpv);
+    \draw[solidvaporvapor, line width=3pt] (Mpv) to[bend right=5] (Qpv);
+
+    % temperature and pressure isocontours
+    \draw[dashed] (TC1pv) .. controls  ($(TC1pv)+(-88:0.3*\deltaT)$) and ($(CRITpv)+(180:0.05*\deltav)$) .. (CRITpv) .. controls ($(CRITpv)+(\angv:0.1*\deltav)$) and ($(TC2pv)+(140:0.3*\deltav)$) .. (TC2pv);
+    \draw[dashed] (T11pv) to[bend right=2] (T12pv) --(T13pv) to[bend right=7] (T14pv);
+    \draw[dashed] (T21pv) to[out=-85,in=110] (T22pv) to[bend right=7] (T23pv);
+    \draw[white,dashed] ($(Apv)+(0,-0.2*\deltap)$)--++(\angv:\deltav);
+    \draw[white,dashed] ($(Apv)+(0,-0.35*\deltap)$)--++(\angv:\deltav);
+    \draw[white,dashed] ($(Apv)+(0,-0.6*\deltap)$)--++(\angv:\deltav);
+
+    
+    % lines
+    \draw[dashed] (A)--(Apv);
+    \draw[dashed] (H)--(Hpv);
+
+    % Labels
+    \fill (CRITpv) circle (2pt) node[above right,align=center,rotate=\angv] {Critical\\point};
+    \draw[black, line width=2] (Lpv)--(Mpv) node[pos=0.46,above=-0.02*\deltav,rotate=\angv] {Triple line};
+
+    
+
+   
+
+    %%%% AXES %%%%
+    \draw[->,very thick] ($(G)+(\angT:-0.05*\deltaT)$)--++(\angv:\deltav) node[pos=0.5,rotate=\angv,below] {Specific volume};
+    \draw[->,very thick] ($(H)+(\angv:0.05*\deltav)$)--++(\angT:\deltaT) node[pos=0.5,rotate=\angT,below] {Temperature};
+    \draw[->,very thick] ($(G)+(\angT:-0.05*\deltaT)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+
+
+    \draw[->,very thick] ($(Gpv)+(\angT:-0.05*\deltaT)$)--++(\angv:\deltav) node[pos=0.5,rotate=\angv,below] {Specific volume};
+    \draw[->,very thick] ($(Hpt)+(\angv:0.05*\deltav)$)--++(\angT:\deltaT) node[pos=0.5,rotate=\angT,below] {Temperature};
+    \draw[->,very thick] ($(Gpv)+(\angT:-0.05*\deltaT)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+    \draw[->,very thick] ($(Hpt)+(\angv:-0.05*\deltav)$)--++(0,\deltap) node[pos=0.5,rotate=90,above] {Pressure};
+        
+    % %helper points and lines (comment from final)
+    % \fill (Apv) circle (2pt) node[above] {Apv};
+    % \fill (Gpv) circle (2pt) node[above] {Gpv}; 
+    % \fill (Jpv) circle (2pt) node[above] {Jpv}; 
+    % \fill (Hpv) circle (2pt) node[above] {Hpv}; 
+    % \fill (Qpv) circle (2pt) node[above] {Qpv}; 
+    % \fill (Epv) circle (2pt) node[above] {Epv};
+    % \fill (Dpv) circle (2pt) node[above] {Dpv};
+    % \fill (Lpv) circle (2pt) node[above] {Lpv};
+    % \fill (Kpv) circle (2pt) node[above] {Kpv};
+    % \fill (Mpv) circle (2pt) node[above] {Mpv};
+    % \fill (TC1pv) circle (2pt) node[above] {$T_{c,1}$};
+    % \fill (T11pv) circle (2pt) node[above] {$T_{1,1}$};
+    % \fill (T12pv) circle (2pt) node[above] {$T_{1,2}$};
+    % \fill (T13pv) circle (2pt) node[above] {$T_{1,3}$};
+    % \fill (T14pv) circle (2pt) node[above] {$T_{1,4}$};
+    % \fill (T21pv) circle (2pt) node[above] {$T_{2,1}$};
+    % \fill (T22pv) circle (2pt) node[above] {$T_{2,2}$};
+    % \fill (T23pv) circle (2pt) node[above] {$T_{2,2}$};
+    
+    % \draw[dashed] (E)--++(\angT:-2*\deltaT);
+    % \draw[dashed] (D)--++(\angT:-2*\deltaT);
+    %\draw[dashed] (TC1)--++(\angT:-2*\deltaT);
+    %\draw[dashed] (T11)--++(\angT:-2*\deltaT);
+    %\draw[dashed] (T22)--++(\angT:-2.5*\deltaT);
+    % \draw[dashed] (T23)--++(\angT:-2.5*\deltaT);
+    % \draw[dashed] (CRIT)--++(\angT:-2*\deltaT);
+    % \draw[dashed] (M)--++(\angT:-2*\deltaT);
+    
+    
+\end{tikzpicture}
+
+\end{document}

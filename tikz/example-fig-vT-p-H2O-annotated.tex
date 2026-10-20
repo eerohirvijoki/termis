@@ -1,0 +1,45 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\textwidth]{../figs/fig-vT-p-H2O.pdf}
+
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+
+        \coordinate (vpoint) at (-0.255,-0.31);
+        \coordinate (vvap) at (0.024,-0.31);
+        
+        \fill (vvap) circle (2pt);
+        \fill (vpoint) circle (2pt);
+        \draw[dashed,purple,thick] (vvap)--++(0,-0.6);
+        \draw[dashed,purple,thick] (vpoint)--++(0,-0.6);
+        \draw[dashed,,purple,thick] ($(vpoint)+(-0.6,0)$)--($(vvap)+(0.2,0)$);
+
+        \draw[latex-,thick,shorten <=5pt] (vvap) to[bend left=20] ($(vvap)+(0.4,0.3)$) node[anchor= west] {$\left\{\begin{aligned}&v=0.03\,\text{m}^3/\text{kg}\\
+        &T\approx280^\circ\text{C}
+        \end{aligned}\right.$};
+
+        \draw[latex-,thick,shorten <=5pt] (vpoint) to[bend left=25] ($(vpoint)+(0.3,0.7)$) node[anchor=west] {$\left\{\begin{aligned}&v=0.03\,\text{m}^3/\text{kg}\\
+        &p=10\,\text{bar}\\
+        &T\approx180^\circ\text{C}
+        \end{aligned}\right.$};
+        
+    \end{scope}
+\end{tikzpicture}    
+\end{document}

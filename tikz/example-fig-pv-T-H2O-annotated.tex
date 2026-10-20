@@ -1,0 +1,48 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\textwidth]{../figs/fig-pv-T-H2O.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        %\foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        %}
+        %\draw (-1,0) -- (1,0);
+        %\draw (0,-1) -- (0,1);
+
+        \coordinate (vliq) at (-0.667,0.13);
+        \coordinate (vvap) at (-0.01,0.13);
+        \coordinate (vpoint) at (-0.497,0.13);
+        \fill (vliq) circle (2pt);
+        \fill (vvap) circle (2pt);
+        \fill (vpoint) circle (2pt);
+        \draw[dashed,purple,thick] (vliq)--++(0,-1.1);
+        \draw[dashed,purple,thick] (vvap)--++(0,-1.1);
+        \draw[dashed,purple,thick] (vpoint)--++(0,-1.1);
+
+        \draw[latex-,thick,shorten <=5pt] (vvap) to[bend right=10] ($(vvap)+(0.3,0.5)$) node[anchor= west] {$\left\{\begin{aligned}&T=150^\circ\text{C}\\
+        &v_\text{vap}\approx0.4\,\text{m}^3/\text{kg}
+        \end{aligned}\right.$};
+
+        \draw[latex-,thick,shorten <=5pt] (vliq) to[bend right=25] ($(vliq)+(1.05,-0.3)$) node[anchor=west] {$\left\{\begin{aligned}&T=150^\circ\text{C}\\
+        &v_\text{liq}\approx1\times 10^{-3}\,\text{m}^3/\text{kg}
+        \end{aligned}\right.$};
+
+        \draw[latex-,thick,shorten <=5pt] (vpoint) to[bend right=25] ($(vpoint)+(0.9,0.1)$) node[anchor=west] {$\left\{\begin{aligned}&T=150^\circ\text{C}\\
+        &v\approx5\times 10^{-3}\,\text{m}^3/\text{kg}
+        \end{aligned}\right.$};
+        
+    \end{scope}
+\end{tikzpicture}
+\end{document}

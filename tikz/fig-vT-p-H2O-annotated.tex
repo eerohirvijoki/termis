@@ -1,0 +1,32 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\linewidth]{../figs/fig-vT-p-H2O.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+        \coordinate (crit) at (0.284,-0.575);
+        \coordinate (trpLiq) at (-0.75,-0.7);
+        \coordinate (trpVap) at (-0.75,0.7);
+        \fill (crit) circle (2.5pt);
+        \draw[latex-,thick,shorten <=3pt] (crit) to[bend left=30] ($(crit)+(-0.3,0.8)$) node[anchor= south,align=left] {Critical point:};
+        \draw[very thick] (trpLiq)--(trpVap) coordinate[pos=0.4] (trp);
+        \draw[latex-,thick,shorten <=0pt] (trp) to[bend right=30] ($(trp)+(0.5,0.6)$) node[anchor= south,align=left] {Triple line:}; 
+    \end{scope}
+\end{tikzpicture}
+\end{document}

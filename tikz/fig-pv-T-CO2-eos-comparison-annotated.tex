@@ -1,0 +1,33 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\linewidth]{../figs/fig-pv-T-CO2-eos-comparison.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+        \coordinate (crit) at (-0.64,-0.054);
+        \coordinate (critRK) at (-0.58,-0.054);
+        \fill (crit) circle (1.5pt);
+        \fill (critRK) circle (1.5pt);
+        \draw[latex-,thick,shorten <=5pt] (crit) to[bend left=20] ($(crit)+(0.7,0.5)$) node[anchor= west,align=left] {Correct critical point:};
+
+        \draw[latex-,thick,shorten <=5pt] (critRK) to[bend left=20] ($(crit)+(0.8,0.2)$) node[anchor= west,align=left] {Redlich-Kwong\\critical point:};
+        
+    \end{scope}
+\end{tikzpicture}
+\end{document}

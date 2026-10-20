@@ -1,0 +1,40 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\linewidth]{../figs/fig-pv-T-H2O.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+        \coordinate (crit) at (-0.56,0.65);
+        \coordinate (trpLiq) at (-0.675,-0.772);
+        \coordinate (trpVap) at (0.694,-0.772);
+        \fill (crit) circle (2.5pt);
+        \draw[latex-,thick,shorten <=3pt] (crit) to[bend left=30] ($(crit)+(0.6,0)$) node[anchor= west,align=left] {Critical point:\\$\left\{\begin{aligned}&T=373.95^\circ\text{C}\\
+        &p=220.64\,\text{bar}\\
+        &v=3.1056\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}
+        \end{aligned}\right.$};
+        
+        \draw[very thick] (trpLiq)--(trpVap) coordinate[pos=0.4] (trp);
+        \draw[latex-,thick,shorten <=1pt] (trp) to[bend left=30] ($(trp)+(0.3,1.0)$) node[anchor= west,align=left] {Triple line:\\$\left\{\begin{aligned}&T=0.01^\circ\text{C}\\
+        &p=6.12\times 10^{-3}\,\text{bar}\\
+        &v\in[10^{-3},206]\,\text{m}^3\,\text{kg}^{-1}
+        \end{aligned}\right.$}; 
+        
+    \end{scope}
+\end{tikzpicture}
+\end{document}
