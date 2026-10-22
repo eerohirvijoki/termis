@@ -1,4 +1,12 @@
-# Mechanics of fluids
+---
+numbering:
+  enumerator: "1.%s"
+  heading_1: true
+  heading_2: true
+  heading_3: true
+---
+
+# 3 Mechanics of fluids
 The equations of motion describing the evolution of simple fluids, as those often encountered in engineering applications, are derived here. The derivation process involves first introducing the Leibniz rule for differentiating integrals, and then applying it to the conservation laws of mass, momentum, and energy. The process is mathematically more involved than what is typically encountered in thermodynamics courses, and is not expected to be digested fully during first reading. Instead, the purpose of this chapter is to build a detailed and rigorous enough of a foundation that can be later recalled and leveraged together with thermodynamic relations to analyze common engineering applications. 
 
 ## Learning goals

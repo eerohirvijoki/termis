@@ -1,4 +1,12 @@
-# Introduction
+---
+numbering:
+  enumerator: "1.%s"
+  heading_1: true
+  heading_2: true
+  heading_3: true
+---
+
+# 1 Introduction
 This chapter first discusses how macroscopic matter is built from its microscopic constituents and how it interacts with its surroundings. The discussion leads to the concepts of internal energy and equilibrium state, to the definitions for different boundary types, and to concepts of heat and work. Here, these concepts are introduced without equations. Later, mathematics will provide the language for quantitative interpretation of the same ideas. The chapter then proceeds to describe the state variables that are needed for the macroscopic description of matter. While doing so, the zeroth law of thermodynamics is encountered, providing an interpretation for temperature. Before closing, the chapter briefly discusses how description for the motion of matter can take two different viewpoints, setting the premise for later analysis of fluid motion. Finally, a roadmap to these notes is provided together with a brief discussion on how thermodynamics and fluid mechanics are positioned with respect to each other. 
 
 ## Learning goals
@@ -226,8 +234,10 @@ To determine the sample temperature, one calculates the pressure inside the ther
 
 :::{math}
 :enumerated: false
-p_\text{ref}&=p_\text{atm}+\rho_\text{Hg} g h_\text{ref}=1.132\,\text{bar}\\
-p&=p_\text{atm}+\rho_\text{Hg} g h=1.073\,\text{bar}
+
+p_\text{ref} & =p_\text{atm}+\rho_\text{Hg} g h_\text{ref}=1.132\,\text{bar}\\
+p & =p_\text{atm}+\rho_\text{Hg} g h=1.073\,\text{bar}
+
 :::
 
 The change in the gas volume from the reference state \(V_\text{ref}\) is calculated from the capillary cross sectional area and the change in the mercury column height

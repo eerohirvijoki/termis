@@ -1,0 +1,37 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\linewidth]{../figs/example-fig-kappa-pv.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+        
+        \node[anchor=center,blue] at (0,0.18) {$\Delta v\approx 1.9\,\ell/\text{kg}$};
+
+        \node[anchor=center,blue,rotate=90] at (-0.40,0.4) {$\Delta p\approx-4.0\,\text{bar}$};
+      
+        \coordinate (pvT) at (0.067,0.42);
+        \draw[latex-, thick,shorten <=3pt,color=blue] (pvT) to[bend left=25] ++(0.1,0.2) node[anchor=west] {$\left\{\begin{aligned}
+            p&=225\,\text{bar}\\
+            T&=376^\circ\text{C}\\
+            v&\approx 4.0\,\ell/\text{kg}
+        \end{aligned}\right.$};
+        
+    \end{scope}
+\end{tikzpicture}
+\end{document}

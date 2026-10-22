@@ -2,7 +2,7 @@
 version: 1
 project:
   id: 4220bab4-822a-4613-bc5c-99b217219988
-  title: "TERMIS"
+  title: "Preface"
 
   toc:
     - file: index.md

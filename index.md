@@ -1,4 +1,6 @@
-# TERMIS - Thermodynamics for EneRgy and Mechanical engIneering Students
+---
+title: TERMIS - Thermodynamics for EneRgy and Mechanical engIneering Students
+---
 
 These notes are for readers interested in fundamentals of energy engineering, with applications in power plants and refrigeration. Many excellent books on the topic exist, yet the material presented here takes a distinct approach.
 

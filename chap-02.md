@@ -1,4 +1,12 @@
-# Properties of Pure Substances
+---
+numbering:
+  enumerator: "2.%s"
+  heading_1: true
+  heading_2: true
+  heading_3: true
+---
+
+# 2 Properties of Pure Substances
 
 This chapter first introduces relations between state variables of pure substances using illustrative phase diagrams. The diagrams provide the reader an overview of how substances generally behave, and what common features are shared among them. Predictive models are then introduced, first with simple analytical equations of state, then through numerical property libraries. The analytical models serve to explain observations in the phase diagrams, help in design of experimental measurements of unknown substances, and support intuition of substance behaviour. The numerical property libraries, on the other hand, are the gold standard for engineering modeling and provide accuracy when required. From the property observations and models, the reader is introduced to the state-variable response coefficients that are needed later in developing the thermodynamic framework. Finally, a principle of corresponding states is discussed to help in predicting properties of unknown substances with the properties of known substances' data.
 
@@ -157,7 +165,7 @@ The specific volume of water in the vessel is $v=V/m=0.03\,\text{m}^3/\text{kg}$
 ::::
 
 
-
+(sec-simple-equations-of-state)=
 ## <span class="elementary"></span> Simple equations of state
 Mathematically, a general two-dimensional surface in a three-dimensional space with coordinates $p$, $v$, and $T$, can be represented by an equation of the form
 :::{math}
@@ -392,6 +400,7 @@ To use pyromat, one imports the library and reverts to SI-units, if desired. By 
 :start-line: 0
 :end-line: 21
 :linenos:
+:caption: Calculating pressure and vapor quality from specific volume and temperature
 ```
 
 The library has separate methods for critical point and triple line information, and for evaluation of saturation properties given only temperature (or pressure):
@@ -401,6 +410,7 @@ The library has separate methods for critical point and triple line information,
 :start-line: 23
 :end-line: 33
 :linenos:
+:lineno-match:
 ```
 
 The acceptable input parameter pairs for the methods, that can be formed from the state variables $p$, $v$, $\rho$, $T$, and $x$, are listed in {numref}`tab:chap-02:pyromat-variable-pairs` together with their applicability domains (single-phase or two-phase). The full documentation is available at [http://pyromat.org](http://pyromat.org).
@@ -421,10 +431,196 @@ The acceptable input parameter pairs for the methods, that can be formed from th
 | $(x, p)$ | x and p | No | Yes |
 :::
 
+The pyromat-library accepts input as scalars, as numpy-arrays, or as a mixture of the two. The output is always a numpy-array, even in case of scalar input. This enables convenient data queries for multiple states with one call but must be kept in mind if outputs from scalar input queries are used in further calculations that do not accept or accept numpy-arrays. The array inputs and outputs are particularly useful for visualization of the data, as demonstrated in {numref}`plot-isotherms-saturation-curve`. 
+
+::::{proof:example}
+:label: plot-isotherms-saturation-curve
+
+Selected isotherms together with the saturation curves can be conveniently drawn into a $p$-$v$ diagram using the in vectorized output from pyromat. To properly handle the potential two-phase region, values on the saturation curves are queried separately and added to the vectors using the concatenate method from numpy in the following manner:
+```{literalinclude} python/example-pyromat-pv-isotherms-and-saturation-curve.py
+:language: python
+:start-line: 0
+:end-line: 52
+:linenos:
+```
+
+Running the script results in a figure shown below:
+
+:::{figure}
+:align: center
+![](./figs/example-pyromat-pv-isotherms-and-saturation-curve.svg)
+:::
+
+::::
+
+To use coolprop, one imports both the library and a specific AbstractState class from it. The SI-units will be used by default, needing no specific configuration. A multiphase model for the desired substance is then instantiated from the AbstractState class. Before any thermodynamic quantities can be computed, though, the substance state has to be specified. This happens by calling the method update and passing it not only the variables but also an input key that informs the library which variables have been passed. Once the state has been updated, quantity values are accessed through separate methods such as p (pressure), T (temperature), rhomass (density), and Q (vapor quality).
+
+```{literalinclude} python/example-coolprop-pvTx.py
+:language: python
+:start-line: 0
+:end-line: 13
+:linenos:
+:lineno-match:
+```
+
+Like pyromat, also coolprop has methods for critical point and triple line information, although with different syntax. However, coolprop does not have separate methods for saturation properties. Instead, they are evaluated by pairing vapor quality and temperature as inputs.
+
+```{literalinclude} python/example-coolprop-pvTx.py
+:language: python
+:start-line: 15
+:end-line: 31
+:linenos:
+:lineno-match:
+```
+
+The acceptable input parameter pairs and their corresponding input keys for the update-method, that can be formed from the state variables $p$, $v$, $\rho$, $T$, and $x$, are listed in {numref}`tab:chap-02:coolprop-variable-pairs`. The full documentation is available at [https://coolprop.org](https://coolprop.org).
+
+:::{table} Acceptable coolprop input parameter pairs from the variables $p$, $v$, $\rho$, $T$, and $x$ and the required key. Applicability domain of the pairs.
+:label: tab:chap-02:coolprop-variable-pairs
+:align: center
+:class: booktabs
+
+| Variable pair | Input Key | Single-phase | Two-phase |
+|:---|:---|:---:|:---:|
+| $(p,T)$ | PT\_INPUTS | Yes | No |
+| $(\rho,T)$ | DmassT\_INPUTS | Yes | Yes |
+| $(\rho, p)$ | DmassP\_INPUTS | Yes | Yes |
+| $(x, T)$ | QT\_INPUTS | No | Yes |
+| $(p, x)$ | PQ\_INPUTS | No | Yes |
+| $(\rho, x)$ | DmassQ\_IPUTS | No | Yes for $\rho<\rho_c$ |
+:::
+
+
+Unlike pyromat, coolprop does not support numpy-arrays. Hence all inputs and outputs are always scalar-valued. On the other hand, coolprop provides a large collection of different substances while pyromat presently has only a few different substances implemented. Both libraries have their uses, and are best learned by practicing.
 
 
 ## <span class="elementary"></span> Thermal expansion and compressibility coefficients
-The thermodynamic framework outlined in Fig. XX
+The relations between the state variables $p$, $v$, and $T$ can be approximated with the simple equations of state from {numref}`sec-simple-equations-of-state` or evaluated accurately with the data libraries introduced in {numref}`sec-pyromat-coolprop`. The framework outlined in {numref}`fig-roadmap`, however, contains not only $p$, $v$, and $T$ but also energy-related quantities such as internal energy $u$, enthalpy $h$, and entropy $s$ that are needed in practical calculations involving power plants and heat pumps. Unlike $p$, $v$, and $T$, the energy-related quantities cannot be obtained from direct measurements. Instead, their experimental determination relies on observing how the measurable variables $p$, $v$, and $T$ change relative to each other when a substance is heated or compressed. At a detailed level, the relative changes are quantified by derivatives.
+
+In the single-phase regions, pressure, specific volume, and temperature relate to each other via the surface equation $f(p,v,T)=0$ and, at least locally, one may define the functions $p(v,T)$, $v(T,p)$, and $T(p,v)$. Calculating total differentials of these functions, one finds the following relations between the differential changes in pressure, specific volume, and temperature
+
+:::{math}
+dp&=\left(\frac{\partial p}{\partial v}\right)_Tdv+\left(\frac{\partial p}{\partial T}\right)_v dT,\\
+dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp,\\
+dT&=\left(\frac{\partial T}{\partial p}\right)_vdp+\left(\frac{\partial T}{\partial v}\right)_p dv.
+:::
+
+As the differentials $dp$, $dv$, and $dT$ are the same on both sides of the equations, one may algebraically rearrange the equations and find relations between the partial derivatives. For example, one may manipulate the differential resulting from the function $v(T,p)$ into
+
+:::{math}
+dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp & &\implies & &\left\{\begin{aligned}
+dp&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}dv-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}dT,\\
+dT&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}dv-\frac{\left(\frac{\partial v}{\partial p}\right)_T }{\left(\frac{\partial v}{\partial T}\right)_p}dp.\end{aligned}\right.
+:::
+
+Comparing the manipulated expressions with the differentials resulting directly from differentiation of the functions $p(v,T)$ and $T(p,v)$, one identifies relations such as
+
+:::{math}
+\left(\frac{\partial p}{\partial T}\right)_v&=-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}.
+:::
+
+The mutual derivatives between $p$, $v$, and $T$ are therefore related to each other.
+
+In the single-phase region, the $p$-$v$-$T$ surface has two independent variables, and all mutual derivatives can be expressed in terms of two independent quantities, namely the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$. The coefficients measure the relative change in substance volume (or density) when either temperature or pressure changes and the other is fixed, and are defined by
+
+:::{math}
+\beta_p&=\frac{1}{v}\left(\frac{\partial v}{\partial T}\right)_p=-\frac{1}{\rho}\left(\frac{\partial \rho}{\partial T}\right)_p,\\
+\kappa_T&=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_T=\frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_T.
+:::
+
+In the two-phase mixture region, pressure and temperature on the $p$-$v$-$T$ surface are not independent but satisfy the saturation relation $g(T,p)=0$. Consequently, the usual definitions of $\beta_p$ and $\kappa_T$ as independent single-phase response coefficients do not apply. The slope of the coexistence curve
+
+:::{math}
+\left(\frac{dp}{dT}\right)_{\text{sat}}
+:::
+
+nevertheless characterises how pressure and temperature vary along the two-phase equilibrium states. In single-phase regions, the coefficient $\beta_p$ can be determined by measuring the volume of a substance at several temperatures while keeping the pressure constant, and the coefficient $\kappa_T$ by measuring volume at several pressures while temperature is fixed. They can therefore be determined from existing $p$-$v$ and $v$-$T$ diagrams by examining the slopes of the isotherms and isobars, or calculated more accurately with the help of the data libraries. For most substances $\beta_p>0$ and $\kappa_T>0$, meaning that volume typically increases with temperature at constant pressure and decreases with pressure at constant temperature.
+
+Measured values for the heat expansion and compressibility coefficients can be leveraged to estimate changes in the state variables. Differentially, one has the exact relation
+
+:::{math}
+dv=v\beta_p|_{(p,T)}dT-v\kappa_T|_{(p,T)} dp
+:::
+
+Small changes $\Delta p=p_1-p_0$ and $\Delta T=T_1-T_0$ in pressure and temperature from a reference state $(p_0,T_0,v_0)$ therefore provide a small change $\Delta v=v_1-v_0$ in specific volume, which can be approximated with the relation
+
+:::{math}
+\Delta v\approx v_0\beta_p|_{(p_0,T_0)}\Delta T-v_0\kappa_T|_{(p_0,T_0)} \Delta p
+:::
+
+
+::::{proof:example}
+For water at pressure of $225\,\text{bar}$ and temperature of $376^\circ\text{C}$, one may draw tangents to the corresponding isotherm and isobar in the $p$-$v$ and $v$-$T$ diagrams and estimate the tangent slopes from the resulting triangles as below 
+
+:::{figure}
+:align: center
+
+![](./figs/example-fig-kappa-pv-annotated.svg)
+
+:::
+
+:::{figure}
+:align: center
+
+![](./figs/example-fig-beta-vT-annotated.svg)
+
+:::
+
+
+The isobaric thermal expansion coefficient and the isothermal compressibility coefficient at the specified state are then calculated to be
+:::{math}
+:enumerated: false
+\beta_p&\approx\frac{1}{v}\frac{\Delta v}{\Delta T}=0.263\,\text{K}^{-1}\\
+\kappa_T&\approx-\frac{1}{v}\frac{\Delta v}{\Delta p}=0.119\,\text{bar}^{-1}
+:::
+::::
+
+::::{proof:example}
+
+An adjustable cylinder with a reference volume of $V_0=25.8\,\ell$ contains $6\,\text{kg}$ of unknown substance at a temperature of $T_0=162^\circ\text{C}$. At this state, the isobaric thermal expansion and isothermal compressibility coefficients have been experimentally determined to be $\beta_p=0.031\,\text{K}^{-1}$ and $\kappa_T=0.015\,\text{bar}^{-1}$. 
+
+If the cylinder volume is held fixed ($\Delta V=0$) while the temperature increases by $\Delta T=1^\circ\text{C}$, the resulting change in the pressure will be approximately
+:::{math}
+:enumerated: false
+&\frac{\Delta V}{V_0}=\beta_p\Delta T-\kappa_T\Delta p\\
+&\implies \Delta p\approx \frac{\beta_p}{\kappa_T}\Delta T=2.067\,\text{bar}
+:::
+If the cylinder volume is compressed by $\Delta V=-1.3\,\ell$ and the pressure is observed to increase by $\Delta p=8.8\,\text{bar}$, the resulting change in temperature will be approximately
+:::{math}
+:enumerated: false
+&\frac{\Delta V}{V_0}=\beta_p\Delta T-\kappa_T\Delta p\\
+&\implies \Delta T=\frac{1}{\beta}\frac{\Delta V}{V_0}+\frac{\kappa_T}{\beta_p}\Delta p=2.633^\circ\text{C}
+:::
+::::
+
+
+::::{proof:example}
+
+The isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$ can be computed with pyromat or coolprop
+
+Pyromat does not offer direct methods for the evaluation but one may approximate derivatives with a finite difference rule $df/dx\approx (f(x+\delta x)-f(x))/\delta x$ using a small enough step size:
+
+```{literalinclude} python/example-beta-kappa-pyromat-coolprop.py
+:language: python
+:start-line: 0
+:end-line: 27
+:linenos:
+:lineno-match:
+```
+
+Running the script results in $\beta_p = 0.261266\,\text{K}^{-1}$ and $\kappa_T= 0.116053\,\text{bar}^{-1}$. Coolprop, on the other hand, offers direct methods for the evaluation:
+
+```{literalinclude} python/example-beta-kappa-pyromat-coolprop.py
+:language: python
+:start-line: 29
+:end-line: 47
+:linenos:
+```
+
+Running the script provides values $\beta_p = 0.262058\,\text{K}^{-1}$ and $\kappa_T = 0.11624\,\text{bar}^{-1}$ that are very close to the estimates obtained with pyromat. Values from both libraries are close to the values obtained visually from the $p$-$v$ and $v$-$T$ diagrams.
+
+::::
+
 
 ## <span class="intermediate"></span> Compressibility factor and reduced variables
 While numerical libraries provide high accuracy, the ideal gas model remains a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. 
