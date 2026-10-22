@@ -440,7 +440,7 @@ Selected isotherms together with the saturation curves can be conveniently drawn
 ```{literalinclude} python/example-pyromat-pv-isotherms-and-saturation-curve.py
 :language: python
 :start-line: 0
-:end-line: 52
+:end-line: 53
 :linenos:
 ```
 
@@ -448,7 +448,7 @@ Running the script results in a figure shown below:
 
 :::{figure}
 :align: center
-![](./figs/example-pyromat-pv-isotherms-and-saturation-curve.svg)
+![](./figs/example-fig-pyromat-pv-isotherms-and-saturation-curve.svg)
 :::
 
 ::::

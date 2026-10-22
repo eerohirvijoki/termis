@@ -48,7 +48,8 @@ ax.grid(which='major',color='#CCCCCC',linestyle='-',linewidth=1)
 ax.grid(which='minor',color='#CCCCCC',linestyle=':',linewidth=0.5)
 ax.set_xscale('log')
 ax.set_yscale('log')
-plt.savefig('../figs/example-fig-pyromat-pv-isotherms-and-saturation-curve.svg',
+plt.savefig('../figs/example-fig-pyromat-pv-isotherms'\
+            +'-and-saturation-curve.svg',
             bbox_inches='tight')
 plt.close(fig)           
 
