@@ -1,0 +1,55 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+\begin{document}       
+\tikzset{
+    relative to node/.style={
+        shift={(#1.center)},
+        x={(#1.east)},
+        y={(#1.north)},
+    }
+}
+\begin{tikzpicture}
+    \node[above right,inner sep = 0] (image) at (0,0) {
+        \includegraphics[width=\linewidth]{../figs/example-fig-redlich-kwong-saturation.pdf}
+    };
+    \begin{scope}[relative to node=image]
+        % \foreach \ratio in {-1,-0.9,...,1}{
+        %    \draw[help lines,purple] (-1,\ratio) -- (1,\ratio);
+        %    \draw[help lines,purple] (\ratio,-1) -- (\ratio,1);
+        % }
+        % \draw (-1,0) -- (1,0);
+        % \draw (0,-1) -- (0,1);
+        \coordinate (v_liq) at (-0.77,-0.368);
+        \coordinate (v_liqrk) at (-0.715,-0.28);
+        \coordinate (v_vap) at (0.315,-0.368);
+        \coordinate (v_vaprk) at (0.2,-0.28);
+        \fill (v_liq) circle (2pt);
+        \fill (v_liqrk) circle (2pt);
+        \fill (v_vap) circle (2pt);
+        \fill (v_vaprk) circle (2pt);
+
+        \node[anchor=south,align=left] (DATA) at (-0.35,0.25) {Measured data:\\$\left\{\begin{aligned}&p_\text{sat}(12^\circ\text{C})=47.3\,\text{bar}\\
+        &v_\text{liq}(12^\circ\text{C})=1.18\,\ell/\text{kg}\\
+        &v_\text{vap}(12^\circ\text{C})=6.91\,\ell/\text{kg}
+        \end{aligned}\right.$}; 
+
+        \node[anchor=south,align=left] (RK) at (0.5,0.24) {Redlich-Kwong prediction:\\$\left\{\begin{aligned}&p_\text{sat}(12^\circ\text{C})=50.9\,\text{bar}\\
+        &v_\text{liq}(12^\circ\text{C})=1.47\,\ell/\text{kg}\\
+        &v_\text{vap}(12^\circ\text{C})=6.28\,\ell/\text{kg}
+        \end{aligned}\right.$};
+            
+        \draw[-latex,thick,shorten >=5pt] (DATA) to[bend left=25] (v_liq);
+        \draw[-latex,thick,shorten >=5pt] (DATA) to[bend right=25] (v_vap);
+
+        \draw[-latex,thick,shorten >=5pt] (RK) to[bend left=15] (v_liqrk);
+        \draw[-latex,thick,shorten >=5pt] (RK) to[bend left=10] (v_vaprk);
+
+        \draw[purple, dashed] (v_liq)--++(0,-0.5);
+        \draw[purple, dashed] (v_vap)--++(0,-0.5);
+        \draw[purple, dashed] (v_liqrk)--++(0,-0.6);
+        \draw[purple, dashed] (v_vaprk)--++(0,-0.6);
+        
+    \end{scope}
+\end{tikzpicture}
+\end{document}

@@ -158,7 +158,7 @@ The specific volume of water in the vessel is $v=V/m=0.03\,\text{m}^3/\text{kg}$
 
 
 
-## <span class="elementary"></span> Equations of state
+## <span class="elementary"></span> Simple equations of state
 Mathematically, a general two-dimensional surface in a three-dimensional space with coordinates $p$, $v$, and $T$, can be represented by an equation of the form
 :::{math}
     f(p,v,T)=0.
@@ -207,7 +207,7 @@ Writing the Van der Waals model as
 (p+a_s\rho^2)(v-b_s)=R_sT,
 :::
 
-one can interpret the parameter $a_s$ as a correction to pressure associated with intermolecular interactions that scale quadratically with respect to gas density. The parameter $b_s$ can be interpreted to account for reduction in accessible volume due to finite molecular size. Writing the equation further as
+one may interpret the parameter $a_s$ as a correction to pressure associated with intermolecular interactions that scale quadratically with respect to gas density. The parameter $b_s$ can be interpreted to account for reduction in accessible volume due to finite molecular size. Writing the equation further as
 
 :::{math}
 :enumerated: false
@@ -228,14 +228,14 @@ Using the Van der Waals model, the first and second derivatives of pressure with
 \left(\frac{\partial^2 p}{\partial v^2}\right)_T=\frac{2R_sT}{(v-b_s)^3}-\frac{6a_s}{v^4}.
 :::
 
-Requiring both derivatives to vanish when pressure and temperature correspond to the critical point values, one can solve for
+Requiring both derivatives to vanish when pressure and temperature correspond to the critical point values, one may solve for
 
 :::{math}
 :enumerated: false
 a_s=\frac{9R_sT_\text{crit}v_\text{crit}}{8}, \qquad b_s=\frac{v_\text{crit}}{3}.
 :::
 
-Here $v_\text{crit}=v(p_\text{crit},T_\text{crit})$ is not the measured value but is implicitly determined from the equation of state
+Here $v_\text{crit}=v(p_\text{crit},T_\text{crit})$ is not the measured value but the value implicitly determined from the equation of state
 
 :::{math}
 :enumerated: false
@@ -259,7 +259,7 @@ b_s=\frac{R_sT_\text{crit}}{8p_\text{crit}}.
 
 ::::
 
-The Van der Waals equation, the Dieterici equation, and the Redlich-Kwong equation all describe state surfaces of type $f(p,v,T)=0$ and improve upon the ideal gas equation. They nevertheless fall short of correct behaviour when the nature of the state surface changes abruptly from the gaseous state to the two-phase liquid-vapor mixture state where pressure and temperature follow a relation of the form $g(p,T)$ instead. The shortfall is demonstrated in {numref}`fig-pv-T-CO2-eos-comparison` for carbon dioxide using the Redlich-Kwong equation. For temperatures above $30.98^\circ\text{C}$, the critical temperature of CO$_2$, the Redlich-Kwong isotherms align quite well with the measured data. The isotherm corresponding to the critical temperature and the predicted location of the critical point are slightly off, since a point with three coordinates generally cannot be exactly matched with only two parameters. The isotherms below that of the critical temperature, however, show unphysical behaviour between the saturated liquid and vapor states. A region exists where pressure increases with increasing volume, whereas the correct isotherms remain flat.
+The Van der Waals equation, the Dieterici equation, and the Redlich-Kwong equation all describe state surfaces of type $f(p,v,T)=0$ and improve upon the ideal gas equation. They nevertheless fall short of correct behaviour when the nature of the state surface changes abruptly from the gaseous state to the two-phase liquid-vapor mixture state where pressure and temperature follow a relation of the form $g(p,T)$ instead. The shortfall is demonstrated in {numref}`fig-pv-T-CO2-eos-comparison` for carbon dioxide using the Redlich-Kwong equation. Also the corresponding isotherms predicted by ideal gas model are shown. For temperatures above $30.98^\circ\text{C}$, the critical temperature of CO$_2$, the Redlich-Kwong isotherms align quite well with the measured data. The isotherm corresponding to the critical temperature and the predicted location of the critical point are slightly off, since a point with three coordinates generally cannot be exactly matched with only two parameters. The Redlich-Kwong isotherms below that of the critical temperature, however, show unphysical behaviour between the saturated liquid and vapor states. A region exists where pressure increases with increasing volume, whereas the correct isotherms remain flat. Notably, the ideal gas isotherms near the critical point perform significantly worse.
 
 :::{figure}
 :label: fig-pv-T-CO2-eos-comparison
@@ -271,7 +271,7 @@ Selected isotherms for CO$_2$ calculated from ideal gas and Redlich-Kwong models
 :::
 
 
-Although the two-parameter models predictions are slightly off near the critical point and cannot as such capture the two-phase behaviour, the historical importance of the models is significant. The understanding of substance properties has developed gradually over time, and even rough estimates of the pressure below which it is possible to liquefy a gas are valuable when mapping the thermodynamic properties of an unknown substance. With the help of two-parameter models, it is possible to estimate the parameters $a_s$ and $b_s$ from measurements performed in the single-phase gaseous region. These parameters can then be used to estimate the critical point. Such estimates can then be used to design the devices with which the experimental measurements are carried out.
+Although the two-parameter models predictions are slightly off near the critical point and behave incorrectly in the two-phase region, the historical importance of the models is significant. The understanding of substance properties has developed gradually over time, and even rough estimates of the pressure and temperature below which it is possible to liquefy a gas are valuable when mapping the thermodynamic properties of an unknown substance. With the help of two-parameter models, it is possible to estimate the parameters $a_s$ and $b_s$ from measurements performed in the single-phase gaseous region. These parameters can then be used to estimate the critical point. Such estimates can then be used to design the devices with which experimental measurements are carried out to obtain accurate data. Combining the two-parameter model with a so-called Maxwell construction, even saturation properties can be estimated, as demonstrated in the section [](#sec-maxwell-construction). When more accurate modeling is required, one may resort to thermodynamic data libraries as introduced in section [](#sec-pyromat-coolprop).
 
 ::::{proof:example}
 
@@ -301,18 +301,127 @@ At a specific volume of $v=0.10\,\text{m}^3/\text{kg}$, the pressure of methane 
 
 ::::
 
+(sec-maxwell-construction)=
+## <span class="advanced"></span> Estimation of saturation properties with two-parameter equations of state
 
-## <span class="advanced"></span> Estimation of saturation properties with analytical equations of state
+The predictive capability of the two-parameter equation-of-state models is improved when they are used together with the so-called Maxwell construction which replaces the unphysical portion of the modeled isotherm with a constant-pressure segment, producing a relation of the form $g(p,T)=0$. The associated constraints for the construction are
+:::{math}
+:label: eq:chap-01:maxwell-construction
+\int_{v_\text{liq}(T)}^{v_\text{vap}(T)} p(v,T)dv&=p_\text{sat}(T)(v_\text{vap}(T)-v_\text{liq}(T)),\\
+p(v_\text{liq}(T),T)&=p_\text{sat}(T),\\
+p(v_\text{vap}(T),T)&=p_\text{sat}(T),
+:::
+where $p_\text{sat}(T)$ is the model-specific saturation pressure at a temperature $T$ below the critical temperature, reflecting the $g(p,T)=0$ condition. The corresponding model-specific saturated liquid and vapor volumes $v_\text{liq}(T)$ and $v_\text{vap}(T)$ define the phase boundaries between which the two-phase mixture is predicted to exist. Solving the system of equations {eq}`eq:chap-01:maxwell-construction` for a specific equation of state model $p(v,T)$ can be performed numerically using iterative methods but the process requires care to avoid the nontrivial solution where $v_\text{vap}(T)=v_\text{liq}(T)$ and $p_\text{sat}(T)$ remains the initial guess. A practical approach involves converting the original system of three equations into a root-finding problem for one equation. 
 
-```{literalinclude} python/fig-pv-T-CO2-eos-comparison.py
+When the temperature is below that of the critical point, the two-parameter-model isotherms in a $p$-$v$ diagram exhibit a local minimum and maximum in pressure as a function of specific volume in the physically valid region $v>b_s$, as seen in {numref}`fig-pv-T-CO2-eos-comparison` for the Redlich-Kwong model. Geometrically, for a given temperature $T$, the model-specific saturation pressure $p_\text{sat}(T)$ from the Maxwell construction must exist between these local minimum and maximum pressure values and be non-negative. This means 
+:::{math}
+p_\text{sat}(T)\in[\max(0,p_{\min}(T)),p_{\max}(T)]
+:::
+where the $p_{\min}(T)$ and $p_{\max}(T)$ are obtained from
+:::{math}
+\left(\frac{\partial p}{\partial v}\right)_T=0 \quad \implies \quad \left\{\begin{aligned}&v_{\min(p)}(T)\\&v_{\max(p)}(T)\end{aligned}\right. \quad \implies \quad \left\{\begin{aligned}p_{\min}(T)&=p(v_{\min(p)}(T),T)\\p_{\max}(T)&=p(v_{\max(p)}(T),T)\end{aligned}\right.
+:::
+with $v_{\min(p)}(T)$ and $v_{\max(p)}(T)$ corresponding to the local pressure minimum and maximum locations for the isotherm $T$. With the model-predicted saturation pressure guaranteed to exist within a fixed interval, one proceeds by guessing a value $p_\text{sat}^\ast(T)$ and solving for specific volumes that satisfy the equation of state. In the physically valid region $v>b_s$, the shape of the isotherm guarantees three roots of which the smallest and largest correspond to the saturated liquid and vapor specific volumes $v_\text{liq}^\ast(T)$ and $v_\text{vap}^\ast(T)$ with respect to the guessed saturation pressure $p_\text{sat}^\ast(T)$ 
+:::{math}
+p(v,T)=p_\text{sat}^\ast(T) \quad \implies \quad \left\{\begin{aligned}&v_\text{liq}^\ast(T)\\&v_\text{vap}^\ast(T)\end{aligned}\right.
+:::
+Finally, one evaluates the expression
+:::{math}
+\Delta^\ast(T)=p_\text{sat}^\ast(T)(v_\text{vap}^\ast(T)-v_\text{liq}^\ast(T))-\int_{v_\text{liq}^\ast(T)}^{v_\text{vap}^\ast(T)} p(v,T)dv
+:::
+to check whether $\Delta^\ast(T)=0$. If not, one refines the guess for $p_\text{sat}^\ast(T)$ with an appropriate bracketing method, recomputes $v_\text{liq}^\ast(T)$, $v_\text{vap}^\ast(T)$, and $\Delta^\ast(T)$ and iterates until $\Delta^\ast(T)=0$ is reached.
+
+::::{proof:example}
+
+Finding the local minimum and maximum of a Redlich-Kwong isotherm below the critical temperature is equivalent to solving for the roots of a quartic polynomial
+:::{math}
+:enumerated: false
+&p(v,T)=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
+&\implies \left(\frac{\partial p}{\partial v}\right)_T=-\frac{R_sT}{(v-b_s)^2}+\frac{a_s}{\sqrt{T}}\frac{2v+b_s}{v^2(v+b_s)^2}\\
+&\implies v^4+2\left(b_s-\frac{a_s}{R_sT\sqrt{T}}\right)v^3+b_s^2\left(1+\frac{3a_s}{b_sR_sT\sqrt{T}}\right)v^2-\frac{a_sb_s^3}{R_sT\sqrt{T}}=0.
+:::
+After solving for the roots and selecting $v_{\min(p)}(T)$ and $v_{\max(p)}(T)$ from them, the corresponding pressure values $p_{\min}(T)$ and $p_{\max}(T)$ are obtained.
+
+After a value $p_\text{sat}^\ast(T)$ for the saturation pressure has been guessed, the specific volumes satisfying the Redlich-Kwong equation of state are found as roots of a cubic polynomial
+:::{math}
+:enumerated: false
+&p_\text{sat}^\ast(T)=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
+&\implies v^3-\frac{R_sT}{p_\text{sat}^\ast(T)}v^2+\left(\frac{a_s}{p_\text{sat}^\ast(T)\sqrt{T}}-\frac{R_sTb_s}{p_\text{sat}^\ast(T)}-b_s^2\right)v-\frac{a_sb_s}{p_\text{sat}^\ast(T)\sqrt{T}}=0,
+:::
+The roots provide the values $v_\text{liq}^\ast(T)$ and $v_\text{vap}^\ast(T)$. 
+
+One may then analytically calculate the integral
+:::{math}
+:enumerated: false
+\int_{v_\text{liq}^\ast(T)}^{v_\text{vap}^\ast(T)} p(v,T)dv&=R_sT\ln\left(\frac{v_\text{vap}^\ast(T)-b_s}{v_\text{liq}(T)-b_s}\right)\\
+&\quad-\frac{a_s}{b_s\sqrt{T}}\ln\left(\frac{v_\text{vap}^\ast(T)}{v_\text{liq}^\ast(T)}\frac{v_\text{liq}^\ast(T)+b_s}{v_\text{vap}^\ast(T)+b_s}\right)
+:::
+to evaluate the expression
+:::{math}
+:enumerated: false
+\Delta^\ast(T)=p_\text{sat}^\ast(T)(v_\text{vap}^\ast(T)-v_\text{liq}^\ast(T))-\int_{v_\text{liq}^\ast(T)}^{v_\text{vap}^\ast(T)} p(v,T)dv
+:::
+
+The algorithm can now be programmed into a python scipt that uses the methods roots and brentq from numpy and scipy libraries to find roots of polynomials and bracket roots of nonlinear functions
+
+```{literalinclude} python/example-redlich-kwong-saturation.py
 :language: python
-:start-line: 1
-:end-line: 50
+:start-line: 0
+:end-line: 63
 :linenos:
 ```
 
-## <span class="intermediate"></span> Numerical libraries
-Engineering applications such as steam power plants and heat pumps involve not only the gaseous phase of substances but also the liquid phase and the liquid-vapor phase mixture. While the two-parameter models have historical value in predicting parameter regimes needed for designing experimental measurements, they lack the accuracy needed in the most demanding of the applications. Fortunately, the theoretical framework of thermodynamics enables constructing multiparameter substance models that can be fitted to experimental data with good accuracy. Several libraries and software implementations of such models exist. 
+Running the script results in Redlich-Kwong estimates $p_\text{sat}(12^\circ\text{C})=50.9\,\text{bar}$, $v_\text{liq}(12^\circ\text{C})=1.47\,\ell/\text{kg}$, and $v_\text{vap}(12^\circ\text{C})=6.28\,\ell/\text{kg}$ that are reasonably close to the measured values, as visible from the figure below. 
+
+:::{figure}
+:align: center
+![](./figs/example-fig-redlich-kwong-saturation-annotated.svg)
+:::
+
+::::
+
+
+(sec-pyromat-coolprop)=
+## <span class="intermediate"></span> Pyromat and CoolProp data libraries
+Engineering applications such as steam power plants and heat pumps involve not only the gaseous phase of substances but also the liquid phase and the liquid-vapor phase mixture. While the two-parameter models have historical value in predicting parameter regimes needed for designing experimental measurements, they lack the accuracy needed in the most demanding of the applications. Fortunately, the theoretical framework of thermodynamics enables constructing multiparameter substance models that can be fitted to experimental data with good accuracy. Several libraries and software implementations of such models exist. The ones introduced here are [pyromat](https://pypi.org/project/PYroMat/) and [coolprop](https://pypi.org/project/CoolProp/), which both are open source, offer a user-friendly python interface, and have extensive documentation. Both libraries can be installed using pip, the package installer for python.
+
+To use pyromat, one imports the library and reverts to SI-units, if desired. By default, pyromat uses non-SI units for pressure (bar), molar quantities (kmol), and energy (kJ). In engineering applications, such units are often common, though. Then one instantiates a multiphase model for the desired substance and computes thermodynamic quantities by calling individual quantity methods such as p (pressure), v (specific volume), d (density), T (temperature), and x (vapor quality) or by calling the state method that evaluates all quantities from a given input quantity pair: 
+
+```{literalinclude} python/example-pyromat-pvTx.py
+:language: python
+:start-line: 0
+:end-line: 21
+:linenos:
+```
+
+The library has separate methods for critical point and triple line information, and for evaluation of saturation properties given only temperature (or pressure):
+
+```{literalinclude} python/example-pyromat-pvTx.py
+:language: python
+:start-line: 23
+:end-line: 33
+:linenos:
+```
+
+The acceptable input parameter pairs for the methods, that can be formed from the state variables $p$, $v$, $\rho$, $T$, and $x$, are listed in {numref}`tab:chap-02:pyromat-variable-pairs` together with their applicability domains (single-phase or two-phase). The full documentation is available at [http://pyromat.org](http://pyromat.org).
+
+:::{table} Acceptable pyromat input parameter pairs formable from the variables $p$, $v$, $\rho$, $T$, and $x$.
+:label: tab:chap-02:pyromat-variable-pairs
+:align: center
+:class: booktabs
+
+| Variable pair | Input pair | Single-phase | Two-phase |
+|:---|:---|:---:|:---:|
+| $(p,T)$ | p and T | Yes | No |
+| $(\rho,T)$ | d and T | Yes | Yes |
+| $(v, T)$ | v and T | Yes | Yes |
+| $(\rho, p)$ | d and p | Yes | Yes |
+| $(v, p)$ | v and p | Yes | Yes |
+| $(x, T)$ | x and T | No | Yes |
+| $(x, p)$ | x and p | No | Yes |
+:::
+
+
 
 ## <span class="elementary"></span> Thermal expansion and compressibility coefficients
 The thermodynamic framework outlined in Fig. XX
