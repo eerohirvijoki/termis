@@ -27,7 +27,7 @@ The learning goals for this chapter are listed below. The goals to support the c
 The goals to support the intermediate and advanced paths are:
 
 - <span class="intermediate"></span> The reader fits two-parameter models to experimentally observed critical point data.
-- <span class="intermediate"></span> The reader manipulates differential forms to obtain relations between partial derivatives.
+- <span class="intermediate"></span> The reader uses total differentials to derive relations between partial derivatives.
 - <span class="advanced"></span> The reader estimates saturation properties with two-parameter models subjected to the Maxwell construct.
 - <span class="advanced"></span> The reader programs a python script utilizing pyromat or coolprop to create a $p$-$v$ or a $v$-$T$ diagram.
 
@@ -69,7 +69,7 @@ The phase-mixture regions might seem somewhat exotic at first but are not. A reg
 
 (sec-pv-vT-diagrams)=
 ## <span class="elementary"></span> The p-v and v-T diagrams, vapor quality
-Many engineering applications involve fluids at pressures above that of the triple line, though exceptions do exist. For practical reasons of data availability, the discussion here is limited to pressure values above the tiple line. To represent the fluid state and the associated isotherms and isobars quantitatively, the $p$–$v$ and $v$–$T$ projections replace the schematic $p$–$v$–$T$ surface, as shown for water in {numref}`fig-pv-vT-H2O`. Particular attention is given to the two-phase region, representing mixtures of liquid and vapor, and to the behaviour of temperature and pressure isocontours in the $p$–$v$ and $v$–$T$ planes.
+Many engineering applications involve fluids at pressures above that of the triple line, though exceptions do exist. For practical reasons of data availability, the discussion here is limited to pressure values above the triple line. To represent the fluid state and the associated isotherms and isobars quantitatively, the $p$–$v$ and $v$–$T$ projections replace the schematic $p$–$v$–$T$ surface, as shown for water in {numref}`fig-pv-vT-H2O`. Particular attention is given to the two-phase region, representing mixtures of liquid and vapor, and to the behaviour of temperature and pressure isocontours in the $p$–$v$ and $v$–$T$ planes.
 
 :::::{figure}
 :label: fig-pv-vT-H2O
@@ -86,7 +86,7 @@ The $p$-$v$ (top) and $v$-$T$ (bottom) diagrams for water, with critical point a
 
 In the $p$-$v$ and $v$-$T$ diagrams of {numref}`fig-pv-vT-H2O`, the red curve denotes the saturated liquid states, while the green curve represents the saturated vapor states. The two curves start from the opposing ends of the triple line and meet at the critical point. Together they form the saturation curve which, together with the triple line, encloses the liquid-vapor two-phase region. Elsewhere a fluid state exists in single phase. Although {numref}`fig-pv-vT-H2O` is specific to water, the same definitions and qualitative behavior apply to all pure substances, with only values differing. 
 
-As disccussed in connection with the $p$-$v$-$T$ surface, temperature and pressure both remain constant during a phase transion when volume change is not constrained. This is reflected in both the $p$-$v$ and the $v$-$T$ diagram. In the $p$-$v$ diagram, isotherms are horizontal in the two-phase region, and the phase transition appears as a horizontal line between the saturated liquid and saturated vapor states. In the $v$-$T$ diagram, the roles are reversed. Isobars are vertical within the two-phase region, and the phase transition appears as a vertical line between the saturated liquid and saturated vapor states.
+As disccussed in connection with the $p$-$v$-$T$ surface, temperature and pressure both remain constant during a phase transition when volume change is not constrained. This is reflected in both the $p$-$v$ and the $v$-$T$ diagram. In the $p$-$v$ diagram, isotherms are horizontal in the two-phase region, and the phase transition appears as a horizontal line between the saturated liquid and saturated vapor states. In the $v$-$T$ diagram, the roles are reversed. Isobars are vertical within the two-phase region, and the phase transition appears as a vertical line between the saturated liquid and saturated vapor states.
 
 What changes during a phase transition is the specific volume of a substance, and a quantity referred to as vapor quality. In a volume $V$ containing mass $m$ in a two-phase state, the liquid will occupy a volume $V_\text{liq}$ and have mass $m_\text{liq}$ while the vapor will occupy a volume $V_\text{vap}$ and have mass $m_\text{vap}$. Naturally, the volumes and masses sum together according to
 
@@ -565,7 +565,7 @@ In the two-phase mixture region, pressure and temperature on the $p$-$v$-$T$ sur
 nevertheless characterises how pressure and temperature vary along the two-phase equilibrium states.
 
 
-In applications, measured values for the heat expansion and compressibility coefficients can be leveraged also to estimate changes in the state variables. In single phase regions, specific volume can be interpreted as a function $v(p,T)$ of pressure and volume. Differentiating the function results in the total differential for specific volume
+In applications, measured values for the heat expansion and compressibility coefficients can be leveraged also to estimate changes in the state variables. In single phase regions, specific volume can be interpreted as a function $v(p,T)$ of pressure and temperature. Differentiating the function results in the total differential for specific volume
 
 :::{math}
 dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_Tdp\\
@@ -768,7 +768,7 @@ Substituting $a_s$, $b_s$, and $v_\text{crit}$ then provides
 :enumerated: false
 p_r=\frac{8T_r}{3v_r-1}-\frac{3}{v_r^2},
 :::
-In terms of reduced variables, the Van der Waals equation is seen to contain no substance-dependent parameters. The same applies also to Redlich-Kwong and Dietericci equations of state. All substances that are reasonably well approximated with any of these model are therefore immerdiately observed to obey the principle of corresponding states.
+In terms of reduced variables, the Van der Waals equation is seen to contain no substance-dependent parameters. The same applies also to Redlich-Kwong and Dieterici equations of state. All substances that are reasonably well approximated with any of these model are therefore immerdiately observed to obey the principle of corresponding states.
 ::::
 
 ::::{proof:example}
@@ -820,7 +820,7 @@ The value estimated with the principle of corresponding states is quite close to
 
 
 
-## <span class="elementary"></span> Summary
+## Summary
 Pure substances, such as oxygen, carbon dioxide, and distilled water, exhibit qualitatively similar phase behaviour despite having widely different critical temperatures and pressures. Their thermodynamic states can be mapped experimentally in $p$-$v$-$T$ space and represented in projections such as $p$-$v$ and $v$-$T$ diagrams. Simple two-parameter equations of state, such as the Van der Waals model, can reproduce the main features of this behaviour, while multi-parameter equations of state implemented in data libraries such as pyromat and
 coolprop can provide much more accurate property data.
 
