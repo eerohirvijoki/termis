@@ -320,7 +320,7 @@ This example illustrates that a steady Eulerian velocity field does not imply ze
 
 
 
-## <span class="elementary"></span> A roadmap to the notes
+## A roadmap to the notes
 
 The study of fluids and energy conversion brings together three kinds of knowledge: measurements of observable properties, conservation laws governing macroscopic motion, and constitutive relations describing how matter responds to changes in its state and surroundings. Measurements establish the relations between thermodynamic properties, conservation laws determine how macroscopic quantities evolve, and constitutive relations describe the transport of momentum and energy and the response of matter to deformation and heating.
 
