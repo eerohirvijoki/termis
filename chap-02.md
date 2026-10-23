@@ -359,12 +359,12 @@ b_s=\frac{R_sT_\text{crit}}{8p_\text{crit}}.
 
 The predictive capability of the two-parameter equation-of-state models is improved when they are used together with the so-called Maxwell construction which replaces the unphysical portion of the modeled isotherm with a constant-pressure segment, producing a relation of the form $g(p,T)=0$. The associated constraints for the construction are
 :::{math}
-:label: eq:chap-01:maxwell-construction
+:label: eq:chap-02:maxwell-construction
 \int_{v_\text{liq}(T)}^{v_\text{vap}(T)} p(v,T)dv&=p_\text{sat}(T)(v_\text{vap}(T)-v_\text{liq}(T)),\\
 p(v_\text{liq}(T),T)&=p_\text{sat}(T),\\
 p(v_\text{vap}(T),T)&=p_\text{sat}(T),
 :::
-where $p_\text{sat}(T)$ is the model-specific saturation pressure at a temperature $T$ below the critical temperature, reflecting the $g(p,T)=0$ condition. The corresponding model-specific saturated liquid and vapor volumes $v_\text{liq}(T)$ and $v_\text{vap}(T)$ define the phase boundaries between which the two-phase mixture is predicted to exist. Solving the system of equations {eq}`eq:chap-01:maxwell-construction` for a specific equation of state model $p(v,T)$ can be performed numerically using iterative methods but the process requires care to avoid the nontrivial solution where $v_\text{vap}(T)=v_\text{liq}(T)$ and $p_\text{sat}(T)$ remains the initial guess. A practical approach involves converting the original system of three equations into a root-finding problem for one equation. 
+where $p_\text{sat}(T)$ is the model-specific saturation pressure at a temperature $T$ below the critical temperature, reflecting the $g(p,T)=0$ condition. The corresponding model-specific saturated liquid and vapor volumes $v_\text{liq}(T)$ and $v_\text{vap}(T)$ define the phase boundaries between which the two-phase mixture is predicted to exist. Solving the system of equations {eq}`eq:chap-02:maxwell-construction` for a specific equation of state model $p(v,T)$ can be performed numerically using iterative methods but the process requires care to avoid the nontrivial solution where $v_\text{vap}(T)=v_\text{liq}(T)$ and $p_\text{sat}(T)$ remains the initial guess. A practical approach involves converting the original system of three equations into a root-finding problem for one equation. 
 
 When the temperature is below that of the critical point, the two-parameter-model isotherms in a $p$-$v$ diagram exhibit a local minimum and maximum in pressure as a function of specific volume in the physically valid region $v>b_s$, as seen in {numref}`fig-pv-T-CO2-eos-comparison` for the Redlich-Kwong model. Geometrically, for a given temperature $T$, the model-specific saturation pressure $p_\text{sat}(T)$ from the Maxwell construction must exist between these local minimum and maximum pressure values and be non-negative. This means 
 :::{math}
@@ -619,7 +619,7 @@ If the cylinder volume is compressed by $\Delta V=-1.3\,\ell$ and the pressure i
 :::{math}
 :enumerated: false
 &\frac{\Delta V}{V_0}=\beta_p\Delta T-\kappa_T\Delta p\\
-&\implies \Delta T=\frac{1}{\beta}\frac{\Delta V}{V_0}+\frac{\kappa_T}{\beta_p}\Delta p=2.633^\circ\text{C}
+&\implies \Delta T=\frac{1}{\beta_p}\frac{\Delta V}{V_0}+\frac{\kappa_T}{\beta_p}\Delta p=2.633^\circ\text{C}
 :::
 ::::
 
