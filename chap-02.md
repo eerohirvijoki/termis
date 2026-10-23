@@ -304,6 +304,7 @@ p(v,T_\text{crit})=p_\text{crit}
 :::
 which provide the model-specific parameters $a_s(T_\text{crit},p_\text{crit})$ and $b_s(T_\text{crit},p_\text{crit})$ as well as the model prodicted critical volume $v_\text{crit}=v(T_\text{crit},p_\text{crit})$ as functions of the experimental critical point temperature and pressure. 
 
+(example-vdw-coefficients)=
 ::::{proof:example}
 For the Van der Waals model, the first and second derivatives of pressure with respect to specific volume at constant temperature become
 
@@ -727,10 +728,103 @@ Confirming that the triple product between the partial derivatives is valid
 :::
 ::::
 
-## <span class="elementary"></span> Compressibility factor and reduced variables
-While numerical libraries provide high accuracy, the ideal gas model remains a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. 
+## <span class="elementary"></span> Compressibility factor, reduced variables, and the principle of corresponding states
+Where data libraries provide high accuracy result, the ideal gas model can remain a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. To determine when the ideal gas model can be expected to perform sufficiently well, the so-called compressibility factor 
+:::{math}
+Z = \frac{pv}{R_sT},
+:::
+can be used as a dimensionless metric to quantify deviation from ideal behaviour. As the name suggests, the factor compares the volume $v$ the substance occupies in relation to the volume $R_sT/p$ an ideal gas at the same temperature and pressure would occupy. The closer the value of $Z$ is to unity, the better the ideal gas model is expected to describe the substance properties. On the other hand, if $Z$ clearly deviates from unity, then the ideal gas model likely should be abandoned in favor of the more complex equations of state or data libraries. 
+
+Diagrams involving the compressibility factor are usually expressed in terms of the so-called reduced variables that are dimensionless and normalized to the critical state values
+:::{math}
+T_r&=\frac{T}{T_\text{crit}},\\
+p_r&=\frac{p}{p_\text{crit}},\\
+v_r&=\frac{v}{v_\text{crit}}.
+:::
+When illustrated for different substance, as in {numref}`fig-compressibility-factor` for methane $\text{CH}_4$, nitrogen $\text{N}_2$, and carbon dioxide $\text{CO}_2$, the compressibility factor reveals approximately similar behaviour for many substances, even with significantly different critical states. Even the phase transitions across the liquid-vapor two-phase state, visible on the diagram as strictly vertical segments, seem similar for different substances. 
+:::{figure}
+:label: fig-compressibility-factor
+:align: center
+![](./figs/fig-compressibility-factor.svg)
+
+Selected reduced temperature ($T_r$) isotherms of common gases illustrating the similarity of $Z$ of the gases.
+:::
+
+
+This observation is referred to as the principle of corresponding states and it tells that many fluids have approximately similar compressibility factors and deviate from ideal to roughly same degree when compared at the same reduced temperature and pressure. It is for this reason that the Van der Waals, Dieterici, and Redlich-Kwong equations of state can be applied to many substances with relatively good accuracy. The observation can also be used to estimate properties of a substance with respect to some other substance that behaves similarly in reduced coordinates.
+::::{proof:example}
+In the {numref}`example-vdw-coefficients`, the parameters $a_s$, $b_s$ and the model-specific critical volume $v_\text{crit}$ for the Van der Waals model were shown to be
+:::{math}
+:enumerated: fale
+a_s=\frac{27}{64}\frac{R_s^2T_\text{crit}^2}{p_\text{crit}}, \qquad b_s=\frac{1}{8}\frac{R_sT_\text{crit}}{p_\text{crit}}, \qquad v_\text{crit}=3b_s
+:::
+Writing the Van der Waals equation in terms of reduced variables provides
+:::{math}
+:enumerated: false
+p_\text{crit}p_r=\frac{R_sT_\text{crit}T_r}{v_\text{crit}v_r-b_s}-\frac{a_s}{v_\text{crit}^2}\frac{1}{v_r^2}
+:::
+Substituting $a_s$, $b_s$, and $v_\text{crit}$ then provides
+:::{math}
+:enumerated: false
+p_r=\frac{8T_r}{3v_r-1}-\frac{3}{v_r^2},
+:::
+In terms of reduced variables, the Van der Waals equation is seen to contain no substance-dependent parameters. The same applies also to Redlich-Kwong and Dietericci equations of state. All substances that are reasonably well approximated with any of these model are therefore immerdiately observed to obey the principle of corresponding states.
+::::
+
+::::{proof:example}
+In {numref}`fig-compressibility-factor`, carbon dioxide and methane are observed to have similar compressibility factors in terms of reduced variables. One should therefore be able to use state variable data of methane to estimate the state variables of carbon dioxide, and vice versa. 
+
+Given the critical point temperature $T_{\text{crit},\text{CO}_2}$ and density $\rho_{\text{crit},\text{CO}_2}$ for carbon dioxide, a temperature $T_{\text{CO}_2}$ and density $\rho_{\text{CO}_2}$ define reduced variables
+:::{math}
+:enumerated: false
+T_r&=\frac{T_{\text{CO}_2}}{T_{\text{crit},\text{CO}_2}}\\
+\rho_r&=\frac{\rho_{\text{CO}_2}}{\rho_{\text{crit},\text{CO}_2}}
+:::
+Given the critical point temperature $T_{\text{crit},\text{CH}_4}$ and density $\rho_{\text{crit},\text{CH}_4}$ for methane, the corresponding state temperature $T_{\text{CH}_4}$ and density $\rho_{\text{CH}_4}$ of methane are
+:::{math}
+:enumerated: false
+T_{\text{CH}_4}&=T_rT_{\text{crit},\text{CH}_4}\\
+\rho_{\text{CH}_4}&=\rho_r\rho_{\text{crit},\text{CH}_4}
+:::
+Using these values, the corresponding state pressure $p_{\text{CH}_4}$ for methane can be calculated with data libraries. Given the critical point pressure $p_{\text{crit},\text{CH}_4}$ for methane, the corresponding state reduced pressure is then found from 
+:::{math}
+:enumerated: false
+p_r=\frac{p_{\text{CH}_4}}{p_{\text{crit},\text{CH}_4}}
+:::
+With the reduced pressure known the critical point pressure $p_{\text{crit},\text{CO}_2}$ of carbon dioxide can be used to estimate the carbon dioxide pressure
+:::{math}
+:enumerated: false
+p_{\text{CO}_2}=p_rp_{\text{crit},\text{CO}_2}
+:::
+
+This process is implemented in the script below to estimate the pressure $p_{\text{CO}_2}$ of carbon dioxide at a temperature of $T_{\text{CO}_2}=20^\circ\text{C}$ and density of $\rho_{\text{CO}_2}=230\,\text{kg}\,\text{m}^{-3}$. The estimate is also compared to accurate value and ideal gas estimate.
+
+```{literalinclude} python/example-corresponding-states.py
+:language: python
+:start-line: 0
+:end-line: 40
+:linenos:
+:lineno-match:
+```
+
+Running the script results in the following pressure values for carbon dioxide 
+:::{math}
+:enumerated: false
+p_{\text{CO}_2,\text{corr. state value}} &= 59.3999\,\text{bar}\\
+p_{\text{CO}_2,\text{accurate value}} &= 57.2904\,\text{bar}\\
+p_{\text{CO}_2,\text{ideal gas value}} &= 127.38\,\text{bar}
+:::
+
+The value estimated with the principle of corresponding states is quite close to the correct value, while the ideal gas estimate is far off.
+::::
+
+
 
 ## <span class="elementary"></span> Summary
-Pure substances, such as oxygen, carbon dioxide, and distilled water,
-exhibit qualitatively similar phase behaviour despite having widely
-different critical temperatures and pressures. 
+Pure substances, such as oxygen, carbon dioxide, and distilled water, exhibit qualitatively similar phase behaviour despite having widely different critical temperatures and pressures. Their thermodynamic states can be mapped experimentally in $p$-$v$-$T$ space and represented in projections such as $p$-$v$ and $v$-$T$ diagrams. Simple two-parameter equations of state, such as the Van der Waals model, can reproduce the main features of this behaviour, while multi-parameter equations of state implemented in data libraries such as pyromat and
+coolprop can provide much more accurate property data.
+
+For two-parameter equations of state, the model parameters can be related to the critical state by requiring the isotherm to have a stationary inflection point at the critical point. Measured critical-state data can then be used to determine the model parameters, or the parameters can be estimated from measurements away from the critical point. Together with the Maxwell construction, the resulting model can also be used to estimate saturation states. The approximately universal behaviour of different substances can be illustrated using reduced variables and the compressibility factor which reveals similar behaviour for different fluids at corresponding reduced temperatures and pressures.
+
+The thermodynamic state can also be described locally through differential response coefficients. The isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility $\kappa_T$ characterize the response of specific volume to changes in temperature and pressure, respectively. Both can be estimated from local slopes in $p$-$v$ and $v$-$T$ diagrams or calculated directly from property data. These coefficients will later provide the connection between experimentally measured thermodynamic response and the differential relations needed to construct the thermodynamic framework.
+
