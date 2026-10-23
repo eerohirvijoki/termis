@@ -8,7 +8,7 @@ numbering:
 
 # 2 Properties of Pure Substances
 
-This chapter first introduces relations between state variables of pure substances using illustrative phase diagrams. The diagrams provide the reader an overview of how substances generally behave, and what common features are shared among them. Predictive models are then introduced, first with simple analytical equations of state, then through numerical property libraries. The analytical models serve to explain observations in the phase diagrams, help in design of experimental measurements of unknown substances, and support intuition of substance behaviour. The numerical property libraries, on the other hand, are the gold standard for engineering modeling and provide accuracy when required. From the property observations and models, the reader is introduced to the state-variable response coefficients that are needed later in developing the thermodynamic framework. Finally, a principle of corresponding states is discussed to help in predicting properties of unknown substances with the properties of known substances' data.
+This chapter first introduces relations between state variables of pure substances using illustrative phase diagrams. The diagrams provide the reader an overview of how substances generally behave, and what common features are shared among them. Predictive models are then introduced, first with simple analytical equations of state, then through numerical property libraries. The analytical models serve to explain observations in the phase diagrams, help in design of experimental measurements of unknown substances, and support intuition of substance behaviour. The numerical property libraries, on the other hand, are the gold standard for engineering modeling and provide accuracy when required. From the property observations and models, the reader is introduced to the state-variable response coefficients that are needed later in developing the thermodynamic framework. Finally, the principle of corresponding states is discussed to help in predicting properties of unknown substances with the properties of known substances' data.
 
 ## Learning goals
 
@@ -18,17 +18,20 @@ The learning goals for this chapter are listed below. The goals to support the c
 - <span class="elementary"></span> The reader recalls the different phases of ordinary matter, the transitions between them, and is able to sketch phase diagrams.
 - <span class="elementary"></span> The reader calculates vapor quality of a state point on a given $p$-$v$ or $v$-$T$ diagram.
 - <span class="elementary"></span> The reader uses simple analytical equations of state to evaluate state variables.
-- <span class="elementary"></span>  Using measured data, the reader predicts substance critical point with a Van der Waals model or another two-parameter model.
+- <span class="elementary"></span> The reader predicts substance's critical point with a Van der Waals model or another two-parameter model from measurements.
+- <span class="elementary"></span> The reader uses pyromat or coolprop to evaluate substance state variables and vapor quality.
+- <span class="elementary"></span> The reader estimates the isobaric thermal expansion and the isothermal compressibility coefficients from $p$-$v$ or $v$-$T$ diagrams and computes them with pyromat or coolprop.
 - <span class="elementary"></span> The reader calculates the compressibility factor from given data to estimate the validity of ideal gas model.
+- <span class="elementary"></span> The reader uses the principle of corresponding states to to predict properties of a substance with the help other substance's data.
 
 The goals to support the intermediate and advanced paths are:
 
-- <span class="intermediate"></span>  The reader uses pyromat or coolprop to calculate pressure, density, or temperature for a given state point.
-- <span class="intermediate"></span>  The reader estimates the isobaric thermal expansion and the isothermal compressibility coefficients from $p$-$v$ or $v$-$T$ diagrams for a given state point.
-- <span class="advanced"></span> The estimates saturation properties with analytical equations of state subjected to the Maxwell construct.
-- <span class="advanced"></span> The reader manipulates differential forms to obtain relations between partial derivatives.
+- <span class="intermediate"></span> The reader fits two-parameter models to experimentally observed critical point data.
+- <span class="intermediate"></span> The reader manipulates differential forms to obtain relations between partial derivatives.
+- <span class="advanced"></span> The reader estimates saturation properties with two-parameter models subjected to the Maxwell construct.
 - <span class="advanced"></span> The reader programs a python script utilizing pyromat or coolprop to create a $p$-$v$ or a $v$-$T$ diagram.
 
+(sec-pvT-diagram)=
 ## <span class="elementary"></span> The p-v-T phase diagram
 In mechanics, matter is classified into solid states that can sustain shape under shearing forces and into fluid states that cannot. In engineering thermodynamics, fluid states are classified not only into liquid and gas states but subclassified further into superheated vapor and supercritical fluid states. In short, superheated vapor is gaseous while supercritical fluid has characteristics of both liquid and gas. Also mixtures of solid, liquid, and gas states in common thermodynamic equilibrium are encountered. In a three-dimensional space with pressure $p$, specific volume $v$, and temperature $T$ as coordinates, thermodynamic states of a pure substance form a two-dimensional, so-called $p$-$v$-$T$ surface. Schematic illustrations of such surfaces are provided in {numref}`fig-pvT`, with temperature and pressure isocontours, i.e., isotherms and isobars, drawn with black and white dashed curves.
 
@@ -64,8 +67,9 @@ For pressure values above that of the triple line but below that of the critical
 
 The phase-mixture regions might seem somewhat exotic at first but are not. A region where two phases coexist in equilibrium can be obtained, e.g., by placing a kettle filled with liquid water on a stove and turning the heat on. Once the water starts boiling, water vapor forms and fills the remaining space under the kettle lid, pushing air out. A mass of water then exists within a volume in both liquid and vapor states, sharing a common temperature and pressure. Because liquid water has higher density than water vapor, gravity separates the liquid and vapor phases into physically different regions within the kettle. As a system, the water in the kettle nevertheless has one mass and one volume, and therefore, as a system, can be assigned a single specific volume or density value, corresponding to a state. In this respect the triple line is a unique collection of states. As the line separates two phase-transition regions, matter on the line can exist simultaneously in all three primary phases, as solid, liquid, and gaseous vapor.
 
+(sec-pv-vT-diagrams)=
 ## <span class="elementary"></span> The p-v and v-T diagrams, vapor quality
-Most engineering applications involve fluids at pressures above that of the triple line. To represent the fluid state and the associated isotherms and isobars quantitatively, the $p$–$v$ and $v$–$T$ projections replace the schematic $p$–$v$–$T$ surface, as shown for water in {numref}`fig-pv-vT-H2O`. Particular attention is given to the two-phase region, representing mixtures of liquid and vapor, and to the behaviour of temperature and pressure isocontours in the $p$–$v$ and $v$–$T$ planes.
+Many engineering applications involve fluids at pressures above that of the triple line, though exceptions do exist. For practical reasons of data availability, the discussion here is limited to pressure values above the tiple line. To represent the fluid state and the associated isotherms and isobars quantitatively, the $p$–$v$ and $v$–$T$ projections replace the schematic $p$–$v$–$T$ surface, as shown for water in {numref}`fig-pv-vT-H2O`. Particular attention is given to the two-phase region, representing mixtures of liquid and vapor, and to the behaviour of temperature and pressure isocontours in the $p$–$v$ and $v$–$T$ planes.
 
 :::::{figure}
 :label: fig-pv-vT-H2O
@@ -80,7 +84,7 @@ Most engineering applications involve fluids at pressures above that of the trip
 The $p$-$v$ (top) and $v$-$T$ (bottom) diagrams for water, with critical point and triple line indicated.
 :::::
 
-In the $p$-$v$ and $v$-$T$ diagrams of {numref}`fig-pv-vT-H2O`, the red curve denotes the saturated liquid states, while the green curve represents the saturated vapor states. The two curves start from the opposing ends of the triple line and meet at the critical point. Together they form the saturation curve which, together with the triple line, encloses the liquid-vapor two-phase region. Elsewhere the fluid exists in single phase. Although {numref}`fig-pv-vT-H2O` is specific to water, the same definitions and qualitative behavior apply to all pure substances. 
+In the $p$-$v$ and $v$-$T$ diagrams of {numref}`fig-pv-vT-H2O`, the red curve denotes the saturated liquid states, while the green curve represents the saturated vapor states. The two curves start from the opposing ends of the triple line and meet at the critical point. Together they form the saturation curve which, together with the triple line, encloses the liquid-vapor two-phase region. Elsewhere a fluid state exists in single phase. Although {numref}`fig-pv-vT-H2O` is specific to water, the same definitions and qualitative behavior apply to all pure substances, with only values differing. 
 
 As disccussed in connection with the $p$-$v$-$T$ surface, temperature and pressure both remain constant during a phase transion when volume change is not constrained. This is reflected in both the $p$-$v$ and the $v$-$T$ diagram. In the $p$-$v$ diagram, isotherms are horizontal in the two-phase region, and the phase transition appears as a horizontal line between the saturated liquid and saturated vapor states. In the $v$-$T$ diagram, the roles are reversed. Isobars are vertical within the two-phase region, and the phase transition appears as a vertical line between the saturated liquid and saturated vapor states.
 
@@ -104,10 +108,11 @@ The liquid and vapor parts have specific volumes corresponding to the respective
     v_\text{vap}&=\frac{V_\text{vap}}{m_\text{vap}}, 
 :::
 
-and a state in the two-phase region, having vapor quality $x$, can be shown to have a specific volume of
+and a state in the two-phase region, having vapor quality $x$, has a specific volume of
 
 :::{math}
-    v=(1-x)v_\text{liq}+x\,v_\text{vap}.
+	v&=\frac{V}{m}=\frac{V_\text{liq}}{m}+\frac{V_\text{vap}}{m}=\frac{m_\text{liq}}{m}\frac{V_\text{liq}}{m_\text{liq}}+\frac{m_\text{vap}}{m}\frac{V_\text{vap}}{m_\text{vap}}\\
+	&=(1-x)v_\text{liq}+x\,v_\text{vap}
 :::
 
 Conversely, the vapor quality in the two-phase region can be determined from the specific volume with
@@ -125,15 +130,15 @@ Hot steam at $T=150^\circ\text{C}$ is produced for an industrial process by boil
 
 From the $p$-$v$ diagram in {numref}`fig-pv-T-H2O`, one can estimate the specific volumes of saturated liquid and saturated vapor using the $150^\circ\text{C}$ isotherm and the saturated liquid and vapor curves:
 $$
-	v_\text{liq}&\approx 1\times 10^{-3}\,\text{m}^3/\text{kg}, &
-	v_\text{vap}&\approx 4\times 10^{-1}\,\text{m}^3/\text{kg}.
+	v_\text{liq}&\approx 1\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}, &
+	v_\text{vap}&\approx 4\times 10^{-1}\,\text{m}^3\,\text{kg}^{-1}.
 $$
 Using the definition of specific volume, the masses of liquid water and water vapor are then calculated from the volumes and the specific volumes
 $$
 	m_\text{liq}&=\frac{V_\text{liq}}{v_\text{liq}}\approx 200\,\text{kg}, &
 	m_\text{vap}&=\frac{V_\text{vap}}{v_\text{vap}}=\frac{V-V_\text{liq}}{v_\text{vap}}\approx 2\,\text{kg},
 $$
-and the total mass of water inside the pressure vessel can be calculated to be $m\approx202\,\text{kg}$. The specific volume for the water inside the vessel is therefore $v=V/m\approx 5\times 10^{-3}\,\text{m}^3/\text{kg}$ and the vapor quality is calculated to be
+and the total mass of water inside the pressure vessel can be calculated to be $m\approx202\,\text{kg}$. The specific volume for the water inside the vessel is therefore $v=V/m\approx 5\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}$ and the vapor quality is calculated to be
 $$
 	x=\frac{v-v_\text{liq}}{v_\text{vap}-v_\text{liq}}\approx 0.01.
 $$
@@ -154,7 +159,7 @@ The points from which the values used are obtained are illustrated below.
 
 A pressure vessel with a volume of $30\,\text{m}^3$ contains $1000\,\text{kg}$ of water at a pressure of $p=10\,\text{bar}$. What is the temperature of water in the vessel? At what temperature would all water in the vessel become vapor?
 
-The specific volume of water in the vessel is $v=V/m=0.03\,\text{m}^3/\text{kg}$. From the $v$-$T$ diagram in {numref}`fig-vT-p-H2O`, one finds the temperature at this specific volume and pressure of $10\,\text{bar}$ to be $T\approx 180^\circ\text{C}$. Both the volume of the pressure vessel and the mass of water inside it remain fixed even if temperature were to change. The temperature at which all of the water inside would be vapor, is then found on the green saturated vapor curve at the given specific volume, corresponding to $T\approx 280^\circ\text{C}$. Both state points are illustrated below.
+The specific volume of water in the vessel is $v=V/m=0.03\,\text{m}^3\,\text{kg}^{-1}$. From the $v$-$T$ diagram in {numref}`fig-vT-p-H2O`, one finds the temperature at this specific volume and pressure of $10\,\text{bar}$ to be $T\approx 180^\circ\text{C}$. Both the volume of the pressure vessel and the mass of water inside it remain fixed even if temperature were to change. The temperature at which all of the water inside would be vapor, is then found on the green saturated vapor curve at the given specific volume, corresponding to $T\approx 280^\circ\text{C}$. Both state points are illustrated below.
 
 :::{figure}
 :align: center
@@ -171,17 +176,19 @@ Mathematically, a general two-dimensional surface in a three-dimensional space w
 :::{math}
     f(p,v,T)=0.
 :::
-Experimental observations show that, in the two-phase regions, pressure and temperature can both stay constant while the specific volume varies. Real phase transitions may exhibit delayed boiling or condensation due to kinetic effects and the absence of nucleation sites. The equilibrium phase boundaries discussed here nevertheless provide an accurate approximation for most engineering applications. In these regions, pressure and temperature therefore satisfy a relation of the form
+Experimental observations illustrated in {numref}`sec-pvT-diagram` and {numref}`sec-pv-vT-diagrams` show that, in the two-phase regions, pressure and temperature can both stay constant while the specific volume varies. While real phase transitions may exhibit delayed boiling or condensation due to kinetic effects and the absence of nucleation sites, the equilibrium phase boundaries nevertheless provide an accurate approximation for most engineering applications. Within such boundaries, pressure and temperature therefore satisfy a relation of the form
 :::{math}
     g(p,T)=0,
 :::
-while, for a fixed temperature or pressure, the specific volume parametrizes the two-phase mixture states. Across the boundaries between single- and two-phase regions, the derivatives of the state surface change abruptly. This is observed in the $p$-$v$ and $v$-$T$ diagrams for water in {numref}`fig-pv-vT-H2O`, where the isotherms and isobars vary smoothly outside the liquid–vapor region but change direction abruptly on the saturation curves. Because of this, it is practically impossible to represent the entire state surface by a single analytic equation that behaves smoothly everywhere. Therefore, mathematical expressions referred to as equations of state are developed with constrained applicability domains. 
+and, for a fixed temperature or pressure, the specific volume parametrizes the two-phase mixture states. 
+
+Across the boundaries between single- and two-phase regions, the derivatives of the state surface change abruptly. This is observed in the $p$-$v$ and $v$-$T$ diagrams for water in {numref}`fig-pv-vT-H2O`, where the isotherms and isobars vary smoothly outside the liquid–vapor region but change direction abruptly on the saturation curves. Because of this, it is practically impossible to represent the entire state surface by a single analytic equation that behaves smoothly everywhere. Therefore, mathematical expressions referred to as equations of state are developed with constrained applicability domains. 
 
 The arguably simplest equation of state, found experimentally and applicable for dilute gases, is referred to as the ideal gas equation 
 :::{math}
     pv=R_sT.
 :::
-The constant $R_s=R/M$ is gas specific, with $R=8.3145\,\text{J}/\text{mol}/\text{K}$ the universal gas constant and $M$ the molar mass of the gas. The mathematical form of the equation implies that the ideal gas isotherms in a $p$-$v$ diagram look like hyperbolas on a linear-linear scale. Taking logarithms from both sides of the equation and rearranging leads to $\log_{10}p=\log_{10}(R_sT)-\log_{10}v$. In a $p$-$v$ diagram using a log-log scale, the ideal gas isotherms would therefore appear as straight downward trending lines with a slope of -1. This behavior is observed in the $p$-$v$ diagram of water in {numref}`fig-pv-T-H2O`. The slope of the $700^\circ\text{C}$ isotherm is very close to -1 throughout while for lower temperatures, the slope is quite close to -1 if the pressure is low enough. 
+The constant $R_s=R/M$ is gas specific, with $R=8.3145\,\text{J}/\text{mol}/\text{K}$ the universal gas constant and $M$ the molar mass of the gas. The mathematical form of the equation implies that the ideal gas isotherms in a $p$-$v$ diagram look like hyperbolas on a linear-linear scale. Taking logarithms from both sides of the equation and rearranging leads to $\log_{10}p=\log_{10}(R_sT)-\log_{10}v$. In a $p$-$v$ diagram using a log-log scale, the ideal gas isotherms would therefore appear as straight downward trending lines with a slope of -1. This behavior is observed in the $p$-$v$ diagram of water in {numref}`fig-pv-T-H2O`. The slope of the $700^\circ\text{C}$ isotherm is very close to -1 throughout while for lower temperatures, the slope is quite close to -1 if the pressure is low enough. The qualitative agreement with observations suggests the ideal gas equation to be a reasonable model at least in certain part of the fluid region.
 
 Close to the saturated vapor curve or near the critical point, the real isotherms deviate significantly from the hyperbolas of the ideal gas model (the straight downward sloping lines in log-log scale). Such deviations become important in engineering applications operating at high pressures or near phase transitions, as ideal gas models may produce large errors. Therefore more accurate models for the gaseous phase have been developed. Historically the most influential has been the Van der Waals equation of state
 :::{math}
@@ -204,8 +211,21 @@ and the Redlich-Kwong equation of state
     b_s&=\frac{2^{1/3}-1}{3}\frac{R_sT_\text{crit}}{p_\text{crit}},
     \end{aligned}\right.
 :::
-Of these the Van der Waals and Redlich–Kwong models belong to the class of cubic equations of state while all three belong to the family of two-parameter models. The equations are modifications of the ideal gas equation to account for molecular interaction effects and finite molecular size, and reduce to the ideal gas model at appropriate limits. The expressions for the coefficients in the two-parameter models are found by requiring both the first and the second derivative of pressure with respect to volume to be zero at temperature and pressure corresponding to the critical point. This reflects the behaviour of measured data. 
-
+Of these the Van der Waals and Redlich–Kwong models belong to the class of cubic equations of state while all three belong to the family of two-parameter models. The equations are modifications of the ideal gas equation to account for molecular interaction effects and finite molecular size, and reduce to the ideal gas model at appropriate limits. 
+::::{proof:example}
+The cubic nature of the Van der Waals is revealed when trying to solve for specific volume from given pressure and temperature values
+:::{math}
+:enumerated: false
+&p=\frac{R_sT}{v-b_s}-\frac{a_s}{v^2}\\
+&\implies v^3-\left(b_s+\frac{R_sT}{p}\right)v^2+\frac{a_s}{p}v-a_sb_s=0
+:::
+Similarly for the Redlich-Kwong model, one finds a cubic equation for specific volume
+:::{math}
+:enumerated: false
+&p=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
+&\implies v^3-\frac{R_sT}{p}v^2+\left(\frac{a_s}{p\sqrt{T}}-\frac{R_sTb_s}{p}-b_s^2\right)v-\frac{a_sb_s}{p\sqrt{T}}=0
+:::
+::::
 ::::{proof:example}
 
 Writing the Van der Waals model as
@@ -226,48 +246,7 @@ one observes the Van der Waals model to reduce to the ideal gas equation when bo
 
 ::::
 
-::::{proof:example}
-
-Using the Van der Waals model, the first and second derivatives of pressure with respect to specific volume at constant temperature become
-
-:::{math}
-:enumerated: false
-\left(\frac{\partial p}{\partial v}\right)_T=-\frac{R_sT}{(v-b_s)^2}+\frac{2a_s}{v^3}, \qquad 
-\left(\frac{\partial^2 p}{\partial v^2}\right)_T=\frac{2R_sT}{(v-b_s)^3}-\frac{6a_s}{v^4}.
-:::
-
-Requiring both derivatives to vanish when pressure and temperature correspond to the critical point values, one may solve for
-
-:::{math}
-:enumerated: false
-a_s=\frac{9R_sT_\text{crit}v_\text{crit}}{8}, \qquad b_s=\frac{v_\text{crit}}{3}.
-:::
-
-Here $v_\text{crit}=v(p_\text{crit},T_\text{crit})$ is not the measured value but the value implicitly determined from the equation of state
-
-:::{math}
-:enumerated: false
-p_\text{crit}=\frac{R_sT_\text{crit}}{v_\text{crit}-b_s}-\frac{a_s}{v_\text{crit}^2}
-:::
-
-leading to 
-
-:::{math}
-:enumerated: false
-v_\text{crit}=\frac{3}{8}\frac{R_sT_\text{crit}}{p_\text{crit}}
-:::
-
-Substituting back, one finds the expressions for the Van der Waals coefficients in terms of the critical point temperature and pressure
-
-:::{math}
-:enumerated: false
-a_s=\frac{27}{64}\frac{R_s^2T_\text{crit}^2}{p_\text{crit}}, \qquad
-b_s=\frac{R_sT_\text{crit}}{8p_\text{crit}}.
-:::
-
-::::
-
-The Van der Waals equation, the Dieterici equation, and the Redlich-Kwong equation all describe state surfaces of type $f(p,v,T)=0$ and improve upon the ideal gas equation. They nevertheless fall short of correct behaviour when the nature of the state surface changes abruptly from the gaseous state to the two-phase liquid-vapor mixture state where pressure and temperature follow a relation of the form $g(p,T)$ instead. The shortfall is demonstrated in {numref}`fig-pv-T-CO2-eos-comparison` for carbon dioxide using the Redlich-Kwong equation. Also the corresponding isotherms predicted by ideal gas model are shown. For temperatures above $30.98^\circ\text{C}$, the critical temperature of CO$_2$, the Redlich-Kwong isotherms align quite well with the measured data. The isotherm corresponding to the critical temperature and the predicted location of the critical point are slightly off, since a point with three coordinates generally cannot be exactly matched with only two parameters. The Redlich-Kwong isotherms below that of the critical temperature, however, show unphysical behaviour between the saturated liquid and vapor states. A region exists where pressure increases with increasing volume, whereas the correct isotherms remain flat. Notably, the ideal gas isotherms near the critical point perform significantly worse.
+The Van der Waals equation, the Dieterici equation, and the Redlich-Kwong equation all describe state surfaces of type $f(p,v,T)=0$ and improve upon the ideal gas equation. They nevertheless fall short of correct behaviour when the nature of the state surface changes abruptly from the gaseous state to the two-phase liquid-vapor mixture state where pressure and temperature follow a relation of the form $g(p,T)$ instead. The shortfall is demonstrated in {numref}`fig-pv-T-CO2-eos-comparison` for carbon dioxide using the Redlich-Kwong equation. Also the corresponding isotherms predicted by ideal gas model are shown. For temperatures above $30.98^\circ\text{C}$, the critical temperature of CO$_2$, the Redlich-Kwong isotherms align quite well with the measured data. The isotherm corresponding to the critical temperature at specific volumes smaller than the critical point volume, and the predicted location of the critical point are slightly off. The explanation for the critical point discrepancy is provided in {numref}`sec-fitting-two-parameter-models`. Below the critical temperature, the Redlich-Kwong isotherms show unphysical behaviour between the experimental saturated liquid and vapor states. A region exists where pressure increases with increasing volume, whereas the correct isotherms remain flat. This unphysical behaviour below the critical point temperature is exhibited by all two-parameter models. Notably, the ideal gas isotherms near the critical point perform significantly worse.
 
 :::{figure}
 :label: fig-pv-T-CO2-eos-comparison
@@ -279,7 +258,7 @@ Selected isotherms for CO$_2$ calculated from ideal gas and Redlich-Kwong models
 :::
 
 
-Although the two-parameter models predictions are slightly off near the critical point and behave incorrectly in the two-phase region, the historical importance of the models is significant. The understanding of substance properties has developed gradually over time, and even rough estimates of the pressure and temperature below which it is possible to liquefy a gas are valuable when mapping the thermodynamic properties of an unknown substance. With the help of two-parameter models, it is possible to estimate the parameters $a_s$ and $b_s$ from measurements performed in the single-phase gaseous region. These parameters can then be used to estimate the critical point. Such estimates can then be used to design the devices with which experimental measurements are carried out to obtain accurate data. Combining the two-parameter model with a so-called Maxwell construction, even saturation properties can be estimated, as demonstrated in the section [](#sec-maxwell-construction). When more accurate modeling is required, one may resort to thermodynamic data libraries as introduced in section [](#sec-pyromat-coolprop).
+Although the two-parameter models predictions are slightly off near the critical point and behave incorrectly in the two-phase region, the historical importance of the models is significant. The understanding of substance properties has developed gradually over time, and even rough estimates of the pressure and temperature below which it is possible to liquefy a gas are valuable when mapping the thermodynamic properties of an unknown substance. With the help of two-parameter models, it is possible to estimate the parameters $a_s$ and $b_s$ from measurements performed in the single-phase gaseous region. The parameters $a_s$ and $b_s$ can then be used to estimate the critical point location and the estimates used to design the devices with which experimental measurements are carried out to obtain accurate data. Combining the two-parameter model with a so-called Maxwell construction, even saturation properties can be estimated, as demonstrated in {numref}`sec-maxwell-construction`. When more accurate modeling is required, one may resort to thermodynamic data libraries introduced in {numref}`sec-pyromat-coolprop`.
 
 ::::{proof:example}
 
@@ -308,6 +287,71 @@ p_\text{crit}&=\frac{2^{1/3}-1}{3}\frac{R_sT_\text{crit}}{b_s}
 At a specific volume of $v=0.10\,\text{m}^3/\text{kg}$, the pressure of methane at $T_1=-20^\circ\text{C}$ has been measured at $p_1=12.61\,\text{bar}$. At the same volume at temperature $T_2=50^\circ\text{C}$, the pressure has been measured at $p_2=16.40\,\text{bar}$. The Redlich-Kwong model then predicts the critical temperature and pressure of methane to be $T_\text{crit}=-91.54^\circ\text{C}$ and $p_\text{crit}=40.50\,\text{bar}$. The estimates are reasonably close to the experimentally measured values of $T_\text{crit}=-82.59^\circ\text{C}$ and $p_\text{crit}=45.99\,\text{bar}$.
 
 ::::
+
+(sec-fitting-two-parameter-models)=
+## <span class="intermediate"></span> Fitting of two-parameter equations of state
+The two-parameter equations of state are designed to better fit experimental observations near the critical point than the ideal gas model. For example, as visible in {numref}`fig-pv-T-CO2-eos-comparison`, the Redlich-Kwong model achieves a reasonably good accuracy in that the model-specific isotherms appear to closely resemble the experimental data, apart from the clear difference in the two-phase region. The success of the various two-parameter models to do so relies on how the parameters $a_s$ and $b_s$ are chosen. 
+
+In a $p$-$v$ diagram of a pure substance, the experimental isotherm passing through the critical point exhibits a stationary inflection point at the critical point. Mathematically this means that both the first and the second derivative of pressure with respect to specific volume are zero at the critical point. For the two parameter models to reflect this experimental observation, the model-predicted critical point is required to reproduced the experimentally observed inflection point at critical point temperature and pressure. Consequently the model-predicted value for the critical point specific volume is typically somewhat off the experimental value. Mathematically, one requires three conditions to hold
+:::{math}
+\left(\frac{\partial p}{\partial v}\right)_T\Big|_{(T=T_\text{crit},p=p_\text{crit})}=0\\
+:::
+:::{math}
+\left(\frac{\partial^2 p}{\partial v^2}\right)_T\Big|_{(T=T_\text{crit},p=p_\text{crit})}=0\\
+:::
+:::{math}
+p(v,T_\text{crit})=p_\text{crit}
+:::
+which provide the model-specific parameters $a_s(T_\text{crit},p_\text{crit})$ and $b_s(T_\text{crit},p_\text{crit})$ as well as the model prodicted critical volume $v_\text{crit}=v(T_\text{crit},p_\text{crit})$ as functions of the experimental critical point temperature and pressure. 
+
+::::{proof:example}
+For the Van der Waals model, the first and second derivatives of pressure with respect to specific volume at constant temperature become
+
+:::{math}
+:enumerated: false
+\left(\frac{\partial p}{\partial v}\right)_T&=-\frac{R_sT}{(v-b_s)^2}+\frac{2a_s}{v^3},\\ 
+\left(\frac{\partial^2 p}{\partial v^2}\right)_T&=\frac{2R_sT}{(v-b_s)^3}-\frac{6a_s}{v^4}.
+:::
+
+Requiring both derivatives to vanish when pressure and temperature correspond to the critical point values, one may solve for
+:::{math}
+:enumerated: false
+\left.\begin{aligned}
+-\frac{R_sT_\text{crit}}{(v_\text{crit}-b_s)^2}+\frac{2a_s}{v_\text{crit}^3}&=0\\
+\frac{2R_sT_\text{crit}}{(v_\text{crit}-b_s)^3}-\frac{6a_s}{v_\text{crit}^4}&=0
+\end{aligned}\right\}
+\implies
+\left\{\begin{aligned}
+a_s&=\frac{9R_sT_\text{crit}v_\text{crit}}{8}\\
+b_s&=\frac{v_\text{crit}}{3}
+\end{aligned}\right.
+:::
+where $v_\text{crit}=v(p_\text{crit},T_\text{crit})$ is not the measured value of the critical point but the value implicitly determined from the equation of state at the model predicted critical point
+:::{math}
+:enumerated: false
+p_\text{crit}=\frac{R_sT_\text{crit}}{v_\text{crit}-b_s}-\frac{a_s}{v_\text{crit}^2}
+:::
+Substitugint the expressions for $a_s$ and $b_s$ to the equation of state at the model-predicted critical point provides
+:::{math}
+:enumerated: false
+\left.\begin{aligned}
+p_\text{crit}&=\frac{R_sT_\text{crit}}{v_\text{crit}-b_s}-\frac{a_s}{v_\text{crit}^2}\\
+a_s&=\frac{9R_sT_\text{crit}v_\text{crit}}{8}\\
+b_s&=\frac{v_\text{crit}}{3}
+\end{aligned}\right\}
+\implies
+v_\text{crit}=\frac{3}{8}\frac{R_sT_\text{crit}}{p_\text{crit}}
+:::
+
+Substituting the model-predicted critical point specific volume back to the expressions for the Van der Waals coefficients, one finally obtains
+:::{math}
+:enumerated: false
+a_s=\frac{27}{64}\frac{R_s^2T_\text{crit}^2}{p_\text{crit}}, \qquad
+b_s=\frac{R_sT_\text{crit}}{8p_\text{crit}}.
+:::
+
+::::
+
 
 (sec-maxwell-construction)=
 ## <span class="advanced"></span> Estimation of saturation properties with two-parameter equations of state
@@ -390,7 +434,7 @@ Running the script results in Redlich-Kwong estimates $p_\text{sat}(12^\circ\tex
 
 
 (sec-pyromat-coolprop)=
-## <span class="intermediate"></span> Pyromat and CoolProp data libraries
+## <span class="elementary"></span> Pyromat and CoolProp data libraries
 Engineering applications such as steam power plants and heat pumps involve not only the gaseous phase of substances but also the liquid phase and the liquid-vapor phase mixture. While the two-parameter models have historical value in predicting parameter regimes needed for designing experimental measurements, they lack the accuracy needed in the most demanding of the applications. Fortunately, the theoretical framework of thermodynamics enables constructing multiparameter substance models that can be fitted to experimental data with good accuracy. Several libraries and software implementations of such models exist. The ones introduced here are [pyromat](https://pypi.org/project/PYroMat/) and [coolprop](https://pypi.org/project/CoolProp/), which both are open source, offer a user-friendly python interface, and have extensive documentation. Both libraries can be installed using pip, the package installer for python.
 
 To use pyromat, one imports the library and reverts to SI-units, if desired. By default, pyromat uses non-SI units for pressure (bar), molar quantities (kmol), and energy (kJ). In engineering applications, such units are often common, though. Then one instantiates a multiphase model for the desired substance and computes thermodynamic quantities by calling individual quantity methods such as p (pressure), v (specific volume), d (density), T (temperature), and x (vapor quality) or by calling the state method that evaluates all quantities from a given input quantity pair: 
@@ -400,7 +444,6 @@ To use pyromat, one imports the library and reverts to SI-units, if desired. By 
 :start-line: 0
 :end-line: 21
 :linenos:
-:caption: Calculating pressure and vapor quality from specific volume and temperature
 ```
 
 The library has separate methods for critical point and triple line information, and for evaluation of saturation properties given only temperature (or pressure):
@@ -431,27 +474,6 @@ The acceptable input parameter pairs for the methods, that can be formed from th
 | $(x, p)$ | x and p | No | Yes |
 :::
 
-The pyromat-library accepts input as scalars, as numpy-arrays, or as a mixture of the two. The output is always a numpy-array, even in case of scalar input. This enables convenient data queries for multiple states with one call but must be kept in mind if outputs from scalar input queries are used in further calculations that do not accept or accept numpy-arrays. The array inputs and outputs are particularly useful for visualization of the data, as demonstrated in {numref}`plot-isotherms-saturation-curve`. 
-
-::::{proof:example}
-:label: plot-isotherms-saturation-curve
-
-Selected isotherms together with the saturation curves can be conveniently drawn into a $p$-$v$ diagram using the in vectorized output from pyromat. To properly handle the potential two-phase region, values on the saturation curves are queried separately and added to the vectors using the concatenate method from numpy in the following manner:
-```{literalinclude} python/example-pyromat-pv-isotherms-and-saturation-curve.py
-:language: python
-:start-line: 0
-:end-line: 53
-:linenos:
-```
-
-Running the script results in a figure shown below:
-
-:::{figure}
-:align: center
-![](./figs/example-fig-pyromat-pv-isotherms-and-saturation-curve.svg)
-:::
-
-::::
 
 To use coolprop, one imports both the library and a specific AbstractState class from it. The SI-units will be used by default, needing no specific configuration. A multiphase model for the desired substance is then instantiated from the AbstractState class. Before any thermodynamic quantities can be computed, though, the substance state has to be specified. This happens by calling the method update and passing it not only the variables but also an input key that informs the library which variables have been passed. Once the state has been updated, quantity values are accessed through separate methods such as p (pressure), T (temperature), rhomass (density), and Q (vapor quality).
 
@@ -487,65 +509,72 @@ The acceptable input parameter pairs and their corresponding input keys for the 
 | $(\rho, p)$ | DmassP\_INPUTS | Yes | Yes |
 | $(x, T)$ | QT\_INPUTS | No | Yes |
 | $(p, x)$ | PQ\_INPUTS | No | Yes |
-| $(\rho, x)$ | DmassQ\_IPUTS | No | Yes for $\rho<\rho_c$ |
+| $(\rho, x)$ | DmassQ\_INPUTS | No | Yes for $\rho<\rho_c$ |
 :::
 
+
+
+## <span class="advanced"></span> Plotting phase diagrams with Pyromat and CoolProp
+The pyromat-library accepts input as scalars, as numpy-arrays, or as a mixture of the two. The output is always a numpy-array, even in case of scalar input. This enables convenient data queries for multiple states with one call but must be kept in mind if outputs from scalar input queries are used in further calculations that do not accept or accept numpy-arrays. The array inputs and outputs are particularly useful for visualization of the data, as demonstrated in {numref}`plot-isotherms-saturation-curve`. 
+
+(plot-isotherms-saturation-curve)=
+::::{proof:example}
+
+Selected isotherms together with the saturation curves can be conveniently drawn into a $p$-$v$ diagram using the in vectorized output from pyromat. To properly handle the potential two-phase region, values on the saturation curves are queried separately and added to the vectors using the concatenate method from numpy in the following manner:
+```{literalinclude} python/example-pyromat-pv-isotherms-and-saturation-curve.py
+:language: python
+:start-line: 0
+:end-line: 53
+:linenos:
+```
+
+Running the script results in a figure shown below:
+
+:::{figure}
+:align: center
+![](./figs/example-fig-pyromat-pv-isotherms-and-saturation-curve.svg)
+:::
+
+::::
 
 Unlike pyromat, coolprop does not support numpy-arrays. Hence all inputs and outputs are always scalar-valued. On the other hand, coolprop provides a large collection of different substances while pyromat presently has only a few different substances implemented. Both libraries have their uses, and are best learned by practicing.
 
 
 ## <span class="elementary"></span> Thermal expansion and compressibility coefficients
-The relations between the state variables $p$, $v$, and $T$ can be approximated with the simple equations of state from {numref}`sec-simple-equations-of-state` or evaluated accurately with the data libraries introduced in {numref}`sec-pyromat-coolprop`. The framework outlined in {numref}`fig-roadmap`, however, contains not only $p$, $v$, and $T$ but also energy-related quantities such as internal energy $u$, enthalpy $h$, and entropy $s$ that are needed in practical calculations involving power plants and heat pumps. Unlike $p$, $v$, and $T$, the energy-related quantities cannot be obtained from direct measurements. Instead, their experimental determination relies on observing how the measurable variables $p$, $v$, and $T$ change relative to each other when a substance is heated or compressed. At a detailed level, the relative changes are quantified by derivatives.
+The relations between the state variables $p$, $v$, and $T$ can be approximated with the simple equations of state from {numref}`sec-simple-equations-of-state` or evaluated accurately with the data libraries introduced in {numref}`sec-pyromat-coolprop`. The framework outlined in {numref}`fig-roadmap`, however, contains not only $p$, $v$, and $T$ but also energy-related quantities such as internal energy $u$, enthalpy $h$, and entropy $s$ that are needed in practical calculations involving power plants and heat pumps. Unlike $p$, $v$, and $T$, the energy-related quantities cannot be obtained from direct measurements. Instead, their experimental determination relies on observing how the measurable variables $p$, $v$, and $T$ change relative to each other when a substance is heated or compressed. 
 
-In the single-phase regions, pressure, specific volume, and temperature relate to each other via the surface equation $f(p,v,T)=0$ and, at least locally, one may define the functions $p(v,T)$, $v(T,p)$, and $T(p,v)$. Calculating total differentials of these functions, one finds the following relations between the differential changes in pressure, specific volume, and temperature
-
-:::{math}
-dp&=\left(\frac{\partial p}{\partial v}\right)_Tdv+\left(\frac{\partial p}{\partial T}\right)_v dT,\\
-dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp,\\
-dT&=\left(\frac{\partial T}{\partial p}\right)_vdp+\left(\frac{\partial T}{\partial v}\right)_p dv.
-:::
-
-As the differentials $dp$, $dv$, and $dT$ are the same on both sides of the equations, one may algebraically rearrange the equations and find relations between the partial derivatives. For example, one may manipulate the differential resulting from the function $v(T,p)$ into
+In single-phase regions, where pressure, specific volume, and temperature relate to each other via the surface equation $f(p,v,T)=0$, such changes are described with the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$ that are defined as relative changes in volume with respect to temperature and pressure
 
 :::{math}
-dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp & &\implies & &\left\{\begin{aligned}
-dp&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}dv-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}dT,\\
-dT&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}dv-\frac{\left(\frac{\partial v}{\partial p}\right)_T }{\left(\frac{\partial v}{\partial T}\right)_p}dp.\end{aligned}\right.
+\beta_p=\frac{1}{v}\left(\frac{\partial v}{\partial T}\right)_p=-\frac{1}{\rho}\left(\frac{\partial \rho}{\partial T}\right)_p,\\
 :::
-
-Comparing the manipulated expressions with the differentials resulting directly from differentiation of the functions $p(v,T)$ and $T(p,v)$, one identifies relations such as
-
 :::{math}
-\left(\frac{\partial p}{\partial T}\right)_v&=-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}.
+\kappa_T=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_T=\frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_T.
 :::
 
-The mutual derivatives between $p$, $v$, and $T$ are therefore related to each other.
 
-In the single-phase region, the $p$-$v$-$T$ surface has two independent variables, and all mutual derivatives can be expressed in terms of two independent quantities, namely the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$. The coefficients measure the relative change in substance volume (or density) when either temperature or pressure changes and the other is fixed, and are defined by
+The coefficient $\beta_p$ can be determined by measuring the volume of a substance at several temperatures while keeping the pressure constant, and the coefficient $\kappa_T$ by measuring volume at several pressures while temperature is fixed. They can therefore be determined from existing $p$-$v$ and $v$-$T$ diagrams by examining the slopes of the isotherms and isobars, or calculated more accurately with the help of the data libraries. For most substances $\beta_p>0$ and $\kappa_T>0$, meaning that volume typically increases with temperature at constant pressure and decreases with pressure at constant temperature.
 
-:::{math}
-\beta_p&=\frac{1}{v}\left(\frac{\partial v}{\partial T}\right)_p=-\frac{1}{\rho}\left(\frac{\partial \rho}{\partial T}\right)_p,\\
-\kappa_T&=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_T=\frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_T.
-:::
-
-In the two-phase mixture region, pressure and temperature on the $p$-$v$-$T$ surface are not independent but satisfy the saturation relation $g(T,p)=0$. Consequently, the usual definitions of $\beta_p$ and $\kappa_T$ as independent single-phase response coefficients do not apply. The slope of the coexistence curve
+In the two-phase mixture region, pressure and temperature on the $p$-$v$-$T$ surface are not independent but satisfy the saturation relation of the form $g(T,p)=0$. Consequently, the usual definitions of $\beta_p$ and $\kappa_T$ as independent single-phase response coefficients do not apply. The slope of the coexistence curve
 
 :::{math}
 \left(\frac{dp}{dT}\right)_{\text{sat}}
 :::
 
-nevertheless characterises how pressure and temperature vary along the two-phase equilibrium states. In single-phase regions, the coefficient $\beta_p$ can be determined by measuring the volume of a substance at several temperatures while keeping the pressure constant, and the coefficient $\kappa_T$ by measuring volume at several pressures while temperature is fixed. They can therefore be determined from existing $p$-$v$ and $v$-$T$ diagrams by examining the slopes of the isotherms and isobars, or calculated more accurately with the help of the data libraries. For most substances $\beta_p>0$ and $\kappa_T>0$, meaning that volume typically increases with temperature at constant pressure and decreases with pressure at constant temperature.
+nevertheless characterises how pressure and temperature vary along the two-phase equilibrium states.
 
-Measured values for the heat expansion and compressibility coefficients can be leveraged to estimate changes in the state variables. Differentially, one has the exact relation
+
+In applications, measured values for the heat expansion and compressibility coefficients can be leveraged also to estimate changes in the state variables. In single phase regions, specific volume can be interpreted as a function $v(p,T)$ of pressure and volume. Differentiating the function results in the total differential for specific volume
 
 :::{math}
-dv=v\beta_p|_{(p,T)}dT-v\kappa_T|_{(p,T)} dp
+dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_Tdp\\
+&=v\beta_pdT-v\kappa_T dp
 :::
 
 Small changes $\Delta p=p_1-p_0$ and $\Delta T=T_1-T_0$ in pressure and temperature from a reference state $(p_0,T_0,v_0)$ therefore provide a small change $\Delta v=v_1-v_0$ in specific volume, which can be approximated with the relation
 
 :::{math}
-\Delta v\approx v_0\beta_p|_{(p_0,T_0)}\Delta T-v_0\kappa_T|_{(p_0,T_0)} \Delta p
+\frac{\Delta v}{v_0}\approx \beta_p|_{(p_0,T_0)}\Delta T-\kappa_T|_{(p_0,T_0)} \Delta p
 :::
 
 
@@ -598,7 +627,16 @@ If the cylinder volume is compressed by $\Delta V=-1.3\,\ell$ and the pressure i
 
 The isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$ can be computed with pyromat or coolprop
 
-Pyromat does not offer direct methods for the evaluation but one may approximate derivatives with a finite difference rule $df/dx\approx (f(x+\delta x)-f(x))/\delta x$ using a small enough step size:
+Coolprop offers direct methods for evaluating the coefficients:
+
+```{literalinclude} python/example-beta-kappa-pyromat-coolprop.py
+:language: python
+:start-line: 29
+:end-line: 47
+:linenos:
+```
+
+Running the script provides values $\beta_p = 0.262058\,\text{K}^{-1}$ and $\kappa_T = 0.11624\,\text{bar}^{-1}$. Pyromat does not offer direct methods but one may approximate derivatives with a finite difference rule $df/dx\approx (f(x+\delta x)-f(x))/\delta x$ using a small enough step size:
 
 ```{literalinclude} python/example-beta-kappa-pyromat-coolprop.py
 :language: python
@@ -608,21 +646,88 @@ Pyromat does not offer direct methods for the evaluation but one may approximate
 :lineno-match:
 ```
 
-Running the script results in $\beta_p = 0.261266\,\text{K}^{-1}$ and $\kappa_T= 0.116053\,\text{bar}^{-1}$. Coolprop, on the other hand, offers direct methods for the evaluation:
-
-```{literalinclude} python/example-beta-kappa-pyromat-coolprop.py
-:language: python
-:start-line: 29
-:end-line: 47
-:linenos:
-```
-
-Running the script provides values $\beta_p = 0.262058\,\text{K}^{-1}$ and $\kappa_T = 0.11624\,\text{bar}^{-1}$ that are very close to the estimates obtained with pyromat. Values from both libraries are close to the values obtained visually from the $p$-$v$ and $v$-$T$ diagrams.
+Running the script results in $\beta_p = 0.261266\,\text{K}^{-1}$ and $\kappa_T= 0.116053\,\text{bar}^{-1}$ that are very close to the estimates obtained with coolprop. Values from both libraries are close to the values obtained visually from the $p$-$v$ and $v$-$T$ diagrams.
 
 ::::
 
+## <span class="intermediate"></span> Differential relations between state variables
 
-## <span class="intermediate"></span> Compressibility factor and reduced variables
+The isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility coeffcient $\kappa_T$ that describe the relative changes in volume with respect to temperature and pressure, respectively, are examples of differential relations between the state variables applicable in single-phase regions. They are not the only differential relations, though, as one could equally investigate the differential dependency of pressure on temperature at a fixed volume. It turns out, however, that all other derivatives can be expressed in terms of $\beta_p$ and $\kappa_T$.
+
+Assuming the existence of a smooth $p$-$v$-$T$ surface represented by the single-phase equation $f(p,v,T)=0$, one may, at least locally, define any of the functions $p(v,T)$, $v(T,p)$, and $T(p,v)$. Calculating total differentials of these functions, one finds the following relations between the differential changes in pressure, specific volume, and temperature
+
+:::{math}
+dp=\left(\frac{\partial p}{\partial v}\right)_Tdv+\left(\frac{\partial p}{\partial T}\right)_v dT,\\
+:::
+:::{math}
+dv=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp,\\
+:::
+:::{math}
+dT=\left(\frac{\partial T}{\partial p}\right)_vdp+\left(\frac{\partial T}{\partial v}\right)_p dv.
+:::
+
+As the differentials $dp$, $dv$, and $dT$ are the same on both sides of the equations, one may algebraically rearrange the equations and find relations between the partial derivatives. For example, one may manipulate the differential resulting from the function $v(T,p)$ into
+
+:::{math}
+dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp & &\implies & &\left\{\begin{aligned}
+dp&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}dv-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}dT,\\
+dT&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}dv-\frac{\left(\frac{\partial v}{\partial p}\right)_T }{\left(\frac{\partial v}{\partial T}\right)_p}dp.\end{aligned}\right.
+:::
+
+Comparing the manipulated expressions with the differentials resulting directly from differentiation of the functions $p(v,T)$ and $T(p,v)$, one identifies relations between the partial derivatives and confirms them to be expressible in terms of $\beta_p$ and $\kappa_T$. For example the different expressions for pressure differential $dp$ provide
+:::{math}
+\left.\begin{aligned}
+dp&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}dv-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}dT,\\
+dp&=\left(\frac{\partial p}{\partial v}\right)_Tdv+\left(\frac{\partial p}{\partial T}\right)_v dT\end{aligned}\right\}
+\implies 
+\left\{\begin{aligned}
+\left(\frac{\partial p}{\partial T}\right)_v&=-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}=\frac{\beta_p}{\kappa_T}\\
+\left(\frac{\partial p}{\partial v}\right)_T&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}=-\frac{1}{v\kappa_T}
+\end{aligned}\right.
+:::
+while the different expressions for temperature differential $dT$ provide
+:::{math}
+\left.\begin{aligned}
+dT&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}dv-\frac{\left(\frac{\partial v}{\partial p}\right)_T }{\left(\frac{\partial v}{\partial T}\right)_p}dp,\\
+dT&=\left(\frac{\partial T}{\partial p}\right)_vdp+\left(\frac{\partial T}{\partial v}\right)_p dv\end{aligned}\right\}
+\implies 
+\left\{\begin{aligned}
+\left(\frac{\partial T}{\partial v}\right)_p&=-\frac{\left(\frac{\partial v}{\partial p}\right)_T}{\left(\frac{\partial v}{\partial T}\right)_p}=\frac{\kappa_T}{\beta_p}\\
+\left(\frac{\partial T}{\partial p}\right)_v&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}=\frac{1}{v\beta_p}
+\end{aligned}\right.
+:::
+
+The mutual derivatives between $p$, $v$, and $T$ are therefore all expressible in terms of $\beta_p$ and $\kappa_T$ and related to each other. Particularly one finds that for any permuted combination of $\{x,y,z\}\in\{p,v,T\}$ with $x\neq y\neq z$, one finds two useful rules
+:::{math}
+\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial x}\right)_z=1, \qquad \left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x\left(\frac{\partial z}{\partial x}\right)_y=-1
+:::
+
+::::{proof:example}
+
+The formula containing the product of three permuted partial derivatives can be verified using coolprop. For water at $p=225\,\text{bar}$ and $T=376^\circ\text{C}$ one may calculate the partial derivatives with the following script:
+```{literalinclude} python/example-partial-derivatives-coolprop.py
+:language: python
+:start-line: 0
+:end-line: 26
+:linenos:
+:lineno-match:
+```
+
+Running the script results in the values
+:::{math}
+:enumerated: false
+\left(\frac{\partial p}{\partial T}\right)_\rho&=2.25445\,\text{bar}\,\text{K}^{-1}\\
+\left(\frac{\partial T}{\partial \rho}\right)_p&= -0.0153139\,\text{K}\,\text{m}^3\,\text{kg}^{-1}\\
+\left(\frac{\partial \rho}{\partial p}\right)_T& = 28.9651\,\text{kg}\,\text{m}^{-3}\,\text{bar}^{-1}
+:::
+Confirming that the triple product between the partial derivatives is valid
+:::{math}
+:enumerated: false
+\left(\frac{\partial p}{\partial T}\right)_\rho \left(\frac{\partial T}{\partial \rho}\right)_p \left(\frac{\partial \rho}{\partial p}\right)_T=-1
+:::
+::::
+
+## <span class="elementary"></span> Compressibility factor and reduced variables
 While numerical libraries provide high accuracy, the ideal gas model remains a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. 
 
 ## <span class="elementary"></span> Summary
