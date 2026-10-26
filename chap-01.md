@@ -30,11 +30,11 @@ In addition, one intermediate and one advanced goal are included to prepare also
 
 
 ## <span class="elementary"></span> Internal energy and equilibrium state 
-Ordinary matter consists of particles such as atoms, molecules, and ions, which interact through forces ultimately originating in electromagnetic interactions between their charged constituents. Even electrically neutral particles can attract or repel one another because of their internal charge distributions. These interactions give rise to a potential energy that depends on the relative positions and configurations of the particles, typically favouring certain separations over others.
+Ordinary matter consists of particles such as atoms, molecules, and ions, which interact through forces that originate in electromagnetic interactions between their charged constituents. Even electrically neutral particles can attract or repel one another because of their internal charge distributions. These interactions give rise to a potential energy that depends on the relative positions and configurations of the particles, typically favouring certain separations over others.
 
-The collective behaviour of many interacting particles gives rise to different macroscopic states of matter. In a solid, particles typically remain close to preferred positions, vibrating around them. In a liquid, particles remain close together but continually rearrange. In a gas, particles are typically far apart, with interactions becoming significant mainly during close encounters. The sketches in {numref}`fig-water-solid-liquid-vapor-molecules` illustrate water in these different configurations. The macroscopic state thus reflects the interplay between interaction potential energy, which favours certain particle arrangements, and kinetic energy associated with translational, rotational, and vibrational motion.
+The collective behaviour of many interacting particles gives rise to different macroscopic states of matter. In a solid, particles typically remain close to preferred positions, vibrating around them. In a liquid, particles remain close together but continually rearrange. In a gas, particles are typically far apart, with interactions becoming significant mainly during close encounters. The sketches in {numref}`fig-water-solid-liquid-vapor-molecules` illustrate water in these different configurations. The macroscopic state thus reflects the interplay between interaction potential energy, which favours certain particle arrangements, and kinetic energy associated with translational, rotational, and vibrational motion, trying to tear the matter apart.
 
-The microscopic kinetic and interaction potential energies of the particles, excluding the kinetic energy of the system's centre of mass, its gravitational potential energy, and nuclear binding energy, constitute its internal energy. The symbol $U$ is reserved for the internal energy of a collection of particles.
+The microscopic kinetic and interaction potential energies of the particles, excluding the kinetic energy of the particle collection's centre of mass, its gravitational potential energy, and nuclear binding energy, constitute its internal energy. In these notes, the symbol $U$ is reserved to denote the internal energy of a collection of particles.
 
 :::::{figure}
 :label: fig-water-solid-liquid-vapor-molecules
@@ -59,18 +59,18 @@ The microscopic kinetic and interaction potential energies of the particles, exc
 Water in different configurations, with hydrogen bonds illustrated (cyan dashed lines).
 :::::
 
-As the particles move and interact, they exchange energy and momentum according to the laws of classical mechanics. A collection of particles is said to be in a thermodynamic equilibrium when its macroscopic properties and statistical distributions remain stationary in time, despite the continuing microscopic motion and interactions. In equilibrium, individual particles still exchange energy and momentum, but the overall statistical description remains unchanged.
+As the particles move and interact, they exchange energy and momentum. A collection of particles is said to be in a thermodynamic equilibrium when its macroscopic properties and statistical distributions remain stationary in time, despite the continuing microscopic motion and interactions. In equilibrium, individual particles still exchange energy and momentum, but the overall statistical description remains unchanged.
 
-Internal energy describes the total microscopic kinetic and interaction potential energy in the particle collection's centre-of-mass frame; it does not, by itself, specify how that energy is distributed among the particles. Consequently, internal energy can be defined for both equilibrium and non-equilibrium collections, although a collection away from equilibrium may require additional variables to describe its state.
+As internal energy describes the total microscopic kinetic and interaction potential energy in the particle collection's centre-of-mass frame, it does not, by itself, specify how that energy is distributed among the particles. Consequently, internal energy can be defined for both equilibrium and non-equilibrium particle collections.
 
 
 ## <span class="elementary"></span> Boundary types, heat, and work
 
 Consider two collections of particles, each of which has settled into its own equilibrium state. Regard each collection as a system. A boundary separates a system from its surroundings or another system and determines the mechanisms by which energy can be transferred across it.
 
-A diathermal boundary permits energy transfer that changes the microscopic energy or configuration distributions of the particles without requiring macroscopic displacement of the boundary in the system's rest frame. Two systems separated by such a boundary are said to be in thermal contact. Examples include two solid objects touching each other and a thin metal wall separating two volumes of liquid. The portion of energy transferred across a diathermal boundary through microscopic interactions between particles or through radiation that is emitted by a system in thermal equilibrium is referred to as heat. Heat is energy in transfer, not a property contained within a system.
+A diathermal boundary permits energy transfer that changes the microscopic energy or configuration distributions of the particles without requiring macroscopic displacement of the boundary in the system's rest frame. Two systems separated by such a boundary are said to be in thermal contact. Practical examples include two solid objects touching each other and a thin metal wall separating two volumes of liquid. The portion of energy transferred across a diathermal boundary through microscopic interactions between particles, or through radiation that is emitted by a system in thermal equilibrium, is referred to as heat. Heat therefore is energy in transfer, not a property contained within a system.
 
-An adiabatic boundary prevents heat transfer. This idealization can be approximated by sufficiently thick insulation, although perfect insulation cannot be achieved in practice. An adiabatic boundary does not necessarily prevent other forms of energy transfer across the boundary.
+An adiabatic boundary prevents heat transfer. This idealization can be approximated by sufficiently thick insulation, although perfect insulation can never be achieved in practice. An adiabatic boundary does not necessarily prevent other forms of energy transfer across the boundary.
 
 When two systems interact through forces acting across a movable boundary, energy can be transferred through the macroscopic displacement of that boundary. This mode of energy transfer is referred to as mechanical work. A typical example is a movable piston in a cylinder, separating the gas inside the cylinder from its surroundings. As the piston moves under the action of forces, energy is transferred through work at the boundary. A boundary that is stationary with respect to the system's rest frame and rigid cannot transfer energy through its own displacement. Like heat, mechanical work is energy in transfer rather than a property of a system.
 
@@ -115,7 +115,7 @@ Density, specific volume, and molar volume can be defined for a collection of pa
 :::
 
 ## <span class="elementary"></span> Pressure
-Consider then a cylinder filled with gas and closed with a piston, as in {numref}`fig-pressure-piston-cylinder`. A gas particle that interacts with the piston changes its velocity over a short time interval and, according to Newton’s laws, imparts a small impulse to the piston. On macroscopic times scales, such collisions in a gas appear to occur extremely frequently, and the cumulative effect of many impulses produces a force that, on macroscopic time scales, appears continuous in time. To keep the piston from moving, an opposing force must be applied normal to the piston surface.
+Consider then a cylinder filled with gas and closed with a stationary piston, as in {numref}`fig-pressure-piston-cylinder`. A gas particle that interacts with the piston changes its velocity over a short time interval and, according to Newton’s laws, imparts a small impulse to the piston. On macroscopic times scales, such collisions in a gas appear to occur extremely frequently, and the cumulative effect of many impulses produces a force that, on macroscopic time scales, appears continuous in time. To keep the piston from moving, an opposing force must be applied normal to the piston surface.
 
 :::::{figure}
 :label: fig-pressure-piston-cylinder
@@ -131,7 +131,7 @@ Consider then a cylinder filled with gas and closed with a piston, as in {numref
 (a) A gas particle imparts impulse on a piston. (b) A force equivalent to the effect of the impulses is need to keep the piston in place.
 :::::
 
-The magnitude of this force depends on both the state of the gas and the area of the boundary over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a fluid in equilibrium, pressure is the normal force per unit area exerted by the fluid on a surface. Locally at a point, it is defined as
+The magnitude of this force depends on both the state of the gas within the cylinder and the area of the piston surface over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a liquid or gas in equilibrium, pressure is the normal force per unit area exerted by the substance on a surface. Locally at a point, it is defined as
 
 :::{math}
 :label: eq:chap-01:pressure-as-normal-force
@@ -151,35 +151,32 @@ where $F_n$ is the normal force exerted on a surface element of area $A$ contain
 | $p$ | Pressure | $\text{Pa}\,(=\text{N}\,\text{m}^{-2})$ |
 :::
 
-If the piston is pushed inward by increasing the applied force, the volume of the gas decreases. Under sufficiently strong compression, part of the gas may condense into a liquid, so that the cylinder contains both liquid and gas. Because the liquid and gas have different densities, gravity can cause them to stratify, forming an interface. For a flat interface at rest, the pressures in the liquid and gas at the interface are equal, neglecting the effect of other interfacial forces. At a curved liquid–gas interface, such as the surface of a small droplet or bubble, surface tension can balance a pressure difference between the two phases.
+If the piston is pushed inward by increasing the applied force, the volume of the gas decreases. Under sufficiently strong compression, part of the gas may condense into a liquid, so that the cylinder contains both liquid and gas. Because the liquid and gas have different densities, gravity can cause them to stratify and form a liquid-gas interface. For a flat interface at rest, the pressures in the liquid and gas sides are equal. At a curved liquid-gas interface, such as the surface of a small droplet or bubble, a surface tension force can balance a pressure difference between the liquid and the gas.
 
-The surface on which pressure is defined therefore need not be a solid wall, such as the piston surface. An imaginary surface drawn within a gas or liquid also suffices. Momentum is transferred across such a surface through the microscopic motion and interactions of particles, giving rise to a macroscopic normal force per unit area. Pressure is thus a macroscopic property of the fluid, not a property of a particular container wall. It can nevertheless be measured using a piston that compresses the gas or liquid.
+The surface on which pressure is defined therefore need not be a solid wall, such as the piston surface. An imaginary surface drawn within a gas or liquid also suffices. Momentum is transferred across such a surface through the microscopic motion and interactions of particles, giving rise to a macroscopic normal force per unit area. Pressure is thus a macroscopic property of the substance, not a property of a particular container wall. It can nevertheless be measured using a piston that compresses the gas or liquid.
 
 
 ## <span class="intermediate"></span> A remark on solids and stress
 
-While the macroscopic force per unit area acting across an imaginary surface within a fluid undergoing uniform motion is normal to the surface, regardless of the surface orientation, this need not be true for solids in general or for fluids undergoing nonuniform motion. In a solid at rest or a fluid in nonuniform motion, the macroscopic force transmitted across an internal imaginary surface through a point can depend on the surface orientation. Consequently, the force per unit area cannot, in general, be characterized by a single scalar independent of the surface orientation. Instead, a tensor-valued quantity $\bm{\sigma}$, called the stress tensor, is introduced to describe the force $\bm{F}$ per unit area in terms of the surface normal $\bm{\hat{n}}$:
+While the macroscopic force per unit area acting across an imaginary surface within a liquid or gas undergoing uniform motion is normal to the surface, regardless of the surface orientation, this need not be true for solids in general or for liquids and gases undergoing nonuniform motion. Therefore, a tensor-valued quantity $\bm{\sigma}$, called the stress tensor, is generally needed to connect the force $\bm{F}$ per unit area to the surface normal $\bm{\hat{n}}$:
 
 :::{math}
-    \lim_{A\to 0}\frac{\bm{F}}{A}=\bm{\sigma}\cdot\bm{\hat{n}},
+    \lim_{A\to 0}\frac{\bm{F}}{A}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
 
-where $A$ is the area of a surface element shrinking around the point of interest, with its orientation held fixed.
+Here $A$ is the area of a surface element shrinking around the point of interest, with its orientation determined by $\bm{\hat{n}}$ and held fixed. The tensor $\bm{\sigma}$ enables the directions of $\bm{\hat{n}}$ and $\bm{F}$ to differ and description of forces that, for example, resist shearing in a flowing liquid or result from material anisotropy in solids. 
 
-The stress state of a material depends on the applied forces and constraints, and can be direction-dependent even in an isotropic material. Material anisotropy, by contrast, means that the material's mechanical response depends on direction because of features of its microscopic structure. For example, extrusion can produce preferential molecular alignment in plastics, while cold rolling can produce preferred crystallographic orientations and elongated grain structures in steel.
+In these notes, the stress tensor will be encountered again when the equations describing fluid motion are derived. It also appears implicitly in the mechanical work rate terms of the engineering formulas used in power plant and refrigeration cycle analysis. While appearing to be a mathematical abstraction, the tensor description of contact forces on surfaces is a necessity implied by Newton's laws.
 
-A solid can also be subjected to a uniform hydrostatic pressure, which applies an isotropic compressive stress at the solid's external boundary. This differs from the general stress state of a solid, which can include shear stresses and unequal normal stresses. In practice, hydrostatic pressure can be applied by surrounding a solid with a gas or liquid at a prescribed pressure. The surrounding fluid exerts a normal force per unit area on the solid's external boundary, providing a known mechanical loading. The resulting internal stress state depends on the loading conditions and the mechanical constraints imposed on the solid.
-
-In these notes, the stress tensor will be encountered again when the equations describing fluid motion are derived. It also appears implicitly in the mechanical work rate terms of the engineering formulas used in power plant and refrigeration cycle analysis.
 
 ## <span class="elementary"></span> The zeroth law and temperature
 
-Where pressure, and more generally stress, characterizes the macroscopic description of mechanical interactions within a system and across a boundary, one can ask whether a macroscopic property also characterizes thermal interactions across a boundary. To explore this, suppose two systems are separated by a diathermal boundary and are otherwise isolated from external influences. The systems can exchange heat. After some time, the net heat transfer between them ceases, and they reach thermal equilibrium. The two systems are then said to be in thermal equilibrium with each other.
+Where pressure, and more generally stress, characterizes the macroscopic description of mechanical interactions within a system and across a boundary, one may ask whether a macroscopic property also characterizes thermal interactions across a boundary. To explore this, suppose two systems are separated by a diathermal boundary and are otherwise isolated from external influences. The systems can exchange heat. After some time, the net heat transfer between them ceases, and they reach thermal equilibrium. The two systems are then said to be in thermal equilibrium with each other.
 
 The zeroth law of thermodynamics states that thermal equilibrium is transitive: if system A is in thermal equilibrium with system C, and system B is also in thermal equilibrium with system C, then systems A and B are in thermal equilibrium with each other. The zeroth law allows one to introduce a macroscopic property called temperature, denoted by $T$, which has the same value for systems in thermal equilibrium. Conversely, systems with the same temperature are in thermal equilibrium with each other.
 
 ## <span class="elementary"></span> A gas thermometer
-While the zeroth law enables defining the concept of temperature, it does not directly provide a way to measure or calculate it. A detour is needed. To quantify the temperature $T$ of a system, one may place a gas-filled bulb in thermal contact with the system, connect the gas to a manometer, as illustrated in {numref}`fig-gas-thermometer`, and make experimental observations.
+The zeroth law enables defining the concept of temperature but it does not directly provide a way to measure or calculate it. A detour is needed. To quantify the temperature $T$ of a system, one may place a gas-filled bulb in thermal contact with the system, connect the gas to a manometer, as illustrated in {numref}`fig-gas-thermometer`. According to the zeroth law, the gas in the bulb will reach thermal equilibrium with the system and thus have the same temperature $T$. 
 
 :::::{figure}
 :label: fig-gas-thermometer
@@ -190,9 +187,7 @@ While the zeroth law enables defining the concept of temperature, it does not di
 A gas-filled bulb in thermal contact with a system and connected to a manometer. The manometer measures the gas pressure and volume.
 :::::
 
-According to the zeroth law, the gas in the bulb will reach thermal equilibrium with the system and thus have the same temperature $T$. 
-
-By changing the gas volume while keeping the system's state unchanged, one can observe different pairs of gas pressure $p$ and volume $V$, all corresponding to the same system temperature. Repeating such measurements at different system temperatures provides the basis for establishing a reproducible relationship between the gas state and temperature:
+By changing the gas volume while keeping the system's state unchanged, one may observe different pairs of gas pressure $p$ and volume $V$, all corresponding to the same system temperature. Repeating such measurements at different system temperatures provides the basis for establishing a reproducible relationship between the gas state and temperature:
 
 :::{math}
     T = f(p,V).
@@ -206,11 +201,11 @@ Experiments with sufficiently dilute gases show that, for a fixed amount of gas 
 
 where $g(T)$ is a function of temperature (and the gas amount) alone.
 
-One may now choose a reference state for the gas and label its temperature, pressure, and volume as $T_\text{ref}$, $p_\text{ref}$, and $V_\text{ref}$, respectively. For any other state of the gas with pressure $p$ and volume $V$, the temperature $T$ then satisfies
+One may then choose a reference state for the gas and label its temperature, pressure, and volume as $T_\text{ref}$, $p_\text{ref}$, and $V_\text{ref}$, respectively. For any other state of the gas with pressure $p$ and volume $V$, the temperature $T$ then satisfies
 :::{math}
     \frac{g(T)}{g(T_\text{ref})} = \frac{pV}{p_\text{ref}V_\text{ref}}.
 :::
-Since the zeroth law does not uniquely determine a numerical temperature scale, one may choose the scale so that $g(T)$ is proportional to \(T\): 
+Since the zeroth law does not uniquely determine a numerical temperature scale, one may choose the scale so that $g(T)$ is proportional to $T$: 
 :::{math}
     g(T) = \text{const}\times T,
 :::
@@ -274,11 +269,11 @@ Descriptions of matter often use intensive quantities to characterize its state,
 
 ## <span class="advanced"></span> Matter in motion
 
-Matter, whether gas, liquid, or solid, can move and change shape. Liquids and gases can flow and are therefore called fluids, whereas solids resist deformation and may respond elastically or undergo permanent deformation. The description of matter at macroscopic scales relies on the fact that the characteristic length and time scales of interest are typically much larger than microscopic scales associated with interparticle distances and collisions. This scale separation allows matter to be described as a continuum, with macroscopic properties varying over space and time rather than being specified separately for individual particles.
+Matter, whether gas, liquid, or solid, can move and change shape. Liquids and gases can flow and are therefore called fluids, whereas solids resist deformation and may respond elastically or undergo permanent deformation. The description of matter and its motion at macroscopic scales relies on the fact that the characteristic length and time scales of interest are typically much larger than the microscopic scales associated with interparticle distances and collisions. 
 
-In the continuum approximation, the state of matter is described by fields that depend on position $\bm{x}$ and time $t$. These include thermodynamic properties such as density, pressure, and temperature, as well as the velocity field $\bm{v}(\bm{x},t)$, which describes the local macroscopic motion of matter. When local thermodynamic equilibrium is a valid approximation, equilibrium thermodynamic relations can be applied to the local state. The evolution of the fields is then described by conservation laws for mass, momentum, and energy, together with appropriate constitutive relations.
+This scale separation allows matter to be described in terms of a continuum theory, where macroscopic properties are interpreted as fields that depend on position $\bm{x}$ and time $t$. These include not only the state variables density, pressure, and temperature but also the velocity field $\bm{v}(\bm{x},t)$, which describes the local macroscopic motion of matter. The evolution of the fields is then described by conservation laws for mass, momentum, and energy, together with appropriate constitutive relations and an assumption of thermodynamic equilibrium to be a valid approximation locally in the matter.
 
-In classical mechanics, one often studies the motion of a body with a fixed mass under the action of forces. The corresponding material description in continuum mechanics follows a volume containing the same matter as it moves and deforms. Such a volume is called a material volume. Remote forces, such as gravity, act throughout the volume, whereas contact forces act across its boundary. This description is particularly convenient for solids, whose deformation can often be described relative to an initial configuration.
+In classical mechanics of point particles or rigid bodies, one studies the motion of a fixed mass under the action of forces. The corresponding material description in continuum mechanics follows a volume containing the same matter as it moves and deforms. Such a volume is called a material volume. Remote forces, such as gravity, act throughout the volume, whereas contact forces act across its boundary. This description, called material or Lagrangian, is convenient for solids, whose deformation can often be described relative to an initial configuration.
 
 An alternative is to describe the fields at fixed locations in space. This is called the Eulerian description. Rather than following a particular material volume, one observes how matter flows through a chosen spatial region and how its properties change there. This description is often convenient for fluids, which can undergo substantial deformation and continuously exchange matter with a fixed region of space. The Lagrangian and Eulerian descriptions are complementary ways of describing the same continuum motion.
 
@@ -294,7 +289,7 @@ The solution specifies the position of the material point at each time, given it
 \frac{d^2\bm{x}(t)}{dt^2}&=\frac{d}{dt}\bm{v}(\bm{x}(t),t)=(\partial_t\bm{v}+(\bm{v}\cdot\nabla)\bm{v})\big|_{(\bm{x}(t),t)},
 :::
 
-where the notation indicates the fields on the right-hand side are evaluated at $(\bm{x}(t),t)$. The first term, $\partial_t\bm{v}$, describes the local time rate of change of the velocity at a fixed spatial location. The second term, $(\bm{v}\cdot\nabla)\bm{v}$, accounts for spatial variation of the velocity field along the trajectory. Thus, the material acceleration can be nonzero even when the velocity field does not change with time at any fixed location.
+where the notation indicates the fields on the right-hand side are evaluated at $(\bm{x}(t),t)$. The first term $\partial_t\bm{v}$ describes the local Eulerian time rate of change of the velocity, at a fixed spatial location. The second term, $(\bm{v}\cdot\nabla)\bm{v}$, accounts for spatial variation of the velocity field along the trajectory needed in addition to the Eulerian rate to describe the Lagrangian rate of change of velocity. Notably, the material acceleration can be nonzero even when the velocity field does not change with time at any fixed location ($\bm{v}=\bm{v}(\bm{x})$), illustrating the differences between the Eulerian and Lagrangian viewpoints.
 
 ::::{proof:example}
 :label: example:chap-01:lagrangian-acceleration
