@@ -74,9 +74,12 @@
   \draw[walldark] (\x+\l,0) ellipse ({\ra} and \rb);
   
   % LABELS
-  \draw[<-,very thick,orange!90!black] (\x+\l,0.0*\Rb) --++ (0.3*\L,0)
-    node[pos=0.6,below=0,orange!90!black] {$F_n=\frac{\sum_iI_{i,n}}{\Delta t}$};
-  \node[blue!60!black] at (\x,-0.5*\Rb) {$A$};      
+  \draw[<-,very thick,orange!90!black] (\x,-0.3*\Rb) --++ (0.3*\L,0)
+    node[pos=0.9,below=0,orange!90!black] {$\bm{F}_n=-\frac{\sum_i\bm{I}_{i}}{\Delta t}$};
+  \node[blue!60!black] at (\x-0.5*\Ra,0*\Rb) {$A$};      
+
+  \draw[->, very thick,blue!60!black] (\x,0.2*\Rb)--++(1.5*\l,0) node[above,pos=0.22] {$\bm{\hat{n}}$};
+  
   
   % GAS PARTICLE
   \pic at (-0.12*\x, 0.2*\Rb) {gasparticle={vec={ -40:0.7*\v}}};
@@ -119,10 +122,15 @@
   \def\p{2}   % momentum length
   
   % PISTON
+  %\draw[->, very thick,blue!60!black] (0,0)--++(0.9*\p,0) node[below,pos=1] {$\bm{\hat{n}}$};
+
   \draw[->,very thick,orange!90!black] (0*\w,{0.5*\Rb)}) --++ (2.55*\l,0)
-    node[pos=0.85,above,orange!90!black] {$I_{i,n}=m_i\Delta \bm{v}_{i}\cdot\bm{\hat{n}}$};
+    node[pos=0.9,above,orange!90!black] {$\bm{I}_{i}=-m_i\Delta \bm{v}_{i}$};
   \draw[piston]
     (2*\w,\rb) --++ (\l,0) arc (90:-90:{\ra} and {\rb}) --++ (-\l,0) -- cycle;
+  
+  %\draw[very thick,blue!60!black,dashed,opacity=0.5] (0,0)--++(0.8*\p,0);
+
   \draw[walldark]
     (0,\Rb) arc (90:-90:{\Ra} and {\Rb}) --++ (2*\w,0) arc (-90:90:{\Ra} and {\Rb}) -- cycle;
   \draw[piston] (0,0) ellipse ({\Ra} and \Rb);
@@ -136,8 +144,8 @@
 
   % LABEL
   \node[blue!60!black] at (0,-0.5*\Rb) {$A$};
-  \draw[->, very thick,blue!60!black] (0,0)--++(-0.3*\p,0) node[below,pos=1] {$\bm{\hat{n}}$};
-  
+  %\draw[very thick,blue!60!black,dashed,opacity=0.5] (0,0)--++(0.22*\p,0);
+
 \end{tikzpicture}
 
 

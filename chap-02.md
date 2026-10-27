@@ -729,18 +729,29 @@ Confirming that the triple product between the partial derivatives is valid
 ::::
 
 ## <span class="elementary"></span> Compressibility factor, reduced variables, and the principle of corresponding states
-Where data libraries provide high accuracy result, the ideal gas model can remain a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. To determine when the ideal gas model can be expected to perform sufficiently well, the so-called compressibility factor 
+Where data libraries provide high accuracy, the ideal gas model can remain a convenient tool for rapid engineering estimates and analytical derivations due to its mathematical simplicity. To determine when the ideal gas model can be expected to perform sufficiently well, the so-called compressibility factor 
 :::{math}
 Z = \frac{pv}{R_sT},
 :::
-can be used as a dimensionless metric to quantify deviation from ideal behaviour. As the name suggests, the factor compares the volume $v$ the substance occupies in relation to the volume $R_sT/p$ an ideal gas at the same temperature and pressure would occupy. The closer the value of $Z$ is to unity, the better the ideal gas model is expected to describe the substance properties. On the other hand, if $Z$ clearly deviates from unity, then the ideal gas model likely should be abandoned in favor of the more complex equations of state or data libraries. 
+can be used as a dimensionless metric to quantify deviation from ideal behaviour. As the name suggests, the factor compares the volume $v$ the substance occupies in relation to the volume $R_sT/p$ an ideal gas at the same temperature and pressure would occupy. The closer the value of $Z$ is to unity, the better the ideal gas model is expected to describe the substance properties. On the other hand, if $Z$ clearly deviates from unity, then the ideal gas model likely should be abandoned in favor of the more complex equations of state or data libraries. For water, the $Z$-value is illustrated in a $v$-$T$ diagram in {numref}`fig-vT-Z-H2O`.
+
+:::::{figure}
+:label: fig-vT-Z-H2O
+:align: center
+
+![](./figs/fig-vT-Z-H2O.svg)
+
+The value of compressibility factor for water.
+:::::
 
 Diagrams involving the compressibility factor are usually expressed in terms of the so-called reduced variables that are dimensionless and normalized to the critical state values
+
 :::{math}
-T_r&=\frac{T}{T_\text{crit}},\\
-p_r&=\frac{p}{p_\text{crit}},\\
-v_r&=\frac{v}{v_\text{crit}}.
+T_r=\frac{T}{T_\text{crit}},\qquad
+p_r=\frac{p}{p_\text{crit}},\qquad
+v_r=\frac{v}{v_\text{crit}}.
 :::
+
 When illustrated for different substance, as in {numref}`fig-compressibility-factor` for methane $\text{CH}_4$, nitrogen $\text{N}_2$, and carbon dioxide $\text{CO}_2$, the compressibility factor reveals approximately similar behaviour for many substances, even with significantly different critical states. Even the phase transitions across the liquid-vapor two-phase state, visible on the diagram as strictly vertical segments, seem similar for different substances. 
 :::{figure}
 :label: fig-compressibility-factor
@@ -821,10 +832,9 @@ The value estimated with the principle of corresponding states is quite close to
 
 
 ## Summary
-Pure substances, such as oxygen, carbon dioxide, and distilled water, exhibit qualitatively similar phase behaviour despite having widely different critical temperatures and pressures. Their thermodynamic states can be mapped experimentally in $p$-$v$-$T$ space and represented in projections such as $p$-$v$ and $v$-$T$ diagrams. Simple two-parameter equations of state, such as the Van der Waals model, can reproduce the main features of this behaviour, while multi-parameter equations of state implemented in data libraries such as pyromat and
-coolprop can provide much more accurate property data.
+Pure substances, such as oxygen, carbon dioxide, and distilled water, exhibit qualitatively similar phase behaviour despite having widely different critical temperatures and pressures. Their thermodynamic states can be mapped experimentally in $p$-$v$-$T$ space and represented in projections such as $p$-$v$ and $v$-$T$ diagrams. Simple two-parameter equations of state, such as the Van der Waals model, can reproduce the main features of this behaviour, while multi-parameter equations of state implemented in data libraries such as pyromat and provide accurate property data.
 
-For two-parameter equations of state, the model parameters can be related to the critical state by requiring the isotherm to have a stationary inflection point at the critical point. Measured critical-state data can then be used to determine the model parameters, or the parameters can be estimated from measurements away from the critical point. Together with the Maxwell construction, the resulting model can also be used to estimate saturation states. The approximately universal behaviour of different substances can be illustrated using reduced variables and the compressibility factor which reveals similar behaviour for different fluids at corresponding reduced temperatures and pressures.
+For two-parameter equations of state, the model parameters can be related to the critical state by requiring the isotherm to have a stationary inflection point at the critical point. Measured critical-state data can then be used to determine the model parameters, or the parameters can be estimated from measurements away from the critical point. Together with the Maxwell construction, a two-parameter model can also be used to estimate saturation states. The approximately universal behaviour of different substances can be illustrated using reduced variables and the compressibility factor which reveals similar behaviour for different fluids at corresponding reduced temperatures and pressures.
 
 The thermodynamic state can also be described locally through differential response coefficients. The isobaric thermal expansion coefficient $\beta_p$ and the isothermal compressibility $\kappa_T$ characterize the response of specific volume to changes in temperature and pressure, respectively. Both can be estimated from local slopes in $p$-$v$ and $v$-$T$ diagrams or calculated directly from property data. These coefficients will later provide the connection between experimentally measured thermodynamic response and the differential relations needed to construct the thermodynamic framework.
 

@@ -115,7 +115,7 @@ Density, specific volume, and molar volume can be defined for a collection of pa
 :::
 
 ## <span class="elementary"></span> Pressure
-Consider then a cylinder filled with gas and closed with a stationary piston, as in {numref}`fig-pressure-piston-cylinder`. A gas particle that interacts with the piston changes its velocity over a short time interval and, according to Newton’s laws, imparts a small impulse to the piston. On macroscopic times scales, such collisions in a gas appear to occur extremely frequently, and the cumulative effect of many impulses produces a force that, on macroscopic time scales, appears continuous in time. To keep the piston from moving, an opposing force must be applied normal to the piston surface.
+Consider then a cylinder filled with gas and closed with a stationary piston, as in {numref}`fig-pressure-piston-cylinder`. A gas particle of mass $m_i$ that interacts with the piston changes its velocity by $\Delta \bm{v}_i=\bm{v}_i(t+\Delta t)-\bm{v}_i(t)$ over a short time interval $\Delta t$ and, according to Newton’s laws, imparts a small impulse $\bm{I}_i=-m_i\Delta \bm{v}_i$ to the piston. On macroscopic times scales, such collisions of gas particles on the piston surface appear to occur extremely frequently, and the cumulative effect of many impulses produces a contact force on the piston that, on macroscopic time scales, appears continuous in time. To keep the piston from moving, an opposing contact force $\bm{F}_n$ must be applied normal to the piston surface.
 
 :::::{figure}
 :label: fig-pressure-piston-cylinder
@@ -131,13 +131,13 @@ Consider then a cylinder filled with gas and closed with a stationary piston, as
 (a) A gas particle imparts impulse on a piston. (b) A force equivalent to the effect of the impulses is need to keep the piston in place.
 :::::
 
-The magnitude of this force depends on both the state of the gas within the cylinder and the area of the piston surface over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a liquid or gas in equilibrium, pressure is the normal force per unit area exerted by the substance on a surface. Locally at a point, it is defined as
+The magnitude $|\bm{F}_n|$ of this normal force depends on both the state of the gas within the cylinder and the area $A$ of the piston surface over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a liquid or gas in equilibrium, pressure is defined point-wise on a surface through
 
 :::{math}
 :label: eq:chap-01:pressure-as-normal-force
-    \lim_{A\to 0}\frac{F_n}{A}=p.
+    \lim_{A\to 0}\frac{|\bm{F}_n|}{A}=p,
 :::
-where $F_n$ is the normal force exerted on a surface element of area $A$ containing the point of interest. The SI-units for the pressure related quantities are listed in {numref}`tab:chap-01:pressure-related-units`. While the SI-unit for pressure is $\text{Pa}$, in engineering applications a more common unit is $1\,\text{bar}=10^5\,\text{Pa}$.
+with the point of interest being contained within the shrinking surface element of area $A$. The SI-units for the pressure related quantities are listed in {numref}`tab:chap-01:pressure-related-units`. While the SI-unit for pressure is $\text{Pa}$, in engineering applications a more common unit is $1\,\text{bar}=10^5\,\text{Pa}$.
 
 :::{table} Units of pressure related quantities.
 :label: tab:chap-01:pressure-related-units
@@ -158,13 +158,15 @@ The surface on which pressure is defined therefore need not be a solid wall, suc
 
 ## <span class="intermediate"></span> A remark on solids and stress
 
-While the macroscopic force per unit area acting across an imaginary surface within a liquid or gas undergoing uniform motion is normal to the surface, regardless of the surface orientation, this need not be true for solids in general or for liquids and gases undergoing nonuniform motion. Therefore, a tensor-valued quantity $\bm{\sigma}$, called the stress tensor, is generally needed to connect the force $\bm{F}$ per unit area to the surface normal $\bm{\hat{n}}$:
+While the macroscopic contact force per unit area acting across an imaginary surface within an equilibrium liquid or gas is normal to the surface, regardless of the surface orientation, this need not be true for solids in general or for liquids and gases undergoing nonuniform motion. Therefore, a tensor-valued quantity $\bm{\sigma}$, called the stress tensor, is generally used to relate a contact force $\bm{F}$ per unit area to the normal vector $\bm{\hat{n}}$ of a surface element of area $A$ via
 
 :::{math}
     \lim_{A\to 0}\frac{\bm{F}}{A}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
 
-Here $A$ is the area of a surface element shrinking around the point of interest, with its orientation determined by $\bm{\hat{n}}$ and held fixed. The tensor $\bm{\sigma}$ enables the directions of $\bm{\hat{n}}$ and $\bm{F}$ to differ and description of forces that, for example, resist shearing in a flowing liquid or result from material anisotropy in solids. 
+The tensor $\bm{\sigma}$ enables the directions of the surface normal vector $\bm{\hat{n}}$ and the contact force $\bm{F}$ to differ and, through that, description of forces that, for example, resist shearing in a flowing liquid and result from material anisotropy or from nonuniform loading in solids. 
+
+It is typically difficult to interpret stress as a physical concept at first. Consider therefore a layer of liquid or elastic body between two parallel plates. If both plates are horizontal, the weight of the upper plate causes the liquid or the body to experience a force normal to the plate surface that can be interpreted as pressure. If the plates are tilted instead, the upper plate's weight exerts a force on the the liquid or body that has components both normal and tangential to the plate surface. An elastic body will then deform and accommodate a new shape to balance the forces, while the liquid layer would begin to flow due to sliding of the upper plate. In both cases, the force at the contact point deviates from the normal direction of the body or liquid surface. 
 
 In these notes, the stress tensor will be encountered again when the equations describing fluid motion are derived. It also appears implicitly in the mechanical work rate terms of the engineering formulas used in power plant and refrigeration cycle analysis. While appearing to be a mathematical abstraction, the tensor description of contact forces on surfaces is a necessity implied by Newton's laws.
 
@@ -317,17 +319,17 @@ This example illustrates that a steady Eulerian velocity field does not imply ze
 
 ## A roadmap to the notes
 
-The study of fluids and energy conversion brings together three kinds of knowledge: measurements of observable properties, conservation laws governing macroscopic motion, and constitutive relations describing how matter responds to changes in its state and surroundings. Measurements establish the relations between thermodynamic properties, conservation laws determine how macroscopic quantities evolve, and constitutive relations describe the transport of momentum and energy and the response of matter to deformation and heating.
+In these notes, the study of fluids and energy conversion brings together three kinds of essential knowledge: (i) measurable properties, (ii) conservation laws governing macroscopic motion, and (iii) constitutive relations describing how matter responds to changes in its state and surroundings.
 
-For fluids in thermodynamic equilibrium, measurements provide values of pressure $p$, specific volume $v$ or density $\rho$, and temperature $T$. From such measurements, one may establish how these properties depend on one another, for example through the thermal expansion coefficient $\beta_p$ and the isothermal compressibility $\kappa_T$. Such information provides the starting point for constructing thermodynamic state relations.
+For fluids in thermodynamic equilibrium, measurements provide values of pressure $p$, specific volume $v$ or density $\rho$, and temperature $T$. From such measurements, one may establish how these properties depend on one another, and describe the dependencies infinitesimally through the thermal expansion coefficient $\beta_p$ and the isothermal compressibility coefficient $\kappa_T$. Collectively, such information provides the starting point for constructing thermodynamic state relations.
 
-Applying conservation laws to material volumes yields the governing equations for the evolution of mass, momentum, and energy. In a continuum description, these equations involve fields such as density $\rho$, velocity $\bm{v}$, and specific internal energy $u$. However, conservation laws alone do not provide a closed predictive model. Constitutive relations for stresses and heat fluxes, together with thermodynamic relations between state properties, are also required.
+On a different path, applying conservation laws to material volumes yields the governing equations for the evolution of mass, momentum, and energy. In a continuum description, these equations involve fields such as density $\rho$, velocity $\bm{v}$, and specific internal energy $u$. However, the conservation laws alone do not provide a closed predictive model. Constitutive relations for contact forces and description of heat transfer within fluid are needed together with thermodynamic relations between the fluid's state properties.
 
-The thermodynamic relations needed for this closure are developed by studying measurements and energy conservation in quasistatic processes. These processes provide a way to investigate how heat transfer and mechanical work relate to changes in the thermodynamic state. The analysis introduces the specific heat capacities $c_p$ and $c_v$, establishes internal energy $u$ as a state function, and leads to an additional state function, the specific enthalpy $h$. These quantities describe how a substance stores energy and how its thermodynamic state responds to changes in temperature, pressure, and volume.
+Bringing the measurable properties and implications of the conservations laws together, thermodynamic state relations are developed by studying energy conservation in quasistatic processes. These processes provide a way to investigate how heat transfer and mechanical work relate to changes in the thermodynamic state. The analysis introduces a second set of measurable quantities, the specific heat capacities $c_p$ and $c_v$, establishes internal energy $u$ as a state function, and leads to an additional state function, the specific enthalpy $h$. These quantities describe how a substance stores energy and how its thermodynamic state responds to changes in temperature, pressure, and volume.
 
 Further analysis of quasistatic processes reveals restrictions on the transformations between thermodynamic states. The mathematical structure of these restrictions leads to the introduction of entropy $s$, followed by the thermodynamic potentials known as the specific Helmholtz free energy $f$ and the specific Gibbs free energy $g$. These state functions provide alternative descriptions of the same thermodynamic system and are particularly useful for constructing computational models of fluid properties.
 
-With thermodynamic and constitutive closure established, the continuum equations become a predictive framework for fluid motion and energy transfer. Thermodynamic property models, including those implemented in numerical property libraries, supply the state relations needed to evaluate fluid properties from suitable combinations of temperature, pressure, and volume. The resulting framework combines mass, momentum, and energy balances with thermodynamic relations to analyze engineering systems. Together, fluid mechanics and thermodynamics provide the foundations for understanding and designing pumps, fans, compressors, turbines, heat exchangers, heat pumps, power plants, and internal combustion engines, though mass-flow rates $\dot{m}$, heat rates $\dot{Q}$, and mechanical work rates $\dot{W}$. As a whole this process path is illustrated in {numref}`fig-roadmap`. 
+Together, fluid mechanics and thermodynamics lead to continuum field equations that become a predictive framework for fluid motion and energy transfer. Thermodynamic property models supply the state relations needed to evaluate fluid properties from suitable combinations of temperature, pressure, and volume. Then application of the conservation laws lead to mass, momentum, energy, and entropy balances that enable description and analysis of engineering systems in terms of practical quantities such as mass-flow rates $\dot{m}$, heat rates $\dot{Q}$, and mechanical work rates $\dot{W}$. All combined, this process can be illustrated in {numref}`fig-roadmap` as a roadmap. 
 
 :::::{figure}
 :label: fig-roadmap
