@@ -7,9 +7,12 @@ numbering:
 ---
 
 # 3 Mechanics of fluids
-This chapter derives the partial differential equations that describe the time evolution of fluid's density $\rho(\bm{x},t)$, velocity $\bm{v}(\bm{x},t)$, and specific internal energy $u(\bm{x},t)$ as fields that depend on location $\bm{x}$ and time $t$. The presented derivation is an application of the generalized Leibniz rule to differentiate integrals that are calculated over time-evolving volumes. Together with the principles of mass, momentum, and energy conservation, the Leibniz integral differentiation formula enables conversion of fundamental physics principles to locally applicable partial differential equations. Only simple fluids often encountered in engineering applications are discussed and the constitutive relations for stress and heat flux are argued from experimental observations. As a conclusion for the chapter, the set of partial differential equations obtained from the conservation principles is observed to contain more variables than there are equations for, and to require a thermodynamic closure via state relations before further progress to applications becomes possible.
+This chapter derives the partial differential equations that describe the time evolution of fluid's density $\rho(\bm{x},t)$, velocity $\bm{v}(\bm{x},t)$, and specific internal energy $u(\bm{x},t)$ as fields that depend on location $\bm{x}$ and time $t$. The derivation builds on the Leibniz rule for differenting integrals that are calculated over time-evolving volumes. Together with the principles of mass, momentum, and energy conservation, the Leibniz rule enables conversion of fundamental physics principles to locally applicable partial differential equations for the fluid state fields. The discussion is restricted to simple fluids often encountered in engineering applications, and the constitutive relations for stress and heat flux are argued from experimental observations. As a conclusion for the chapter, the set of partial differential equations obtained from the conservation principles is observed to contain more variables than there are equations for, and to require a thermodynamic closure via state relations before further progress to practical energy engineering applications becomes possible.
 
-The application of the Leibniz rule involves standard calculus tools such as the divergence theorem and can be considered core knowledge for energy engineers. These notes supplement the core knowledge by presenting also a rigorous derivation of the Leibniz rule itself. Additionally, when studying the conservation of momentum, the notes demonstrate the emergence of a stress tensor as a physical necessity to describe contact forces on surfaces. Both steps constitute intermediate and advanced concepts and are targeted for those seeking deeper understanding of the topics. The reader is not expected to digest these advanced topics during first reading. Instead, they may well take more time to understand fully.
+The application of the Leibniz rule involves standard calculus tools such as the divergence theorem and can be considered core knowledge for energy engineers. During the process of applying the rule to the principles of momentum and energy conservation, stress tensor is encountered. As tensors are typically not covered during ordinary differential and integral calculus classes, the chapter begins with a brief introduction on them.
+
+
+These notes supplement the core knowledge by presenting also a rigorous derivation of the rule. Additionally, when studying the conservation of momentum, the notes demonstrate the emergence of a stress tensor as a physical necessity to describe contact forces on surfaces. Both steps constitute intermediate and advanced concepts and are targeted for those seeking deeper understanding of the topics. The reader is not expected to digest these advanced topics during first reading. Instead, they may well take more time to understand fully.
 
 The chapter begins with a mathematical primer. A short introduction to tensors is provided and the Leibniz integral differentiation rule state and interpreted. For interested readers, the chapter then continues to the details of deriving the Leibniz rule, before returning to the core path of applying to rule to derive the fluid equations. Those primarily interested on the core engineering path may well skip the intermediate and advanced topics.
 
@@ -20,7 +23,22 @@ The chapter begins with a mathematical primer. A short introduction to tensors i
 - learning goals
 
 ## <span class="elementary"></span> Tensors as mathematical objects
-Assume the vector field 
+A careful mathematical analysis of Newton's second law that tells the rate of change of a body's momentum to correspond to the forces applied to the body, be it a volume of fluid or a solid, shows that a contact force per unit area on a body's surface must be expressible as a linear map of the surface normal vector at the location of contact. The mathematically, an infinitesimal force $\delta\bm{F}$ acting on an infinitesimal surface area $dA$ around a point $\bm{x}$ with an outward unit surface normal $\bm{\hat{n}}$
+
+:::::{figure}
+:label: fig-jello
+:align: center
+<!-- :class: my-subfigures grid grid-cols-5 items-end gap-2 --> 
+
+(fig-jello-horizontal)=
+![An elastic body under horizontal load](./figs/fig-jello-between-plates-horizontal.svg)
+
+(fig-jello-tilted)=
+![An elastic body under tilted loading](./figs/fig-jello-between-plates-tilted.svg)
+
+Average forces on a surface of an elastic body from a load at different positions.
+:::::
+
 
 ## <span class="elementary"></span> Interpretation of the Leibniz integral differentiation rule
 Assume the vector field 
