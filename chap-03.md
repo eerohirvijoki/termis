@@ -7,14 +7,20 @@ numbering:
 ---
 
 # 3 Mechanics of fluids
-This chapter derives the partial differential equations that describe the time evolution of fluid's density $\rho(\bm{x},t)$, velocity $\bm{v}(\bm{x},t)$, and specific internal energy $u(\bm{x},t)$ as fields that depend on location $\bm{x}$ and time $t$. The derivation builds on the Leibniz rule for differenting integrals that are calculated over time-evolving volumes. Together with the principles of mass, momentum, and energy conservation, the Leibniz rule enables conversion of fundamental physics principles to locally applicable partial differential equations for the fluid state fields. The discussion is restricted to simple fluids often encountered in engineering applications, and the constitutive relations for stress and heat flux are argued from experimental observations. As a conclusion for the chapter, the set of partial differential equations obtained from the conservation principles is observed to contain more variables than there are equations for, and to require a thermodynamic closure via state relations before further progress to practical energy engineering applications becomes possible.
+This chapter derives the partial differential equations that describe the time evolution of fluid's density $\rho(\bm{x},t)$, velocity $\bm{v}(\bm{x},t)$, and specific internal energy $u(\bm{x},t)$ as fields dependent on location $\bm{x}$ and time $t$. Later, these equations are used to formulate control-volume engineering models for analysis of power plant and refrigeration systems. The positioning of this chapter within the overall roadmap is illustrated in {numref}`fig-roadmap-chap-03`.
 
-The application of the Leibniz rule involves standard calculus tools such as the divergence theorem and can be considered core knowledge for energy engineers. During the process of applying the rule to the principles of momentum and energy conservation, stress tensor is encountered. As tensors are typically not covered during ordinary differential and integral calculus classes, the chapter begins with a brief introduction on them.
+:::{figure} ./figs/fig-roadmap-chap-03.svg
+:label: fig-roadmap-chap-03
+:align: center
+:width: 100%
+The positioning of the chapter content with respect to the roadmap.
+:::
 
+The derivation of the evolution equations builds on the Leibniz rule for differentiating integrals over time-evolving volumes. Combined with the principles of mass, momentum, and energy conservation, the Leibniz rule enables conversion of fundamental physics principles to locally applicable partial differential equations for the fluid state fields. The discussion focuses on simple fluids often encountered in engineering applications, and the constitutive relations for stress and heat flux are motivated by experimental observations. As a concluding note, the set of partial differential equations obtained from the conservation principles is observed to contain more variables than there are equations for, necessitating a thermodynamic closure via state relations before practical energy engineering applications can be analyzed.
 
-These notes supplement the core knowledge by presenting also a rigorous derivation of the rule. Additionally, when studying the conservation of momentum, the notes demonstrate the emergence of a stress tensor as a physical necessity to describe contact forces on surfaces. Both steps constitute intermediate and advanced concepts and are targeted for those seeking deeper understanding of the topics. The reader is not expected to digest these advanced topics during first reading. Instead, they may well take more time to understand fully.
+The application of the Leibniz rule to conservation principles involves standard calculus tools, such as the divergence theorem, and constitutes core knowledge for energy engineers. When applying the rule to the principles of momentum and energy conservation, the contact forces that contribute to the time rate of change of momentum and rate of mechanical work on surfaces are expressed in terms of a stress tensor. As tensors are typically not covered during ordinary differential and integral calculus classes, the chapter begins with a brief introduction to them before presenting and interpreting the Leibniz rule.
 
-The chapter begins with a mathematical primer. A short introduction to tensors is provided and the Leibniz integral differentiation rule state and interpreted. For interested readers, the chapter then continues to the details of deriving the Leibniz rule, before returning to the core path of applying to rule to derive the fluid equations. Those primarily interested on the core engineering path may well skip the intermediate and advanced topics.
+As supplements to the core knowledge, this chapter includes a full derivation of the Leibniz rule, establishes the stress tensor as a physical necessity to describe contact forces on surfaces, and justifies the symmetry of the stress tensor by conservation of angular momentum. These intermediate and advanced topics are designed for readers seeking deeper theoretical foundation and are not expected to be fully mastered on a first reading. Readers primarily interested in the core engineering path may skip the intermediate and advanced sections and focus directly on the derivation process of the evolution equations.
 
 ## Learning goals
 
@@ -23,21 +29,73 @@ The chapter begins with a mathematical primer. A short introduction to tensors i
 - learning goals
 
 ## <span class="elementary"></span> Tensors as mathematical objects
-A careful mathematical analysis of Newton's second law that tells the rate of change of a body's momentum to correspond to the forces applied to the body, be it a volume of fluid or a solid, shows that a contact force per unit area on a body's surface must be expressible as a linear map of the surface normal vector at the location of contact. The mathematically, an infinitesimal force $\delta\bm{F}$ acting on an infinitesimal surface area $dA$ around a point $\bm{x}$ with an outward unit surface normal $\bm{\hat{n}}$
+A careful analysis of Newton's second law over a volume of matter shows that any force per unit area resulting from a point-wise contact on the surface of the volume with another volume of matter must be expressible as a linear map of the surface normal vector at the location of contact. While stated here as a fact, the claim is proven rigorously in {numref}`sec-stress-tensor`. Mathematically, an infinitesimal contact force $\delta\bm{F}_s$ acting on an infinitesimal surface area $dA$ at a point with an outward unit surface normal $\bm{\hat{n}}$ is then expressed as
 
-:::::{figure}
+:::{math}
+:label: eq-differential-surface-force
+\delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA.
+:::
+
+The force, the surface element, and the surface outward unit normal for such setting are illustrated in {numref}`fig-surface-force` with respect to a volume of matter.
+
+:::{figure} ./figs/fig-surface-force.svg
+:label: fig-surface-force
+:align: center
+:width: 50%
+
+A differential surface force $\delta \bm{F}_s$ acting on a differential area $dA$ oriented with respect to an outward unit normal vector $\bm{\hat{n}}$ on a surface of a solid of fluid body.
+:::
+
+Since $\delta\bm{F}_s$ on the left side of {numref}`eq-differential-surface-force` is to represent a vector valued quantity, and $\bm{\hat{n}}$ on the right side is also a vector, one may justifiably wonder what type of an object the symbol $\bm{\sigma}$ represents and how exactly does it act as a linear map through the dot product operator $(\cdot)$. 
+
+As an example, consider a block of elastic jello placed on a plate and loaded from the top with a heavy block of mass $m$ as in {numref}`fig-jello`.
+
+::::{figure}
 :label: fig-jello
 :align: center
-<!-- :class: my-subfigures grid grid-cols-5 items-end gap-2 --> 
+:width: 100%
 
 (fig-jello-horizontal)=
-![An elastic body under horizontal load](./figs/fig-jello-between-plates-horizontal.svg)
+:::{image} ./figs/fig-jello-between-plates-horizontal.svg
+:alt: An elastic body under horizontal loading
+:width: 60%
+:::
 
 (fig-jello-tilted)=
-![An elastic body under tilted loading](./figs/fig-jello-between-plates-tilted.svg)
+:::{image} ./figs/fig-jello-between-plates-tilted.svg
+:alt: An elastic body under tilted loading
+:width: 60%
+:::
 
-Average forces on a surface of an elastic body from a load at different positions.
-:::::
+Average forces on a surface of an elastic body from loading at different positions.
+::::
+
+The total surface force exerted by the block on the top surface of the jello is the integral of the infinitesimal contact force over the top surface area. Since the outward unit normal has the same direction everywhere, it can be pulled out from the integral, and one has
+:::{math}
+\bm{F}_s=\int_A\delta\bm{F}_s=\int_A\bm{\sigma}\cdot\bm{\hat{n}}dA=\int_A\bm{\sigma}dA \cdot\bm{\hat{n}}.
+:::
+If the plate is horizontal as in {numref}`fig-jello-horizontal`, the total surface force $\bm{F}_s=m\bm{g}$ is co-linear with the surface unit normal $\bm{\hat{n}}$. This observation would suggest that $\bm{\sigma}$ in general could be some scalar function and the action of it, represented by the dot-product operator $(\cdot)$, could be a simple multiplication with a scalar. However, when the plate is tilted as in {numref}`fig-jello-tilted`, the resulting total surface force no longer aligns with the surface unit normal $\bm{\hat{n}}$. Instead, it has both normal $\bm{F}_n$ and tangential components $\bm{F}_t$ with respect to the surface orientation that are balanced by the friction force $\bm{F}_\mu=-\bm{F}_t$ and the support force $\bm{T}=-\bm{F}_n$. If one is still to trust Newton's second law, the object $\bm{\sigma}$ cannot be simply a scalar valued function and the operator $(\cdot)$ act as scalar multiplication.
+
+Mathematically, $\bm{\sigma}$ is an example of a rank-2 tensor that maps vectors into new vectors with the tensor-vector dot product denoted with $(\cdot)$ representing the action of $\bm{\sigma}$ on $\bm{\hat{n}}$. A general rank-2 tensor $\bm{\sigma}$ in Cartesian coordinates with unit basis vectors $\{\bm{\hat{x}}_i\}_{i=1}^3\in\{\bm{\hat{x}},\bm{\hat{y}},\bm{\hat{z}}\}$ has a representation
+:::{math}
+\bm{\sigma}=\sum_{i,j=1}^{3}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j\sigma_{ij}
+:::
+with $\{\sigma_{ij}\}_{i,j=1}^3$ being a two-dimensional list of real numbers representing the coefficient values of the tensor in the specified coordinate system, in this case the Cartesian coordinates. The list of values can be accessed by dotting the tensor with the associated coordinate basis vector from left and right
+:::{math}
+\sigma_{ij}=\bm{\hat{x}}_i\cdot\bm{\sigma}\cdot\bm{\hat{x}}_j.
+:::
+While the two-dimensional list $\{\sigma_{ij}\}_{i,j=1}^3$ can be seen as a matrix, the tensor $\bm{\sigma}$ contains not only the coefficients but also the basis vectors and their tensor product. A tensor therefore should never be misunderstood as just a matrix. If some other coordinate basis is used instead of the Cartesian one, the coefficient values change accordingly, due to changes in the basis vectors. A rank-2 tensor of particular importance is the identity tensor
+:::{math}
+\bm{I}=\sum_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j\delta_{ij},
+:::
+where $\delta_{ij}$ is the Kronecker delta. Below, the most common rules involving dot product and tensor product are listed. Here $\bm{a}$, $\bm{b}$, and $\bm{c}$ are vectors while $\bm{\sigma}$ and $\bm{\pi}$ are rank-2 tensors, and $\bm{I}$ is the identity tensor.
+:::{math}
+(\bm{a} \otimes \bm{b}) \cdot \bm{c} &= \bm{a}(\bm{b} \cdot \bm{c}) && \text{Right dot product} \\
+\bm{c} \cdot (\bm{a} \otimes \bm{b}) &= (\bm{c} \cdot \bm{a})\bm{b} && \text{Left dot product} \\
+\bm{\sigma} : \bm{\pi} &= \sum_{i,j} \sigma_{ij} \pi_{ij} && \text{Double dot product} \\
+\bm{I} : \bm{\sigma}&= \sum_{i}\sigma_{ii} && \text{Trace operation} \\
+\bm{\sigma}\cdot\bm{a}&= \bm{a}\cdot\bm{\sigma}^T  && \text{Tensor transpose}
+:::
 
 
 ## <span class="elementary"></span> Interpretation of the Leibniz integral differentiation rule
@@ -248,8 +306,10 @@ Consider a volume
 ## <span class="elementary"></span> Conservation of momentum
 According to Newton's second law, the rate of change of linear momentum of a body equals the net forces acting on it. The forces acting on a volume of fluid include gravity that is distributed throughout the fluid volume, and mechanical contact force that is distributed on the surface of the body. Since the total force must be finite, yet distributed over the body volume and surface, both the body and surface force need to be treated differentially while the total force is an integral of the differential force. 
 
+(sec-stress-tensor)=
+## <span class="advanced"></span> Cauchy's theorem and emerge of the stress tensor
 
-## <span class="elementary"></span> Conservation of angular momentum
+## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
 For point masses, the definition 
 
 ## <span class="elementary"></span> Conservation of energy

@@ -117,19 +117,25 @@ Density, specific volume, and molar volume can be defined for a collection of pa
 ## <span class="elementary"></span> Pressure
 Consider then a cylinder filled with gas and closed with a stationary piston, as in {numref}`fig-pressure-piston-cylinder`. A gas particle of mass $m_i$ that interacts with the piston changes its velocity by $\Delta \bm{v}_i=\bm{v}_i(t+\Delta t)-\bm{v}_i(t)$ over a short time interval $\Delta t$ and, according to Newton’s laws, imparts a small impulse $\bm{I}_i=-m_i\Delta \bm{v}_i$ to the piston. On macroscopic times scales, such collisions of gas particles on the piston surface appear to occur extremely frequently, and the cumulative effect of many impulses produces a contact force on the piston that, on macroscopic time scales, appears continuous in time. To keep the piston from moving, an opposing contact force $\bm{F}_n$ must be applied normal to the piston surface.
 
-:::::{figure}
+::::{figure}
 :label: fig-pressure-piston-cylinder
 :align: center
-:class: my-subfigures grid grid-cols-2 items-end gap-2
+:width: 100%
 
 (pressure-piston)=
-![Impulse from a particle](./figs/fig-pressure-piston.svg)
+:::{image} ./figs/fig-pressure-piston.svg
+:alt: Impulse from a particle
+:width: 50%
+:::
 
 (pressure-cylinder)=
-![A normal force on a cylinder piston](./figs/fig-pressure-cylinder.svg)
+:::{image} ./figs/fig-pressure-cylinder.svg
+:alt: A normal force on a cylinder piston
+:width: 60%
+:::
 
 (a) A gas particle imparts impulse on a piston. (b) A force equivalent to the effect of the impulses is need to keep the piston in place.
-:::::
+::::
 
 The magnitude $|\bm{F}_n|$ of this normal force depends on both the state of the gas within the cylinder and the area $A$ of the piston surface over which the particles interact. This motivates defining pressure as a macroscopic property that characterizes the mechanical effect of a system on a surface. For a liquid or gas in equilibrium, pressure is defined point-wise on a surface through
 
@@ -180,12 +186,10 @@ The zeroth law of thermodynamics states that thermal equilibrium is transitive: 
 ## <span class="elementary"></span> A gas thermometer
 The zeroth law enables defining the concept of temperature but it does not directly provide a way to measure or calculate it. A detour is needed. To quantify the temperature $T$ of a system, one may place a gas-filled bulb in thermal contact with the system, connect the gas to a manometer, as illustrated in {numref}`fig-gas-thermometer`. According to the zeroth law, the gas in the bulb will reach thermal equilibrium with the system and thus have the same temperature $T$. 
 
-:::::{figure}
+:::::{figure} ./figs/fig-gas-thermometer.svg
 :label: fig-gas-thermometer
 :align: center
-
-![](./figs/fig-gas-thermometer.svg)
-
+:width: 45%
 A gas-filled bulb in thermal contact with a system and connected to a manometer. The manometer measures the gas pressure and volume.
 :::::
 
@@ -331,11 +335,9 @@ Further analysis of quasistatic processes reveals restrictions on the transforma
 
 Together, fluid mechanics and thermodynamics lead to continuum field equations that become a predictive framework for fluid motion and energy transfer. Thermodynamic property models supply the state relations needed to evaluate fluid properties from suitable combinations of temperature, pressure, and volume. Then application of the conservation laws lead to mass, momentum, energy, and entropy balances that enable description and analysis of engineering systems in terms of practical quantities such as mass-flow rates $\dot{m}$, heat rates $\dot{Q}$, and mechanical work rates $\dot{W}$. All combined, this process can be illustrated in {numref}`fig-roadmap` as a roadmap. 
 
-:::::{figure}
+:::{figure} ./figs/fig-roadmap.svg
 :label: fig-roadmap
 :align: center
-
-![](./figs/fig-roadmap.svg)
-
+:width: 100%
 A roadmap to the notes.
-:::::
+:::
