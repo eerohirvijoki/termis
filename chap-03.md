@@ -214,16 +214,17 @@ The process of converting conservation principle of mass, momentum, and energy i
 :::{math}
 \nabla\cdot(f\bm{a})&=\nabla f\cdot\bm{a}+f\nabla\cdot\bm{a},\\
 \nabla\cdot(\bm{a}\otimes\bm{b})&=(\nabla\cdot\bm{a})\bm{b}+\bm{a}\cdot\nabla\bm{b},\\
-\nabla\cdot(\bm{\sigma}\cdot\bm{a})&=(\nabla\cdot\bm{\sigma})\cdot\bm{a}+\bm{\sigma}^\mathsf{T}:\nabla\bm{a}.
+\nabla\cdot(\bm{\sigma}\cdot\bm{a})&=(\nabla\cdot\bm{\sigma})\cdot\bm{a}+\bm{\sigma}:\nabla\bm{a}.
 :::
-The rules become a powerful tool when combined with the divergence theorem
+The rules become a powerful tool when combined with the divergence theorems for scalar and tensor fields
 :::{math}
-\int_{\partial V}\bm{f}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{f}dV,
+\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{a}dV,\\
+\int_{\partial V}\bm{\sigma}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{\sigma}dV,\\
 :::
-that connectst a surface integral over the closing boundary $\partial V$ of a volume $V$ into a volume integral for a field $\bm{f}$ that can be either a vector field or a tensor field.
+that a connect surface integral of a field over the boundary $\partial V$ of a volume $V$ into a volume integral of the field divergence.
 
 ::::{proof:example}
-Produce here an example that applies the divergence theorem is applied.
+Produce here an example that applies the divergence theorem.
 ::::
 
 ## <span class="elementary"></span> Interpretation of the Leibniz integral differentiation rule
