@@ -18,7 +18,7 @@ The positioning of the chapter content with respect to the roadmap.
 
 The derivation of the evolution equations builds on the Leibniz rule for differentiating integrals over time-evolving volumes. Combined with the principles of mass, momentum, and energy conservation, the Leibniz rule enables conversion of fundamental physics principles to locally applicable partial differential equations for the fluid state fields. The discussion focuses on simple fluids often encountered in engineering applications, and the constitutive relations for stress and heat flux are motivated by experimental observations. As a concluding note, the set of partial differential equations obtained from the conservation principles is observed to contain more variables than there are equations for, necessitating a thermodynamic closure via state relations before practical energy engineering applications can be analyzed.
 
-The application of the Leibniz rule to conservation principles involves standard vector calculus tools, such as the divergence theorem, and constitutes core knowledge for engineers. When applying the rule to the principles of momentum and energy conservation, the contact forces that contribute to the time rate of change of momentum and rate of mechanical work on surfaces are expressed in terms of a stress tensor. As tensors are typically not covered during ordinary differential and integral calculus classes, the chapter begins with a brief introduction to them before presenting and interpreting the Leibniz rule.
+The application of the Leibniz rule to conservation principles involves standard vector calculus tools, such as the divergence theorem, and constitutes core knowledge for engineers. When applying the rule to the principles of momentum and energy conservation, the contact forces that contribute to the time rate of change of momentum and rate of mechanical work on surfaces are expressed in terms of a stress tensor. As tensors are typically not covered during ordinary differential and integral calculus classes, the chapter includes a brief introduction to them before presenting and interpreting the Leibniz rule.
 
 As supplements to the core knowledge, this chapter includes a full derivation of the Leibniz rule, establishes the stress tensor as a physical necessity dictated by Newton's second law to describe contact forces on surfaces, and justifies the symmetry of the stress tensor by conservation of angular momentum. These intermediate and advanced topics are designed for readers seeking deeper theoretical foundation and are not expected to be fully mastered on a first reading. Readers primarily interested in the core engineering path may skip the intermediate and advanced sections and focus on the derivation process of the evolution equations.
 
@@ -76,33 +76,27 @@ The total surface force exerted by the block on the top surface of the jello is 
 :::
 If the plate is horizontal as in {numref}`fig-jello-horizontal`, the total surface force exerted on the jello equals the weight of the block $\bm{F}_s=m\bm{g}$ and is co-linear with the surface unit normal $\bm{\hat{n}}$. Alone, this observation would suggest that $\bm{\sigma}$ in general could be some scalar function and the action of it, represented by the operator $(\cdot)$, could be a simple multiplication with a scalar. However, when the plate is tilted as in {numref}`fig-jello-tilted`, the resulting total surface force no longer aligns with the surface unit normal $\bm{\hat{n}}$. Instead, it has both normal $\bm{F}_n$ and tangential components $\bm{F}_t$ with respect to the surface orientation that are balanced by the friction force $\bm{F}_\mu=-\bm{F}_t$ that prevents the block from sliding, and the support force $\bm{T}=-\bm{F}_n$ that prevents the block from passing through the jello. If one is to still trust the stated mathematical implication of Newton's second law, the object $\bm{\sigma}$ in general cannot be simply a scalar valued function and the operator $(\cdot)$ act as scalar multiplication.
 
-Mathematically, $\bm{\sigma}$ is an example of a rank-2 tensor that maps vectors into new vectors, and the action of $\bm{\sigma}$ on $\bm{\hat{n}}$ denoted by the symbol $(\cdot)$ is the ordinary vector-vector dot product. From a linear algebra class, one may recall matrices to map vectors to other vectors but a rank-2 tensor $\bm{\sigma}$ is more than just a matrix. In a linear algebra class, a vector $\overline{a}$ represented a one-dimensional list of scalar numbers $\{a_i\}_{i=1}^N$ indexed as $(\overline{a})_i=a_i$, and a matrix $\overline{\overline{\sigma}}$ a two-dimensional list of scalar numbers $\{\sigma_{ij}\}_{i=1,j=1}^{N,M}$ indexed as $(\overline{\overline{\sigma}})_{ij}=\sigma_{ij}$, with $N$ and $M$ potentially different. In physics, a vector $\bm{a}$ is a list of scalar numbers $\{a_i\}_{i=1}^3$ with each number $a_i$ associated with a direction in space. In Cartesian coordinates, with a set of unit basis vectors $\{\bm{\hat{x}}_i\}_{i=1}^3=\{\bm{\hat{x}},\bm{\hat{y}},\bm{\hat{z}}\}$, such vector is written $\bm{a}=\sum_{i=1}^3a_i\bm{\hat{x}}_i$. For a rank-2 tensor $\bm{\sigma}$ to map a physics vector $\bm{a}$ into a new physics vector $\bm{b}=\sum_{i=1}^3b_i\bm{\hat{x}}_i$, it has to first remove the directions in $\bm{a}$, map the scalar numbers into new scalar numbers, and reattach directions into the new numbers. This is accomplished by assigning a rank-2 tensor $\bm{\sigma}$ the Cartesian coordinate representation
+Mathematically, $\bm{\sigma}$ is an example of a rank-2 tensor that maps vectors into new vectors, and the action of $\bm{\sigma}$ on $\bm{\hat{n}}$, denoted by the symbol $(\cdot)$, is the ordinary vector-vector dot product. From a linear algebra class, one may recall matrices to map vectors to other vectors via the matrix-vector product but a rank-2 tensor $\bm{\sigma}$ is more than just a matrix. In a linear algebra class, a vector $\overline{a}$ represented a one-dimensional list of scalar numbers $\{a_i\}_{i=1}^N$ indexed as $(\overline{a})_i=a_i$, and a matrix $\overline{\overline{\sigma}}$ a two-dimensional list of scalar numbers $\{\sigma_{ij}\}_{i=1,j=1}^{N,M}$ indexed as $(\overline{\overline{\sigma}})_{ij}=\sigma_{ij}$, with $N$ and $M$ potentially different. In physics, a vector $\bm{a}$ is constructed from a list of scalar numbers $\{a_i\}_{i=1}^3$ but with each number $a_i$ associated with a direction in space. Analogously, a rank-2 tensor $\bm{\sigma}$ is constructed from a two-dimensional list of numbers $\{\sigma_{ij}\}_{i,j=1}^3$ with each number $\sigma_{ij}$ associated with two spatial directions.
+
+In Cartesian coordinates, with a set of unit basis vectors $\{\bm{\hat{x}}_i\}_{i=1}^3=\{\bm{\hat{x}},\bm{\hat{y}},\bm{\hat{z}}\}$, a physics vector $\bm{a}$ is written 
+:::{math}
+\bm{a}=\sum_{i=1}^3a_i\bm{\hat{x}}_i=\sum_{i=1}^3(\overline{a})_i\bm{\hat{x}}_i.
+:::
+For a rank-2 tensor $\bm{\sigma}$ to map this $\bm{a}$ into a new physics vector $\bm{b}=\sum_{i=1}^3b_i\bm{\hat{x}}_i=\sum_{i=1}^3(\overline{b})_i\bm{\hat{x}}_i$, it has to first remove the directions $\{\bm{\hat{x}}_i\}_{i=1}^3$, map the scalar numbers $\{a_i\}_{i=1}^3$ into new scalar numbers $\{b_i\}_{i=1}^3$, and reattach the directions $\{\bm{\hat{x}}_i\}_{i=1}^3$ into the new numbers. This is accomplished by assigning a rank-2 tensor $\bm{\sigma}$ the Cartesian coordinate representation
 :::{math}
 \bm{\sigma}=\sum_{i,j=1}^{3}\sigma_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j=\sum_{i,j=1}^3(\overline{\overline{\sigma}})_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
 :::
-with $\{\sigma_{ij}\}_{i,j=1}^3$ a two-dimensional list of scalar numbers, that can be interpreted as a matrix $\overline{\overline{\sigma}}$, representing the coefficient values of the tensor, in this case in the chosen Cartesian coordinates. In general case, a tensor can be represented in any chosen set of coordinates, not only in Cartesian ones. Most importantly, the coefficients of a tensor do not remain invariant when coordinates are changed, although the tensor itself and its action on vectors remains so.
+with $\{\sigma_{ij}\}_{i,j=1}^3$ a two-dimensional list of scalar numbers, that can be interpreted as a matrix $\overline{\overline{\sigma}}$, representing the coefficient values of the tensor in the chosen Cartesian coordinates. In general case, a tensor can be represented in any chosen set of coordinates, not only in Cartesian ones. Most importantly, the coefficients of a tensor do not remain invariant when coordinates are changed, although the tensor itself and its action on vectors remains so.
 
 The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tensor product of two vectors. For any three vectors $\bm{a}$, $\bm{b}$, and $\bm{c}$, and two scalars $f$ and $g$, it satisfies
 :::{math}
-\bm{a}\otimes f &=f\bm{a} && \text{Right scalar multiplication}\\
-f\otimes \bm{a} &=f\bm{a} && \text{Left scalar multiplication}\\
+(f\bm{a})\otimes\bm{b}&=f(\bm{a}\otimes\bm{b})=\bm{a}\otimes(f\bm{b}) && \text{Scalar multiplication}\\
 (\bm{a} \otimes \bm{b}) \cdot \bm{c} &= \bm{a}(\bm{b} \cdot \bm{c}) && \text{Right dot product} \\
 \bm{c} \cdot (\bm{a} \otimes \bm{b}) &= (\bm{c} \cdot \bm{a})\bm{b} && \text{Left dot product} \\
 \bm{a} \otimes (f\bm{b}+g\bm{c}) &= f(\bm{a} \otimes \bm{b})+g(\bm{a}\otimes\bm{c}) && \text{Right linearity}\\
 (f\bm{b}+g\bm{c}) \otimes \bm{a} &= f(\bm{b} \otimes \bm{a})+g(\bm{c}\otimes\bm{a}) && \text{Left linearity}
 :::
-Notably, the product is not commutative, meaning $\bm{a}\otimes\bm{b}\neq \bm{b}\otimes\bm{a}$ in general. 
-
-::::{proof:example}
-If the vectors $\bm{a}$ and $\bm{b}$ are expressed in Cartesian coordinates, then the bilinearity of $\otimes$ (linearity from right and left) implies
-:::{math}
-:enumerated: false
-\bm{a}\otimes\bm{b}=\left(\sum_{i=1}^{3}a_i\bm{\hat{x}}_i\right)\otimes\left(\sum_{i=j}^{3}b_j\bm{\hat{x}}_j\right)=\sum_{i,j=1}^3a_ib_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
-:::
-A tensor product of the vectors $\bm{a}$ and $\bm{b}$ is therefore observed to be a rank-2 tensor with a coefficient matrix $\overline{\overline{ab}}$ with index coefficients $(\overline{\overline{ab}})_{ij}=a_ib_j$. Only if the matrix is symmetric, i.e., $\overline{\overline{ab}}^\mathsf{T}=\overline{\overline{ab}}$, meaning $(\overline{\overline{ab}})_{ij}=(\overline{\overline{ab}})_{ji}$, does the tensor product of $\bm{a}$ and $\bm{b}$ commute and $\bm{a}\otimes\bm{b}=\bm{b}\otimes\bm{a}$.
-::::
-
-The rules for the tensor product operator $\otimes$ imply that, in Cartesian coordinates, the right dot-product of a tensor $\bm{\sigma}$ with a vector $\bm{a}$ results in
+The tensor product of $\bm{a}$ and $\bm{b}$ is commutative if and only the vectors are parallel ($\bm{a}=f\bm{c}$ and $\bm{b}=g\bm{c}$). The rules for the tensor product $\otimes$ imply that, in Cartesian coordinates, the right dot-product of a tensor $\bm{\sigma}$ with a vector $\bm{a}$ results in
 :::{math}
 \bm{\sigma}\cdot\bm{a}=\sum_{i,j=1}^3\sigma_{ij}a_j\bm{\hat{x}}_i=\sum_{i=1}^3(\overline{\overline{\sigma}}\,\overline{a})_i\bm{\hat{x}}_i,
 :::
@@ -110,15 +104,15 @@ while the left dot-product of a tensor results in
 :::{math}
 \bm{a}\cdot\bm{\sigma}=\sum_{i,j=1}^3a_i\sigma_{ij}\bm{\hat{x}}_j=\sum_{i=1}^3(\overline{\overline{\sigma}}^\mathsf{T}\overline{a})_i\bm{\hat{x}}_i.
 :::
-In both cases, the tensor-vector dot-product results in a new vector but with different coefficient values. In the right dot-product, the scalar coefficient values of $\bm{b}=\bm{\sigma}\cdot\bm{a}$ are $\{b_i=(\overline{\overline{\sigma}}\,\overline{a})_i\}_{i=1}^3$ representing a matrix-vector product of the coefficients. In the left dot-product, the scalar coefficients values of $\bm{b}=\bm{a}\cdot\bm{\sigma}$ are instead $\{b_i=(\overline{\overline{\sigma}}^\mathsf{T}\overline{a})_i\}_{i=1}^3$ still representing a matrix-vector product but with respect to the transposed matrix $\overline{\overline{\sigma}}^\mathsf{T}$. This motivates defining the tensor transpose
+In both cases, the tensor-vector dot-product results in a new vector but with different coefficient values. In the right dot-product, the scalar coefficients of $\bm{b}=\bm{\sigma}\cdot\bm{a}$ are $\{b_i=(\overline{\overline{\sigma}}\,\overline{a})_i\}_{i=1}^3$ representing a matrix-vector product of the coefficients. In the left dot-product, the scalar coefficients of $\bm{b}=\bm{a}\cdot\bm{\sigma}$ are $\{b_i=(\overline{\overline{\sigma}}^\mathsf{T}\overline{a})_i\}_{i=1}^3$ instead, representing a matrix-vector product with respect to the transposed matrix $\overline{\overline{\sigma}}^\mathsf{T}$. This motivates defining the tensor transpose in Cartesian coordinates as
 :::{math}
 \bm{\sigma}^\mathsf{T}=\sum_{i,j=1}^3(\overline{\overline{\sigma}}^\mathsf{T})_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j=\sum_{i,j=1}^3\sigma_{ji}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
 :::
-that satisfies the identity
+which satisfies the identity
 :::{math}
 \bm{\sigma}\cdot\bm{a}&=\bm{a}\cdot\bm{\sigma}^\mathsf{T} && \text{Tensor transpose}.
 :::
-Consequently, the Cartesian coefficient values of a tensor $\bm{\sigma}$ can be accessed by dotting the tensor with the associated coordinate basis vector from left and right
+Consequently, the coefficients of a tensor $\bm{\sigma}$ in Cartesian coordinates can be accessed by dotting the tensor with the coordinate basis vector from left and right
 :::{math}
 \sigma_{ij}=\bm{\hat{x}}_i\cdot\bm{\sigma}\cdot\bm{\hat{x}}_j.
 :::
@@ -132,7 +126,6 @@ The right tensor-vector dot-product of $\bm{\sigma}$ with $\bm{a}$ in Cartesian 
 &=\sum_{i,j,k=1}^3\sigma_{ij}a_k\bm{\hat{x}}_i(\bm{\hat{x}}_j\cdot\bm{\hat{x}}_k)\\
 &=\sum_{i,j=1}^3\sigma_{ij}a_j\bm{\hat{x}}_i.
 :::
-In general curvilinear coordinates, the result would look different and involve also the metric coefficients of the coordinate system.
 ::::
 
 A rank-2 tensor of particular importance is the identity tensor that has the Cartesian coordinate representation 
@@ -141,14 +134,14 @@ A rank-2 tensor of particular importance is the identity tensor that has the Car
 :::
 where $\delta_{ij}$ is the Kronecker delta satisfying
 :::{math}
-\delta_{ij}=\left\{\begin{aligned}&1, &&\text{if}\quad i=j,\\&0, &&\text{if}\quad i\neq j.\end{aligned}\right.
+\delta_{ij}=\left\{\begin{aligned}&1, &&\text{if}\quad i=j,\\&0, &&\text{if}\quad i\neq j,\end{aligned}\right.
 :::
 and $\overline{\overline{I}}$ is the identity matrix with coefficients $(\overline{\overline{I}})_{ij}=\delta_{ij}$. With respect to any vector $\bm{a}$, the identity tensor unsurprisingly satisfies
 :::{math}
 \bm{I}\cdot\bm{a}&=\bm{a}\cdot\bm{I}=\bm{a}, && \text{Identity tensor}.
 :::
 
-In addition to the tensor-vector dot-product, also a double dot-product denoted by $(:)$ is possible between two tensors. Where a vector-vector dot-product results in a scalar, and a tensor-vector dot-product results in a vector, the tensor-tensor double dot-product between two rank-2 tensors $\bm{\sigma}$ and $\bm{\pi}$ results in a scalar and, in Cartesian coordinates, is defined
+In addition to the tensor-vector dot-product, also a double dot-product, denoted by $(:)$, is possible between two tensors. Where a vector-vector dot-product results in a scalar, and a tensor-vector dot-product results in a vector, the tensor-tensor double dot-product between two rank-2 tensors $\bm{\sigma}$ and $\bm{\pi}$ results in a scalar and, in Cartesian coordinates, is defined
 :::{math}
 \bm{\sigma}:\bm{\pi}=\sum_{i,j=1}^3\sigma_{ij}\pi_{ij}.
 :::
@@ -157,9 +150,81 @@ If one of the tensors is the identity tensor $\bm{I}$, the double dot-product re
 \text{tr}(\bm{\sigma})&=\bm{I}:\bm{\sigma}=\bm{\sigma}:\bm{I}=\sum_{i=1}^3\sigma_{ii}, && \text{Trace of a tensor}
 :::
 
-## <span class="elementary"></span> Calculus with rank-2 tensors
-Ordinary differential and integral calculus involves vectors that depend on location
+## <span class="elementary"></span> Calculus involving rank-2 tensors
+Laws of physics involve not only scalars and vectors but scalar-, vector-, and tensor-valued fields that vary spatially and temporally. The laws governing the evolution of fluids are no exception, and calculus rules involving the different fields are needed to derive and express such laws quantitatively.
 
+In Cartesian coordinates $\{x_i\}_{i=1}^3=\{x,y,z\}$, a position vector $\bm{x}$ is expressed as
+:::{math}
+\bm{x}=\sum_{i=1}^3x_i\bm{\hat{x}}_i.
+:::
+A scalar-valued field $f(\bm{x})$ is a multivariate function of the Cartesian coordinates in the sense of
+:::{math}
+f(\bm{x})=f(x,y,z).
+:::
+A vector-valued field $\bm{a}(\bm{x})$ has the Cartesian coordinate representation
+:::{math}
+\bm{a}(\bm{x})=\sum_{i=1}^3a_i(\bm{x})\bm{\hat{x}}_i,
+:::
+where the coefficients $\{a_i(\bm{x})\}_{i=1}^3$ are scalar-valued functions of the position $\bm{x}$. Similarly, a tensor-valued field $\bm{\sigma}(\bm{x})$ has the Cartesian coordinate representation
+:::{math}
+\bm{\sigma}(\bm{x})=\sum_{i,j=1}^3\sigma_{ij}(\bm{x})\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
+:::
+where the coefficients $\{\sigma_{ij}(\bm{x})\}_{i,j=1}^3$ are scalar-valued functions. If a coordinate system other than the Cartesian one were chosen, the scalar, vector, and tensor fields would remain invariant but the coefficient functions and the basis vectors would change. Notably, the vectors needed to represent the basis would be dependent of the position $\bm{x}$. In these notes, the calculus rules and definitions are presented in Cartesian coordinates and the arguments are omitted, unless stated otherwise. When expressed in vector and tensor notation without indices, the rules nevertheless apply in any chosen coordinate system. 
+
+::::{proof:example}
+Produce here an example illustrating how the components of a vector differ in Cartesian and cylindrical coordinates.
+::::
+
+From calculus classes, one recalls the vector-valued differential operator $\nabla$ with the representation
+:::{math}
+\nabla=\sum_{i=1}^3\bm{\hat{x}}_i\frac{\partial}{\partial x_i}=\sum_{i=1}^3\bm{\hat{x}}_i\partial_i.
+:::
+The action of $\nabla$ on a scalar field $f$ produces the gradient of the function $f$ which itself is a vector field
+:::{math}
+\nabla f=\sum_{i=1}^3\partial_if\,\bm{\hat{x}}_i,
+:::
+with respect to the coefficient functions $\{\partial_if\}_{i=1}^3$. Since $\nabla$ is a vector-valued operator, it can be paired with the common dot- and cross-products. A vector field $\bm{a}$ can be returned back to a scalar field by taking the divergence
+:::{math}
+\nabla\cdot\bm{a}=\sum_{i=1}^3\partial_ia_i,
+:::
+while the curl of a vector field results in an other vector field
+:::{math}
+\nabla\times\bm{a}=\sum_{i,j,k=1}^3\varepsilon_{ijk}\partial_ia_j\bm{\hat{x}}_k,
+:::
+where $\varepsilon_{ijk}$ is the alternating Levi-Civita symbol expressible as
+:::{math}
+\varepsilon_{ijk}=\text{det}\begin{pmatrix} \delta_{1,i} & \delta_{1,j} & \delta_{1,k} \\
+\delta_{2,i} & \delta_{2,j} & \delta_{2,k} \\
+\delta_{3,i} & \delta_{3,j} & \delta_{3,k}\end{pmatrix}.
+:::
+A step up from vectors happens if $\nabla$ acts on a vector field. The gradient of a vector field $\bm{a}$ is a tensor field
+:::{math}
+\nabla\bm{a}=\sum_{i,j=1}^3\partial_ia_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
+:::
+with respect to the coefficient functions $\{\partial_ia_j\}_{i,j=1}^{3}$. Where the divergence of a vector fields results in a scalar, the divergence of a tensor field $\bm{\sigma}$ results in a vector field and is defined
+:::{math}
+\nabla\cdot\bm{\sigma}=\sum_{i,j=1}^3\partial_i\sigma_{ij}\bm{\hat{x}}_j
+:::
+
+::::{proof:example}
+Produce here an example on how to calculate a gradient, divergence, and a curl.
+::::
+
+The process of converting conservation principle of mass, momentum, and energy into local partial differential equations involves transforming surface integrals to volume integrals. Carrying out such tasks involves the action of $\nabla$ on products containing scalar, vector, and tensor fields. The most important rules needed are
+:::{math}
+\nabla\cdot(f\bm{a})&=\nabla f\cdot\bm{a}+f\nabla\cdot\bm{a},\\
+\nabla\cdot(\bm{a}\otimes\bm{b})&=(\nabla\cdot\bm{a})\bm{b}+\bm{a}\cdot\nabla\bm{b},\\
+\nabla\cdot(\bm{\sigma}\cdot\bm{a})&=(\nabla\cdot\bm{\sigma})\cdot\bm{a}+\bm{\sigma}^\mathsf{T}:\nabla\bm{a}.
+:::
+The rules become a powerful tool when combined with the divergence theorem
+:::{math}
+\int_{\partial V}\bm{f}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{f}dV,
+:::
+that connectst a surface integral over the closing boundary $\partial V$ of a volume $V$ into a volume integral for a field $\bm{f}$ that can be either a vector field or a tensor field.
+
+::::{proof:example}
+Produce here an example that applies the divergence theorem is applied.
+::::
 
 ## <span class="elementary"></span> Interpretation of the Leibniz integral differentiation rule
 Assume the vector field 
