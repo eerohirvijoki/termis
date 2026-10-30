@@ -260,9 +260,9 @@ The time-independent vector field $\bm{v}(\bm{x})=\omega(y\bm{\hat{x}}-x\bm{\hat
 with the following component functions in the $x$-, $y$-, and $z$-directions
 :::{math}
 :enumerated: false
-\phi_t^x(\bm{x})&=[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]\bm{\hat{x}},\\
-\phi_t^y(\bm{x})&=[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]\bm{\hat{y}},\\
-\phi_t^z(\bm{x})&=(z+v_z(t-t_0))\bm{\hat{z}}.
+\phi_t^x(\bm{x})&=\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y,\\
+\phi_t^y(\bm{x})&=-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y,\\
+\phi_t^z(\bm{x})&=z+v_z(t-t_0).
 :::
 This can be verified by computing the time derivatives of the component functions
 :::{math}
@@ -296,7 +296,7 @@ Running the script results in the figure below, confirming the tracjetory to be 
 :::
 ::::
 
-Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and enclosed by a boundary $\partial V(t)$. Here the field $\bm{u}(\bm{x},t)$ does not necessarily need to be the velocity field of the fluid. Instead, it can be any smooth vector field. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
+Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
 :::{math}
 :label: eq:leibniz-rule-surface-form
 \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
@@ -304,7 +304,7 @@ Being now aware of the effects of vector fields on the movement of sets of point
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
 ::::{proof:example}
-The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
+The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u>0$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
 :::{math}
 :enumerated: false
 V(0)=\{(x,y,z)\in\mathbb{R}^3|0\leq x\leq L,(y,z)\in A\}.
@@ -330,7 +330,7 @@ Assuming $f(x)$ to have an integral function $F(x)$ such that $dF(x)/dx=f(x)$, a
 &=A\frac{d}{dt}(F(ut+L)-F(ut))\\
 &=Auf(ut+L)-Auf(ut)
 :::
-The first term on the right corresponds to the rate $Au>0$ at which the moving volume gains volume through the boundary at $x=ut+L$, multiplied by the value of the function $f(x)$ at that boundary. The second term describes the corresponding loss of volume at the rate $Au$ through the trailing boundary at $x=ut$, multiplied by the value of $f(x)$ there.
+The first term on the right corresponds to the rate $Au>0$ at which the moving volume gains volume through the boundary at $x=ut+L$, multiplied by the value of the function $f(x)$ at that boundary. The second term describes the corresponding loss of volume at the rate $-Au<0$ through the trailing boundary at $x=ut$, multiplied by the value of $f(x)$ there.
 
 On the right side of the Leibniz rule only the boundary term survives since $\partial_tf(\bm{x})=0$. Further, the lateral boundary does not contribute since the velocity field is parallel to it and therefore has no component in the direction of its outward normal. On the boundary $x=ut+L$, one has $\bm{\hat{n}}=\bm{\hat{x}}$. On the boundary $x=ut$, one has $\bm{\hat{n}}=-\bm{\hat{x}}$ instead. Therefore
 :::{math}
@@ -343,8 +343,8 @@ which exactly correspond to the left side of the Leibniz rule.
 With the help of the divergence theorem and vector calculus rules the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
 :::{math}
 :label: eq:leibniz-rule-volume-form
-\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{f}\otimes\bm{u})\right)dV\\
-&=\int_{V(t)}\left(\partial_t \bm{f}+(\bm{u}\cdot\nabla)\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV
+\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\\
+&=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV
 :::
 It is this last form of the Leibniz rule that enables one to convert the physics principles of mass, momentum, and energy conservation into local partial differential equations.
 
