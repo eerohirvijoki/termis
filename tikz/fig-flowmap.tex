@@ -23,7 +23,7 @@
     
     \draw[very thick] (Xzero) to[out=\angXzero,in=180+\angXone] (Xone);
 
-    \fill[blue!30,opacity=0.9] ($(Xone)+(95:\rone)$) to[bend left=10] ($(Xone)+(165:\rone)$) to[bend left=15] ($(Xone)+(95:-\rone)$) node[below,blue] {$\Omega(t)=\text{Im}_{\bm{\phi}_t}(\Omega(t_0))$} 
+    \fill[blue!30,opacity=0.9] ($(Xone)+(95:\rone)$) to[bend left=10] ($(Xone)+(165:\rone)$) to[bend left=15] ($(Xone)+(95:-\rone)$) node[below,blue] {$\Omega(t)$} 
     to[bend left=10] ($(Xone)+(165:-\rone)$) to[bend right=15] cycle;
 
     \draw[dashed] (Xone) to[out=\angXone,in=180] (B);
@@ -31,7 +31,7 @@
     \coordinate(X) at ($(Xzero)+(85:0.5*\rzero)$);
     \fill (X) circle (2pt) node[below right] {$\bm{x}$};
     \draw[-latex, red, thick] (X) -- ++(\angXzero:2.5) 
-        node[right, sloped, pos=1] {$\begin{aligned}&\tfrac{d}{dt}\big|_{t=t_0}\bm{\phi}_t(\bm{x})\\&=\bm{v}(\bm{x},t_0)\end{aligned}$};
+        node[right, sloped, pos=1] {$\begin{aligned}&\tfrac{d}{dt}\bm{\phi}_t(\bm{x})\big|_{t=t_0}\\&=\bm{v}(\bm{x},t_0)\end{aligned}$};
         
 
     \coordinate (Y) at ($(Xone)+(10:0.5*\rone)$);

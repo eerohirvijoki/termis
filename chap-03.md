@@ -35,7 +35,7 @@ In fluid and solid mechanics, forces on surfaces that result from contact of mat
 :label: eq-differential-surface-force
 \delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA.
 :::
-Here $\bm{\sigma}$ is a tensor field of rank-2 referred to as stress, $\bm{\hat{n}}$ is the outward unit normal vector from the body on which the infinitesimal force $\delta\bm{F}_s$ acts on over the infinitesimal surface area $dA$, as illustrated in {numref}`fig-surface-force`, and the dot $(\cdot)$ represents tensor-vector contraction. This requirement is a direct consequence of Newton's second law and is proved rigorously in {numref}`sec-stress-tensor`. 
+Here $\bm{\sigma}$ is a tensor field of rank-2 referred to as stress, $\bm{\hat{n}}$ is the outward unit normal vector from the body on which the infinitesimal contact force $\delta\bm{F}_s$ acts over the infinitesimal surface area $dA$ at a point $\bm{x}$, as illustrated in {numref}`fig-surface-force`, and the dot $(\cdot)$ represents tensor-vector contraction. The vector field $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$ is referred to as traction, represents force per unit area, and has units of $\text{Pa}$. This required representation for contact forces is a direct consequence of Newton's second law and proved rigorously in {numref}`sec-stress-tensor`. 
 
 :::{figure} ./figs/fig-surface-force.svg
 :label: fig-surface-force
@@ -45,7 +45,7 @@ Here $\bm{\sigma}$ is a tensor field of rank-2 referred to as stress, $\bm{\hat{
 A differential surface force $\delta \bm{F}_s$ acting on a differential area $dA$ oriented with respect to an outward unit normal vector $\bm{\hat{n}}$ on a surface of a solid or fluid body.
 :::
 
-To apply the infinitesimal contact force and to study the principles of conservation of momentum and energy, one must first understand what kind of a mathematical object a rank-2 tensor is and what calculation rules apply to it.
+To apply the infinitesimal contact force and to study the principles of conservation of momentum and energy, one must first understand what kind of a mathematical object a rank-2 tensor is, how it acts on vector fields through the contraction operator $(\cdot)$, and what calculus rules apply to it.
 
 In Cartesian coordinates $\{x_i\}_{i=1}^3=\{x,y,z\}$, the position vector $\bm{x}$ is defined
 :::{math}
@@ -59,9 +59,9 @@ where a coefficient $a_i(\bm{x},t)$ is a scalar function of the position $\bm{x}
 :::{math}
 \bm{\sigma}(\bm{x},t)=\sum_{i,j=1}^{3}\sigma_{ij}(\bm{x},t)\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
 :::
-where a coefficient $\sigma_{ij}(\bm{x},t)$ is again a scalar function but now associated with not one but two directions, namely $\bm{\hat{x}}_i$ and $\bm{\hat{x}}_j$. Similarly as the coefficient functions $a_i(\bm{x},t)$ of a vector field change upon changing of the coordinates, so do the coefficient functions $\sigma_{ij}(\bm{x},t)$ of a tensor field. The tensor field $\bm{\sigma}(\bm{x},t)$ nevertheless represents the same geometric object in every coordinate system, similarly as a vector field $\bm{a}(\bm{x},t)$ does. From here on, the explicit arguments for the fields will be dropped for compactness, unless otherwise specified.
+where a coefficient $\sigma_{ij}(\bm{x},t)$ is again a scalar function but now associated with not one but two directions, namely $\bm{\hat{x}}_i$ and $\bm{\hat{x}}_j$, connected via the operator $(\otimes)$. Similarly as the coefficient functions $a_i(\bm{x},t)$ of a vector field change upon changing of the coordinates, so do the coefficient functions $\sigma_{ij}(\bm{x},t)$ of a tensor field. The tensor field $\bm{\sigma}(\bm{x},t)$ nevertheless represents the same geometric object in every coordinate system, similarly as a vector field $\bm{a}(\bm{x},t)$ does. From here on, the explicit arguments for the fields will be dropped for compactness, unless otherwise specified.
 
-The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tensor product. The tensor product of two vectors $\bm{a}$ and $\bm{b}$ is a dyad $\bm{a}\otimes\bm{b}$. For any three vectors $\bm{a}$, $\bm{b}$, and $\bm{c}$, and a scalar $f$, the tensor product satisfies the identities
+The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tensor product. The tensor product of two vectors $\bm{a}$ and $\bm{b}$ is a dyad $\bm{a}\otimes\bm{b}$. For any three vectors $\bm{a}$, $\bm{b}$, and $\bm{c}$, and a scalar $f$, the tensor product satisfies the dyadic identities
 :::{math}
 (f\bm{a})\otimes\bm{b}&=f(\bm{a}\otimes\bm{b})=\bm{a}\otimes(f\bm{b}) && \text{Scalar multiplication}\\
 \bm{a} \otimes (\bm{b}+\bm{c}) &= \bm{a} \otimes \bm{b}+\bm{a}\otimes\bm{c} && \text{Right linearity}\\
@@ -69,7 +69,9 @@ The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tenso
 (\bm{a} \otimes \bm{b}) \cdot \bm{c} &= \bm{a}(\bm{b} \cdot \bm{c}) && \text{Right dyad-vector contraction} \\
 \bm{c} \cdot (\bm{a} \otimes \bm{b}) &= (\bm{c} \cdot \bm{a})\bm{b} && \text{Left vector-dyad contraction}
 :::
-The dyads $\bm{a}\otimes\bm{b}$ and $\bm{b}\otimes\bm{a}$ are equal if and only if $\bm{a}$ and $\bm{b}$ are linearly dependent. The rules for the tensor product $\otimes$ imply that, in Cartesian coordinates, the right contraction of a rank-2 tensor $\bm{\sigma}$ with a vector $\bm{a}$ results in a vector
+Furthere, the dyads $\bm{a}\otimes\bm{b}$ and $\bm{b}\otimes\bm{a}$ are equal if and only if $\bm{a}$ and $\bm{b}$ are linearly dependent. 
+
+The rules for the tensor product $\otimes$ imply that, in Cartesian coordinates, the right contraction of a rank-2 tensor $\bm{\sigma}$ with a vector $\bm{a}$ results in a vector
 :::{math}
 \bm{\sigma}\cdot\bm{a}=\sum_{i,j=1}^3\sigma_{ij}a_j\bm{\hat{x}}_i,
 :::
@@ -85,7 +87,7 @@ which satisfies the identity
 :::{math}
 \bm{\sigma}\cdot\bm{a}=\bm{a}\cdot\bm{\sigma}^\mathsf{T}.
 :::
-Consequently, the coefficients of a tensor $\bm{\sigma}$ in Cartesian coordinates can be accessed by dotting the tensor with the coordinate basis vectors from left and right
+Consequently, the coefficients of a tensor $\bm{\sigma}$ in Cartesian coordinates can be accessed by contracting the tensor with the coordinate basis vectors from left and right
 :::{math}
 \sigma_{ij}=\bm{\hat{x}}_i\cdot\bm{\sigma}\cdot\bm{\hat{x}}_j.
 :::
@@ -217,67 +219,62 @@ The Levi-Civita symbol $\varepsilon_{ijk}$ is antisymmetric with respect to chan
 
 
 
-## <span class="elementary"></span> Interpretation of the Leibniz integral differentiation rule
-Assume the vector field 
+## <span class="elementary"></span> Leibniz integral differentiation rule
+The tool to convert physics principles to local partial differential equations that describe the evolution of fluids is generally referred to as the Leibniz integral differentiation rule. It describes how integrals of scalar-, vector-, or tensor-valued fields vary in time when evaluated over temporally evolving curves, surfaces, or volumes. The particular use case of the rule to derive the fluid evolution equations involves only volumes, in which case the rule is often referred to as the Reynolds transport theorem. The other important use case for the rule is encountered when deriving the control-volume balance equations needed in engineering applications. In the first case, the evolution of the volume follows the fluid's velocity field. In the second case, the moving volume of fluid is typically enclosed by a mechanical device such as a turbine or a compressor, with the movement of the fluid volume originating from, e.g., rotating turbine or compressor blades.
 
-
-## <span class="intermediate"></span> The flow map of a vector field
-Assume the vector field $\bm{v}(\bm{x},t)$ to describe which direction fluid is moving at point $\bm{x}$ at time $t$, and at what speed. Drop a small grain of pollen into the fluid at $\bm{y}_0$ at time $t=t_0$. From that moment onwards, the position $\bm{y}(t)$ of the pollen grain will follow the fluid flow and obey the vector-valued ordinary differential equation subject to an initial condition
+As the first step, one has to understand how a moving volume is described and how vector fields relate to it. For this, assume the vector field $\bm{v}(\bm{x},t)$ to describe which direction fluid is moving at point $\bm{x}$ at time $t$, and at what speed, i.e., the velocity of the fluid. Then drop a small grain of pollen into the fluid at a specific location $\bm{y}_0$ at time $t=t_0$. From that moment onwards, the position $\bm{y}(t)$ of the pollen grain will follow the fluid flow and obey the vector-valued ordinary differential equation subject to an initial condition
 :::{math}
 :label: eq:point-ODE
 \frac{d\bm{y}(t)}{dt}=\bm{v}(\bm{y}(t),t), \qquad \bm{y}(t_0)=\bm{y}_0.
 :::
-Over time, the position $\bm{y}(t)$ draws a curve into space with the tangent vectors of the curve denoting the direction of the local and instantaneous velocity of the grain as in {numref}`fig-point-movement`.
+Over time, the position $\bm{y}(t)$ draws a curve in space with the tangent vectors of the curve denoting the local and instantaneous velocity of the grain as in {numref}`fig-point-movement`.
 
-:::::{figure}
+:::{figure} ./figs/fig-point-movement.svg
 :label: fig-point-movement
 :align: center
-
-![](./figs/fig-point-movement.svg)
-
-Movement of a point along a vector field.
-:::::
-
-Solution to the differential equation {numref}`eq:point-ODE` describing the motion of the pollen grain can be formally expressed with a time-dependent flow map $\bm{\phi}_t(\bm{x})$ associated with the velocity field $\bm{v}(\bm{x},t)$. Starting at time $t_0$, the map moves any point $\bm{x}$, including the $\bm{y}_0$ where the pollen grain was initially dropped, into a new point $\bm{\phi}_t(\bm{x})$ by integrating along the flow of the time-dependent velocity field $\bm{v}(\bm{x},t)$ until time $t$ is reached. The derivative of the flow map with respect to time $t$ therefore corresponds to the velocity field evaluated at the inspected point and time
-:::{math}
-\frac{d}{dt}\bm{\phi}_t(\bm{x})=\bm{v}(\bm{\phi}_t(\bm{x}),t),
+:width: 80%
+Movement of a point following a vector field.
 :::
-and, at time $t=t_0$, the map reduces to identity $\bm{\phi}_{t_0}(\bm{x})=\bm{x}$. Under the action of the flow map $\bm{\phi}_t$, any set of points $\{\bm{x}|\bm{x}\in\Omega(t_0)\}$ is mapped into an image set $\Omega(t)=\text{Im}_{\bm{\phi}_t}(\Omega(t_0))=\{\bm{\phi}_t(\bm{x})|\bm{x}\in\Omega(t_0)\}$ of the original one as illustrated in {numref}`fig-flowmap`. The map therefore moves not only points but also lines, surfaces, and volumes along the flow of the velocity field $\bm{v}(\bm{x},t)$. For some velocity fields, it is possible to find analytical expressions for the corresponding flow map, but typically the map has to be constructed numerically by integrating the ordinary differential equation {numref}`eq:point-ODE`.
 
-:::::{figure}
+Since $\bm{v}(\bm{x},t)$ is a vector field, it can move not only the specific point $\bm{y}_0$ where the pollen grain was dropped but any point $\bm{x}$. This is formalized by defining the so-called flow map $\bm{\phi}_t(\bm{x})$ and requiring it to describe the solution to the ordinary differential equation {numref}`eq:point-ODE` with respect to any initial point
+:::{math}
+\frac{d}{dt}\bm{\phi}_t(\bm{x})=\bm{v}(\bm{\phi}_t(\bm{x}),t), \qquad \bm{\phi}_{t_0}(\bm{x})=\bm{x}.
+:::
+The flow map $\bm{\phi}_t$ is a vector valued function that takes in a point $\bm{x}$ at time $t_0$ and outputs a new point $\bm{\phi}_t(\bm{x})$ that corresponds to the location of the potion at a later time $t$ if it were to follow the vector field $\bm{v}(\bm{x},t)$. Consequently, the flow map can be used to describe how an arbitrary set of points $\Omega(t_0)$ recorded at time $t_0$ would follow the vector field and evolve into a new set of points $\Omega(t)=\{\bm{\phi}_t(\bm{x})|\bm{x}\in\Omega(t_0)\}$ at time $t$. This evolution is illustrated in {numref}`fig-flowmap` for a surface. 
+
+:::{figure} ./figs/fig-flowmap.svg
 :label: fig-flowmap
 :align: center
+:width: 100%
+Movement of specific point $\bm{y}(t)$ and a set of points $\Omega(t)$ that form a surface according to the flow map $\bm{\phi}_t(\bm{x})$ of a vector field $\bm{v}(\bm{x},t)$. 
+:::
 
-![](./figs/fig-flowmap.svg)
-
-Movement of a general point $\bm{y}(t)$ and the image $\text{Im}_{\bm{\phi}_t}(\Omega(t_0))$ of a domain $\Omega(t_0)$ under the flow map $\bm{\phi}_t(\bm{x})$ of a vector field $\bm{v}(\bm{x},t)$. 
-:::::
-
+For some velocity fields, it is possible to find analytical expressions for the flow map, but typically the map has to be constructed numerically by integrating the ordinary differential equation {numref}`eq:point-ODE` with respect to all initial locations of interest.
 (example-flowmap-analytical)=
 ::::{proof:example}
 The time-independent vector field $\bm{v}(\bm{x})=\omega(y\bm{\hat{x}}-x\bm{\hat{y}})+v_z\bm{\hat{z}}$, with $\omega$ and $v_z$ constants, has a flow map
 :::{math}
 :enumerated: false
-\bm{\phi}_t(\bm{x})&=\phi_t^x(\bm{x})\bm{\hat{x}}+\phi_t^y(\bm{x})\bm{\hat{y}}+\phi_t^{z}(\bm{x})\bm{\hat{z}}
+\bm{\phi}_t(\bm{x})&=\phi_t^x(\bm{x})\bm{\hat{x}}+\phi_t^y(\bm{x})\bm{\hat{y}}+\phi_t^{z}(\bm{x})\bm{\hat{z}},
 :::
 with the following component functions in the $x$-, $y$-, and $z$-directions
 :::{math}
 :enumerated: false
-\phi_t^x(\bm{x})&=[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]\bm{\hat{x}}\\
-\phi_t^y(\bm{x})&=[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]\bm{\hat{y}}\\
-\phi_t^z(\bm{x})&=(z+v_z(t-t_0))\bm{\hat{z}}
+\phi_t^x(\bm{x})&=[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]\bm{\hat{x}},\\
+\phi_t^y(\bm{x})&=[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]\bm{\hat{y}},\\
+\phi_t^z(\bm{x})&=(z+v_z(t-t_0))\bm{\hat{z}}.
 :::
-This can be verified computing the time derivatives of the component functions
+This can be verified by computing the time derivatives of the component functions
 :::{math}
 :enumerated: false
-\frac{d}{dt}\phi_t^x(\bm{x})&=\omega[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]=\omega \phi_t^y(\bm{x})\\
-\frac{d}{dt}\phi_t^y(\bm{x})&=- \omega[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]=-\omega\phi_t^x(\bm{x})\\
-\frac{d}{dt}\phi_t^{z}(\bm{x})&=v_z
+\frac{d}{dt}\phi_t^x(\bm{x})&=\omega[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]=\omega \phi_t^y(\bm{x}),\\
+\frac{d}{dt}\phi_t^y(\bm{x})&=- \omega[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]=-\omega\phi_t^x(\bm{x}),\\
+\frac{d}{dt}\phi_t^{z}(\bm{x})&=v_z,
 :::
 so that the time derivative of the flow map can be identified as
 :::{math}
 :enumerated: false
-\frac{d}{dt}\bm{\phi}_t(\bm{x})=\omega(\phi_t^y(\bm{x})\bm{\hat{x}}-\phi_t^x(\bm{x})\bm{\hat{y}})+v_z\bm{\hat{z}}=\bm{v}(\bm{\phi}_t(\bm{x}))
+\frac{d}{dt}\bm{\phi}_t(\bm{x})=\omega(\phi_t^y(\bm{x})\bm{\hat{x}}-\phi_t^x(\bm{x})\bm{\hat{y}})+v_z\bm{\hat{z}}=\bm{v}(\bm{\phi}_t(\bm{x})).
 :::
 
 The map describes a helical trajectory with constant angular velocity $\omega$ and translative velocity $v_z$ in the $z$-direction.
@@ -292,19 +289,72 @@ The scipy-library offers the method odeint for numerical solution of ordinary di
 :end-line: 49
 :linenos:
 ```
-Running the script the figure below is produced, confirming the tracjetory to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity.
-:::{figure}
+Running the script results in the figure below, confirming the tracjetory to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity.
+:::{image} ./figs/example-fig-flowmap-with-odeint.svg
 :align: center
-
-![](./figs/example-fig-flowmap-with-odeint.svg)
-
+:width: 80%
 :::
-
 ::::
 
+Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and enclosed by a boundary $\partial V(t)$. Here the field $\bm{u}(\bm{x},t)$ does not necessarily need to be the velocity field of the fluid. Instead, it can be any smooth vector field. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
+:::{math}
+:label: eq:leibniz-rule-surface-form
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
+:::
+According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
+
+::::{proof:example}
+The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
+:::{math}
+:enumerated: false
+V(0)=\{(x,y,z)\in\mathbb{R}^3|0\leq x\leq L,(y,z)\in A\}.
+:::
+For later times $t$, the vector field $\bm{u}(\bm{x},t)$ moves the volume into a new set of points
+:::{math}
+V(t)=\{(x,y,z)\in\mathbb{R}^3|ut\leq x\leq ut+L,(y,z)\in A\}
+:::
+It is then a matter of investigating how the integral
+:::{math}
+:enumerated: false
+\int_{V(t)}fdV=A\int_{ut}^{ut+L}f(x)dx
+:::
+evolves in time when the volume changes. Graphically, the setting is illustrated below
+:::{image} ./figs/example-fig-moving-rectangle.svg
+align: center
+:width:100%
+:::
+Assuming $f(x)$ to have an integral function $F(x)$ such that $dF(x)/dx=f(x)$, a direct computation of the left side of the Leibniz rule then provides
+:::{math}
+:enumerated: false
+\frac{d}{dt}\int_{V(t)}fdV&=A\frac{d}{dt}\int_{ut}^{ut+L}f(x)dx\\
+&=A\frac{d}{dt}(F(ut+L)-F(ut))\\
+&=Auf(ut+L)-Auf(ut)
+:::
+The first term on the right corresponds to the rate $Au>0$ at which the moving volume gains volume through the boundary at $x=ut+L$, multiplied by the value of the function $f(x)$ at that boundary. The second term describes the corresponding loss of volume at the rate $Au$ through the trailing boundary at $x=ut$, multiplied by the value of $f(x)$ there.
+
+On the right side of the Leibniz rule only the boundary term survives since $\partial_tf(\bm{x})=0$. Further, the lateral boundary does not contribute since the velocity field is parallel to it and therefore has no component in the direction of its outward normal. On the boundary $x=ut+L$, one has $\bm{\hat{n}}=\bm{\hat{x}}$. On the boundary $x=ut$, one has $\bm{\hat{n}}=-\bm{\hat{x}}$ instead. Therefore
+:::{math}
+:enumerated: false
+\int_{\partial V(t)}f\bm{u}\cdot\bm{\hat{n}}dA=Auf(ut+L)-Auf(ut),
+:::
+which exactly correspond to the left side of the Leibniz rule.
+::::
+
+With the help of the divergence theorem and vector calculus rules the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
+:::{math}
+:label: eq:leibniz-rule-volume-form
+\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{f}\otimes\bm{u})\right)dV\\
+&=\int_{V(t)}\left(\partial_t \bm{f}+(\bm{u}\cdot\nabla)\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV
+:::
+It is this last form of the Leibniz rule that enables one to convert the physics principles of mass, momentum, and energy conservation into local partial differential equations.
+
+For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
+
+(sec-differential-elements)=
+## <span class="intermediate"></span> Differential line-, surface, and volume elements
 If an infinitesimally short line, small patch, or volume of pollen is dropped into the flow instead of a single point-like grain, how exactly will they develop over time? Points are known to move according to the differential equation {numref}`eq:point-ODE` but infinitesimally small lines, surface patches, and volumes differ from points as mathematical objects. What equations will their evolution follow and what are the rates at which these objects change in time? Answering these questions enables one to derive the Leibniz integral differentiation rule. Before setting such infinitesimal objects into motion, one has to understand how the objects constructed in the first place.
 
-## <span class="intermediate"></span> Differential line-, surface, and volume elements
+
 Consider a coordinate triplet $(u_1,u_2,u_3)$ that defines a point $\bm{x}$ in space. In other words, a location in space is a vector-valued function $\bm{x}(u_1,u_2,u_3)$ of the coordinates. A differential, vector-valued line element $d\bm{\ell}_{\bm{x},\alpha}$, into the direction of the coordinate $u_\alpha$ and rooted at $\bm{x}$, is generated by the change in the position $\bm{x}$ with respect to a differential change $du_\alpha$ in the coordinate $u_\alpha$ via the definition
 :::{math}
 d\bm{\ell}_{\bm{x},\alpha}=\lim_{\epsilon\to0}\frac{\bm{x}(u_\alpha+\epsilon du_\alpha,u_\beta,u_\gamma)-\bm{x}(u_\alpha,u_\beta,u_\gamma)}{\epsilon}=\frac{\partial\bm{x}}{\partial u_\alpha}du_\alpha.
@@ -351,12 +401,10 @@ The absolute value of the scalar triple product of the three directional vectors
 :::
 that on mathematics courses is often introduced as the determinant of the matrix containing the partial derivatives of the coordinates, instead of the geometric view presented here. Both definitions give the same result.
 Example coordinate-triplet isolines trough a point $\bm{x}$ and the possible vectors $\partial\bm{x}/\partial u_\alpha$ they generate at the point $\bm{x}$ are illustrated in {numref}`fig-coordinate-vectors`. From the figure, one may observe the vectors to span finite areas and a finite volume. The areas and the volume become differential once the lenght along the vectors are scaled with the associated differentials $du_\alpha$.
-:::{figure}
+:::{figure} ./figs/fig-coordinate-vectors.svg
 :label: fig-coordinate-vectors
 :align: center
-
-![](./figs/fig-coordinate-vectors.svg)
-
+:width: 100%
 Coordinate lines and vectors that define differential line, surface, and volume elements.
 :::
 
@@ -410,15 +458,15 @@ dV_{\bm{x}}=|d\bm{A}_{\bm{x},z}\cdot d\bm{\ell}_{\bm{x},z}|=rdrd\vartheta dz.
 :::
 ::::
 
-## <span class="advanced"></span> Rank-2 tensors
-Similarly as the initial position of a pollen grain dropped into a flowing fluid is mapped into a new position over time, also the vectors 
-
+(sec-differential-elements-evolution)=
 ## <span class="advanced"></span> Evolution of differential elements
 Now return to the expression 
 
-## <span class="advanced"></span> Leibniz rule for differentiating integrals
+(sec-leibniz-rule-derivation)=
+## <span class="advanced"></span> Derivation of the Leibniz rule
 Deriving equations for the evolution of fluid quantities requires differentiating volume integrals over domains that flow with the fluid velocity 
 
+(sec-conservation-of-mass)=
 ## <span class="elementary"></span> Conservation of mass
 Consider a volume 
 
@@ -437,5 +485,5 @@ A differential volume
 ## <span class="elementary"></span> Constitutive relations for stress and heat flux
 The conservation principles of mass, momentum, and energy discussed above lead to local differential equations from which the local time rate of change of fluid's density, velocity, and internal energy ought to be computed. 
 
-## <span class="elementary"></span> Summary
+## Summary
 The motion of a fluid can be described by following individual points along the flow and studying how differential line, surface, and volume elements evolve. 

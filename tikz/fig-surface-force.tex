@@ -3,88 +3,21 @@
 \usetikzlibrary{arrows.meta, positioning, calc}
 
 \begin{document}
-
 \begin{tikzpicture}
 \usetikzlibrary{calc}
 \shadedraw[ball color=gray!40,opacity=0.5] plot[smooth cycle] coordinates {(-2,1) (-0.8,1.5) (0.5,1.3) (1,0.8) (1.8,0) (2,-1) (1.4,-2) (0,-2.1) (-1,-1.7) (-1.8,-1)};
 \draw[dashed] (-1.8,-1) to[bend left=30] (-1.7,-0.7) .. controls (-1,0.2) and (0,0) .. (1.4,-0.5) to [bend left=30] (2,-1);
-
-%% %%% BODY FORCE
-%% \coordinate (C1) at (-0.2,-1.5);
-%% \coordinate (C2) at ($(C1)+(0.6,0)$);
-%% \coordinate (C3) at ($(C2)+(0.1,0.6)$);
-%% \coordinate (C4) at ($(C1)+(-0.1,0.6)$);
-%% \coordinate (C5) at ($(C1)+(-0.2,0.2)$);
-%% \coordinate (C6) at ($(C5)+(-0.1,0.6)$);
-%% \coordinate (C7) at ($(C3)+(-0.2,0.2)$);
-%% \coordinate (G) at ($(C1)!0.4!(C2)$);
-
-%% \draw[very thick,dashed,green!40!black] (G)--++(0,-0.6);
-%% \draw[very thick,-latex,green!40!black] ($(G)+(0,-0.6)$)--++(0,-0.7) node[pos=1, below] {$\delta\bm{F}_b=\rho\bm{g}dV$};
-
-%% \draw[fill=gray!40,dashed] (C1) to[bend right=10] (C2) to[bend right=10] (C3)
-%%  to[bend left=10] (C4) to[bend right=10] cycle;
-
-%% \draw[fill=gray!40,dashed] (C1) to[bend left=10] (C5) to[bend left=10] (C6)
-%%  to[bend right=10] (C4) to[bend right=10] cycle;
-
-%% \draw[fill=gray!40,dashed] (C6) to[bend right=10] (C7) to[bend right=10] (C3) to[bend left=10] (C4) to[bend left=10] cycle;
-
-%% \node[anchor=south,yshift=-0.07cm,xshift=0.05cm] at (G) {$dV$};
- 
-%%%% SURFACE FORCE
-\draw[fill=gray!40] (0.7,0) to[bend right=10] (1.4,0.3) to[bend left=15] (1.7,-0.3)
-to[bend left=10] (1.1,-0.6) to[bend right=10] cycle;
-\def\angP{38};
-\def\angPP{128};
-\coordinate (P1) at (1.3,-0.1);
-\coordinate (P2) at ($(P1)+(\angP:1.6)$);
-\coordinate (P3) at ($(P2)+(\angPP:1.6)$);
-\draw[blue,very thick,-latex] (P1)--++(\angP:1) node[below] {$\bm{\hat{n}}$};
-\draw[green!40!black,very thick,latex-] (P1)--(P3) node[pos=1,above] {$\delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA$};
-\draw[green!40!black,thick,dashed] (P3)-- (P2)-- (P1) ;
-\draw[green!40!black] ($(P2)+(\angP:-0.15)$)--++(\angPP:0.15)--++(\angP:0.15);
-\node[anchor=north,rotate=30] at (1.2,-0.1) {$dA$}; 
-% %%%%% HEAT FLUX 
-% \draw[fill=gray!40] (-1.8,-0.4) to[bend right=10] (-1.7,-1.0) to[bend right=20] (-1.1,-1.4)
-% to[bend left=10] (-1.0,-0.7) to[bend left=10] cycle;
-
-% \def\angQ{230};
-% \def\angQQ{260};
-% \coordinate (Q1) at (-1.4,-1.0);
-
-% \draw[blue,very thick,-latex] (Q1) -- ++(\angQ:1) node[above left] {$\bm{\hat{n}}$};
-% \draw[red,very thick,latex-] (Q1) -- ++(\angQQ:1.3) node[pos=0.8,right] {$\bm{q}$};
-% \node[anchor=north,rotate=-20] at (-1.3,-0.55) {$dA$}; 
-
-% \node[anchor=north] at (-1,0.5) {$V$}; 
-% \node[anchor=north] at (1,-2) {$\partial V$}; 
-
-%% %%%%% VELOCITY
-%% \def\angV{110};
-%% \def\dv{1};
-%% \coordinate (V1) at (-0.8,0.9);
-%% \coordinate (V2) at (-0.1,0.95);
-%% \coordinate (V3) at (-0.4,1.35);
-%% \coordinate (V4) at (-1.1,1.3);
-%% \coordinate (V) at (-0.55,1.15);
-%% \coordinate (VV) at ($(V)+(\angV:\dv)$);
-%% \draw[fill=gray!30] (V1) to[bend left=10] (V2) to[bend right=15] (V3) to[bend right=10] (V4) to[bend left=15] cycle;
-%% \draw[dashed] (V1)--++(\angV:\dv);
-%% \draw[dashed] (V2)--++(\angV:\dv);
-%% \draw[dashed] (V3)--++(\angV:\dv);
-%% \draw[dashed] (V4)--++(\angV:\dv);
-%% \draw[-,very thick] (V)--++(\angV:\dv);
-%% \draw[fill=gray!30] ($(V1)+(\angV:\dv)$) to[bend left=10] ($(V2)+(\angV:\dv)$) to[bend right=15] ($(V3)+(\angV:\dv)$) to[bend right=10] ($(V4)+(\angV:\dv)$) to[bend left=10] cycle;
-%% \node[anchor=center,rotate=5] at (VV) {$dA$};
-%% \draw[-latex,very thick] (VV)--++(\angV:1.2) node[above] {$\bm{v}$};
-%% \draw[-latex,very thick,blue] (VV)--++(90:\dv) node[right] {$\bm{\hat{n}}$};
-
-
-%\draw[fill=gray!40] (-0.8,-0.8) rectangle (-0.3,-1.3) node[below right=0pt, inner sep=0pt]{d$V$};
-%\draw[fill=gray!50] (-0.8,-0.8) -- ++ (0.2,0.2) -- ++ (0.5,0) -- (-0.3,-0.8);
-%\draw (-0.3,-1.3) -- ++ (0.2,0.2) -- ++ (0,0.5);
-
+\def\ang_n{38};
+\coordinate (Px) at (1.3,-0.1);
+\coordinate (Pn) at ($(Px)+(\ang_n:1)$);
+\coordinate (Pf_n) at ($(Px)+(\ang_n:-1.1)$);
+\coordinate (Pf) at ($(Pf_n)+(\ang_n-90:1.4)$);
+\draw[green!40!black,dashed] (Pn)-- (Pf_n)--(Pf) ;
+\draw[green!40!black] ($(Pf_n)+(\ang_n:0.15)$)--++(\ang_n-90:0.15)--++(\ang_n:-0.15);
+\draw[-latex,green!40!black,thick] (Px)--(Pf) node[pos=1,below right] {$\delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA$};;
+\draw[fill=gray!40,opacity=0.7] (0.7,0) to[bend right=10] (1.4,0.3) to[bend left=15] (1.7,-0.3) to[bend left=10] (1.1,-0.6) to[bend right=10] cycle;
+\draw[blue,very thick,-latex] (Px)--(Pn) node[below right] {$\bm{\hat{n}}$};
+\node[anchor=center,rotate=30] at ($(Px)+(0.06,-0.18)$) {$dA$};
+\fill[red!90!black] (Px) circle (1.5pt) node[above left=-0.1cm and -0.05cm,rotate=20] {$\bm{x}$};
 \end{tikzpicture}
-
 \end{document}
