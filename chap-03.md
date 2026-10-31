@@ -45,7 +45,7 @@ Here $\bm{\sigma}$ is a tensor field of rank-2 referred to as stress, $\bm{\hat{
 A differential surface force $\delta \bm{F}_s$ acting on a differential area $dA$ oriented with respect to an outward unit normal vector $\bm{\hat{n}}$ on a surface of a solid or fluid body.
 :::
 
-To apply the infinitesimal contact force and to study the principles of conservation of momentum and energy, one must first understand what kind of a mathematical object a rank-2 tensor is, how it acts on vector fields through the contraction operator $(\cdot)$, and what calculus rules apply to it.
+To apply the infinitesimal contact force and to study the principles of conservation of momentum and energy, one must first understand what kind of a mathematical object a rank-2 tensor field is, how it acts on vector fields through the contraction operator $(\cdot)$, and what calculus rules apply to it.
 
 In Cartesian coordinates $\{x_i\}_{i=1}^3=\{x,y,z\}$, the position vector $\bm{x}$ is defined
 :::{math}
@@ -69,7 +69,41 @@ The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tenso
 (\bm{a} \otimes \bm{b}) \cdot \bm{c} &= \bm{a}(\bm{b} \cdot \bm{c}) && \text{Right dyad-vector contraction} \\
 \bm{c} \cdot (\bm{a} \otimes \bm{b}) &= (\bm{c} \cdot \bm{a})\bm{b} && \text{Left vector-dyad contraction}
 :::
-Furthere, the dyads $\bm{a}\otimes\bm{b}$ and $\bm{b}\otimes\bm{a}$ are equal if and only if $\bm{a}$ and $\bm{b}$ are linearly dependent. 
+Further, the dyads $\bm{a}\otimes\bm{b}$ and $\bm{b}\otimes\bm{a}$ are equal if and only if $\bm{a}$ and $\bm{b}$ are linearly dependent.
+::::{proof:example}
+Consider the vectors
+:::{math}
+:enumerated: false
+\bm{a}&=2\bm{\hat{x}}-\bm{\hat{y}},\\
+\bm{b}&=-\bm{\hat{x}}+\bm{\hat{y}},\\
+\bm{c}&=3\bm{\hat{y}}+\bm{\hat{z}}.
+:::
+The left and right linearity together with the scalar multiplication rule provide
+:::{math}
+:enumerated:false
+\bm{a}\otimes\bm{b}&=(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})\\
+&=(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}})+(2\bm{\hat{x}}-\bm{\hat{y}})\otimes\bm{\hat{y}}\\
+&=(2\bm{\hat{x}})\otimes(-\bm{\hat{x}})+(-\bm{\hat{y}})\otimes(-\bm{\hat{x}})+(2\bm{\hat{x}})\otimes\bm{\hat{y}}+(-\bm{\hat{y}})\otimes\bm{\hat{y}}\\
+&=-2\bm{\hat{x}}\otimes\bm{\hat{x}}+\bm{\hat{y}}\otimes\bm{\hat{x}}+2\bm{\hat{x}}\otimes\bm{\hat{y}}-\bm{\hat{y}}\otimes\bm{\hat{y}}.
+:::
+The right dyad-vector contraction rule gives
+:::{math}
+:enumerated: false
+(\bm{a}\otimes\bm{b})\cdot\bm{c}&=[(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})]\cdot(3\bm{\hat{y}}+\bm{\hat{z}})\\
+&=(2\bm{\hat{x}}-\bm{\hat{y}})[(-\bm{\hat{x}}+\bm{\hat{y}})\cdot(3\bm{\hat{y}}+\bm{\hat{z}})]\\
+&=(2\bm{\hat{x}}-\bm{\hat{y}})(3)\\
+&=6\bm{\hat{x}}-3\bm{\hat{y}},
+:::
+while the left vector-dyad contraction rule gives
+:::{math}
+:enumerated: false
+\bm{c}\cdot(\bm{a}\otimes\bm{b})&=(3\bm{\hat{y}}+\bm{\hat{z}})\cdot[(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})]\\
+&=[(3\bm{\hat{y}}+\bm{\hat{z}})\cdot(2\bm{\hat{x}}-\bm{\hat{y}})] (-\bm{\hat{x}}+\bm{\hat{y}})\\
+&=(-\bm{\hat{x}}+\bm{\hat{y}})(-3)\\
+&=3\bm{\hat{x}}-3\bm{\hat{y}},
+:::
+which clearly are two different vectors.
+::::
 
 The rules for the tensor product $\otimes$ imply that, in Cartesian coordinates, the right contraction of a rank-2 tensor $\bm{\sigma}$ with a vector $\bm{a}$ results in a vector
 :::{math}
@@ -92,24 +126,13 @@ Consequently, the coefficients of a tensor $\bm{\sigma}$ in Cartesian coordinate
 \sigma_{ij}=\bm{\hat{x}}_i\cdot\bm{\sigma}\cdot\bm{\hat{x}}_j.
 :::
 
-::::{proof:example}
-The right tensor-vector contraction of $\bm{\sigma}$ with $\bm{a}$ in Cartesian coordinates is given by
-:::{math}
-:enumerated: false
-\bm{\sigma}\cdot\bm{a}&=\left(\sum_{i,j=1}^3\sigma_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j\right) \cdot\left(\sum_{k=1}^{3}a_k\bm{\hat{x}}_k\right)\\
-&=\sum_{i,j,k=1}^3\sigma_{ij}a_k(\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j)\cdot\bm{\hat{x}}_k\\
-&=\sum_{i,j,k=1}^3\sigma_{ij}a_k\bm{\hat{x}}_i(\bm{\hat{x}}_j\cdot\bm{\hat{x}}_k)\\
-&=\sum_{i,j=1}^3\sigma_{ij}a_j\bm{\hat{x}}_i.
-:::
-::::
-
 A rank-2 tensor of particular importance is the identity tensor that has the Cartesian coordinate representation 
 :::{math}
-\bm{I}=\sum_{i,j=1}^3\delta_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
+\bm{I}=\sum_{i,j=1}^3\delta_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
 :::
 where $\delta_{ij}$ is the Kronecker delta satisfying
 :::{math}
-\delta_{ij}=\left\{\begin{aligned}&1, &&\text{if}\quad i=j,\\&0, &&\text{if}\quad i\neq j,\end{aligned}\right.
+\delta_{ij}=\left\{\begin{aligned}&1, &&\text{if}\quad i=j,\\&0, &&\text{if}\quad i\neq j.\end{aligned}\right.
 :::
 With respect to any vector $\bm{a}$, the identity tensor satisfies
 :::{math}
@@ -128,17 +151,17 @@ If one of the tensors is the identity tensor $\bm{I}$, the double contraction re
 
 ## <span class="elementary"></span> Calculus involving rank-2 tensors
 
-In these notes, the calculus identities are expressed in Cartesian coordinates, unless stated otherwise. When written purely in vector notation without indices, the identities nevertheless apply in any chosen coordinate system. 
+In these notes, the calculus identities are expressed in Cartesian coordinates, unless stated otherwise. The identities written in vector and tensor notation without indices are nevertheless coordinate-independent, provided the differential operators are interpreted consistently.
 
 From calculus classes, one recalls the vector-valued differential operator $\nabla$ with the Cartesian coordinate representation
 :::{math}
 \nabla=\sum_{i=1}^3\bm{\hat{x}}_i\frac{\partial}{\partial x_i}=\sum_{i=1}^3\bm{\hat{x}}_i\partial_i.
 :::
-The action of $\nabla$ on a scalar field $f$ produces the gradient of the function $f$ which itself is a vector field
+The action of $\nabla$ on a scalar field $f$ produces its gradient, which is a vector field
 :::{math}
 \nabla f=\sum_{i=1}^3\partial_if\,\bm{\hat{x}}_i,
 :::
-with respect to the coefficient functions $\partial_if$. Since $\nabla$ is a vector-valued operator, it can be paired with a vector field by the common vector dot-product $(\cdot)$ or the vector cross-product $(\times)$. A vector field $\bm{a}$ can be returned back to a scalar field by taking the divergence
+represented by the coefficient functions $\partial_if$. Since $\nabla$ is a vector-valued operator, it can be paired with a vector field by the common vector dot-product $(\cdot)$ or the vector cross-product $(\times)$. A vector field $\bm{a}$ can be returned back to a scalar field by taking the divergence
 :::{math}
 \nabla\cdot\bm{a}=\sum_{i=1}^3\partial_ia_i,
 :::
@@ -146,18 +169,61 @@ while the curl of a vector field results in another vector field
 :::{math}
 \nabla\times\bm{a}=\sum_{i,j,k=1}^3\varepsilon_{ijk}\partial_ia_j\bm{\hat{x}}_k.
 :::
-The step up from vectors to tensors happens if $\nabla$ acts on a vector field without the $(\cdot)$ or $(\times)$ between. The gradient of a vector field $\bm{a}$ is a tensor field
+The step up from vectors to tensors happens if $\nabla$ acts on a vector field without the $(\cdot)$ or $(\times)$ between. The gradient of a vector field $\bm{a}$ is formally expressed using the tensor product. In Cartesian coordinates, it results in
 :::{math}
-\nabla\bm{a}=\sum_{i,j=1}^3\partial_ia_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
+\nabla\bm{a}=\nabla\otimes\bm{a}=\sum_{i,j=1}^3\partial_i a_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
 :::
-with respect to the coefficient functions $\partial_ia_j$. Where the divergence of a vector field results in a scalar, the divergence of a tensor field $\bm{\sigma}$ results in a vector field and is defined
+which is a rank-2 tensor field represented by the coefficient functions $\partial_i a_j$. Where the divergence of a vector field results in a scalar, the divergence of a tensor field $\bm{\sigma}$ results in a vector field and is defined
 :::{math}
 \nabla\cdot\bm{\sigma}=\sum_{i,j=1}^3\partial_i\sigma_{ij}\bm{\hat{x}}_j.
 :::
 
 ::::{proof:example}
-Produce here an example on how to calculate a gradient, divergence, and a curl.
+Consider a scalar field $f$ and a vector field $\bm{a}$ defined in Cartesian coordinates as
+:::{math}
+:enumerated: false
+f(\bm{x})&=x^2y+yz,\\
+\bm{a}(\bm{x})&=xy\bm{\hat{x}}+yz\bm{\hat{y}}+zx\bm{\hat{z}}.
+:::
+The gradient of the scalar field is a vector field given by
+:::{math}
+:enumerated: false
+\nabla f
+&=\frac{\partial f}{\partial x}\bm{\hat{x}}+\frac{\partial f}{\partial y}\bm{\hat{y}}+\frac{\partial f}{\partial z}\bm{\hat{z}}\\
+&=2xy\bm{\hat{x}}+(x^2+z)\bm{\hat{y}}+y\bm{\hat{z}}.
+:::
+The divergence of the vector field returns a scalar field
+:::{math}
+:enumerated: false
+\nabla\cdot\bm{a}
+&=\frac{\partial a_x}{\partial x}
++\frac{\partial a_y}{\partial y}
++\frac{\partial a_z}{\partial z}\\
+&=y+z+x.
+:::
+whereas its curl returns another vector field
+:::{math}
+:enumerated: false
+\nabla\times\bm{a}
+&=\left(\frac{\partial a_z}{\partial y}-\frac{\partial a_y}{\partial z}\right)\bm{\hat{x}}
++\left(\frac{\partial a_x}{\partial z}-\frac{\partial a_z}{\partial x}\right)\bm{\hat{y}}
++\left(\frac{\partial a_y}{\partial x}-\frac{\partial a_x}{\partial y}\right)\bm{\hat{z}}\\
+&=-y\bm{\hat{x}}-z\bm{\hat{y}}-x\bm{\hat{z}}.
+:::
+The gradient of the vector field is instead a rank-2 tensor field. Its Cartesian coordinate representation is
+:::{math}
+:enumerated: false
+\nabla\bm{a}
+&=\frac{\partial a_x}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{x}}+\frac{\partial a_y}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{y}}+\frac{\partial a_z}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{z}}\\
+&\quad+\frac{\partial a_x}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{x}}+\frac{\partial a_y}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{y}}+\frac{\partial a_z}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{z}}\\
+&\quad+\frac{\partial a_x}{\partial z}\bm{\hat{z}}\otimes\bm{\hat{x}}+\frac{\partial a_y}{\partial z}\bm{\hat{z}}\otimes\bm{\hat{y}}+\frac{\partial a_z}{\partial z}\bm{\hat{z}}\otimes\bm{\hat{z}}\\
+&=y\bm{\hat{x}}\otimes\bm{\hat{x}}+z\bm{\hat{x}}\otimes\bm{\hat{z}}\\
+&\quad+x\bm{\hat{y}}\otimes\bm{\hat{x}}+z\bm{\hat{y}}\otimes\bm{\hat{y}}\\
+&\quad+y\bm{\hat{z}}\otimes\bm{\hat{y}}+x\bm{\hat{z}}\otimes\bm{\hat{z}}.
+:::
+This illustrates how the action of the differential operator $\nabla$ produces different mathematical objects depending on how it is applied to a scalar, vector, or tensor field.
 ::::
+
 
 The process of converting conservation principle of mass, momentum, and energy into local partial differential equations involves transforming surface integrals to volume integrals. Carrying out such tasks requires the action of $\nabla$ on products containing scalar-, vector-, and tensor-valued fields. The rules most needed are
 :::{math}
@@ -173,8 +239,71 @@ They become powerful tools when combined with the divergence theorems for scalar
 that convert a surface integral of a field over the boundary $\partial V$ of a volume $V$ into a volume integral of the field divergence.
 
 ::::{proof:example}
-Produce here an example that applies the divergence theorem.
+Consider a cubic volume 
+:::{math}
+:enumerated: false
+V=\{(x,y,z)\in\mathbb{R}^3|0\leq x,y,z \leq L\},
+:::
+where $L$ is the side length of the cube and $A=L^2$ the area of each face. Assume also a vector field
+:::{math}
+:enumerated: false
+\bm{a}=x\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}}.
+:::
+The surface integral of $\bm{a}\cdot\bm{\hat{n}}$ over the cube boundary $\partial V$ can be evaluated by considering the six faces of the cube. On each of the three faces at $x=L$, $y=L$, and $z=L$, one has $\bm{a}\cdot\bm{\hat{n}}=L$, whereas on the remaining three faces at $x=0$, $y=0$, and $z=0$, the term is zero. Consequently,
+:::{math}
+:enumerated: false
+\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA&=LA+LA+LA=3L^3.
+:::
+Since the divergence of $\bm{a}$ is a constant
+:::{math}
+:enumerated: false
+\nabla\cdot\bm{a}
+=\frac{\partial x}{\partial x}
++\frac{\partial y}{\partial y}
++\frac{\partial z}{\partial z}
+=3,
+:::
+one immediately computes
+:::{math}
+:enumerated: false
+\int_V\nabla\cdot\bm{a}\,dV=3V=3L^3.
+:::
+This demonstrates the divergence theorem for a vector field.
+
+Consider the non-symmetric rank-2 tensor field
+:::{math}
+:enumerated: false
+\bm{\sigma}=\bm{\hat{x}}\otimes\bm{a}.
+:::
+Using the right dyad-vector contraction rule, the surface integral becomes
+:::{math}
+:enumerated: false
+\int_{\partial V}\bm{\sigma}\cdot\bm{\hat{n}}dA
+&=\int_{\partial V}(\bm{\hat{x}}\otimes\bm{a})\cdot\bm{\hat{n}}dA\\
+&=\bm{\hat{x}}\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA\\
+&=3L^3\bm{\hat{x}}.
+:::
+To evaluate the corresponding volume integral, first transpose the tensor:
+:::{math}
+:enumerated: false
+\bm{\sigma}^\mathsf{T}=\bm{a}\otimes\bm{\hat{x}}.
+:::
+Using the product rule for the divergence of a dyad gives
+:::{math}
+:enumerated: false
+\nabla\cdot\bm{\sigma}^\mathsf{T}
+&=\nabla\cdot(\bm{a}\otimes\bm{\hat{x}})\\
+&=(\nabla\cdot\bm{a})\bm{\hat{x}}+\bm{a}\cdot\nabla\bm{\hat{x}}\\
+&=3\bm{\hat{x}},
+:::
+where the second term vanishes because $\bm{\hat{x}}$ is a constant basis vector in Cartesian coordinates. Thus,
+:::{math}
+:enumerated: false
+\int_V\nabla\cdot\bm{\sigma}^\mathsf{T}dV=3\bm{\hat{x}}V=3L^3\bm{\hat{x}},
+:::
+which equals the corresponding surface integral. Notice that $\nabla\cdot\bm{\sigma}=\bm{\hat{x}}$, which is different from $\nabla\cdot\bm{\sigma}^\mathsf{T}=3\bm{\hat{x}}$. The transpose in the tensor divergence theorem is therefore essential when the tensor is not symmetric.
 ::::
+
 
 ## <span class="intermediate"></span> Further identities involving tensors
 Those interested in progressing beyond the core engineering path and to studying the implications of momentum conservation encounter also expressions involving tensor-vector cross products and tensor-tensor single dot-products. To define such operations, the following identities involving dyads, of which rank-2 tensor are linear combinations of, are needed
