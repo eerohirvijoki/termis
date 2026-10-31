@@ -331,7 +331,7 @@ and particularly the dot product with the identity tensor results in
 :::
 The calculus identity using the above definitions is
 :::{math}
-\nabla\cdot(\bm{a}\times\bm{\sigma})&=\bm{a}\times\nabla\cdot\bm{\sigma}+\bm{\varepsilon}:(\nabla\bm{a}\cdot\bm{\sigma}),
+\nabla\cdot(\bm{a}\times\bm{\sigma})^\mathsf{T}&=\bm{a}\times\nabla\cdot\bm{\sigma}^\mathsf{T}-\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{a}),
 :::
 where the rank-3 antisymmetric Levi-Civita tensor $\bm{\varepsilon}$ is defined
 :::{math}
@@ -346,7 +346,39 @@ The Levi-Civita symbol $\varepsilon_{ijk}$ is antisymmetric with respect to chan
 \bm{\varepsilon}:\bm{\pi}=\bm{0}.
 :::
 
-
+::::{proof:example}
+Consider the position vector field
+:::{math}
+:enumerated: false
+\bm{x}=x\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}}.
+:::
+Its gradient is the identity tensor, since
+:::{math}
+:enumerated: false
+\nabla\bm{x}
+=\sum_{i,j=1}^3\partial_i x_j
+\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
+=\sum_{i,j=1}^3\delta_{ij}
+\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
+=\bm{I}.
+:::
+Applying the calculus identity for the divergence of a vector-tensor cross product consequently gives
+:::{math}
+:enumerated: false
+\nabla\cdot(\bm{x}\times\bm{\sigma})^\mathsf{T}
+&=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
+-\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{x})\\
+&=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
+-\bm{\varepsilon}:\bm{\sigma}.
+:::
+If the tensor $\bm{\sigma}$ is symmetric, the last term vanishes, leaving
+:::{math}
+:enumerated: false
+\nabla\cdot(\bm{x}\times\bm{\sigma})^\mathsf{T}
+=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T}).
+:::
+This observation plays a key role in establishing the symmetry of the stress tensor from the argument that only the torque from forces can change the angular momentum of a body.
+::::
 
 ## <span class="elementary"></span> Leibniz integral differentiation rule
 The tool to convert physics principles to local partial differential equations that describe the evolution of fluids is generally referred to as the Leibniz integral differentiation rule. It describes how integrals of scalar-, vector-, or tensor-valued fields vary in time when evaluated over temporally evolving curves, surfaces, or volumes. The particular use case of the rule to derive the fluid evolution equations involves only volumes, in which case the rule is often referred to as the Reynolds transport theorem. The other important use case for the rule is encountered when deriving the control-volume balance equations needed in engineering applications. In the first case, the evolution of the volume follows the fluid's velocity field. In the second case, the moving volume of fluid is typically enclosed by a mechanical device such as a turbine or a compressor, with the movement of the fluid volume originating from, e.g., rotating turbine or compressor blades.
