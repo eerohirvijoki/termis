@@ -666,22 +666,23 @@ Again, the time rate of change is proportional to the element itself, operated o
 :::
 Since the coordinate system $(\xi_1,\xi_2,\xi_3)$ is arbitrary, it can be chosen locally to be adapted to an arbitrary initial curve or oriented surface. In the case of a curve, one chooses one of the coordinates, for example $\xi_i$, to parametrize the initial curve, while keeping the other two coordinates fixed. In the case of an oriented surface, one chooses two coordinates, for example $\xi_i$ and $\xi_j$, to span the initial surface, while keeping the third coordinate $\xi_k$ fixed. The coordinate direction associated with $\xi_k$ can be chosen to point along the surface normal of the initial surface. The coordinate labels are then held fixed as the flow map $\bm{\psi}_t$ carries the initial curve or surface forward in time. The derived evolution equations therefore apply to differential line and surface elements of arbitrary orientation, independently of the coordinate chart used to represent them. Dropping the explicit coordinate labels, one obtains
 :::{math}
+:label: eq-dl-dA-dV-dt
 \frac{d}{dt}d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \frac{d}{dt}d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left(\left((\nabla\cdot\bm{u})\bm{I}-\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left((\nabla\cdot\bm{u})dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}.
 :::
 Note, however, that a single coordinate chart is not necessarily sufficient to describe an entire curve or surface. Instead, multiple coordinate patches may need to be used. 
 
-In all of the time derivatives of the differential elements {numref}`eq-dl-dt`, {numref}`eq-dA-dt`, and {numref}`eq-dV-dt`, a common term appears, namely the gradient $\nabla\bm{u}$ of the vector field $\bm{u}$. In fact, since $\nabla\cdot\bm{u}=\nabla\bm{u}:\bm{I}$, the proportionality of the time rate of change of each element to itself is encoded entirely by the rank-2 tensor $\nabla\bm{u}$ alone. Interesting observations can be made that later help justify the mathematical form of the stress tensor. Decompose the tensor $\nabla\bm{u}$ into three separate parts according to
+Since $\nabla\cdot\bm{u}=\nabla\bm{u}:\bm{I}$, a common term, the gradient $\nabla\bm{u}$ of the vector field $\bm{u}$, appears in all of the time derivatives of the differential elements in {numref}`eq-dl-dA-dV-dt`. The proportionality of the time rate of change of each element to itself is encoded entirely by the rank-2 tensor $\nabla\bm{u}$. Interesting observations, regarding this term can be made that later help justify the form of the stress tensor. To illustrate the observations, decompose the tensor $\nabla\bm{u}$ into three separate parts
 :::{math}
-\nabla\bm{u}=\bm{D}+\frac{1}{3}(\nabla\cdot\bm{u})\bm{I}+\bm{\Omega},
+\nabla\bm{u}=\bm{D}+\frac{1}{3}(\nabla\cdot\bm{u})\bm{I}+\bm{\Omega}.
 :::
 Here the symmetric and traceless tensor $\bm{D}$ and the antisymmetric tensor $\bm{\Omega}$ are 
 :::{math}
 \bm{D}&=\frac{1}{2}\left(\nabla\bm{u}+(\nabla\bm{u})^\mathsf{T}\right)-\frac{1}{3}(\nabla\cdot\bm{u})\bm{I},\\
 \bm{\Omega}&=\frac{1}{2}\left(\nabla\bm{u}-(\nabla\bm{u})^\mathsf{T}\right).
 :::
-In the gradient tensor, the term $\tfrac{1}{3}(\nabla\cdot\bm{u})\bm{I}$ describes isotropic deformation, the term $\bm{D}$ describes deformation that is non-isotropic but volume-preserving, and the term $\bm{\Omega}$ describes rotation without deformation. Each part therefore categorizes motion into distinct mechanisms that can be verified by tracking movement of points $\bm{x}(t)$ in the flow of $\bm{u}(\bm{x},t)$.
+While the decomposition may appear superficial, each of the parts has a distinct role in generating and characterizing motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{u})\bm{I}$ describes isotropic deformation, the term $\bm{D}$ describes deformation that is non-isotropic but volume-preserving, and the term $\bm{\Omega}$ describes rotation without deformation. This can be verified by tracking the movement of points $\bm{x}(t)$ in the flow of $\bm{u}(\bm{x},t)$.
 
 ::::{proof:example}
 Consider three different velocity fields
@@ -725,99 +726,121 @@ results in non-uniform rotation and deformation.
 
 (sec-leibniz-rule-derivation)=
 ## <span class="advanced"></span> Derivation of the Leibniz rule
-Equipped with the knowledge of how differential elements change under the flow of a vector field $\bm{u}(\bm{x},t)$, pushed forward by the flow map $\bm{\psi}_t$, one is ready to apply the associated formulae and compute time derivatives of integrals over curves, surfaces, and volume that move along the flow of the field.
+Equipped with the knowledge of how differential elements change under the flow of a vector field $\bm{u}(\bm{x},t)$, pushed forward by the flow map $\bm{\psi}_t$, one is ready to apply the associated formulae {numref}`eq-dl-dA-dV-dt` and compute time derivatives of integrals over curves, surfaces, and volumes that move along the flow of the field.
 
-Define a time dependent curve $C(t)$, an oriented surface $S(t)$ with a unit normal vector $\bm{\hat{n}}$, and a volume $V(t)$ with
+Define a time dependent curve $C(t)$, an oriented surface $S(t)$, and a volume $V(t)$ as images of some initial curve $C(t_0)$, surface $S(t_0)$, and volume $V(t_0)$ with respect to the flow map $\bm{\psi}_t$
 :::{math}
 C(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in C(t_0)\},\\
 S(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in S(t_0)\},\\
-V(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in V(t_0)\},
+V(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in V(t_0)\}.
 :::
-that are images of some initial curve $C(t_0)$, surface $S(t_0)$, and volume $V(t_0)$ with respect to the flow map $\bm{\psi}_t$. Assume a scalar-, vector-, or tensor-valued field $\bm{f}(\bm{x},t)$, and consider the following integrals over the time-dependent curve, surface, and volume
+Assume a scalar-, vector-, or tensor-valued field $\bm{f}(\bm{x},t)$, and consider the following integrals over the time-dependent curve, surface, and volume
 :::{math}
-\int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell},\\
-\int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A},\\
-\int_{V(t)}\bm{f}(\bm{x},t)d\bm{V}.
+\int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}},\\
+\int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}},\\
+\int_{V(t)}\bm{f}(\bm{x},t)d\bm{V}\big|_{\bm{x}}.
 :::
-For the line integral over the curve $C(t)$, assume a coordinate system $(\xi_1,\xi_2,\xi_3)$ where one of the coordinates parametrizes the curve $C(t_0)$.
-.  over a time-dependent volume $V(t)$ evolving according to a vector field $\bm{u}(\bm{x},t)$ and having closed surface $\partial V(t)$
-\begin{align}
-    \int_{V(t)}\bm{f}(\bm{x},t)dV_{\bm{x}}.
-\end{align}
-Assume the flow map associated with the velocity field $\bm{u}(\bm{x},t)$ from some fixed moment $t_0$ onwards to be $\bm{\psi}_t$. The volume $V(t)$ can now be expressed as an image set 
-\begin{align}
-    V(t)=\text{Im}_{\bm{\psi}_t}(V(t_0))=\{\bm{\psi}_t(\bm{x}_0)\,|\,\bm{x}_0\in V(t_0)\},
-\end{align}
-of a fixed volume $V(t_0)$ and to be generated by the flow map $\psi_t$ moving initial points $\bm{x}_0$ in to the new points $\bm{x}_0$. Introduce a change of coordinates on the integration labels according to $\bm{x}=\bm{\psi}_t(\bm{x}_0)$. Then
-\begin{align}
-    \int_{V(t)}\bm{f}(\bm{x},t)dV_{\bm{x}}=\int_{\text{Im}_{\bm{\psi}_t}(V(t_0))}\bm{f}(\bm{x},t)dV_{\bm{x}}=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}_0),t)dV_{\bm{\psi}_t(\bm{x}_0)},
-\end{align}
-where the integration on right is now to be performed over the labelled points $\bm{x}_0\in V(t_0)$. As the domain $V(t_0)$ of the label points $\bm{x}_0$ is independent of the time $t$, the time derivative can be taken inside the integral and 
-\begin{align}
-    \frac{d}{dt}\int_{V(t)}\bm{f}(\bm{x},t)dV_{\bm{x}}=\int_{V(t_0)}\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}_0),t)dV_{\bm{\psi}_t(\bm{x}_0)}\right).
-\end{align}
-The product and composition rule of differentiation, and the expression for the time derivative of a differential volume element under the flow, then provide
-\begin{align}
-    &\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}_0),t)dV_{\bm{\psi}_t(\bm{x}_0)}\right)\nonumber\\
-    &=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}_0),t) dV_{\bm{\psi}_t(\bm{x}_0)}+\bm{f}(\bm{\psi}_t(\bm{x}_0),t)\frac{d}{dt}dV_{\bm{\psi}_t(\bm{x}_0)}\nonumber\\
-    &=(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f})\Big|_{(\bm{\psi}_t(\bm{x}_0),t)}dV_{\bm{\psi}_t(\bm{x}_0)}+(\bm{f}\nabla\cdot\bm{u})\Big|_{(\bm{\psi}_t(\bm{x}_0),t)}dV_{\bm{\psi}_t(\bm{x}_0)},
-\end{align}
-and the time derivative of the integral can be written
-\begin{align}
-    \frac{d}{dt}\int_{V(t)}\bm{f}(\bm{x},t)dV_{\bm{x}}=\int_{V(t_0)}\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\nabla\cdot\bm{u}\right)\Big|_{(\bm{\psi}_t(\bm{x}_0),t)}dV_{\bm{\psi}_t(\bm{x}_0)}.
-\end{align}
-Performing then a change of coordinates back to the original ones with $\bm{x}=\bm{\psi}_t(\bm{x}_0)$, one is able to return the integral to be evaluated over the original volume $V(t)$ at time $t$
-\begin{align*}
-    \int_{V(t_0)}\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\nabla\cdot\bm{u}\right)\Big|_{(\bm{\psi}_t(\bm{x}_0),t)}dV_{\bm{\psi}_t(\bm{x}_0)}=\int_{V(t)}\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\nabla\cdot\bm{u}\right)\Big|_{(\bm{x},t)}dV_{\bm{x}}.
-\end{align*}
-In applications, the explicit labeling of the integration domain with points $\bm{x}$ is usually dropped, resulting in the compact formula for the Leibniz integral differentiation rule
-\begin{align}\label{eq:leibniz-rule}
-    \frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\nabla\cdot\bm{u}\right)dV\nonumber\\
-    &=\int_{V(t)}\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV,
-\end{align}
-The divergence theorem can then be used to provide a meaningful physical interpretation for the Leibniz integral differentiation rule
-\begin{align}
-    \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Rate of change}\\\text{of a volume integral}\\\text{over a moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Volume integral}\\\text{over the}\\\text{local change}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of}\\\text{the volume}}}}_{\substack{\text{Net flow of $\bm{f}$ into $V$}\\\text{due to movement of $\partial V$}}}.
-\end{align}
-\begin{example}
-    The three-dimensional derivation above combines several unfamiliar mathematical steps. The same construction is illustrated below in one dimension, where the individual steps can be followed using the ordinary chain and product rules. The calculation also recovers the familiar one-dimensional Leibniz rule.
+Here, the integration label $\bm{x}$ is shown explicitly for the differential elements, for book-keeping. Perform then a change of integration labels with the help of the flow map so that 
+:::{math}
+\int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}}&=\int_{C(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
+\int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}}&=\int_{S(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
+\int_{V(t)}\bm{f}(\bm{x},t)d\bm{V}\big|_{\bm{x}}&=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}.
+:::
+On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)$, and $V(t)$. On the right, the label $\bm{x}$ denotes the time-indepent domains $C(t_0)$, $S(t_0)$, $V(t_0)$ instead, and the time dependence has been moved inside the integrals via the change of integration labels with the flow map. Since the integration domains no longer depend on time, computation of time derivatives of the integrals can be performed. Before that, use the chainrule and {numref}`eq-dl-dA-dV-dt` to compute the derivatives
+:::{math}
+&\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
+&=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}
++\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+:::
+:::{math}
+&\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
+&=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}
++\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+(\nabla\cdot\bm{u})\bm{f}-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+:::
+:::{math}
+&\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
+&=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}
++\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+:::
+Now, with the help of the formula above, calculate the time derivative of the line integral and transforms the integration labels back to the time dependent domain
+:::{math}
+:label: eq-leibniz-rule-line
+\frac{d}{dt}\int_{C(t)}(\bm{f}\cdot d\bm{\ell})\big|_{(\bm{x},t)}&=\int_{C(t_0)}\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
+&=\int_{C(t_0)}\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&=\int_{C(t)}\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{x},t)}.
+:::
+To calculate the time derivative of the surface integral, exactly the same steps are used. Transformation of the labeling to time-independent domain, calculation of the time derivative of the integrand and the surface element, and transformation back to the time-dependent labeling. This process results in
+:::{math}
+:label: eq-leibniz-rule-surface
+\frac{d}{dt}\int_{S(t)}(\bm{f}\cdot d\bm{A})\big|_{(\bm{x},t)}=\int_{S(t)}\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{x},t)}.
+:::
+For the volume integral, the same steps provides the formula
+:::{math}
+:label: eq-leibniz-rule-volume
+\frac{d}{dt}\int_{V(t)}(\bm{f}dV)\big|_{(\bm{x},t)}=\int_{V(t)}\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{x},t)}.
+:::
+Since the integration labels on boths sides now are the same again, they are usually dropped. 
 
-    To differentiate the time-dependent integral
-    \begin{align*}
-        \int_{a(t)}^{b(t)} f(x,t) dx,
-    \end{align*}
-    with $a(t)$ and $b(t)$ some time-dependent, well-behaving functions describing the positions of the integral boundaries in time $t$, assume any point $x\in[a(t),b(t)]$ to move with the speed $u(x,t)$. Let $\psi(x,t)$ be the flow map of $u(x,t)$ so that a point $x_0\in[a(t_0),b(t_0)]$ becomes a point $\psi(x_0,t)=x$ and $\partial_t\psi(x,t)=u(\psi(x,t),t)$. One may now write
-    \begin{align*}
-        \int_{a(t)}^{b(t)} f(x,t) dx&=\int_{\psi(a(t_0),t)}^{\psi(b(t_0),t)}f(x,t)dx\\
-        &=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)d\psi(x_0,t)\\
-        &=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0
-    \end{align*}
-    To proceed, apply the chainrule to the derivative of the flow map
-    \begin{align*}
-        \frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}=\frac{\partial^2\psi(x,t)}{\partial x\partial t}\Big|_{(x_0,t)}=\frac{\partial u(\psi(x,t),t)}{\partial x}\Big|_{(x_0,t)}=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}.
-    \end{align*}
-    One may now identify that 
-    \begin{align*}
-        \frac{d}{dt}d\psi(x_0,t)=\frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}d\psi(x_0,t),
-    \end{align*}
-    is analogous to the time derivative of a differential volume element with $\partial u/\partial x$ serving the role of velocity divergence. Considering that the time derivative of the composed function $f(\psi(x_0,t),t)$ can be written 
-    \begin{align*}
-        \frac{d}{dt}f(\psi(x_0,t),t)=\frac{\partial f}{\partial t}\Big|_{(\psi(x_0,t),t)}+\frac{\partial f}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial \psi}{\partial  t}\Big|_{(x_0,t)}=\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}\right)\Big|_{(\psi(x_0,t),t)},
-    \end{align*}
-    the time derivative of the integral becomes
-    \begin{align*}
-        \frac{d}{dt}\int_{a(t)}^{b(t)} f(x,t) dx&=\int_{a(t_0)}^{b(t_0)}\frac{d}{dt}\left(f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}\right)dx_0\\
-        &=\int_{a(t_0)}^{b(t_0)}\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}+f\frac{\partial u}{\partial x}\right)\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0\\
-        &=\int_{a(t)}^{b(t)}\left(\frac{\partial f}{\partial t}+\frac{\partial(uf)}{\partial x}\right)\Big|_{(x,t)}dx\\
-        &=\int_{a(t)}^{b(t)}\frac{\partial f(x,t)}{\partial t}dx+\Big[u(x,t)f(x,t)\Big]_{x=a(t)}^{x=b(t)}
-    \end{align*}
-    The result is the one-dimensional version of the Leibniz rule. 
-    Realizing that the speed function $u(x,t)$ at the boundary points satisfies $u(a(t),t)=da/dt$ and $u(b(t),t)=db/dt$ enables writing
-    \begin{align*}
-        \frac{d}{dt}\int_{a(t)}^{b(t)}f(x,t)dx=\int_{a(t)}^{b(t)}\frac{\partial f(x,t)}{\partial t}dx+f(b(t),t)\frac{db(t)}{dt}-f(a(t),t)\frac{da(t)}{dt},
-    \end{align*}
-    which recovers the familiar and well-known rule for differentiating one-dimensional integrals with changing boundaries.
-\end{example}
+Each of the derived integral formulae have their place in fluid mechanics. In these notes, equation {numref}`eq-leibniz-rule-volume` is utilized to derive the fluid equations and to establish engineering balance equations over control volumes. Once fluid equations are established, the equation {numref}`eq-leibniz-rule-surface` can be used to prove the conservation of vorticity flux through a surface that moves with the fluid in inviscid barotropic flows, a result better known as Helmholtz's vortex theorem. The equation {numref}`eq-leibniz-rule-line`, on the other hand, could be used to prove Kelvin's circulation theorem for similar fluids. These theorems have important applications in studies of atmospheric flows.
+
+As in these notes the time derivative of the volume integral has a major role, it is useful to convert the divergence term into a surface term for its physical interpretation. With the divergence theorem, one finds
+:::{math}
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
+:::
+
+::::{proof:example}
+The three-dimensional derivation of the Leibniz rule combines several mathematical steps. These steps can be illustrated also in a simpler and more familiar setting in one dimension.
+
+To differentiate the time-dependent integral
+:::{math}
+:enumerated: false
+\int_{a(t)}^{b(t)} f(x,t) dx,
+:::
+with $a(t)$ and $b(t)$ some time-dependent, well-behaving functions describing the positions of the integral boundaries in time $t$, assume any point $x\in[a(t),b(t)]$ to move with the speed $u(x,t)$. Let $\psi(x,t)$ be the flow map of $u(x,t)$ so that a point $x_0\in[a(t_0),b(t_0)]$ becomes a point $\psi(x_0,t)=x$ and $\partial_t\psi(x,t)=u(\psi(x,t),t)$. One may now write
+:::{math}
+:enumerated: false
+\int_{a(t)}^{b(t)} f(x,t) dx&=\int_{\psi(a(t_0),t)}^{\psi(b(t_0),t)}f(x,t)dx=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)d\psi(x_0,t)\\
+&=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0.
+:::
+To proceed, apply the chainrule to the derivative of the flow map
+:::{math}
+:enumerated: false
+\frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}&=\frac{\partial^2\psi(x,t)}{\partial x\partial t}\Big|_{(x_0,t)}=\frac{\partial u(\psi(x,t),t)}{\partial x}\Big|_{(x_0,t)}\\
+&=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}.
+:::
+One may now identify that 
+:::{math}
+:enumerated: false
+\frac{d}{dt}d\psi(x_0,t)&=\frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0\\
+&=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}d\psi(x_0,t),
+:::
+is analogous to the time derivative of a differential volume element with $\partial u/\partial x$ serving the role of velocity divergence. Considering that the time derivative of the composed function $f(\psi(x_0,t),t)$ can be written 
+:::{math}
+:enumerated: false
+\frac{d}{dt}f(\psi(x_0,t),t)&=\frac{\partial f}{\partial t}\Big|_{(\psi(x_0,t),t)}+\frac{\partial f}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial \psi}{\partial t}\Big|_{(x_0,t)}\\
+&=\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}\right)\Big|_{(\psi(x_0,t),t)},
+:::
+the time derivative of the integral becomes
+:::{math}
+:enumerated: false
+\frac{d}{dt}\int_{a(t)}^{b(t)} f(x,t) dx&=\int_{a(t_0)}^{b(t_0)}\frac{d}{dt}\left(f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}\right)dx_0\\
+&=\int_{a(t_0)}^{b(t_0)}\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}+f\frac{\partial u}{\partial x}\right)\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0\\
+&=\int_{a(t)}^{b(t)}\left(\frac{\partial f}{\partial t}+\frac{\partial(uf)}{\partial x}\right)\Big|_{(x,t)}dx\\
+&=\int_{a(t)}^{b(t)}\frac{\partial f(x,t)}{\partial t}dx+\Big[u(x,t)f(x,t)\Big]_{x=a(t)}^{x=b(t)}.
+:::
+The result is the one-dimensional version of the Leibniz rule. 
+Realizing that the speed function $u(x,t)$ at the boundary points satisfies $u(a(t),t)=da/dt$ and $u(b(t),t)=db/dt$ enables writing
+:::{math}
+:enumerated: false
+\frac{d}{dt}\int_{a(t)}^{b(t)}f(x,t)dx=\int_{a(t)}^{b(t)}\frac{\partial f(x,t)}{\partial t}dx+f(b(t),t)\frac{db(t)}{dt}-f(a(t),t)\frac{da(t)}{dt},
+:::
+which recovers the familiar and well-known rule for differentiating one-dimensional integrals with changing boundaries.
+::::
 
 (sec-conservation-of-mass)=
 ## <span class="elementary"></span> Conservation of mass
