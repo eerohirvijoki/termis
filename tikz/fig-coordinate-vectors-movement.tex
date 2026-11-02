@@ -38,28 +38,28 @@
 
     % define x_t and velocity at x_t
     \draw (X_path_start) to[bend left=20] coordinate[pos=0.1] (X_t) (X_path_end);
-    \draw[-latex,very thick,red] (X_t)--++(18:3) node[above right,pos=1] {$\bm{v}(\bm{x},t_0)$};
+    \draw[-latex,very thick,red] (X_t)--++(18:3) node[above right,pos=1] {$\bm{u}(\bm{x},t_0)$};
     \fill (X_t) circle (2pt) node[below=0.1cm] {$\bm{x}$};
     
-    % define u_1-curve and vector
-    \draw[-latex,mydarkorange,very thick] (X_t) -- coordinate[pos=0.3] (du_1) ++(60:2.5) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_1}\end{aligned}$};
+    % define \xi_1-curve and vector
+    \draw[-latex,mydarkorange,very thick] (X_t) -- coordinate[pos=0.3] (dxi_1) ++(60:2.5) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_1}\end{aligned}$};
     
-    % define u_2-curve and vector
-    \draw[-latex,mydarkgreen,very thick] (X_t) -- coordinate[pos=0.3] (du_2) ++(110:1.5) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_2}\end{aligned}$};
+    % define \xi_2-curve and vector
+    \draw[-latex,mydarkgreen,very thick] (X_t) -- coordinate[pos=0.3] (dxi_2) ++(110:1.5) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_2}\end{aligned}$};
     
-    % define u_3-curve and vector
-    \draw[-latex,mydarkblue,very thick] (X_t) -- coordinate[pos=0.3] (du_3) ++(-50:2) node[right,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_3}\end{aligned}$};
+    % define \xi_3-curve and vector
+    \draw[-latex,mydarkblue,very thick] (X_t) -- coordinate[pos=0.3] (dxi_3) ++(-50:2) node[right,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_3}\end{aligned}$};
 
     % draw box faces
-    \draw[dashed,mygrey] (du_1)--($(du_1)+(du_2)-(X_t)$);
-    \draw[dashed,mygrey] (du_1)--(X_t);
-    \draw[dashed,mygrey] (du_1)--($(du_3)+(du_1)-(X_t)$);
+    \draw[dashed,mygrey] (dxi_1)--($(dxi_1)+(dxi_2)-(X_t)$);
+    \draw[dashed,mygrey] (dxi_1)--(X_t);
+    \draw[dashed,mygrey] (dxi_1)--($(dxi_3)+(dxi_1)-(X_t)$);
     
-    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (du_2)--($(du_2)+(du_1)-(X_t)$)--($(du_3)+(du_2)-(X_t)+(du_1)-(X_t)$)--($(du_3)+(du_2)-(X_t)$)--cycle;
+    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (dxi_2)--($(dxi_2)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)$)--cycle;
     
-    \draw[gray!60,fill=gray!10,fill opacity=0.4,line join=bevel] (X_t)--(du_2)--($(du_2)+(du_3)-(X_t)$)--(du_3)--cycle;
+    \draw[gray!60,fill=gray!10,fill opacity=0.4,line join=bevel] (X_t)--(dxi_2)--($(dxi_2)+(dxi_3)-(X_t)$)--(dxi_3)--cycle;
 
-    \draw[gray!60,fill=gray!10,fill opacity=0.4,line join=bevel] (du_3)--($(du_3)+(du_1)-(X_t)$)--($(du_3)+(du_1)-(X_t)+(du_2)-(X_t)$)--($(du_3)+(du_2)-(X_t)$)--cycle;
+    \draw[gray!60,fill=gray!10,fill opacity=0.4,line join=bevel] (dxi_3)--($(dxi_3)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_1)-(X_t)+(dxi_2)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)$)--cycle;
 
 
     % POINT t
@@ -70,26 +70,26 @@
 
     % define x_t and velocity at x_t
     \draw (X_path_start) to[bend left=20] coordinate[pos=0.8] (X_tt) (X_path_end);
-    \draw[-latex,very thick,red] (X_tt)--++(-13:3) node[above right,pos=1] {$\bm{v}(\bm{\phi}_t(\bm{x}),t)$};
-    \fill (X_tt) circle (2pt) node[below left=0.1cm] {$\bm{\phi}_t(\bm{x})$};
+    \draw[-latex,very thick,red] (X_tt)--++(-13:3) node[above right,pos=1] {$\bm{u}(\bm{\psi}_t(\bm{x}),t)$};
+    \fill (X_tt) circle (2pt) node[below left=0.1cm] {$\bm{\psi}_t(\bm{x})$};
     
-    % define u_1-curve and vector
-    \draw[-latex,mydarkorange,very thick] (X_tt) -- coordinate[pos=0.3] (du_11) ++(30:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{\phi}_t(\bm{x})}{\partial u_1}\end{aligned}$};
+    % define \xi_1-curve and vector
+    \draw[-latex,mydarkorange,very thick] (X_tt) -- coordinate[pos=0.3] (dxi_11) ++(30:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_1}\end{aligned}$};
     
-    % define u_2-curve and vector
-    \draw[-latex,mydarkgreen,very thick] (X_tt) -- coordinate[pos=0.3] (du_22) ++(150:3) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{\phi}_t(\bm{x})}{\partial u_2}\end{aligned}$};
+    % define \xi_2-curve and vector
+    \draw[-latex,mydarkgreen,very thick] (X_tt) -- coordinate[pos=0.3] (dxi_22) ++(150:3) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_2}\end{aligned}$};
     
-    % define u_3-curve and vector
-    \draw[-latex,mydarkblue,very thick] (X_tt) -- coordinate[pos=0.3] (du_33) ++(-80:1.3) node[below,pos=1] {$\begin{aligned}\frac{\partial\bm{\phi}_t(\bm{x})}{\partial u_3}\end{aligned}$};
+    % define \xi_3-curve and vector
+    \draw[-latex,mydarkblue,very thick] (X_tt) -- coordinate[pos=0.3] (dxi_33) ++(-80:1.3) node[below,pos=1] {$\begin{aligned}\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_3}\end{aligned}$};
 
     % draw box faces
-    \draw[dashed,mygrey] (du_11)--(X_tt); 
-    \draw[dashed,mygrey] (du_22)--(X_tt); 
-    \draw[dashed,mygrey] (du_33)--(X_tt); 
+    \draw[dashed,mygrey] (dxi_11)--(X_tt); 
+    \draw[dashed,mygrey] (dxi_22)--(X_tt); 
+    \draw[dashed,mygrey] (dxi_33)--(X_tt); 
     
-    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (du_22)--($(du_22)+(du_11)-(X_tt)$)--($(du_22)+(du_11)-(X_tt)+(du_33)-(X_tt)$)--($(du_22)+(du_11)-(X_tt)+(du_33)-(X_tt)+(X_tt)-(du_11)$)--cycle;
-    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (du_33)--($(du_33)+(du_22)-(X_tt)$)--($(du_33)+(du_22)-(X_tt)+(du_11)-(X_tt)$)--($(du_33)+(du_11)-(X_tt)$)--cycle;
-    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (du_11)--($(du_11)+(du_33)-(X_tt)$)--($(du_11)+(du_33)-(X_tt)+(du_22)-(X_tt)$)--($(du_22)+(du_11)-(X_tt)$)--cycle;
+    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (dxi_22)--($(dxi_22)+(dxi_11)-(X_tt)$)--($(dxi_22)+(dxi_11)-(X_tt)+(dxi_33)-(X_tt)$)--($(dxi_22)+(dxi_11)-(X_tt)+(dxi_33)-(X_tt)+(X_tt)-(dxi_11)$)--cycle;
+    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (dxi_33)--($(dxi_33)+(dxi_22)-(X_tt)$)--($(dxi_33)+(dxi_22)-(X_tt)+(dxi_11)-(X_tt)$)--($(dxi_33)+(dxi_11)-(X_tt)$)--cycle;
+    \draw[gray!50,fill=gray!10,fill opacity=0.4,line join=bevel] (dxi_11)--($(dxi_11)+(dxi_33)-(X_tt)$)--($(dxi_11)+(dxi_33)-(X_tt)+(dxi_22)-(X_tt)$)--($(dxi_22)+(dxi_11)-(X_tt)$)--cycle;
     
 
     

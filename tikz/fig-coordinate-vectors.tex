@@ -37,14 +37,14 @@
     \path (X_path_start) to[bend left=20] coordinate[pos=0.5] (X_t) (X_path_end);
     \fill (X_t) circle (2pt) node[below left] {$\bm{x}$};
     
-    % define u_1-curve and vector
-    \draw[-latex,mydarkorange,very thick] (X_t) -- coordinate[pos=0.3] (du_1) ++(70:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_1}\end{aligned}$};
+    % define \xi_1-curve and vector
+    \draw[-latex,mydarkorange,very thick] (X_t) -- coordinate[pos=0.3] (dxi_1) ++(70:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_1}\end{aligned}$};
     \draw[dashed,very thin,mydarkorange,,postaction={
     decorate,
     decoration={
         text along path,
         text align=center,
-        text={${u_2}$ and ${u_3}$ constant},
+        text={${\xi_2}$ and ${\xi_3}$ constant},
         text color=mydarkorange,
         raise=-10pt,
         reverse path=false,
@@ -53,15 +53,15 @@
     },anchor=center] (X_t) to[out=70,in=180+20] ++(40:5);
     \draw[dashed,very thin,mydarkorange] ($(X_t)+(260:3)$) to[out=90,in=180+70] (X_t);
 
-    % define u_2-curve and vector
-    \draw[-latex,mydarkgreen,very thick] (X_t) -- coordinate[pos=0.3] (du_2) ++(110:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_2}\end{aligned}$};
+    % define \xi_2-curve and vector
+    \draw[-latex,mydarkgreen,very thick] (X_t) -- coordinate[pos=0.3] (dxi_2) ++(110:2) node[above,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_2}\end{aligned}$};
     \draw[dashed,mydarkgreen] (X_t) to[out=110,in=180+160] ++(140:5);
     \draw[dashed,mydarkgreen,postaction={
     decorate,
     decoration={
         text along path,
         text align=center,
-        text={${u_1}$ and ${u_3}$ constant},
+        text={${\xi_1}$ and ${\xi_3}$ constant},
         text color=mydarkgreen,
         raise=-8pt,
         reverse path=true,
@@ -69,15 +69,15 @@
     },anchor=center] ($(X_t)+(330:6)$) to[out=170,in=180+110] (X_t);
 
     
-    % define u_3-curve and vector
-    \draw[-latex,mydarkblue,very thick] (X_t) -- coordinate[pos=0.3] (du_3) ++(-20:2) node[right,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial u_3}\end{aligned}$};
+    % define \xi_3-curve and vector
+    \draw[-latex,mydarkblue,very thick] (X_t) -- coordinate[pos=0.3] (dxi_3) ++(-20:2) node[right,pos=1] {$\begin{aligned}\frac{\partial\bm{x}}{\partial \xi_3}\end{aligned}$};
     \draw[dashed,mydarkblue] (X_t) to[out=-20,in=180-70] ++(-50:5);
     \draw[dashed,mydarkblue,,postaction={
     decorate,
     decoration={
         text along path,
         text align=center,
-        text={${u_1}$ and ${u_2}$ constant},
+        text={${\xi_1}$ and ${\xi_2}$ constant},
         text color=mydarkblue,
         raise=5pt,
         reverse path=false,
@@ -85,15 +85,15 @@
     },anchor=center] ($(X_t)+(180:5)$) to[out=15,in=180-20] (X_t);
 
     % draw box faces
-    \draw[dashed,mygrey] (du_1)--($(du_1)+(du_2)-(X_t)$);
-    \draw[dashed,mygrey] (du_1)--(X_t);
-    \draw[dashed,mygrey] (du_1)--($(du_3)+(du_1)-(X_t)$);
+    \draw[dashed,mygrey] (dxi_1)--($(dxi_1)+(dxi_2)-(X_t)$);
+    \draw[dashed,mygrey] (dxi_1)--(X_t);
+    \draw[dashed,mygrey] (dxi_1)--($(dxi_3)+(dxi_1)-(X_t)$);
     
-    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (du_2)--($(du_2)+(du_1)-(X_t)$)--($(du_3)+(du_2)-(X_t)+(du_1)-(X_t)$)--($(du_3)+(du_2)-(X_t)$)--cycle;
+    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (dxi_2)--($(dxi_2)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)$)--cycle;
     
-    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (X_t)--(du_2)--($(du_2)+(du_3)-(X_t)$)--(du_3)--cycle;
+    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (X_t)--(dxi_2)--($(dxi_2)+(dxi_3)-(X_t)$)--(dxi_3)--cycle;
 
-    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (du_3)--($(du_3)+(du_1)-(X_t)$)--($(du_3)+(du_1)-(X_t)+(du_2)-(X_t)$)--($(du_3)+(du_2)-(X_t)$)--cycle;
+    \draw[gray!40,fill=gray!10,fill opacity=0.2,line join=bevel] (dxi_3)--($(dxi_3)+(dxi_1)-(X_t)$)--($(dxi_3)+(dxi_1)-(X_t)+(dxi_2)-(X_t)$)--($(dxi_3)+(dxi_2)-(X_t)$)--cycle;
     
 \end{tikzpicture}
 
