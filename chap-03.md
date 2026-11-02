@@ -738,13 +738,13 @@ Assume a scalar-, vector-, or tensor-valued field $\bm{f}(\bm{x},t)$, and consid
 :::{math}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}},\\
-\int_{V(t)}\bm{f}(\bm{x},t)d\bm{V}\big|_{\bm{x}}.
+\int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}.
 :::
 Here, the integration label $\bm{x}$ is shown explicitly for the differential elements, for book-keeping. Perform then a change of integration labels with the help of the flow map so that 
 :::{math}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}}&=\int_{C(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}}&=\int_{S(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
-\int_{V(t)}\bm{f}(\bm{x},t)d\bm{V}\big|_{\bm{x}}&=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}.
+\int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}&=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}.
 :::
 On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)$, and $V(t)$. On the right, the label $\bm{x}$ denotes the time-indepent domains $C(t_0)$, $S(t_0)$, $V(t_0)$ instead, and the time dependence has been moved inside the integrals via the change of integration labels with the flow map. Since the integration domains no longer depend on time, computation of time derivatives of the integrals can be performed. Before that, use the chainrule and {numref}`eq-dl-dA-dV-dt` to compute the derivatives
 :::{math}
@@ -761,9 +761,9 @@ On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)
 &=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
 :::
 :::{math}
-&\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
-&=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot dV\big|_{(\bm{\psi}_t(\bm{x}),t)}
-+\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
+&\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
+&=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}
++\bm{f}(\bm{\psi}_t(\bm{x}),t)\frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
 :::
