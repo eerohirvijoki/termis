@@ -445,7 +445,7 @@ The map describes a helical trajectory with constant angular velocity $\omega$ a
 Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
 :::{math}
 :label: eq:leibniz-rule-surface-form
-\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
@@ -636,7 +636,7 @@ One recognizes that the time derivative of the differential line-element is prop
 &\quad+d\bm{\ell}_{i}\big|_{(\bm{\psi}_t(\bm{x}),t)}\times\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}_{j}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\nonumber\\
 &=\left(\left((\nabla\cdot\bm{u})\bm{I}-\nabla\bm{u}\right)\cdot d\bm{A}_{k}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
 :::
-Again, the time rate of change is proportional to the element itself, operated on with a rank-2 tensor involving the vector field gradient. In case of the volume element, the calculation leverages both previous results {numref}`eq-dl-dt` and {numref}`eq-dA-dt`, providing
+Again, the time rate of change is proportional to the element itself, operated on with a rank-2 tensor involving the vector field gradient. In case of the volume element, the calculation leverages both previous results {numref}`eq-dl-dt` and {numref}`eq-dA-dt`. Choose the ordering of the coordinate directions such that $d\bm{A}_k\cdot d\bm{\ell}_k>0$ initially. Since the flow map preserves orientation, this scalar product remains positive, and taking the absolute value can be omitted. A direct computation then provides
 :::{math}
 :label: eq-dV-dt
 \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\frac{d}{dt}\left(d\bm{A}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot d\bm{\ell}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\nonumber\\
@@ -716,19 +716,19 @@ To demonstrate that each part of the $\nabla\bm{u}$ tensor indeed corresponds to
 :enumerated: false
 \frac{d\bm{x}(t)}{dt}=\bm{u}(\bm{x}(t)),
 :::
-until a time of $t=u_0/(2L_0)$ for each of the specified vector fields $\bm{u}$. For the integration, one may use a script similar as in {numref}`example-odeint`. The projection of a cube of points onto the $x$-$y$ plane, initially standing on it's edge, changes in the following manner under the different vector fields
+until a time of $t=(2L_0/u_0)$ for each of the specified vector fields $\bm{u}$. For the integration, one may use a script similar as in {numref}`example-odeint`. The projection of a cube of points onto the $x$-$y$ plane, initially standing on it's edge, changes in the following manner under the different vector fields
 :::{image} ./figs/example-fig-D-Omega-div-flow-individually.svg
 :align: center
 :width: 100%
 :::
 The field $\bm{u}_D$ has indeed stretched the cube in the $x$-direction and squeezed it in the $y$-direction, corresponding to non-isotropic volume-preserving deformation. The field $\bm{u}_\Omega$ has rotated the square around the $z$-axis without deforming it. The field $\bm{u}_\text{div}$ has isotropically scaled the cube volume.
 
-More diverse effects are observed for velocity fields that have more complicated spatial dependencies. For example, the velocity field
+More diverse effects are observed for velocity fields that have more complicated spatial dependencies. For example, in the vector field
 :::{math}
 :enumerated: false
 \bm{u}=u_0\frac{-y\bm{\hat{x}}+x\bm{\hat{y}}}{\sqrt{x^2+y^2}}+\frac{u_0}{L_0^2}(x^2\bm{\hat{x}}+y^2\bm{\hat{y}}+z^2\bm{\hat{z}}),
 :::
-has non-vanishing contributions to all of the three parts of the $\nabla\bm{u}$ tensor field. The resulting motion corresponds to non-uniform rotation with constant tangential speed around the $z$-axis and in non-uniform isotropic deformation, as illustrated int the projection into $x$-$y$ plane below.
+the first term introduces constant tangential speed, while the second terms adds spatially varying deformation and dilatation. The vector field therefore generally has nonzero contributions from all three parts of the $\nabla\bm{u}$ tensor field. The motion corresponding to the field, projected onto the $x$-$y$ plane, is illustrated below.
 :::{image} ./figs/example-fig-D-Omega-div-flow-complicated.svg
 :align: center
 :width: 50%
@@ -737,7 +737,7 @@ has non-vanishing contributions to all of the three parts of the $\nabla\bm{u}$ 
 
 
 (sec-leibniz-rule-derivation)=
-## <span class="advanced"></span> Derivation of the Leibniz rule
+## <span class="advanced"></span> Derivation of the Leibniz rules
 Equipped with the knowledge of how differential elements change under the flow of a vector field $\bm{u}(\bm{x},t)$, pushed forward by the flow map $\bm{\psi}_t$, one is ready to apply the associated formulae {numref}`eq-dl-dA-dV-dt` and compute time derivatives of integrals over curves, surfaces, and volumes that move along the flow of the field.
 
 Define a time dependent curve $C(t)$, an oriented surface $S(t)$, and a volume $V(t)$ as images of some initial curve $C(t_0)$, surface $S(t_0)$, and volume $V(t_0)$ with respect to the flow map $\bm{\psi}_t$
@@ -746,13 +746,15 @@ C(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in C(t_0)\},\\
 S(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in S(t_0)\},\\
 V(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in V(t_0)\}.
 :::
-Assume a scalar-, vector-, or tensor-valued field $\bm{f}(\bm{x},t)$, and consider the following integrals over the time-dependent curve, surface, and volume
+Consider the following integrals over the time-dependent curve, surface, and volume
 :::{math}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}},\\
 \int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}.
 :::
-Here, the integration label $\bm{x}$ is shown explicitly for the differential elements, for book-keeping. Perform then a change of integration labels with the help of the flow map so that 
+In the line and surface integrals, the field $\bm{f}$ must be a vector field. In the volume integral, the field $\bm{f}$ can more generally be scalar-, vector-, or even tensor-valued. Here, the integration label $\bm{x}$ is shown explicitly for the differential elements, for book-keeping. 
+
+Perform then a change of integration labels with the help of the flow map so that 
 :::{math}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}}&=\int_{C(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}}&=\int_{S(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
@@ -779,7 +781,7 @@ On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)
 &=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
 :::
-Now, with the help of the formula above, calculate the time derivative of the line integral and transforms the integration labels back to the time dependent domain
+In the volume related term, if $\bm{f}$ is a scalar, then $\bm{u}\otimes\bm{f}$ reduces to $\bm{u}f$. Now, with the help of the formula above, calculate the time derivative of the line integral and transforms the integration labels back to the time dependent domain
 :::{math}
 :label: eq-leibniz-rule-line
 \frac{d}{dt}\int_{C(t)}(\bm{f}\cdot d\bm{\ell})\big|_{(\bm{x},t)}&=\int_{C(t_0)}\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
@@ -802,7 +804,7 @@ Each of the derived integral formulae have their place in fluid mechanics. In th
 
 As in these notes the time derivative of the volume integral has a major role, it is useful to convert the divergence term into a surface term for its physical interpretation. With the divergence theorem, one finds
 :::{math}
-\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 
 ::::{proof:example}
