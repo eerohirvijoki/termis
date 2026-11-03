@@ -440,22 +440,6 @@ so that the time derivative of the flow map can be identified as
 :::
 
 The map describes a helical trajectory with constant angular velocity $\omega$ and translative velocity $v_z$ in the $z$-direction.
-
-::::
-
-::::{proof:example}
-The scipy-library offers the method odeint for numerical solution of ordinary differential equations. With the help of it, the flowmap of example {numref}`example-flowmap-analytical` can be computed also numerically. The script below performs numerical construction of the map for one initial location and illustrates the resulting trajectory
-```{literalinclude} python/example-flowmap-with-odeint.py
-:language: python
-:start-line: 0
-:end-line: 49
-:linenos:
-```
-Running the script results in the figure below, confirming the tracjetory to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity.
-:::{image} ./figs/example-fig-flowmap-with-odeint.svg
-:align: center
-:width: 80%
-:::
 ::::
 
 Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
@@ -464,6 +448,14 @@ Being now aware of the effects of vector fields on the movement of sets of point
 \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}\,V(t)}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume}\,V(t)\\\text{resulting from}\\\text{movement of}\\\text{boundary}\,\partial V(t)}}}_{\substack{\text{Net flow of}\,\bm{f}\,\text{into the}\\\text{volume}\,V(t)\,\text{due to the}\\\text{movement of the}\\\text{boundary}\,\partial V(t)}}.
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
+
+With the help of the divergence theorem and vector calculus rules the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
+:::{math}
+:label: eq:leibniz-rule-volume-form
+\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\\
+&=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV.
+:::
+It is this last form of the Leibniz rule that enables one to convert the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
 
 ::::{proof:example}
 The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u>0$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
@@ -501,16 +493,6 @@ On the right side of the Leibniz rule only the boundary term survives since $\pa
 :::
 which exactly correspond to the left side of the Leibniz rule.
 ::::
-
-With the help of the divergence theorem and vector calculus rules the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
-:::{math}
-:label: eq:leibniz-rule-volume-form
-\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\\
-&=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV
-:::
-It is this last form of the Leibniz rule that enables one to convert the physics principles of mass, momentum, and energy conservation into local partial differential equations.
-
-For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
 
 (sec-differential-elements)=
 ## <span class="intermediate"></span> Differential line, surface, and volume elements
@@ -684,39 +666,69 @@ Here the symmetric and traceless tensor $\bm{D}$ and the antisymmetric tensor $\
 :::
 While the decomposition may appear superficial, each of the parts has a distinct role in generating and characterizing motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{u})\bm{I}$ describes isotropic deformation, the term $\bm{D}$ describes deformation that is non-isotropic but volume-preserving, and the term $\bm{\Omega}$ describes rotation without deformation. This can be verified by tracking the movement of points $\bm{x}(t)$ in the flow of $\bm{u}(\bm{x},t)$.
 
+(example-odeint)=
 ::::{proof:example}
-Consider three different velocity fields
+The scipy-library offers the method odeint for numerical solution of ordinary differential equations. With the help of it, the flowmap can be computed numerically for arbitrary vector fields and the motion of individual points tracked over time. As an example, consider the numerical integration of the vector field $\bm{v}$ encountered in example {numref}`example-flowmap-analytical`. This can be performed as in the script below
+```{literalinclude} python/example-flowmap-with-odeint.py
+:language: python
+:start-line: 0
+:end-line: 49
+:linenos:
+```
+Running the script results in a figure below that confirms the tracjetory for the field $\bm{v}$ to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity. 
+:::{image} ./figs/example-fig-flowmap-with-odeint.svg
+:align: center
+:width: 80%
+:::
+::::
+
+::::{proof:example}
+Consider the following three different velocity fields
 :::{math}
 :enumerated: false
-\bm{v}_D&=\frac{v_0}{L_0}(x\bm{\hat{x}}-y\bm{\hat{y}}),
-&\bm{v}_\Omega&=\frac{v_0}{L_0}(-y\bm{\hat{x}}+x\bm{\hat{y}}),
-&\bm{v}_\text{div}&=\frac{v_0}{L_0}(x\bm{\hat{x}}+y\bm{\hat{y}}),
+\bm{u}_D&=\frac{u_0}{L_0}(x\bm{\hat{x}}-y\bm{\hat{y}}),\\
+\bm{u}_\Omega&=\frac{u_0}{L_0}(-y\bm{\hat{x}}+x\bm{\hat{y}}),\\
+\bm{u}_\text{div}&=\frac{u_0}{L_0}(x\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}}).
 :::
-For each field, only one contribution to the velocity gradient tensor is non-zero
+The field $\bm{u}_D$ pushes points away from the $x=0$ plane and towards the $y=0$ plane with speed proportional to the distance from the planes. The field $\bm{u}_\Omega$ rotates points counter clockwise about the $z$-axis. The field $\bm{u}_\text{div}$ pushes points away from origin with speed proportional to the distance from the origin. For each field, only one contribution to the velocity gradient tensor is non-zero. For the field $\bm{u}_D$, one may compute
 :::{math}
 :enumerated: false
-\bm{D}(\bm{v}_D)&=\frac{v_0}{L_0}(\bm{\hat{x}}\bm{\hat{x}}-\bm{\hat{y}}\bm{\hat{y}}), & \bm{\Omega}(\bm{v}_D)&=\bm{0}, & \nabla\cdot\bm{v}_D&=0,\\
-\bm{D}(\bm{v}_\Omega)&=\bm{0}, & \bm{\Omega}(\bm{v}_\Omega)&=\frac{v_0}{L_0}(\bm{\hat{x}}\bm{\hat{y}}-\bm{\hat{y}}\bm{\hat{x}}), & \nabla\cdot\bm{v}_\Omega&=0, \\
-\bm{D}(\bm{v}_\text{div})&=\bm{0}, & \bm{\Omega}(\bm{v}_\text{div})&=\bm{0}, & \nabla\cdot\bm{v}_\text{div}&=\frac{2v_0}{L_0}.
+\bm{D}(\bm{u}_D)&=\frac{u_0}{L_0}(\bm{\hat{x}}\otimes\bm{\hat{x}}-\bm{\hat{y}}\otimes\bm{\hat{y}}),\\
+\bm{\Omega}(\bm{u}_D)&=\bm{0},\\
+\nabla\cdot\bm{u}_D&=0.
 :::
-Integrate then points in space according to the differential equation
+For the field $\bm{u}_\Omega$, one computes instead
 :::{math}
 :enumerated: false
-\frac{d\bm{x}(t)}{dt}=\bm{v}(\bm{x}(t)),
+\bm{D}(\bm{u}_\Omega)&=\bm{0},\\
+\bm{\Omega}(\bm{u}_\Omega)&=\frac{u_0}{L_0}(\bm{\hat{x}}\otimes\bm{\hat{y}}-\bm{\hat{y}}\otimes\bm{\hat{x}}),\\
+\nabla\cdot\bm{u}_\Omega&=0.
 :::
-until a time of $t=v_0/(2L_0)$. A square of points, initially standing on it's corner, changes in the following manner under different vector fields
+Finally, for the field $\bm{u}_\text{div}$, one obtains
+:::{math}
+:enumerated: false
+\bm{D}(\bm{u}_\text{div})&=\bm{0},\\
+\bm{\Omega}(\bm{u}_\text{div})&=\bm{0},\\
+\nabla\cdot\bm{u}_\text{div}&=\frac{3u_0}{L_0}.
+:::
+To demonstrate that each part of the $\nabla\bm{u}$ tensor indeed corresponds to the stated motion, integrate points in space according to the differential equation
+:::{math}
+:enumerated: false
+\frac{d\bm{x}(t)}{dt}=\bm{u}(\bm{x}(t)),
+:::
+until a time of $t=u_0/(2L_0)$ for each of the specified vector fields $\bm{u}$. For the integration, one may use a script similar as in {numref}`example-odeint`. The projection of a cube of points onto the $x$-$y$ plane, initially standing on it's edge, changes in the following manner under the different vector fields
 :::{image} ./figs/example-fig-D-Omega-div-flow-individually.svg
 :align: center
 :width: 100%
 :::
-The field $\bm{u}_D$ has stretched the square in the $x$-direction and squeezed it in the $y$-direction, corresponding to non-isotropic volume-preserving deformation. The field $\bm{u}_\Omega$ has rotated the square without deforming it. The field $\bm{u}_\text{div}$ has isotropically scaled the square volume.
+The field $\bm{u}_D$ has indeed stretched the cube in the $x$-direction and squeezed it in the $y$-direction, corresponding to non-isotropic volume-preserving deformation. The field $\bm{u}_\Omega$ has rotated the square around the $z$-axis without deforming it. The field $\bm{u}_\text{div}$ has isotropically scaled the cube volume.
 
-More complicated combined effects are observed for velocity fields that have more complicated spatial dependencies. For example, the velocity field
+More diverse effects are observed for velocity fields that have more complicated spatial dependencies. For example, the velocity field
 :::{math}
 :enumerated: false
-\bm{u}=u_0\frac{-y\bm{\hat{x}}+x\bm{\hat{y}}}{\sqrt{x^2+y^2}}+\frac{u_0}{L_0^2}(x^2\bm{\hat{x}}+y^2\bm{\hat{y}}),
+\bm{u}=u_0\frac{-y\bm{\hat{x}}+x\bm{\hat{y}}}{\sqrt{x^2+y^2}}+\frac{u_0}{L_0^2}(x^2\bm{\hat{x}}+y^2\bm{\hat{y}}+z^2\bm{\hat{z}}),
 :::
-results in non-uniform rotation and deformation.
+has non-vanishing contributions to all of the three parts of the $\nabla\bm{u}$ tensor field. The resulting motion corresponds to non-uniform rotation with constant tangential speed around the $z$-axis and in non-uniform isotropic deformation, as illustrated int the projection into $x$-$y$ plane below.
 :::{image} ./figs/example-fig-D-Omega-div-flow-complicated.svg
 :align: center
 :width: 50%
