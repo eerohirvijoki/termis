@@ -449,13 +449,12 @@ Being now aware of the effects of vector fields on the movement of sets of point
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
-With the help of the divergence theorem and vector calculus rules the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
+With the help of the divergence theorem and vector calculus rules, the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
 :::{math}
 :label: eq:leibniz-rule-volume-form
-\frac{d}{dt}\int_{V(t)}\bm{f}dV&=\int_{V(t)}\left(\partial_t \bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\\
-&=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV.
+\frac{d}{dt}\int_{V(t)}\bm{f}dV=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV.
 :::
-It is this last form of the Leibniz rule that enables one to convert the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
+In this last form the Leibniz rule enables conversion of the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
 
 ::::{proof:example}
 The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u>0$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
