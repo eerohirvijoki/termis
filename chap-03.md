@@ -444,14 +444,14 @@ The map describes a helical trajectory with constant angular velocity $\omega$ a
 
 Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
 :::{math}
-:label: eq:leibniz-rule-surface-form
+:label: eq-leibniz-rule-surface-form
 \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notably, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
 With the help of the divergence theorem and vector calculus rules, the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
 :::{math}
-:label: eq:leibniz-rule-volume-form
+:label: eq-leibniz-rule-volume-form
 \frac{d}{dt}\int_{V(t)}\bm{f}dV=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV.
 :::
 In this last form the Leibniz rule enables conversion of the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
@@ -857,7 +857,84 @@ which recovers the familiar and well-known rule for differentiating one-dimensio
 
 (sec-conservation-of-mass)=
 ## <span class="elementary"></span> Conservation of mass
-Consider a volume 
+Consider a time-dependent volume $V(t)$ of fluid moving according to the fluid's velocity field $\bm{v}(\bm{x},t)$ as in {numref}`fig-material-volume`. Such volume is tied to the fluid material and generally referred to as a material volume. Mass within it remains fixed in time, regardless of what happens to the volume shape. This is is referred to as conservation of mass.
+::::{figure} ./figs/fig-material-volume.svg
+:label: fig-material-volume
+:align: center
+:width: 100%
+Evolution of a volume $V(t)$ attached to the flow of the fluid's velocity field $\bm{v}(\bm{x},t)$.
+::::
+
+The conservation of mass within any material volume has consequences for the density field $\rho(\bm{x},t)$. A differential volume element $dV$ carries a differential mass of $\rho dV$ of the fluid. A macroscopic material volume $V(t)$ therefore carries the mass $\int_{V(t)}\rho dV$. Since the mass within a material volume remains constant in time, the time derivative of the mass must be zero.
+:::{math}
+\frac{d}{dt}\int_{V(t)}\rho dV=0, \qquad \text{Conservation of mass}.
+:::
+Next apply the Leibniz integral differentiation rule {numref}`eq-leibniz-rule-surface-form` and {numref}`eq-leibniz-rule-volume-form` by setting $\bm{f}=\rho$ and $\bm{u}=\bm{v}$. The time derivative of the mass within a material volume can then be expressed as 
+:::{math}
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho dV}_{\substack{\text{Rate of change of}\\\text{fluid mass in}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t\rho \,dV}_{\substack{\text{Contribution from}\\\text{local temporal}\\\text{density change}}}+\underbrace{\int_{\partial V(t)}\rho\underbrace{\bm{v}\cdot\bm{\hat{n}}dA}_{\substack{\text{Local rate of}\\\text{volume change}}}}_{\substack{\text{Contribution from}\\\text{boundary movement}}}\\
+&=\int_{V(t)}\left(\partial_t\rho+\nabla\cdot(\bm{v}\rho)\right)dV.
+:::
+Since the time derivative of mass must vanish, the integral on the right must be zero. However, the choice of the initial $V(t_0)$ is arbitrary, and the integral must therefore vanish for every volume $V(t)$. Consequently the integrand must be zeros, which results in the partial differential equation for density
+:::{math}
+:label: eq-density
+\partial_t\rho+\nabla\cdot(\bm{v}\rho)=0.
+:::
+This equation is often referred to as the continuity equation and it generally describes the changes in density in response to the fluid's velocity.
+
+(example-density-change)=
+::::{proof:example}
+Consider a velocity field of the form
+:::{math}
+:enumerated: false
+\bm{v}(\bm{x},t)=v(z)\bm{\hat{z}}
+:::
+describing one-dimensional time-independent flow into $\bm{\hat{z}}$-direction with speed $v(z)$ that may vary with respect to the coordinate $z$. Assuming that also the density is steady in time and changes only with respect to the coordinate $z$, the fluid's density equation reduces to
+:::{math}
+:enumerated: false
+\partial_t\rho+\nabla\cdot(\bm{v}\rho) \quad \implies \quad \frac{d}{dz}(v(z)\rho(z))=0
+:::
+This means the scalar velocity $v(z)$ times the density $\rho(z)$ has to be a constant, and that density is given by
+:::{math}
+:enumerated: false
+\rho(z)=\frac{\rho_0v_0}{v(z)}
+:::
+with $\rho_0$ and $v_0$ some constants. If the fluid at some location $z$ flows with slower speed, the density at that location must be higher to satisfy the conservation of mass. Conversely, if the fluid locally has a higher speed, the density must be lower.
+::::
+
+The physical law of mass conservation has a mathematical consequence that is found particularly convenient in sections that follow. According to the Leibniz rule {numref}`eq-leibniz-rule-volume-form` and the continuity equation {numref}`eq-density`, the time rate of change of a quantity $\rho\bm{f}$, where $\bm{f}$ may be any scalar, vector, or tensor field, can be computed as
+:::{math}
+\frac{d}{dt}\int_{V(t)}\rho \bm{f} dV
+&=\int_{V(t)}\left(\partial_t(\rho\bm{f})+\bm{v}\cdot\nabla(\rho\bm{f})+\rho\bm{f}\nabla\cdot\bm{v}\right)dV\\
+&=\int_{V(t)}\left(\bm{f}(\partial_t\rho+\nabla\cdot(\bm{v}\rho))+\rho(\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f})\right)dV\\
+&=\int_{V(t)}\rho(\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f})dV.
+:::
+Physically, the expression $\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f}$ describes the time rate of change of $\bm{f}$ at a point which moves according to the vector field $\bm{v}$. This can be verified by letting the flow map $\bm{\phi}_t$ of the vector field $\bm{v}$ do its job:
+:::{math}
+\frac{d}{dt}\bm{f}(\bm{\phi}_t(\bm{x}),t)=(\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f})\big|_{(\bm{\phi}_t(\bm{x}),t)}
+:::
+It is therefore common to refer to the scalar-valued differential operator 
+:::{math}
+:label: eq-material-derivative
+\frac{D}{Dt}=\partial_t+\bm{v}\cdot\nabla, \qquad \text{Material derivative}
+:::
+as the material derivative. The term and the operator are used extensively in fluid and solid mechanics texts. In terms of it, one has the following integral identity over material volumes
+:::{math}
+:label: eq-rho-identity
+\frac{d}{dt}\int_{V(t)}\rho \bm{f} dV=\int_{V(t)}\rho\frac{D\bm{f}}{Dt}dV
+:::
+and the continuity equation {numref}`eq-density` can be written also in the form
+:::{math}
+\frac{1}{\rho}\frac{D\rho}{Dt}=-\nabla\cdot\bm{v}.
+:::
+In this form, the equation indicates that the relative change in density along the fluid flow results from the velocity field diverging or converging, as observed also in {numref}`example-density-change`.
+
+::::{proof:example}
+The acceleration of a point $\bm{\phi}_t(\bm{x})$ following the velocity field $\bm{v}$ equals the material derivative of the velocity field evaluated along the trajectory at the same point:
+\begin{align*}
+\frac{d^2}{dt^2}\bm{\phi}_t(\bm{x})=\frac{d}{dt}\bm{v}(\bm{\phi}_t(\bm{x}),t)=(\partial_t\bm{v}+\bm{v}\cdot\nabla\bm{v})\big|_{(\bm{\phi}_t(\bm{x}),t)}=\frac{D\bm{v}}{Dt}\big|_{(\bm{\phi}_t(\bm{x}),t)}.
+\end{align*}
+::::
+
 
 ## <span class="elementary"></span> Conservation of momentum
 According to Newton's second law, the rate of change of linear momentum of a body equals the net forces acting on it. The forces acting on a volume of fluid include gravity that is distributed throughout the fluid volume, and mechanical contact force that is distributed on the surface of the body. Since the total force must be finite, yet distributed over the body volume and surface, both the body and surface force need to be treated differentially while the total force is an integral of the differential force. 
