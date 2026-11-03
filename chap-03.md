@@ -169,6 +169,10 @@ while the curl of a vector field results in another vector field
 :::{math}
 \nabla\times\bm{a}=\sum_{i,j,k=1}^3\varepsilon_{ijk}\partial_ia_j\bm{\hat{x}}_k.
 :::
+Here $\varepsilon_{ijk}$ is the alternating Levi-Civita symbol in three dimensions, familiar from the cross product of two vectors, and defined
+:::{math}
+\varepsilon_{ijk}=\left\{\begin{aligned}+&1, &&\text{if}\,(i,j,k)\,\text{is an even permutation of}\,(1,2,3),\\-&1, &&\text{if}\,(i,j,k)\,\text{is an odd permutation of}\,(1,2,3),\\&0,&&\text{otherwise}.\end{aligned}\right.
+:::
 The step up from vectors to tensors happens if $\nabla$ acts on a vector field without the $(\cdot)$ or $(\times)$ between. The gradient of a vector field $\bm{a}$ is formally expressed using the tensor product. In Cartesian coordinates, it results in
 :::{math}
 \nabla\bm{a}=\nabla\otimes\bm{a}=\sum_{i,j=1}^3\partial_i a_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
@@ -317,10 +321,6 @@ Applying these identities, both the right and left tensor-vector cross-product c
 \bm{\sigma}\times\bm{a}=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell k j}\sigma_{i\ell}a_k\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,\\
 \bm{a}\times\bm{\sigma}=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell ki}a_\ell \sigma_{kj}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j.
 :::
-Here $\varepsilon_{ijk}$ is the alternating Levi-Civita symbol in three dimensions, familiar from the cross product of two vectors, and defined
-:::{math}
-\varepsilon_{ijk}=\left\{\begin{aligned}+&1, &&\text{if}\,(i,j,k)\,\text{is an even permutation of}\,(1,2,3),\\-&1, &&\text{if}\,(i,j,k)\,\text{is an odd permutation of}\,(1,2,3),\\&0,&&\text{otherwise}.\end{aligned}\right.
-:::
 Also the tensor-tensor dot-product of two rank-2 tensors $\bm{\sigma}$ and $\bm{\pi}$ results in a new rank-2 tensor
 :::{math}
 \bm{\sigma}\cdot\bm{\pi}=\sum_{i,j,k=1}^{3}\sigma_{ik}\pi_{kj}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,
@@ -402,7 +402,7 @@ Since $\bm{v}(\bm{x},t)$ is a vector field, it can move not only the specific po
 :label: eq-flowmap
 \frac{d}{dt}\bm{\phi}_t(\bm{x})=\bm{v}(\bm{\phi}_t(\bm{x}),t), \qquad \bm{\phi}_{t_0}(\bm{x})=\bm{x}.
 :::
-The flow map $\bm{\phi}_t$ is a vector valued function that takes in a point $\bm{x}$ at time $t_0$ and outputs a new point $\bm{\phi}_t(\bm{x})$ that corresponds to the location of the potion at a later time $t$ if it were to follow the vector field $\bm{v}(\bm{x},t)$. Consequently, the flow map can be used to describe how an arbitrary set of points $\Omega(t_0)$ recorded at time $t_0$ would follow the vector field and evolve into a new set of points $\Omega(t)=\{\bm{\phi}_t(\bm{x})|\bm{x}\in\Omega(t_0)\}$ at time $t$. This evolution is illustrated in {numref}`fig-flowmap` for a surface. 
+The flow map $\bm{\phi}_t$ is a vector valued function that takes in a point $\bm{x}$ at time $t_0$ and outputs a new point $\bm{\phi}_t(\bm{x})$ that corresponds to the location of the position at a later time $t$ if it were to follow the vector field $\bm{v}(\bm{x},t)$. Consequently, the flow map can be used to describe how an arbitrary set of points $\Omega(t_0)$ recorded at time $t_0$ would follow the vector field and evolve into a new set of points $\Omega(t)=\{\bm{\phi}_t(\bm{x})|\bm{x}\in\Omega(t_0)\}$ at time $t$. This evolution is illustrated in {numref}`fig-flowmap` for a surface. 
 
 :::{figure} ./figs/fig-flowmap.svg
 :label: fig-flowmap
@@ -447,7 +447,7 @@ Being now aware of the effects of vector fields on the movement of sets of point
 :label: eq:leibniz-rule-surface-form
 \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
-According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notable, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
+According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notably, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
 With the help of the divergence theorem and vector calculus rules, the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
 :::{math}
@@ -674,7 +674,7 @@ The scipy-library offers the method odeint for numerical solution of ordinary di
 :end-line: 49
 :linenos:
 ```
-Running the script results in a figure below that confirms the tracjetory for the field $\bm{v}$ to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity. 
+Running the script results in a figure below that confirms the trajectory for the field $\bm{v}$ to be helical and to expand into $\bm{\hat{z}}$ direction at constant velocity. 
 :::{image} ./figs/example-fig-flowmap-with-odeint.svg
 :align: center
 :width: 80%
@@ -715,7 +715,7 @@ To demonstrate that each part of the $\nabla\bm{u}$ tensor indeed corresponds to
 :enumerated: false
 \frac{d\bm{x}(t)}{dt}=\bm{u}(\bm{x}(t)),
 :::
-until a time of $t=(2L_0/u_0)$ for each of the specified vector fields $\bm{u}$. For the integration, one may use a script similar as in {numref}`example-odeint`. The projection of a cube of points onto the $x$-$y$ plane, initially standing on it's edge, changes in the following manner under the different vector fields
+until a time of $t=(2L_0/u_0)$ for each of the specified vector fields $\bm{u}$. For the integration, one may use a script similar as in {numref}`example-odeint`. The projection of a cube of points onto the $x$-$y$ plane, initially standing on its edge, changes in the following manner under the different vector fields
 :::{image} ./figs/example-fig-D-Omega-div-flow-individually.svg
 :align: center
 :width: 100%
@@ -759,7 +759,7 @@ Perform then a change of integration labels with the help of the flow map so tha
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}}&=\int_{S(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}&=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}.
 :::
-On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)$, and $V(t)$. On the right, the label $\bm{x}$ denotes the time-indepent domains $C(t_0)$, $S(t_0)$, $V(t_0)$ instead, and the time dependence has been moved inside the integrals via the change of integration labels with the flow map. Since the integration domains no longer depend on time, computation of time derivatives of the integrals can be performed. Before that, use the chainrule and {numref}`eq-dl-dA-dV-dt` to compute the derivatives
+On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)$, and $V(t)$. On the right, the label $\bm{x}$ denotes the time-independent domains $C(t_0)$, $S(t_0)$, $V(t_0)$ instead, and the time dependence has been moved inside the integrals via the change of integration labels with the flow map. Since the integration domains no longer depend on time, computation of time derivatives of the integrals can be performed. Before that, use the chain rule and {numref}`eq-dl-dA-dV-dt` to compute the derivatives
 :::{math}
 &\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
 &=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}
@@ -797,7 +797,7 @@ For the volume integral, the same steps provides the formula
 :label: eq-leibniz-rule-volume
 \frac{d}{dt}\int_{V(t)}(\bm{f}dV)\big|_{(\bm{x},t)}=\int_{V(t)}\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{x},t)}.
 :::
-Since the integration labels on boths sides now are the same again, they are usually dropped. 
+Since the integration labels on both sides now are the same again, they are usually dropped. 
 
 Each of the derived integral formulae have their place in fluid mechanics. In these notes, equation {numref}`eq-leibniz-rule-volume` is utilized to derive the fluid equations and to establish engineering balance equations over control volumes. Once fluid equations are established, the equation {numref}`eq-leibniz-rule-surface` can be used to prove the conservation of vorticity flux through a surface that moves with the fluid in inviscid barotropic flows, a result better known as Helmholtz's vortex theorem. The equation {numref}`eq-leibniz-rule-line`, on the other hand, could be used to prove Kelvin's circulation theorem for similar fluids. These theorems have important applications in studies of atmospheric flows.
 
@@ -820,7 +820,7 @@ with $a(t)$ and $b(t)$ some time-dependent, well-behaving functions describing t
 \int_{a(t)}^{b(t)} f(x,t) dx&=\int_{\psi(a(t_0),t)}^{\psi(b(t_0),t)}f(x,t)dx=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)d\psi(x_0,t)\\
 &=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0.
 :::
-To proceed, apply the chainrule to the derivative of the flow map
+To proceed, apply the chain rule to the derivative of the flow map
 :::{math}
 :enumerated: false
 \frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}&=\frac{\partial^2\psi(x,t)}{\partial x\partial t}\Big|_{(x_0,t)}=\frac{\partial u(\psi(x,t),t)}{\partial x}\Big|_{(x_0,t)}\\
