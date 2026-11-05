@@ -927,6 +927,7 @@ and the continuity equation {numref}`eq-continuity` can be written also in the f
 :::
 In this form, the equation indicates that a relative change in density along the fluid flow results from the velocity field diverging or converging, as observed also in {numref}`example-density-change`.
 
+(example-acceleration-of-a-point)=
 ::::{proof:example}
 The acceleration of a point $\bm{\phi}_t(\bm{x})$ following the velocity field $\bm{v}$ equals the material derivative of the velocity field evaluated along the trajectory at the same point:
 :::{math}
@@ -937,17 +938,18 @@ The acceleration of a point $\bm{\phi}_t(\bm{x})$ following the velocity field $
 
 
 ## <span class="elementary"></span> Conservation of momentum
-According to Newton's second law, the rate of change of linear momentum in a material volume equals the net forces acting on it. In Newtonian mechanics, this is referred to as the principle of momentum conservation. The forces acting on a material volume consist of gravity and mechanical contact forces. Gravity acts throughout the volume as a body force and has a remote source, typically the mass of Earth. Mechanical contact forces act on the surface of the material volume and arise locally from direct contact of the volume with another material volume. Since the total force on a material volume is finite, yet distributed over the volume and its surface, local expressions for both gravity and contact force must be differential, and the total force be expressed as integrals of the differential forces over the material volume and its surface.
+According to Newton's second law, the rate of change of linear momentum of a material volume equals the net forces acting on it. In Newtonian mechanics, this is referred to as the principle of momentum conservation. The forces acting on a material volume consist of gravity and mechanical contact forces. Gravity acts throughout the volume as a body force and has a remote source, typically the mass of Earth. Mechanical contact forces act on the surface of the material volume and arise locally from direct contact of the volume with another material volume. Since the total force on a material volume is finite, yet distributed over the volume and its surface, local expressions for both gravity and contact force must be differential, and the total force expressed as integrals of the differential forces over the material volume and its surface.
 
 Denote with $\bm{g}$ the gravitational acceleration. According Newton's second law, acceleration describes force per unit mass. Since a differential volume $dV$ of fluid contains a differential mass $\rho dV$, the differential body force from gravity on a differential volume of fluid is given by
 :::{math}
 \delta\bm{F}_b=\rho\bm{g}dV.
 :::
-While $\delta\bm{F}_b$ is vector valued, it is not a force vector but a differential object. Let $dA$ be the differential area on the surface of the volume, oriented with respect to an outward surface unit normal vector $\bm{\hat{n}}$. Denote with the vector field $\bm{t}$ the force on the surface per unit area, referred to as traction. The differential contact force $\delta\bm{F}_s$ acting locally on a surface is then
+
+Let then $dA$ be a differential area on the surface of the volume, oriented with respect to an outward surface unit normal vector $\bm{\hat{n}}$. Denote with the vector field $\bm{t}$ the force on the surface per unit area, referred to as traction. The differential contact force $\delta\bm{F}_s$ acting locally on a surface is then
 :::{math}
 \delta\bm{F}_s=\bm{t}dA.
 :::
-While traction has the the same units as pressure, it is also has direction, and is vector with finite length. Also $\delta\bm{F}_s$ is vector valued differential object. The differential forces, as acting on a volume of $V(t)$ with a boundary $\partial V(t)$ are illustrated in {numref}`fig-body-and-surface-forces`.
+While both $\delta\bm{F}_b$ and $\delta\bm{F}_b$ are vector valued, they are not vectors but differential objects. They become authentic force vectors once integrated over finite volume and surface area, respectively The differential forces acting on a volume $V(t)$ with a boundary $\partial V(t)$ are illustrated in {numref}`fig-body-and-surface-forces` together with the surface outward unit normal.
 :::{figure} ./figs/fig-body-and-surface-forces.svg
 :label: fig-body-and-surface-forces
 :align: center
@@ -955,46 +957,39 @@ While traction has the the same units as pressure, it is also has direction, and
 The differential surface and body forces $\delta\bm{F}_s$ and $\delta\bm{F}_b$ acting on a fluid volume.
 :::
 
-Assuming the fluid moves with velocity $\bm{v}$, the differential amount of momentum the fluid carries in a differential volume $dV$ is $\rho\bm{v}dV$. For a macroscopic volume $V(t)$ moving along the fluid's velocity field $\bm{v}$, Newton's law then reads
-\begin{align}\label{eq:newton}
-    \underbrace{\frac{d}{dt}\int_{V(t)}\rho\bm{v}dV}_{\substack{\text{Rate of change of}\\\text{momentum within}\\\text{volume $V(t)$}}} = \underbrace{\int_{V(t)}\delta\bm{F}_b}_{\substack{\text{Force acting}\\\text{on fluid inside}\\\text{the volume}}} + \underbrace{\int_{\partial V(t)}\delta\bm{F}_s}_{\substack{\text{Force from}\\\text{mechanical}\\\text{surface contact}}}.
-\end{align}
-On the left of Eq.~\eqref{eq:newton}, the material derivative identity~\eqref{eq:rho-identity} allows one to move the time derivative inside the integral
-\begin{align}
-    \frac{d}{dt}\int_{V(t)}\rho\bm{v}dV = \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV.
-\end{align}
-On the right of Eq.~\eqref{eq:newton}, the total force involves both a volume and a surface integral
-\begin{align}
-    \int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{t}(\bm{\hat{n}})dA,
-\end{align}
-which, for now, prevents finding a local differential equation to describe the time derivative of the fluid velocity. The surface integral on the right must first be expressed as a volume integral. This is achieved by requiring Newton's second law to hold over arbitrary volumes and investigating two specific volumes to derive a linear relation for the traction with respect to the surface unit normal vector
-\begin{align}
-    \bm{t}(\bm{\hat{n}})=\bm{\sigma}\cdot\bm{\hat{n}},
-\end{align} 
-where the rank-2 tensor $\bm{\sigma}$ is referred to as stress. The process is detailed below.
+With $\bm{v}$ the fluid's velocity field, the differential amount of momentum the fluid carries in a differential volume $dV$ is $\rho\bm{v}dV$. For a macroscopic material volume $V(t)$, Newton's second law then reads
+:::{math}
+:label: eq-newton
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho\bm{v}dV}_{\substack{\text{Time rate of change}\\\text{of momentum in}\,V(t)}} = \underbrace{\int_{V(t)}\delta\bm{F}_b}_{\substack{\text{Total body force}\\\text{on volume}\,V(t)}} + \underbrace{\int_{\partial V(t)}\delta\bm{F}_s}_{\substack{\text{Total surface force}\\\text{on boundary}\,\partial V(t)}},
+:::
+On the left, the material derivative identity {numref}`eq-rho-identity` enables one to move the time derivative inside the integral and to write
+:::{math}
+\frac{d}{dt}\int_{V(t)}\rho\bm{v}dV = \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV.
+:::
+On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in the case of mass conservation. A careful investigation of Newton's second law reveals, however, that the traction on arbitrary surface must be expressible in terms of a symmetric rank-2 tensor $\bm{\sigma}$, referred to as stress
+:::{math}
+\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}.
+:::
+The expression for traction in terms a rank-2 tensor and the surface unit normal vector emerges from requiring Newton's second law to be valid in the first place. The symmetry of the tensor then emerges from requiring that only torques from the body and surface forces can contribute to the time rate of change of the angular momentum of a material volume. The detailed argumentation leading to this conclusion is presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
+With the help of a symmetric stress tensor and the divergence theorem, the total force on a material fluid volume can then be written as a volume integral
+:::{math}
+\int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s&=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA\\
+&=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma})dV.
+:::
 
-The linear dependency of traction on the surface unit normal then enables the use of divergence theorem to convert the surface integral into a volume integral
-\begin{align}
-\int_{\partial V(t)}\bm{t}(\bm{\hat{n}})dA=\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA=\int_{V(t)}\nabla\cdot\bm{\sigma} dV,
-\end{align}
-and the Newton's second law over the volume $V(t)$ can be seen to equal the equation
-\begin{align}
-    \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV=\int_{V(t)}(\rho \bm{g}+\nabla\cdot \bm{\sigma}) dV.
-\end{align}
-Since the initial choice of the volume $V(t)$ is arbitrary, the condition must hold true for all volumes within the fluid. Consequently, the fluid velocity has to satisfy the following local partial differential equation
-\begin{align}\label{eq:cauchy-momentum}
-    \rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma}.
-\end{align}
-This equation is commonly referred to as the Cauchy's momentum equation. 
+With both the left and right side of Newton's second law {numref}`eq-newton` for a material volume expressed as volume integrals, and the initial choice of the volume $V(t)$ being arbitrary, the integrand on the left and righ must be equal. Consequently, the fluid velocity field has to satisfy the following local partial differential equation
+:::{math}
+\rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma},
+:::
+commonly referred to as the Cauchy's momentum equation. 
 ::::{proof:example}
-Recall that the material derivative of the velocity field at a point $\bm{x}(t)$ moving along the fluid flow represented the local acceleration of the point
-\begin{align*}
-\frac{d^2\bm{x}(t)}{dt^2}=\frac{D\bm{v}}{Dt}\Big|_{(\bm{x}(t),t)}.
-\end{align*}
-Cauchy's momentum equation then tells that the local acceleration of the point $\bm{x}(t)$ is caused by gravity and divergence of the stress tensor
-\begin{align*}
-\frac{d^2\bm{x}(t)}{dt^2}=\left(\bm{g}+\rho^{-1}\nabla\cdot\bm{\sigma}\right)\Big|_{(\bm{x}(t),t)}.
-\end{align*}
+Recall from {numref}`example-acceleration-of-a-point` that the material derivative of the velocity field $\bm{v}$ at a point $\bm{\phi}_t(\bm{x})$ that moves with the fluid represents the local acceleration of the point $\bm{\phi}_t(\bm{x})$.
+Cauchy's momentum equation then tells that the local acceleration is caused by gravity and divergence of the stress tensor
+:::{math}
+:enumerated: false
+\frac{d^2}{dt^2}\bm{\phi}_t(\bm{x})=\frac{D\bm{v}}{Dt}\big|_{(\bm{\phi}_t(\bm{x}),t)}=\left(\bm{g}+\rho^{-1}\nabla\cdot\bm{\sigma}\right)\big|_{(\bm{\phi}_t(\bm{x}),t)}.
+:::
+The contribution from gravitational acceleration exists even if the gravitation force distribution were constant throughout space. Non-vanishing contribution from contact forces, however, requires the contact force to not be uniform throughout the space.
 ::::
 ::::{proof:example}
 Consider the fluid is at rest and not moving at all, meaning the velocity field vanishes $\bm{v}(\bm{x},t)=\bm{0}$. The Cauchy's momentum equation still holds true, and reads
@@ -1010,78 +1005,86 @@ From experiments one knows that the gravity in column of static water or air is 
 (sec-stress-tensor)=
 ## <span class="advanced"></span> Cauchy's theorem and emerge of the stress tensor
 For a continuous vector valued function $\bm{f}:\Omega\mapsto \mathbb{R}^n$ defined over a connected set $\Omega\subset\mathbb{R}^m$, the Mean Value Theorem tells that the average value of the integral of $\bm{f}$ over the set $\Omega$ lies in the convex hull of the image of $\Omega$ under $\bm{f}$, namely 
-\begin{align*}
+:::{math}
 \frac{1}{vol(\Omega)}\int_\Omega\bm{f}d^m\bm{x} \in \text{conv}(\{\bm{f}(\bm{x})|\bm{x}\in\Omega\}).
-\end{align*}
+:::
 Using this result, the traction vector can be shown to satisfy the identity
-\begin{align*}
+:::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\bm{\sigma}(\bm{x})\cdot\bm{\hat{n}}(\bm{x}).
-\end{align*}
+:::
 
-Choose an $\epsilon$-parametrized volume $V(t,\epsilon)$ moving with the flow, and which at the instant $t$ is a cylinder centered at the point $\bm{x}$ with the symmetry axis aligned with the unit normal vector $\bm{\hat{n}}(\bm{x})$ of the surface on which one inspects the traction vector. See the figure for clarification.
-\begin{center}
-\input{\rootfolder/code/fig-cylinder} 
-\end{center}
+Choose an $\epsilon$-parametrized volume $V(t,\epsilon)$ moving with the flow, and which at the instant $t$ is a cylinder centered at the point $\bm{x}$ with the symmetry axis aligned with the unit normal vector $\bm{\hat{n}}(\bm{x})$ of the surface on which one inspects the traction vector. See the {numref}`fig-stress-momentum-cylinder` for clarification.
+::::{figure} ./figs/fig-stress-momentum-cylinder.svg
+:label: fig-stress-momentum-cylinder
+:align: center
+:width: 60%
+A cylindrical volume around a point $\bm{x}$ oriented with respect to a unit outward surface normal.
+::::
 Denote the top, bottom, and shell surfaces of the cylinder as the sets of points $S_n(t,\epsilon)$, $S_{-n}(t,\epsilon)$ and $S_r(t,\epsilon)$ with corresponding areas $A_n(\epsilon)=\pi R(\epsilon)^2$ for the top and bottom, and $A_r(\epsilon)=2\pi R(\epsilon)H(\epsilon)$ for the shell. The volume of the cylinder is $V(t,\epsilon)=A_n(\epsilon)H(\epsilon)$. According to the mean value theorem, one now has
-\begin{align*}
+:::{math}
 \frac{1}{V(t,\epsilon)}\int_{V(t,\epsilon)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV&=\bm{F}(\epsilon)\in \text{conv}\left(\left\{\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)_{\bm{y}}|\bm{y}\in V(t,\epsilon)\right\}\right),
 \\
 \frac{1}{A_n(t,\epsilon)}\int_{S_n(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&= \bm{t}_n(\epsilon)\in\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_n(t,\epsilon)\}),
 \\
 \frac{1}{A_n(t,\epsilon)}\int_{S_{-n}(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_{-n}(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_{-n}(t,\epsilon)\}),\\
 \frac{1}{A_r(t,\epsilon)}\int_{S_r(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_r(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},\bm{\hat{r}}(\bm{y}))|\bm{y}\in S_r(t,\epsilon)\}).
-\end{align*}
-At instance $t$, Newton's law~\eqref{eq:newton} over the volume $V(t,\epsilon)$ then becomes
-\begin{align*}
+:::
+At instance $t$, Newton's law {numref}`eq-newton` over the volume $V(t,\epsilon)$ then becomes
+:::{math}
 \bm{F}(\epsilon) V(t,\epsilon)&=(\bm{t}_n(\epsilon)+\bm{t}_{-n}(\epsilon))A_n(t,\epsilon)+\bm{t}_r(\epsilon)A_r(t,\epsilon).
-\end{align*} 
+:::
 Divide both sides with the area $A_n(t,\epsilon)$ and choose the parametrization $R(\epsilon)=\epsilon R_0$, $H(\epsilon)=\epsilon^2H_0$. At the limit $\epsilon\to 0$, the ratios $V(t,\epsilon)/A_n(t,\epsilon)\to 0$ and $A_r(t,\epsilon)/A_n(t,\epsilon)\to 0$ vanish, the sets $S_n(t,\epsilon)\to \bm{x}$ and $S_{-n}(t,\epsilon)\to\bm{x}$ collapse to the point $\bm{x}$, while for the vectors one has $\bm{t}_n(\epsilon)\to\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))$ and $\bm{t}_{-n}(\epsilon)\to\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x}))$. At the limit, Newton's law for the chosen cylindrical volume therefore provides a relation
-\begin{align*}
+:::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=-\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x})).
-\end{align*}
+:::
     
 Mathematically the result implies that the traction vector is odd with respect to the dependency on the unit normal of the surface it acts on. Physically the result reflects Newton's third law. A surface has outward side ($\bm{\hat{n}}$) and an inward side ($-\bm{\hat{n}}$). On any action on the outward side, there is always a corresponding reaction on the inward side, and of exactly the same magnitude but into opposite direction, as Newton's third law says. This effect is not seen locally for the body forces because the reaction to gravity does not happen inside the fluid but at a distant point outside the fluid where Earth, the cause for gravity, resides.
 
-Next consider a different $\epsilon$-parametrized volume $V(t,\epsilon)$, which at instance $t$ is a trirectangular tetrahedron attached to the point $\bm{x}$ from one corner. Set the direction of the face with the largest surface area to align with the normal $\bm{\hat{n}}(\bm{x})$ as in the figure below.
-\begin{center}
-\input{\rootfolder/code/fig-tetrahedron}
-\end{center}
+Next consider a different $\epsilon$-parametrized volume $V(t,\epsilon)$, which at instance $t$ is a trirectangular tetrahedron attached to the point $\bm{x}$ from one corner. Set the direction of the face with the largest surface area to align with the normal $\bm{\hat{n}}(\bm{x})$ as in {numref}`fig-stress-momentum-tetrahedron`
+::::{figure} ./figs/fig-stress-momentum-tetrahedron.svg
+:label: fig-stress-momentum-tetrahedron
+:align: center
+:width: 85%
+A tetraedric volume with one corner attached to a point $\bm{x}$ and the opposing face oriented with respect to a unit outward surface normal.
+::::
+
 Define the sets $S_i(t,\epsilon)$ to correspond to the faces of the tetrahedron aligned with the local orthogonal unit normal vectors $\bm{\hat{e}}_i(\bm{x})$ and the set $S_n(t,\epsilon)$ to correspond to the face aligned with $\bm{\hat{n}}(\bm{x})$. The corresponding areas are $A_i(t,\epsilon)$ and $A_n(t,\epsilon)$ and satisfy
-\begin{align*}
+:::{math}
 A_i(t,\epsilon)=\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x})A_n(t,\epsilon).
-\end{align*}
+:::
 Now the mean value theorem provides
-\begin{align*}
+:::{math}
 \frac{1}{V(t,\epsilon)}\int_{V(t,\epsilon)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV&=\bm{F}(\epsilon)\in \text{conv}\left(\left\{\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)_{\bm{y}}|\bm{y}\in V(t,\epsilon)\right\}\right),
 \\
 \frac{1}{A_n(t,\epsilon)}\int_{S_n(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&= \bm{t}_n(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_n(t,\epsilon)\}),
 \\
 \frac{1}{A_i(t,\epsilon)}\int_{S_i(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_i(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{e}}_i(\bm{x}))|\bm{y}\in S_i(t,\epsilon)\}).
-\end{align*}
-At instance $t$, Newton's law~\eqref{eq:newton} over the volume $V(t,\epsilon)$ then becomes
-\begin{align*}
+:::
+At instance $t$, Newton's law {numref}`eq-newton` over the volume $V(t,\epsilon)$ then becomes
+:::{math}
 \bm{F}(\epsilon) V(t,\epsilon)&=\bm{t}_n(\epsilon)A_n(t,\epsilon)+\sum_{i=1}^3\bm{t}_i(\epsilon)A_i(t,\epsilon).
-\end{align*} 
+:::
 Divide both sides with $A_n(t,\epsilon)$ and choose the parametrization $L_i=\epsilon L_{i,0}$. At the limit $\epsilon\to 0$, the ratio $V(t,\epsilon)/A_n(t,\epsilon)\to 0$ vanishes, the sets $S_i(t,\epsilon)\to\bm{x}$ and $S_n(t,\epsilon)\to\bm{x}$ collapse to point $\bm{x}$, while for the vectors one has $\bm{t}_i(\epsilon)\to \bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x}))$ and $\bm{t}_n(\epsilon)\to\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))$. At the limit, Newton's law for the chosen tetrahedron volume therefore provides the relation
-\begin{align*}
+:::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=-\sum_{i=1}^3\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x}) \,\bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x})).
-\end{align*}
+:::
     
 The result established with the cylindrical volume can be applied with respect to any surface. In particular, one could choose to study traction vectors on surfaces aligned with respect to the $\bm{\hat{e}}_i(\bm{x})$ to obtain $\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x}))=-\bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x}))$. Now one can write
-\begin{align*}
+:::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\sum_{i=1}^3\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x}) \,\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x})).
-\end{align*}
+:::
 With respect to the basis vectors $\bm{\hat{e}}_i(\bm{x})$, the surface normal can be written $\bm{\hat{n}}(\bm{x})=\sum_{i=1}^3n_i(\bm{x})\,\bm{\hat{e}}_i(\bm{x})$ where the coefficients are $n_i(\bm{x})=\bm{\hat{n}}(\bm{x})\cdot\bm{\hat{e}}_i(\bm{x})$. Therefore
 one finds
-\begin{align*}
+:::{math}
 \bm{t}\left(\bm{x},\sum_{i=1}^3n_i(\bm{x})\,\bm{\hat{e}}_i(\bm{x})\right)=\sum_{i=1}^3n_i(\bm{x})\,\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x}))
-\end{align*}
+:::
 This condition on $\bm{t}$ defines it to be a linear relation with respect to the surface normal $\bm{\hat{n}}$. Therefore
-\begin{align*}
+:::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\bm{\sigma}(\bm{x})\cdot\bm{\hat{n}}(\bm{x}),
-\end{align*}
+:::
 where $\bm{\sigma}(\bm{x})$ is a tensor, referred to as stress.
-	
+
+(sec-symmetry-of-stress)=
 ## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
 For point masses, the definition 
 

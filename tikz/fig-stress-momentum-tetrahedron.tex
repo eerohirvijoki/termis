@@ -1,0 +1,73 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\begin{document}
+
+% Set the viewing angle
+\tdplotsetmaincoords{60}{110}
+
+\begin{tikzpicture}[tdplot_main_coords, scale=4, >=stealth]
+
+    % Coordinates for the vertices
+    \coordinate (O) at (0,0,0) node[above left] {$\bm{x}$};
+    \coordinate (A) at (1,0,0);
+    \coordinate (B) at (0,1,0);
+    \coordinate (C) at (0,0,0.8);
+
+    \fill[black] (O) circle (0.5pt);
+
+    % 1. Draw back edges (hidden) as dashed
+    \draw[dashed, gray] (O) -- (A);
+    \draw[dashed, gray] (O) -- (B);
+    \draw[dashed, gray] (O) -- (C);
+
+    % 2. Draw the coordinate faces with opaqueness
+    \fill[blue!20, opacity=0.4] (O) -- (B) -- (C) -- cycle;
+    \fill[green!20, opacity=0.4] (O) -- (A) -- (C) -- cycle;
+    \fill[yellow!20, opacity=0.4] (O) -- (A) -- (B) -- cycle;
+
+    % Traction vector
+    \coordinate (Center) at (0.5,0.3,0.1);
+    \draw[dashed, very thick, black] (O)--(Center);
+    \draw[-latex, ultra thick, black] (Center)--++($3*(Center)$) node[anchor=west] {$\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))$};
+
+    % 3. Draw the Normal Vectors (Dashed inside/behind, Solid outside)
+    
+    % Normal to x-face (-e1): Starts at x=0 (the blue face)
+    % We draw a dashed bit that looks like it's behind the slanted face
+    \coordinate (Center) at (-0.9,0,0);
+    \draw[dashed, very thick, blue] (O)--(Center);
+    \draw[-latex, ultra thick, blue] (Center)--++($0.33*(Center)$) node[anchor=south] {$-\bm{\hat{e}}_1(\bm{x})$};
+    
+    % Normal to y-face (-e2): Starts at y=0 (the green face)
+    \coordinate (Center) at (0,-0.2,0);
+    \draw[dashed, thick, green!60!black] (O)--(Center);
+    \draw[-latex, thick, green!60!black] (Center)--++($4*(Center)$) node[anchor=north] {$-\bm{\hat{e}}_2(\bm{x})$};
+    
+    % Normal to z-face (-e3): Starts at z=0 (the yellow face)
+    \coordinate(Center) at (0,0,-0.45);
+    \draw[dashed, thick, orange] (O)--(Center);
+    \draw[-latex, ultra thick, orange] (Center)-- ++($(Center)$) node[anchor=north] {$-\bm{\hat{e}}_3(\bm{x})$};
+
+    % 4. Draw the Slanted Face (Front) - Draw after back vectors to ensure layer order
+    \fill[red!30, opacity=0.4] (A) -- (B) -- (C) -- cycle;
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+    % 5. Normal to Slanted Face (n) 
+    \coordinate (Center) at (0.33, 0.33, 0.33);
+    \draw[dashed,very thick, red] (O)--(Center);
+    \draw[-latex, ultra thick, red] (Center) -- ++($2*(Center)$) node[anchor=south west] {$\bm{\hat{n}}(\bm{x})$};
+
+    % Axis labels
+    \draw[-latex] (A) -- ++(0.3,0,0) node[below] {$\bm{\hat{e}}_1(\bm{x})$};
+    \draw[-latex] (B) -- ++(0,0.2,0) node[right] {$\bm{\hat{e}}_2(\bm{x})$};
+    \draw[-latex] (C) -- ++(0,0,0.2) node[above] {$\bm{\hat{e}}_3(\bm{x})$};
+    
+    \fill[black]  (A) circle (0.5pt) node[anchor=east,xshift=0.cm,yshift=-0.cm] {$L_1(\epsilon)$};
+    \fill[black]  (B) circle (0.5pt) node[anchor=south west,xshift=0.cm,yshift=0.cm] {$L_2(\epsilon)$};
+    \fill[black]  (C) circle (0.5pt) node[anchor=south west,xshift=0.cm,yshift=0.cm] {$L_3(\epsilon)$};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\begin{document}
+
+% Set the viewing angle (consistent with your previous drawings)
+\tdplotsetmaincoords{75}{110}
+
+\begin{tikzpicture}[tdplot_main_coords, scale=4, >=stealth]
+
+    % Parameters for the "pillbox" volume
+    \def\r{0.4}    % Radius of the cylinder
+    \def\h{0.15}   % Half-height (thickness)
+    \def\angs{110}
+    \def\ange{290}
+    \def\angr{60}
+    \def\angt{110}
+    \def\angtt{60}
+    
+    % Center point x
+    \coordinate (O) at (0,0,0);
+    \fill[black] (O) circle (0.5pt) node[below right] {$\bm{x}$};
+
+    % 1. DRAW BACK HALF OF CYLINDER (Hidden/Dashed)
+    % Bottom circle back arc
+    \tdplotdrawarc[dashed, gray]{(0,0,-\h)}{\r}{\angs}{\ange}{}{}
+    % Top circle back arc
+    \tdplotdrawarc[dashed, gray]{(0,0,\h)}{\r}{90}{270}{}{}
+
+    % 2. DRAW CYLINDER SIDES AND BOTTOM FACE
+    % Bottom face (shaded)
+    \fill[blue!20, opacity=0.4] (0,0,-\h) circle (\r);
+
+    % draw traction vector (shaded part)
+    \draw[very thick, black,dashed] (O)--(-0.1*\r,0.6*\r,\h);
+    
+    % Curved surface (shaded) - from 280 to 460 degrees to cover the front
+    \fill[yellow!20, opacity=0.4, opacity=0.5] 
+        ({ \r*cos(\ange) }, { \r*sin(\ange) }, -\h) -- ({ \r*cos(\ange) }, { \r*sin(\ange) }, \h)
+        arc (\ange:\ange+180:\r) -- ({ \r*cos(\ange+180) }, { \r*sin(\ange+180) }, -\h) arc (\ange+180:\ange:\r);
+
+    % Front edges (the vertical "silhouette" lines)
+    \draw[thick] ({ \r*cos(\angs) }, { \r*sin(\angs) }, -\h) -- ({ \r*cos(\angs) }, { \r*sin(\angs) }, \h);
+    \draw[thick] ({ \r*cos(\ange) }, { \r*sin(\ange) }, -\h) -- ({ \r*cos(\ange) }, { \r*sin(\ange) }, \h);
+
+    
+    
+    % 3. DRAW TOP FACE (Solid/Front)
+    \fill[red!20, opacity=0.4] (0,0,\h) circle (\r);
+    \draw[thick] (0,0,\h) circle (\r);
+    \tdplotdrawarc[thick]{(0,0,-\h)}{\r}{\ange}{\ange+180}{}{}
+
+    % Traction vector, remaining part
+    \draw[-latex, ultra thick, black] (-0.1*\r,0.6*\r,\h)--++($2*(-0.1*\r,0.6*\r,\h)$) node[anchor=south,above] {$\bm{\hat{t}}(\bm{x},\bm{\hat{n}}(\bm{x}))$};
+    
+    % 4. NORMAL VECTORS
+    % Outward normal n (Top face)
+    %\draw[dashed, thick, blue] (0,0,\h) -- (0,0,-3.5*\h);
+    \draw[very thick, dashed, red] (0,0,0.1*\h) -- ++(0,0,\h);
+    \draw[-latex, ultra thick, red] (0,0,\h) -- ++(0,0,2.4*\h) node[anchor=south] {$\bm{\hat{n}}(\bm{x})$};
+    
+    % Outward normal -n (Bottom face)
+    \draw[dashed, very thick, blue] (0,0,-0.1*\h) -- ++(0,0,-1.7*\h);
+    \draw[-latex, ultra thick, blue] (0,0,-1.7*\h) -- ++(0,0,-2*\h) node[anchor=north] {$-\bm{\hat{n}}(\bm{x})$};
+
+    % Outward normal r (shell)
+    \draw[-latex, ultra thick, orange] ({ \r*cos(\angr) },{ \r*sin(\angr) },0) -- ++({ 1.5*\r*cos(\angr) },{ 1.5*\r*sin(\angr) },0) node[anchor=north] {$\bm{\hat{r}}$};
+
+    
+
+    % % 5. COORDINATE BASIS (Right-handed e1, e2, n)
+    % \draw[dashed] (O) -- ++(\r,0,0);
+    % \draw[-latex] ($(O)+(\r,0,0)$) --++(2*\r,0,0) node[anchor=north] {$\bm{\hat{e}}_1$};
+    
+    % \draw[dashed] (O) -- ++(0,\r,0);
+    % \draw[-latex] ($(O)+(0,\r,0)$)--++(0,\r,0) node[anchor=north] {$\bm{\hat{e}}_2$};
+
+    % \draw[dashed] (O) -- ++(0,0,\h);
+    % \draw[-latex] ($(O)+(0,0,\h)$)--++(0,0,3*\h) node[anchor=west] {$\bm{\hat{e}}_3$};
+    
+    % Labels for dimensions
+    \draw[|<->|] (0, -1.2*\r, -\h) --++ (0,0, 2*\h) node[midway, left, xshift=-0.1cm] {$H(\epsilon)$};
+    \draw[|<->|] (0,0, \h) --++ (0,-\r, 0) node[pos=0.5, above, yshift=0.2cm] {$R(\epsilon)$};
+    %\node at (0.2, -0.3, \h) {$\Delta A$};
+
+\end{tikzpicture}
+\end{document}
