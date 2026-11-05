@@ -938,7 +938,7 @@ The acceleration of a point $\bm{\phi}_t(\bm{x})$ following the velocity field $
 
 
 ## <span class="elementary"></span> Conservation of momentum
-According to Newton's second law, the rate of change of linear momentum of a material volume equals the net forces acting on it. In Newtonian mechanics, this is referred to as the principle of momentum conservation. The forces acting on a material volume consist of gravity and mechanical contact forces. Gravity acts throughout the volume as a body force and has a remote source, typically the mass of Earth. Mechanical contact forces act on the surface of the material volume and arise locally from direct contact of the volume with another material volume. Since the total force on a material volume is finite, yet distributed over the volume and its surface, local expressions for both gravity and contact force must be differential, and the total force expressed as integrals of the differential forces over the material volume and its surface.
+According to Newton's second law, the time rate of change of linear momentum of a material volume equals the resultant force acting on it. This is the momentum balance for a material system. For the present discussion, the forces acting on a material volume consist of gravity and mechanical contact forces. Gravity acts throughout the volume as a body force and has a remote source, typically the mass of Earth. Mechanical contact forces act on the surface of the material volume and arise locally from direct contact of the volume with another material volume. Since the total force on a material volume is finite, yet distributed over the volume and its surface, local expressions for both gravity and contact force must be differential, and the total force expressed as integrals of the differential forces over the material volume and its surface.
 
 Denote with $\bm{g}$ the gravitational acceleration. According Newton's second law, acceleration describes force per unit mass. Since a differential volume $dV$ of fluid contains a differential mass $\rho dV$, the differential body force from gravity on a differential volume of fluid is given by
 :::{math}
@@ -949,7 +949,7 @@ Let then $dA$ be a differential area on the surface of the volume, oriented with
 :::{math}
 \delta\bm{F}_s=\bm{t}dA.
 :::
-While both $\delta\bm{F}_b$ and $\delta\bm{F}_b$ are vector valued, they are not vectors but differential objects. They become authentic force vectors once integrated over finite volume and surface area, respectively The differential forces acting on a volume $V(t)$ with a boundary $\partial V(t)$ are illustrated in {numref}`fig-body-and-surface-forces` together with the surface outward unit normal.
+Both $\delta\bm{F}_b$ and $\delta\bm{F}_s$ are vector-valued differential quantities rather than ordinary vectors. Their integrals over a finite volume and surface, respectively, yield ordinary force vectors. The differential forces acting on a volume $V(t)$ with a boundary $\partial V(t)$ are illustrated in {numref}`fig-body-and-surface-forces` together with the surface outward unit normal.
 :::{figure} ./figs/fig-body-and-surface-forces.svg
 :label: fig-body-and-surface-forces
 :align: center
@@ -966,18 +966,18 @@ On the left, the material derivative identity {numref}`eq-rho-identity` enables 
 :::{math}
 \frac{d}{dt}\int_{V(t)}\rho\bm{v}dV = \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV.
 :::
-On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in the case of mass conservation. A careful investigation of Newton's second law reveals, however, that the traction on arbitrary surface must be expressible in terms of a symmetric rank-2 tensor $\bm{\sigma}$, referred to as stress
+On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in the case of mass conservation. A careful investigation of Newton's second law reveals that the traction acting on arbitrary surface must be expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as Cauchy's stress tensor
 :::{math}
 \bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
-The expression for traction in terms a rank-2 tensor and the surface unit normal vector emerges from requiring Newton's second law to be valid in the first place. The symmetry of the tensor then emerges from requiring that only torques from the body and surface forces can contribute to the time rate of change of the angular momentum of a material volume. The detailed argumentation leading to this conclusion is presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
+The requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed argumentations leading to these conclusions are presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
 With the help of a symmetric stress tensor and the divergence theorem, the total force on a material fluid volume can then be written as a volume integral
 :::{math}
 \int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s&=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA\\
 &=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma})dV.
 :::
 
-With both the left and right side of Newton's second law {numref}`eq-newton` for a material volume expressed as volume integrals, and the initial choice of the volume $V(t)$ being arbitrary, the integrand on the left and righ must be equal. Consequently, the fluid velocity field has to satisfy the following local partial differential equation
+Since Newton's second law holds for an arbitrary material volume, the integrands on the left and right sides must be equal everywhere. Consequently, the fluid velocity field must satisfy the following local partial differential equation
 :::{math}
 \rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma},
 :::
@@ -989,21 +989,31 @@ Cauchy's momentum equation then tells that the local acceleration is caused by g
 :enumerated: false
 \frac{d^2}{dt^2}\bm{\phi}_t(\bm{x})=\frac{D\bm{v}}{Dt}\big|_{(\bm{\phi}_t(\bm{x}),t)}=\left(\bm{g}+\rho^{-1}\nabla\cdot\bm{\sigma}\right)\big|_{(\bm{\phi}_t(\bm{x}),t)}.
 :::
-The contribution from gravitational acceleration exists even if the gravitation force distribution were constant throughout space. Non-vanishing contribution from contact forces, however, requires the contact force to not be uniform throughout the space.
+The gravitational acceleration contributes to the local acceleration even if it is uniform throughout space. In contrast, a spatially uniform stress tensor has zero divergence and therefore produces no net contact force on a closed material volume.
 ::::
 ::::{proof:example}
-Consider the fluid is at rest and not moving at all, meaning the velocity field vanishes $\bm{v}(\bm{x},t)=\bm{0}$. The Cauchy's momentum equation still holds true, and reads
-\begin{align*}
-\rho\bm{g}+\nabla\cdot\bm{\sigma}&=\bm{0}, && \text{Fluid at rest}
-\end{align*}
-From experiments one knows that the gravity in column of static water or air is balanced by pressure difference at the column bottom and top. For fluid at rest, the divergence of the stress tensor must therefore reduce to the negative of a the pressure gradient. The only form of stress then is pressure and
-\begin{align*}
-\bm{\sigma}&=-p\bm{I}, && \text{Fluid at rest}
-\end{align*}
+Consider a fluid at rest, meaning that its velocity field vanishes, $\bm{v}(\bm{x},t)=\bm{0}$. Cauchy's momentum equation then reduces to
+:::{math}
+:enumerated: false
+\rho\bm{g}+\nabla\cdot\bm{\sigma}=\bm{0}, \qquad \text{Fluid at rest}
+:::
+For a simple fluid at rest, the stress is isotropic and represented entirely by the thermodynamic pressure
+:::{math}
+:enumerated: false
+\bm{\sigma}=-p\bm{I}, \qquad\text{Fluid at rest}
+:::
+Taking the vertical coordinate $z$ to be positive upwards, and assuming gravitational acceleration to be $\bm{g}=-g\bm{\hat{z}}$, Cauchy's momentum equation then provides the differential equation for hydrostatic pressure
+:::{math}
+:enumerated: false
+\rho\bm{g}+\nabla\cdot(-p\bm{I})=\bm{0} \quad \implies \quad \frac{dp}{dz}=-\rho g.
+:::
 ::::
 
 (sec-stress-tensor)=
 ## <span class="advanced"></span> Cauchy's theorem and emerge of the stress tensor
+Write here the argumentation why the traction must be a function of the unit normal. use Newton's third law for this.
+
+
 For a continuous vector valued function $\bm{f}:\Omega\mapsto \mathbb{R}^n$ defined over a connected set $\Omega\subset\mathbb{R}^m$, the Mean Value Theorem tells that the average value of the integral of $\bm{f}$ over the set $\Omega$ lies in the convex hull of the image of $\Omega$ under $\bm{f}$, namely 
 :::{math}
 \frac{1}{vol(\Omega)}\int_\Omega\bm{f}d^m\bm{x} \in \text{conv}(\{\bm{f}(\bm{x})|\bm{x}\in\Omega\}).
