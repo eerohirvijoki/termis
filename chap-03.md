@@ -1158,9 +1158,9 @@ Dividing {numref}`eq-mean-value-newton-tetra` with the surface area $A_{\epsilon
 :::
 where the second form results from the oddness of traction established in the first phase and the third from using the calculus rules. It is therefore confirmed that the traction vector is a linear map of the surface unit normal vector and can be expressed as
 :::{math}
-\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\bm{\sigma}(\bm{x})\cdot\bm{\hat{n}}(\bm{x}),
+\bm{t}(\bm{x},t,\bm{\hat{n}}(\bm{x},t))=\bm{\sigma}(\bm{x},t)\cdot\bm{\hat{n}}(\bm{x},t),
 :::
-where $\bm{\sigma}(\bm{x})$ is a tensor field of rank-2, referred to as stress.
+where $\bm{\sigma}(\bm{x},t)$ is a tensor field of rank-2, referred to as stress.
 
 (sec-symmetry-of-stress)=
 ## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
