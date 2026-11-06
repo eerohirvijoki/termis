@@ -230,12 +230,14 @@ This illustrates how the action of the differential operator $\nabla$ produces d
 
 The process of converting conservation principle of mass, momentum, and energy into local partial differential equations involves transforming surface integrals to volume integrals. Carrying out such tasks requires the action of $\nabla$ on products containing scalar-, vector-, and tensor-valued fields. The rules most needed are
 :::{math}
+:label: eq-divergence-rules
 \nabla\cdot(f\bm{a})&=\nabla f\cdot\bm{a}+f\nabla\cdot\bm{a},\\
 \nabla\cdot(\bm{a}\otimes\bm{b})&=(\nabla\cdot\bm{a})\bm{b}+\bm{a}\cdot\nabla\bm{b},\\
 \nabla\cdot(\bm{\sigma}\cdot\bm{a})&=(\nabla\cdot\bm{\sigma})\cdot\bm{a}+\bm{\sigma}:\nabla\bm{a}.
 :::
 They become powerful tools when combined with the divergence theorems for scalar and tensor fields
 :::{math}
+:label: eq-divergence-theorem
 \int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{a}dV,\\
 \int_{\partial V}\bm{\sigma}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{\sigma}^\mathsf{T}dV,\\
 :::
@@ -380,7 +382,7 @@ This observation plays a key role in establishing the symmetry of the stress ten
 ::::
 
 ## <span class="elementary"></span> Leibniz integral differentiation rule
-The tool to convert physics principles to local partial differential equations that describe the evolution of fluids is generally referred to as the Leibniz integral differentiation rule. It describes how integrals of scalar-, vector-, or tensor-valued fields vary in time when evaluated over temporally evolving curves, surfaces, or volumes. The particular use case of the rule to derive the fluid evolution equations involves only volumes, in which case the rule is often referred to as the Reynolds transport theorem. The other important use case for the rule is encountered when deriving the control-volume balance equations needed in engineering applications. In the first case, the evolution of the volume follows the fluid's velocity field. In the second case, the moving volume of fluid is typically enclosed by a mechanical device such as a turbine or a compressor, with the movement of the fluid volume originating from, e.g., rotating turbine or compressor blades.
+The tool to convert physics principles to local partial differential equations that describe the evolution of fluids is generally referred to as the Leibniz integral differentiation rule. It describes how integrals of scalar- and vector-valued fields (in general case also tensor-valued fields) vary in time when evaluated over temporally evolving curves, surfaces, or volumes. The particular use case of the rule to derive the fluid evolution equations involves only volumes, in which case the rule is often referred to as the Reynolds transport theorem. The other important use case for the rule is encountered when deriving the control-volume balance equations needed in engineering applications. In the first case, the evolution of the volume follows the fluid's velocity field. In the second case, the moving volume of fluid is typically enclosed by a mechanical device such as a turbine or a compressor, with the movement of the fluid volume originating from, e.g., rotating turbine or compressor blades.
 
 As the first step, one has to understand how a moving volume is described and how vector fields relate to it. For this, assume the vector field $\bm{v}(\bm{x},t)$ to describe which direction fluid is moving at point $\bm{x}$ at time $t$, and at what speed, i.e., the velocity of the fluid. Then drop a small grain of pollen into the fluid at a specific location $\bm{y}_0$ at time $t=t_0$. From that moment onwards, the position $\bm{y}(t)$ of the pollen grain will follow the fluid flow and obey the vector-valued ordinary differential equation subject to an initial condition
 :::{math}
@@ -441,19 +443,26 @@ so that the time derivative of the flow map can be identified as
 The map describes a helical trajectory with constant angular velocity $\omega$ and translative velocity $v_z$ in the $z$-direction.
 ::::
 
-Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar-, vector-, or a tensor-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
+Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar- or vector-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
 :::{math}
 :label: eq-leibniz-rule-surface-form
 \underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notably, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
-With the help of the divergence theorem and vector calculus rules, the surface integral in the Leibniz rule can be converted to a volume integral containing generally three terms
+With the help of the divergence theorem {numref}`eq-divergence-theorem` and the vector calculus rules {numref}`eq-divergence-rules` involving the divergence of a rank-2 tensor field $\bm{u}\otimes\bm{f}$, the surface integral in the Leibniz rule {numref}`eq-leibniz-rule-surface-form` can be converted to a volume integral
+:::{math}
+\int_{\partial V(t)}\bm{f}\bm{u}\cdot\bm{\hat{n}}dA&=\int_{\partial V(t)}(\bm{f}\otimes\bm{u})\cdot\bm{\hat{n}}dA\\
+&=\int_{V(t)}\nabla\cdot(\bm{f}\otimes\bm{u})^\mathsf{T}dV\\
+&=\int_{V(t)}\nabla\cdot(\bm{u}\otimes\bm{f})dV\\
+&=\int_{V(t)}((\nabla\cdot\bm{u})\bm{f}+\bm{u}\cdot\nabla\bm{f})dV,
+:::
+so that the Leibniz rule can be expressed also in a pure volume form
 :::{math}
 :label: eq-leibniz-rule-volume-form
 \frac{d}{dt}\int_{V(t)}\bm{f}dV=\int_{V(t)}\left(\partial_t \bm{f}+(\nabla\cdot\bm{u})\bm{f}+(\bm{u}\cdot\nabla)\bm{f}\right)dV.
 :::
-In this last form the Leibniz rule enables conversion of the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and to understand also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
+In this last form the Leibniz rule enables conversion of the physics principles of mass, momentum, and energy conservation into local partial differential equations. For those interested in progressing beyond the use of the Leibniz rule, and understanding also the derivation of it, the details are provided in the intermediate and advanced {numref}`sec-differential-elements`, {numref}`sec-differential-elements-evolution` and {numref}`sec-leibniz-rule-derivation`. Those more interested following the core engineering path may skip these section and jump directly to {numref}`sec-conservation-of-mass` that investigates the principle of mass conservation.
 
 ::::{proof:example}
 The contribution of volume movement to the Leibniz rule is perhaps best illustrated with a scalar field $f(\bm{x},t)=f(x)$ that is stationary in time and depends only on the coordinate $x$, and assuming a vector field $\bm{u}(\bm{x},t)=u\bm{\hat{x}}$ with $u>0$ constant in time and space. Let the initial volume $V(0)$ have a cross section $A$ in the $y$-$z$ plane and a length $L$ in the $x$-direction. Set the volume to initially correspond to the set of points
@@ -861,12 +870,12 @@ Consider a time-dependent volume $V(t)$ of fluid moving according to the fluid's
 :label: fig-material-volume
 :align: center
 :width: 100%
-Evolution of a volume $V(t)$ attached to the flow of the fluid's velocity field $\bm{v}(\bm{x},t)$.
+Evolution of a material volume $V(t)$ attached to the flow of the fluid's velocity field $\bm{v}(\bm{x},t)$.
 ::::
 
 This conservation of mass within any material volume has consequences for the fluid density field $\rho(\bm{x},t)$. A differential volume element $dV$ carries a differential mass of $\rho dV$ of the fluid. A macroscopic material volume $V(t)$ therefore carries the mass $\int_{V(t)}\rho dV$. Since the mass within a material volume remains constant in time, the time derivative of the mass must be zero.
 :::{math}
-\frac{d}{dt}\int_{V(t)}\rho dV=0, \qquad \text{Conservation of mass}.
+\frac{d}{dt}\int_{V(t)}\rho dV=0.
 :::
 Next apply the Leibniz integral differentiation rule {numref}`eq-leibniz-rule-surface-form` and {numref}`eq-leibniz-rule-volume-form` by setting $\bm{f}=\rho$ and $\bm{u}=\bm{v}$. The time derivative of the mass within a material volume can then be expressed as 
 :::{math}
@@ -936,7 +945,7 @@ The acceleration of a point $\bm{\phi}_t(\bm{x})$ following the velocity field $
 :::
 ::::
 
-
+(sec-conservation-of-momentum)=
 ## <span class="elementary"></span> Conservation of momentum
 According to Newton's second law, the time rate of change of linear momentum of a material volume equals the resultant force acting on it. This is the momentum balance for a material system. For the present discussion, the forces acting on a material volume consist of gravity and mechanical contact forces. Gravity acts throughout the volume as a body force and has a remote source, typically the mass of Earth. Mechanical contact forces act on the surface of the material volume and arise locally from direct contact of the volume with another material volume. Since the total force on a material volume is finite, yet distributed over the volume and its surface, local expressions for both gravity and contact force must be differential, and the total force expressed as integrals of the differential forces over the material volume and its surface.
 
@@ -957,31 +966,32 @@ Both $\delta\bm{F}_b$ and $\delta\bm{F}_s$ are vector-valued differential quanti
 The differential surface and body forces $\delta\bm{F}_s$ and $\delta\bm{F}_b$ acting on a fluid volume.
 :::
 
-With $\bm{v}$ the fluid's velocity field, the differential amount of momentum the fluid carries in a differential volume $dV$ is $\rho\bm{v}dV$. For a macroscopic material volume $V(t)$, Newton's second law then reads
+With $\bm{v}$ the fluid's velocity field, the differential amount of momentum the fluid carries in a differential volume $dV$ is $\rho\bm{v}dV$. For a macroscopic material volume $V(t)$ such as the one in {numref}`fig-material-volume`, Newton's second law then reads
 :::{math}
 :label: eq-newton
-\underbrace{\frac{d}{dt}\int_{V(t)}\rho\bm{v}dV}_{\substack{\text{Time rate of change}\\\text{of momentum in}\,V(t)}} = \underbrace{\int_{V(t)}\delta\bm{F}_b}_{\substack{\text{Total body force}\\\text{on volume}\,V(t)}} + \underbrace{\int_{\partial V(t)}\delta\bm{F}_s}_{\substack{\text{Total surface force}\\\text{on boundary}\,\partial V(t)}},
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho\bm{v}dV}_{\substack{\text{Time rate of change}\\\text{of momentum in}\,V(t)}} = \underbrace{\int_{V(t)}\delta\bm{F}_b}_{\substack{\text{Total body}\\\text{force on}\,V(t)}} + \underbrace{\int_{\partial V(t)}\delta\bm{F}_s}_{\substack{\text{Total surface}\\\text{force on}\,\partial V(t)}}.
 :::
-On the left, the material derivative identity {numref}`eq-rho-identity` enables one to move the time derivative inside the integral and to write
+On the left, the material derivative identity {numref}`eq-rho-identity`, via setting $\bm{f}=\bm{v}$, enables one to move the time derivative inside the integral and to write
 :::{math}
 \frac{d}{dt}\int_{V(t)}\rho\bm{v}dV = \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV.
 :::
-On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in the case of mass conservation. A careful investigation of Newton's second law reveals that the traction acting on arbitrary surface must be expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as Cauchy's stress tensor
+On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in {numref}`sec-conservation-of-mass` in the case of mass conservation. A careful investigation of Newton's second law reveals that the traction acting on arbitrary surface must be expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as Cauchy's stress tensor
 :::{math}
 \bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
 The requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed argumentations leading to these conclusions are presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
+
 With the help of a symmetric stress tensor and the divergence theorem, the total force on a material fluid volume can then be written as a volume integral
 :::{math}
 \int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s&=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA\\
 &=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma})dV.
 :::
 
-Since Newton's second law holds for an arbitrary material volume, the integrands on the left and right sides must be equal everywhere. Consequently, the fluid velocity field must satisfy the following local partial differential equation
+Since Newton's second law holds for an arbitrary material volume, the integrands on the left and right sides of it must be equal everywhere. Consequently, the fluid velocity field must satisfy the following local partial differential equation
 :::{math}
 \rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma},
 :::
-commonly referred to as the Cauchy's momentum equation. 
+commonly referred to as the Cauchy's momentum equation. After introducing a constitutive relation for $\bm{\sigma}$, the Cauchy momentum equation is seen to correspond to the famous Navier-Stokes equation.
 ::::{proof:example}
 Recall from {numref}`example-acceleration-of-a-point` that the material derivative of the velocity field $\bm{v}$ at a point $\bm{\phi}_t(\bm{x})$ that moves with the fluid represents the local acceleration of the point $\bm{\phi}_t(\bm{x})$.
 Cauchy's momentum equation then tells that the local acceleration is caused by gravity and divergence of the stress tensor
@@ -1010,47 +1020,121 @@ Taking the vertical coordinate $z$ to be positive upwards, and assuming gravitat
 ::::
 
 (sec-stress-tensor)=
-## <span class="advanced"></span> Cauchy's theorem and emerge of the stress tensor
-Write here the argumentation why the traction must be a function of the unit normal. use Newton's third law for this.
+## <span class="advanced"></span> Cauchy's theorem and emergence of the stress tensor
+In derivation of Cauchy's momentum equation, the traction vector $\bm{t}$ on a surface was assumed expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as stress, and the outward unit surface normal $\bm{n}$, resulting in $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$. This assumption is far from trivial, a corner stone for both fluid and solid mechanics, and therefore proved rigorously in this section. The symmetry requirement of the stress tensor is explained in {numref}`sec-symmetry-of-stress`. 
 
+To understand why the traction vector must be a function of the unit surface normal in the first place, recall that surface forces represent the point-wise effect of contact between two material volumes. When one material volume causes a contact force on another, Newton's third law states that there must be a counter effect of equal magnitude but into opposing direction. Since the interaction happens on a surface, both the action and the counteraction are flipped with respect to the surface. If you throw a ball at a wall, the ball bounces back and the wall feels an equal impulse of momentum into opposing direction. If you spread butter on a slice of bread, you must hold on to not only the knife but also the bread slice. As the surface orientation is represented by the outward unit normal vector, the traction describing the interaction force density must be a local function of it.
 
-For a continuous vector valued function $\bm{f}:\Omega\mapsto \mathbb{R}^n$ defined over a connected set $\Omega\subset\mathbb{R}^m$, the Mean Value Theorem tells that the average value of the integral of $\bm{f}$ over the set $\Omega$ lies in the convex hull of the image of $\Omega$ under $\bm{f}$, namely 
+The linear dependency of traction on the unit surface normal is revealed in two steps. To establish both rigorously, a mathematical identity is needed that allows to express averages of volume and surface integrals of vector fields in terms of their integrands. 
+Let $V$ and $A$ be bounded volume and surface, and let the vector field $\bm{f}$ be a bounded and Riemann integrable on $V$ and $A$. Then the average of $\bm{f}$ over $V$ or $A$ belongs to the closure of convex hull of the image of the corresponding domain under $\bm{f}$:
 :::{math}
-\frac{1}{vol(\Omega)}\int_\Omega\bm{f}d^m\bm{x} \in \text{conv}(\{\bm{f}(\bm{x})|\bm{x}\in\Omega\}).
+\frac{1}{V}\int_V\bm{f}dV &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in V\})},\\
+\frac{1}{A}\int_A\bm{f}dA &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in A\})}.
 :::
-Using this result, the traction vector can be shown to satisfy the identity
+This mathematical identity may appear intimidating at first but can be illustrated and made more transparent through an example.
+::::{proof:example}
+Consider the two-dimensional domain 
 :::{math}
-\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\bm{\sigma}(\bm{x})\cdot\bm{\hat{n}}(\bm{x}).
+:enumerated: false
+A=\{(x,y)\in\mathbb{R}^2\mid 0\leq x\leq 3, 0\leq y\leq 1\},
 :::
+with area $A=3$. Divide it into three non-overlapping subdomains
+:::{math}
+:enumerated: false
+A_1&=\{(x,y)\in\mathbb{R}^2\mid 0\leq x < 1, 0\leq y\leq 1\},\\
+A_2&=\{(x,y)\in\mathbb{R}^2\mid 1\leq x < 2, 0\leq y\leq 1\},\\
+A_3&=\{(x,y)\in\mathbb{R}^2\mid 2\leq x \leq 3, 0\leq y\leq 1\},
+:::
+with each an equal area of $A_1=A_2=A_3=1$. 
+:::{image} ./figs/example-fig-integral-identity-domain.svg
+:align: center
+:width: 60%
+:::
+Let the vector field $\bm{f}$ be piece-wise constant
+:::{math}
+:enumerated: false
+\bm{f}(\bm{x})=\left\{\begin{aligned}\bm{f}_1&=-\bm{\hat{x}}-\bm{\hat{y}}, && \bm{x}\in A_1,\\
+\bm{f}_2&=2\bm{\hat{y}}, && \bm{x}\in A_2,\\
+\bm{f}_3&=2\bm{\hat{x}}, && \bm{x}\in A_3.\end{aligned}\right.
+:::
+The average of $\bm{f}$ is then
+:::{math}
+:enumerated: false
+\frac{1}{A}\int_A\bm{f}dA&=\frac{1}{A}\left(\bm{f}_1 A_1+\bm{f}_2 A_2+\bm{f}_3 A_3\right)\\
+&=\frac{1}{3}\bm{\hat{x}}+\frac{1}{3}\bm{\hat{y}},
+:::
+and belongs to the closure of the convex hull of the set $\{\bm{f}_1,\bm{f}_2,\bm{f}_3\}$ indicated as the orange domain below.
+:::{image} ./figs/example-fig-integral-identity-convex-hull.svg
+:align: center
+:width: 45%
+:::
+::::
 
-Choose an $\epsilon$-parametrized volume $V(t,\epsilon)$ moving with the flow, and which at the instant $t$ is a cylinder centered at the point $\bm{x}$ with the symmetry axis aligned with the unit normal vector $\bm{\hat{n}}(\bm{x})$ of the surface on which one inspects the traction vector. See the {numref}`fig-stress-momentum-cylinder` for clarification.
+To proceed, take the traction vector at a point $\bm{x}$ at time $t$ on any (possibly time-dependent) surface to be a vector valued function of the form
+:::{math}
+\bm{t}(\bm{x},t,\bm{\hat{n}}(\bm{x},t)).
+:::
+The traction has an explicit dependency on the local surface unit normal vector $\bm{\hat{n}}(\bm{x},t)$ at the inspected point $\bm{x}$ at the inspected time $t$. For now, the explicit dependency of the traction vector and the surface normal on time will be suppressed, for sake of compactness. Choose then a specific $\epsilon$-parametrized material volume $V_\epsilon(t)$ which at the instant $t$ coincides with a cylinder centered at the point $\bm{x}$ with the symmetry axis of the cylinder aligned with the unit normal vector $\bm{\hat{n}}(\bm{x})$ of the surface on which one is to inspect the traction vector. See {numref}`fig-stress-momentum-cylinder` for clarification.
 ::::{figure} ./figs/fig-stress-momentum-cylinder.svg
 :label: fig-stress-momentum-cylinder
 :align: center
 :width: 60%
 A cylindrical volume around a point $\bm{x}$ oriented with respect to a unit outward surface normal.
 ::::
-Denote the top, bottom, and shell surfaces of the cylinder as the sets of points $S_n(t,\epsilon)$, $S_{-n}(t,\epsilon)$ and $S_r(t,\epsilon)$ with corresponding areas $A_n(\epsilon)=\pi R(\epsilon)^2$ for the top and bottom, and $A_r(\epsilon)=2\pi R(\epsilon)H(\epsilon)$ for the shell. The volume of the cylinder is $V(t,\epsilon)=A_n(\epsilon)H(\epsilon)$. According to the mean value theorem, one now has
+Let the $\epsilon$-dependent cylinder radius and height at the instant $t$ be $R(\epsilon)=\epsilon R_0$ and $H(\epsilon)=\epsilon^2 H_0$, with $R_0$ and $H_0$ some finite scaling constants.
+At instant $t$, the top, bottom, and shell surfaces of the cylinder correspond to the sets of points $A_{\epsilon,n}(t)$ (top), $A_{\epsilon,-n}(t)$ (bottom), and $A_{\epsilon,r}(t)$ (shell) defined with
 :::{math}
-\frac{1}{V(t,\epsilon)}\int_{V(t,\epsilon)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV&=\bm{F}(\epsilon)\in \text{conv}\left(\left\{\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)_{\bm{y}}|\bm{y}\in V(t,\epsilon)\right\}\right),
-\\
-\frac{1}{A_n(t,\epsilon)}\int_{S_n(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&= \bm{t}_n(\epsilon)\in\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_n(t,\epsilon)\}),
-\\
-\frac{1}{A_n(t,\epsilon)}\int_{S_{-n}(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_{-n}(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_{-n}(t,\epsilon)\}),\\
-\frac{1}{A_r(t,\epsilon)}\int_{S_r(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_r(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},\bm{\hat{r}}(\bm{y}))|\bm{y}\in S_r(t,\epsilon)\}).
+A_{\epsilon,n}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}-\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}-\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x})|\leq R(\epsilon)\end{aligned}\right\}\\
+A_{\epsilon,-n}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}+\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}+\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x})|\leq R(\epsilon)\end{aligned}\right\}\\
+A_{\epsilon,r}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}-h\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}-h\bm{\hat{n}}(\bm{x})|=R(\epsilon),\\
+&-\tfrac{1}{2}H(\epsilon)\leq h\leq \tfrac{1}{2}H(\epsilon)\end{aligned}\right\}
 :::
-At instance $t$, Newton's law {numref}`eq-newton` over the volume $V(t,\epsilon)$ then becomes
+The surfaces have corresponding areas of $A_{\epsilon,n}(t)=A_{\epsilon,-n}(t)=\pi R(\epsilon)^2$ for the top and bottom, and $A_{\epsilon,r}(t)=2\pi R(\epsilon)H(\epsilon)$ for the shell, while the volume of the cylinder is $V_{\epsilon}(t)=\pi R^2(\epsilon)H(\epsilon)$. Over time the cylinder would evolve and deform, but here only the instant $t$ matters. Notable, at the limit $\epsilon\to 0$, the volume and all of the surfaces collapse to the point $\bm{x}$.
+
+
+At the time instant $t$, combine the volume integral terms appearing in the Newton's second law {numref}`eq-newton` into one integral over the material volume $V_{\epsilon}(t)$ and express it in the following way
 :::{math}
-\bm{F}(\epsilon) V(t,\epsilon)&=(\bm{t}_n(\epsilon)+\bm{t}_{-n}(\epsilon))A_n(t,\epsilon)+\bm{t}_r(\epsilon)A_r(t,\epsilon).
+\frac{d}{dt}\int_{V_\epsilon(t)}\rho\bm{v}dV-\int_{V_\epsilon(t)}\rho\bm{g}dV=\int_{V_\epsilon(t)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV=\bm{f}_\epsilon(t) V_{\epsilon}(t)
 :::
-Divide both sides with the area $A_n(t,\epsilon)$ and choose the parametrization $R(\epsilon)=\epsilon R_0$, $H(\epsilon)=\epsilon^2H_0$. At the limit $\epsilon\to 0$, the ratios $V(t,\epsilon)/A_n(t,\epsilon)\to 0$ and $A_r(t,\epsilon)/A_n(t,\epsilon)\to 0$ vanish, the sets $S_n(t,\epsilon)\to \bm{x}$ and $S_{-n}(t,\epsilon)\to\bm{x}$ collapse to the point $\bm{x}$, while for the vectors one has $\bm{t}_n(\epsilon)\to\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))$ and $\bm{t}_{-n}(\epsilon)\to\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x}))$. At the limit, Newton's law for the chosen cylindrical volume therefore provides a relation
+Express similarly the surface integral term over the boundary $\partial V_{\epsilon}(t)$ of the volume $V_{\epsilon}(t)$ as 
+:::{math}
+\int_{\partial V_\epsilon(t)}\bm{t}dA&=\int_{A_{\epsilon,n}(t)}\bm{t}dA+\int_{A_{\epsilon,-n}(t)}\bm{t}dA+\int_{A_{\epsilon,r}(t)}\bm{t}dA\\
+&=\bm{t}_{\epsilon,n}(t)A_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)A_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)A_{\epsilon,r}(t)
+:::
+According to the Mean Value Theorem, the vectors $\bm{f}_{\epsilon}(t)$, $\bm{t}_{\epsilon,n}(t)$, $\bm{t}_{\epsilon,-n}(t)$, and  $\bm{t}_{\epsilon,r}(t)$ belong to the closures of convex hulls of the corresponding integrands 
+:::{math}
+\bm{f}_{\epsilon}(t)&\in \overline{\text{conv}\left(\left\{\big(\rho(D\bm{v}/Dt)-\rho\bm{g}\big)\big|_{(\bm{y},t)}\mid \bm{y}\in V_{\epsilon}(t)\right\}\right)},
+\\
+\bm{t}_{\epsilon,n}(t)&\in\overline{\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in A_{\epsilon,n}(t)\})},
+\\
+\bm{t}_{\epsilon,-n}(t)&\in \overline{\text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{n}}(\bm{x}))|\bm{y}\in A_{\epsilon,-n}(t)\})},\\
+\bm{t}_{\epsilon,r}(t)&\in \overline{\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{r}}(\bm{y}))|\bm{y}\in A_{\epsilon,r}(t)\})}.
+:::
+At instance $t$, Newton's law {numref}`eq-newton` over the material volume $V_{\epsilon}(t)$ is then expressed as
+:::{math}
+\bm{f}_{\epsilon}(t)V_{\epsilon}(t)&=\bm{t}_{\epsilon,n}(t)A_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)A_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)A_{\epsilon,r}(t).
+:::
+Next divide both sides of the equation with the area $A_{\epsilon,n}(t)$, so that
+:::{math}
+\bm{f}_{\epsilon}(t)\frac{V_\epsilon(t)}{A_{\epsilon,n}(t)}&=\bm{t}_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)\frac{A_{\epsilon,r}(t)}{A_{\epsilon,n}(t)}.
+:::
+At the limit $\epsilon\to 0$ one has
+:::{math}
+\lim_{\epsilon\to 0}\frac{V_\epsilon(t)}{A_{\epsilon,n}(t)}&=\lim_{\epsilon\to 0}\frac{\pi (\epsilon R_0)^2(\epsilon^2 H_0)}{\pi (\epsilon R_0)^2}=0\\
+\lim_{\epsilon\to 0}\frac{A_{\epsilon,r}(t)}{A_{\epsilon,n}(t)}&=\lim_{\epsilon\to 0}\frac{2\pi(\epsilon R_0)(\epsilon^2H_0)}{\pi(\epsilon R_0)^2}=0
+:::
+while the two remaining vectors reduce to
+:::{math}
+\lim_{\epsilon\to 0}\bm{t}_{\epsilon,n}(t)&=\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x})),\\
+\lim_{\epsilon\to 0}\bm{t}_{\epsilon,-n}(t)&=\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x})).
+:::
+At the limit of the cylinder becoming a single point, Newton's law provides the following condition the traction vector must satisfy
 :::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=-\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x})).
 :::
-    
 Mathematically the result implies that the traction vector is odd with respect to the dependency on the unit normal of the surface it acts on. Physically the result reflects Newton's third law. A surface has outward side ($\bm{\hat{n}}$) and an inward side ($-\bm{\hat{n}}$). On any action on the outward side, there is always a corresponding reaction on the inward side, and of exactly the same magnitude but into opposite direction, as Newton's third law says. This effect is not seen locally for the body forces because the reaction to gravity does not happen inside the fluid but at a distant point outside the fluid where Earth, the cause for gravity, resides.
 
-Next consider a different $\epsilon$-parametrized volume $V(t,\epsilon)$, which at instance $t$ is a trirectangular tetrahedron attached to the point $\bm{x}$ from one corner. Set the direction of the face with the largest surface area to align with the normal $\bm{\hat{n}}(\bm{x})$ as in {numref}`fig-stress-momentum-tetrahedron`
+To establish the linear dependency of traction on the unit normal, the next step are analogous but involve a material volume that at instant $t$ coincides with a trirectangular tetrahedron attached to the point $\bm{x}$ from one corner. Set the direction of the face with the largest surface area to align with the normal $\bm{\hat{n}}(\bm{x})$ as in {numref}`fig-stress-momentum-tetrahedron`
 ::::{figure} ./figs/fig-stress-momentum-tetrahedron.svg
 :label: fig-stress-momentum-tetrahedron
 :align: center
