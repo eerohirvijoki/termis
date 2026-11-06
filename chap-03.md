@@ -1021,29 +1021,32 @@ Taking the vertical coordinate $z$ to be positive upwards, and assuming gravitat
 
 (sec-stress-tensor)=
 ## <span class="advanced"></span> Cauchy's theorem and emergence of the stress tensor
-In derivation of Cauchy's momentum equation, the traction vector $\bm{t}$ on a surface was assumed expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as stress, and the outward unit surface normal $\bm{n}$, resulting in $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$. This assumption is far from trivial, a corner stone for both fluid and solid mechanics, and therefore proved rigorously in this section. The symmetry requirement of the stress tensor is explained in {numref}`sec-symmetry-of-stress`. 
+In derivation of Cauchy's momentum equation, the traction vector on a surface of a material volume was assumed expressible as $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$ where $\bm{\sigma}$ is a rank-2 tensor referred to as stress and $\bm{\hat{n}}$ is the surface unit normal out from the volume. This assumption is far from trivial, a corner stone for both fluid and solid mechanics, and therefore proved rigorously in this section. The requirement of $\bm{\sigma}$ to be symmetric is explained separately in {numref}`sec-symmetry-of-stress`. 
 
-To understand why the traction vector must be a function of the unit surface normal in the first place, recall that surface forces represent the point-wise effect of contact between two material volumes. When one material volume causes a contact force on another, Newton's third law states that there must be a counter effect of equal magnitude but into opposing direction. Since the interaction happens on a surface, both the action and the counteraction are flipped with respect to the surface. If you throw a ball at a wall, the ball bounces back and the wall feels an equal impulse of momentum into opposing direction. If you spread butter on a slice of bread, you must hold on to not only the knife but also the bread slice. As the surface orientation is represented by the outward unit normal vector, the traction describing the interaction force density must be a local function of it.
-
-The linear dependency of traction on the unit surface normal is revealed in two steps. To establish both rigorously, a mathematical identity is needed that allows to express averages of volume and surface integrals of vector fields in terms of their integrands. 
-Let $V$ and $A$ be bounded volume and surface, and let the vector field $\bm{f}$ be a bounded and Riemann integrable on $V$ and $A$. Then the average of $\bm{f}$ over $V$ or $A$ belongs to the closure of convex hull of the image of the corresponding domain under $\bm{f}$:
+To understand why the traction vector must be a function of the unit surface normal in the first place, recall that surface forces represent the point-wise effect of contact between two material volumes. When one material volume causes a contact force on another, Newton's third law states that there must be a counter force of equal magnitude into opposing direction at the exact same location of contact. Since the contact happens on a surface whose orientation is described by the unit outward normal vector, also the force and its counter force must be orientable with respect to the surface unit normal vector. Therefore, the traction generally is assumed to be a smooth vector field that depends on time and position as
 :::{math}
-\frac{1}{V}\int_V\bm{f}dV &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in V\})},\\
-\frac{1}{A}\int_A\bm{f}dA &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in A\})}.
+\bm{t}=\bm{t}(\bm{x},t,\bm{\hat{n}}(\bm{x},t)).
 :::
-This mathematical identity may appear intimidating at first but can be illustrated and made more transparent through an example.
+
+The linear dependency of traction on the unit surface normal is established in two phases. In both phases, the mean value theorem of vector fields is leveraged to express averages of volume and surface integrals in terms of their integrands over two particularly chosen domains. Hence the theorem is stated first. Let $\mathcal{V}$ and $\mathcal{A}$ be a bounded volumetric domain and surface with volume $V$ and area $A$, respectively. Let the vector field $\bm{f}$ be bounded and Riemann integrable on $\mathcal{V}$ and $\mathcal{A}$. The mean value theorem then states that the averages of $\bm{f}$ over $\mathcal{V}$ and $\mathcal{A}$ belong to the closures of the convex hulls of the images of the corresponding domains under the vector field $\bm{f}$, namely
+:::{math}
+:label: eq-mean-value-theorem
+\frac{1}{V}\int_\mathcal{V}\bm{f}dV &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in \mathcal{V}\})},\\
+\frac{1}{A}\int_\mathcal{A}\bm{f}dA &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in \mathcal{A}\})}.
+:::
+The theorem may appear intimidating at first. It nevertheless constitutes a straightforward idea illustrated with the following example.
 ::::{proof:example}
 Consider the two-dimensional domain 
 :::{math}
 :enumerated: false
-A=\{(x,y)\in\mathbb{R}^2\mid 0\leq x\leq 3, 0\leq y\leq 1\},
+	\mathcal{A}=\{(x,y)\in\mathbb{R}^2\mid 0\leq x\leq 3, 0\leq y\leq 1\},
 :::
 with area $A=3$. Divide it into three non-overlapping subdomains
 :::{math}
 :enumerated: false
-A_1&=\{(x,y)\in\mathbb{R}^2\mid 0\leq x < 1, 0\leq y\leq 1\},\\
-A_2&=\{(x,y)\in\mathbb{R}^2\mid 1\leq x < 2, 0\leq y\leq 1\},\\
-A_3&=\{(x,y)\in\mathbb{R}^2\mid 2\leq x \leq 3, 0\leq y\leq 1\},
+\mathcal{A}_1&=\{(x,y)\in\mathbb{R}^2\mid 0\leq x < 1, 0\leq y\leq 1\},\\
+\mathcal{A}_2&=\{(x,y)\in\mathbb{R}^2\mid 1\leq x < 2, 0\leq y\leq 1\},\\
+\mathcal{A}_3&=\{(x,y)\in\mathbb{R}^2\mid 2\leq x \leq 3, 0\leq y\leq 1\},
 :::
 with each an equal area of $A_1=A_2=A_3=1$. 
 :::{image} ./figs/example-fig-integral-identity-domain.svg
@@ -1070,113 +1073,94 @@ and belongs to the closure of the convex hull of the set $\{\bm{f}_1,\bm{f}_2,\b
 :::
 ::::
 
-To proceed, take the traction vector at a point $\bm{x}$ at time $t$ on any (possibly time-dependent) surface to be a vector valued function of the form
+Next, assume a time-dependent volumetric material domain $\mathcal{V}(t)$ with a volume $V(t)$ and an enclosing boundary surface $\partial\mathcal{V}(t)$. Split the boundary surface into touching subsets $\{\mathcal{A}_i(t)\}_{i}$ with respective areas $\{A_i(t)\}_i$ that together cover the entire boundary $\partial\mathcal{V}(t)$. Then use the identity {numref}`eq-rho-identity` and group the terms appearing in Newton's second law {numref}`eq-newton` as
 :::{math}
-\bm{t}(\bm{x},t,\bm{\hat{n}}(\bm{x},t)).
+:label: eq-regrouped-newton
+\int_{\mathcal{V}(t)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV=\sum_i\int_{\mathcal{A}_i(t)}\bm{t}dA,
 :::
-The traction has an explicit dependency on the local surface unit normal vector $\bm{\hat{n}}(\bm{x},t)$ at the inspected point $\bm{x}$ at the inspected time $t$. For now, the explicit dependency of the traction vector and the surface normal on time will be suppressed, for sake of compactness. Choose then a specific $\epsilon$-parametrized material volume $V_\epsilon(t)$ which at the instant $t$ coincides with a cylinder centered at the point $\bm{x}$ with the symmetry axis of the cylinder aligned with the unit normal vector $\bm{\hat{n}}(\bm{x})$ of the surface on which one is to inspect the traction vector. See {numref}`fig-stress-momentum-cylinder` for clarification.
+separating the volume and surface terms to the different sides. According to the mean value theorem {numref}`eq-mean-value-theorem`, there now exist time-dependent vectors $\bm{f}(t)$ and $\{\bm{t}_i(t)\}_i$ that belong to the closures of convex hulls
+:::{math}
+\bm{f}(t)&\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t)} \mid \bm{y}\in\mathcal{V}(t)\}},\\
+\bm{t}_i(t)&\in\overline{\text{conv}\{\bm{t}(\bm{y},t,\bm{\hat{n}}(\bm{y},t)) \mid \bm{y}\in\mathcal{A}_i(t)\}},
+:::
+in terms of which the regrouped Newton's second law {numref}`eq-regrouped-newton` can be expressed as 
+:::{math}
+:label: eq-mean-value-newton
+\bm{f}(t)V(t)=\sum_i\bm{t}_i(t)A_i(t).
+:::
+As the next steps, one considers specific choices for the material volume, and investigates the mean value form {numref}`eq-mean-value-newton` of Newton's second law while the chosen material volumes are shrunk to a single point. 
+
+In the first phase, one requires the material volume $\mathcal{V}(t)$ at time $t=t_\ast$ to coincide with a cylindrical volume $\mathcal{V}_\epsilon$ that is centered at a point $\bm{x}$ and whose symmetry axis is aligned with the outward unit normal vector $\bm{\hat{n}}(\bm{x},t_\ast)$ of the surface on which one is to inspect the traction vector at time $t_\ast$ at point $\bm{x}$. Note that the surface of inspection is not the surface of the material volume but any arbitrary surface passing through $\bm{x}$. The volume $\mathcal{V}_\epsilon$ is labeled with $\epsilon$ for both the cylinder height $H(\epsilon)=\epsilon^2H_0$ and the radius $R(\epsilon)=\epsilon R_0$ are assumed dependent on a dimensionless parameter $\epsilon$ with $H_0$ and $R_0$ some finite height and radius. At the time $t_\ast$, the surface $\partial\mathcal{V}(t)$, corresponds to the cylinder surface $\partial\mathcal{V}_\epsilon$, and is split into three touching domains $\mathcal{A}_{\epsilon,n}$, $\mathcal{A}_{\epsilon,-n}$, and $\mathcal{A}_{\epsilon,r}$ corresponding to the top, bottom, and shell of the cylinder, respectively. The top and bottom areas of the cylinder are $A_{\epsilon,n}=A_{\epsilon,-n}=\pi R(\epsilon)^2$ while the shell area is $A_{\epsilon,r}=2\pi R(\epsilon)H(\epsilon)$, and the cylinder volume is $V_\epsilon=A_{\epsilon,n} H(\epsilon)$. The cylinder, the point $\bm{x}$, and the surface outward unit normal $\bm{\hat{n}}$ are illustrated in {numref}`fig-stress-momentum-cylinder` below.
 ::::{figure} ./figs/fig-stress-momentum-cylinder.svg
 :label: fig-stress-momentum-cylinder
 :align: center
 :width: 60%
-A cylindrical volume around a point $\bm{x}$ oriented with respect to a unit outward surface normal.
+A cylindrical volume around a point $\bm{x}$ oriented with respect to a unit normal of a surface passing through the point $\bm{x}$.
 ::::
-Let the $\epsilon$-dependent cylinder radius and height at the instant $t$ be $R(\epsilon)=\epsilon R_0$ and $H(\epsilon)=\epsilon^2 H_0$, with $R_0$ and $H_0$ some finite scaling constants.
-At instant $t$, the top, bottom, and shell surfaces of the cylinder correspond to the sets of points $A_{\epsilon,n}(t)$ (top), $A_{\epsilon,-n}(t)$ (bottom), and $A_{\epsilon,r}(t)$ (shell) defined with
+With respect to the volume $\mathcal{V}_\epsilon$, the mean value form {numref}`eq-mean-value-newton` of Newton's second law at time $t_\ast$ then reads
 :::{math}
-A_{\epsilon,n}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}-\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}-\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x})|\leq R(\epsilon)\end{aligned}\right\}\\
-A_{\epsilon,-n}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}+\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}+\tfrac{1}{2}H(\epsilon)\bm{\hat{n}}(\bm{x})|\leq R(\epsilon)\end{aligned}\right\}\\
-A_{\epsilon,r}(t)&=\left\{\bm{y}\in\mathbb{R}^3\, \Bigg|\, \begin{aligned}&(\bm{y}-\bm{x}-h\bm{\hat{n}}(\bm{x}))\cdot\bm{\hat{n}}(\bm{x})=0, \\& |\bm{y}-\bm{x}-h\bm{\hat{n}}(\bm{x})|=R(\epsilon),\\
-&-\tfrac{1}{2}H(\epsilon)\leq h\leq \tfrac{1}{2}H(\epsilon)\end{aligned}\right\}
+:label: eq-mean-value-newton-cylinder
+\bm{f}_\epsilon V_\epsilon=(\bm{t}_{\epsilon,n}+\bm{t}_{\epsilon,-n})A_{\epsilon,n}+\bm{t}_{\epsilon,r}A_{\epsilon,r}
 :::
-The surfaces have corresponding areas of $A_{\epsilon,n}(t)=A_{\epsilon,-n}(t)=\pi R(\epsilon)^2$ for the top and bottom, and $A_{\epsilon,r}(t)=2\pi R(\epsilon)H(\epsilon)$ for the shell, while the volume of the cylinder is $V_{\epsilon}(t)=\pi R^2(\epsilon)H(\epsilon)$. Over time the cylinder would evolve and deform, but here only the instant $t$ matters. Notable, at the limit $\epsilon\to 0$, the volume and all of the surfaces collapse to the point $\bm{x}$.
+where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, $\bm{t}_{\epsilon,-n}$, and $\bm{t}_{\epsilon,r}$ belong to the closures of the convex hulls
+:::{math}
+\bm{f}_\epsilon &\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t_\ast)} \mid \bm{y}\in\mathcal{V}_\epsilon\}},\\
+\bm{t}_{\epsilon,n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,n}\}},\\
+\bm{t}_{\epsilon,-n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,-\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,-n}\}},\\
+\bm{t}_{\epsilon,r}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{r}}(\bm{y})) \mid \bm{y}\in\mathcal{A}_{\epsilon,r}\}}.
+:::
+Note that the outward unit normal of the top cylinder surface equals $\bm{\hat{n}}(\bm{x},t_\ast)$ and the outward unit normal of the bottom cylinder surface equals $-\bm{\hat{n}}(\bm{x},t_\ast)$. Then the equation {numref}`eq-mean-value-newton-cylinder` is divided by the area $A_{\epsilon,n}$, resulting in
+:::{math}
+\bm{f}_\epsilon \frac{V_\epsilon}{A_{\epsilon,n}}=\bm{t}_{\epsilon,n}+\bm{t}_{\epsilon,-n}+\bm{t}_{\epsilon,r}\frac{A_{\epsilon,r}}{A_{\epsilon,n}}
+:::
+Finally, the limit $\epsilon\to 0$ is taken. At this limit, the domains $\mathcal{V}_\epsilon$, $\mathcal{A}_{\epsilon,n}$, $\mathcal{A}_{\epsilon,-n}$, and $\mathcal{A}_{\epsilon,r}$ all collapse to the single point $\bm{x}$, the ratios $V_\epsilon/A_{\epsilon,n}\to 0$ and $A_{\epsilon,r}/A_{\epsilon,n}\to 0$ vanish, $\bm{f}_\epsilon$ and $\bm{t}_{\epsilon,r}$ remain finite and bounded, and 
+:::{math}
+\lim_{\epsilon\to 0}\bm{t}_{\epsilon,n}&=\bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)),\\
+\lim_{\epsilon\to 0}\bm{t}_{\epsilon,-n}&=\bm{t}(\bm{x},t_\ast,-\bm{\hat{n}}(\bm{x},t_\ast)).
+:::
+At this limit, Newton's second law therefore provides the condition
+:::{math}
+\bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))=-\bm{t}(\bm{x},t_\ast,-\bm{\hat{n}}(\bm{x},t_\ast)).
+:::
+Further, as the choice of the time $t_\ast$ is arbitrary, one may substitute $t_\ast$ with $t$.
 
+Mathematically the result implies that the traction vector is odd with respect to the dependency on the unit normal of the surface it acts on. Physically the result reflects Newton's third law. A surface has outward side ($\bm{\hat{n}}$) and an inward side ($-\bm{\hat{n}}$). For any action on the outward side, there is always a corresponding reaction on the inward side, and of exactly the same magnitude but into opposite direction, as Newton's third law says. 
 
-At the time instant $t$, combine the volume integral terms appearing in the Newton's second law {numref}`eq-newton` into one integral over the material volume $V_{\epsilon}(t)$ and express it in the following way
-:::{math}
-\frac{d}{dt}\int_{V_\epsilon(t)}\rho\bm{v}dV-\int_{V_\epsilon(t)}\rho\bm{g}dV=\int_{V_\epsilon(t)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV=\bm{f}_\epsilon(t) V_{\epsilon}(t)
-:::
-Express similarly the surface integral term over the boundary $\partial V_{\epsilon}(t)$ of the volume $V_{\epsilon}(t)$ as 
-:::{math}
-\int_{\partial V_\epsilon(t)}\bm{t}dA&=\int_{A_{\epsilon,n}(t)}\bm{t}dA+\int_{A_{\epsilon,-n}(t)}\bm{t}dA+\int_{A_{\epsilon,r}(t)}\bm{t}dA\\
-&=\bm{t}_{\epsilon,n}(t)A_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)A_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)A_{\epsilon,r}(t)
-:::
-According to the Mean Value Theorem, the vectors $\bm{f}_{\epsilon}(t)$, $\bm{t}_{\epsilon,n}(t)$, $\bm{t}_{\epsilon,-n}(t)$, and  $\bm{t}_{\epsilon,r}(t)$ belong to the closures of convex hulls of the corresponding integrands 
-:::{math}
-\bm{f}_{\epsilon}(t)&\in \overline{\text{conv}\left(\left\{\big(\rho(D\bm{v}/Dt)-\rho\bm{g}\big)\big|_{(\bm{y},t)}\mid \bm{y}\in V_{\epsilon}(t)\right\}\right)},
-\\
-\bm{t}_{\epsilon,n}(t)&\in\overline{\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in A_{\epsilon,n}(t)\})},
-\\
-\bm{t}_{\epsilon,-n}(t)&\in \overline{\text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{n}}(\bm{x}))|\bm{y}\in A_{\epsilon,-n}(t)\})},\\
-\bm{t}_{\epsilon,r}(t)&\in \overline{\text{conv}(\{\bm{t}(\bm{y},\bm{\hat{r}}(\bm{y}))|\bm{y}\in A_{\epsilon,r}(t)\})}.
-:::
-At instance $t$, Newton's law {numref}`eq-newton` over the material volume $V_{\epsilon}(t)$ is then expressed as
-:::{math}
-\bm{f}_{\epsilon}(t)V_{\epsilon}(t)&=\bm{t}_{\epsilon,n}(t)A_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)A_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)A_{\epsilon,r}(t).
-:::
-Next divide both sides of the equation with the area $A_{\epsilon,n}(t)$, so that
-:::{math}
-\bm{f}_{\epsilon}(t)\frac{V_\epsilon(t)}{A_{\epsilon,n}(t)}&=\bm{t}_{\epsilon,n}(t)+\bm{t}_{\epsilon,-n}(t)+\bm{t}_{\epsilon,r}(t)\frac{A_{\epsilon,r}(t)}{A_{\epsilon,n}(t)}.
-:::
-At the limit $\epsilon\to 0$ one has
-:::{math}
-\lim_{\epsilon\to 0}\frac{V_\epsilon(t)}{A_{\epsilon,n}(t)}&=\lim_{\epsilon\to 0}\frac{\pi (\epsilon R_0)^2(\epsilon^2 H_0)}{\pi (\epsilon R_0)^2}=0\\
-\lim_{\epsilon\to 0}\frac{A_{\epsilon,r}(t)}{A_{\epsilon,n}(t)}&=\lim_{\epsilon\to 0}\frac{2\pi(\epsilon R_0)(\epsilon^2H_0)}{\pi(\epsilon R_0)^2}=0
-:::
-while the two remaining vectors reduce to
-:::{math}
-\lim_{\epsilon\to 0}\bm{t}_{\epsilon,n}(t)&=\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x})),\\
-\lim_{\epsilon\to 0}\bm{t}_{\epsilon,-n}(t)&=\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x})).
-:::
-At the limit of the cylinder becoming a single point, Newton's law provides the following condition the traction vector must satisfy
-:::{math}
-\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=-\bm{t}(\bm{x},-\bm{\hat{n}}(\bm{x})).
-:::
-Mathematically the result implies that the traction vector is odd with respect to the dependency on the unit normal of the surface it acts on. Physically the result reflects Newton's third law. A surface has outward side ($\bm{\hat{n}}$) and an inward side ($-\bm{\hat{n}}$). On any action on the outward side, there is always a corresponding reaction on the inward side, and of exactly the same magnitude but into opposite direction, as Newton's third law says. This effect is not seen locally for the body forces because the reaction to gravity does not happen inside the fluid but at a distant point outside the fluid where Earth, the cause for gravity, resides.
-
-To establish the linear dependency of traction on the unit normal, the next step are analogous but involve a material volume that at instant $t$ coincides with a trirectangular tetrahedron attached to the point $\bm{x}$ from one corner. Set the direction of the face with the largest surface area to align with the normal $\bm{\hat{n}}(\bm{x})$ as in {numref}`fig-stress-momentum-tetrahedron`
+In the second phase, to establish the linearity of traction on the unit normal, one requests the time-dependent material volume $\mathcal{V}(t)$ at time $t=t_\ast$ to coincide with a trirectangular tetrahedron $\mathcal{V}_\epsilon$ that is attached to the point $\bm{x}$ from one corner. Further, the outward unit normal of the tetrahedron face with the largest surface area is set to align with the unit normal $\bm{\hat{n}}(\bm{x},t_\ast)$ while the unit normals of the remaining three faces are aligned with the negatives of the unit vectors $\{\bm{\hat{e}}_1(\bm{x}),\bm{\hat{e}}_2(\bm{x}),\bm{\hat{e}}_3(\bm{x})\}$ that form an orthogonal right-handed basis at the point $\bm{x}$. The distances of the tetrahedron corners along the vectors $\bm{\hat{e}}_i(\bm{x})$ from the point $\bm{x}$ are denoted with $L_i(\epsilon)=\epsilon L_{i,0}$. The setting is illustrated in {numref}`fig-stress-momentum-tetrahedron` below.
 ::::{figure} ./figs/fig-stress-momentum-tetrahedron.svg
 :label: fig-stress-momentum-tetrahedron
 :align: center
 :width: 85%
-A tetraedric volume with one corner attached to a point $\bm{x}$ and the opposing face oriented with respect to a unit outward surface normal.
+A tetraedric volume with one corner attached to a point $\bm{x}$ and the opposing face oriented with respect to the surface outward unit normal $\bm{x}$.
 ::::
 
-Define the sets $S_i(t,\epsilon)$ to correspond to the faces of the tetrahedron aligned with the local orthogonal unit normal vectors $\bm{\hat{e}}_i(\bm{x})$ and the set $S_n(t,\epsilon)$ to correspond to the face aligned with $\bm{\hat{n}}(\bm{x})$. The corresponding areas are $A_i(t,\epsilon)$ and $A_n(t,\epsilon)$ and satisfy
+The tetrahedron boundary $\partial \mathcal{V}_\epsilon$ is split to account for the faces $\{\mathcal{A}_{\epsilon,i}\}_{i=1}^3$ and $\mathcal{A}_{\epsilon,n}$ with areas $\{A_{\epsilon,i}\}_{i=1}^3$ and $A_{\epsilon,n}$ that relate via
 :::{math}
-A_i(t,\epsilon)=\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x})A_n(t,\epsilon).
+A_{\epsilon,i}=\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast)A_{\epsilon,n}.
 :::
-Now the mean value theorem provides
+The mean value form {numref}`eq-mean-value-newton` over the tetrahedron then reads
 :::{math}
-\frac{1}{V(t,\epsilon)}\int_{V(t,\epsilon)}\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)dV&=\bm{F}(\epsilon)\in \text{conv}\left(\left\{\left(\rho\frac{D\bm{v}}{Dt}-\rho\bm{g}\right)_{\bm{y}}|\bm{y}\in V(t,\epsilon)\right\}\right),
-\\
-\frac{1}{A_n(t,\epsilon)}\int_{S_n(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&= \bm{t}_n(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},\bm{\hat{n}}(\bm{x}))|\bm{y}\in S_n(t,\epsilon)\}),
-\\
-\frac{1}{A_i(t,\epsilon)}\int_{S_i(t,\epsilon)}\bm{t}(\bm{\hat{n}})dA&=\bm{t}_i(\epsilon)\in \text{conv}(\{\bm{t}(\bm{y},-\bm{\hat{e}}_i(\bm{x}))|\bm{y}\in S_i(t,\epsilon)\}).
+:label: eq-mean-value-newton-tetra
+\bm{f}_\epsilon V_\epsilon&=\bm{t}_nA_{\epsilon,n}+\sum_{i=1}^3\bm{t}_{\epsilon,i}A_{\epsilon,i},\\
+&=A_{\epsilon,n}\left(\bm{t}_n+\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}_{\epsilon,i}\right)
 :::
-At instance $t$, Newton's law {numref}`eq-newton` over the volume $V(t,\epsilon)$ then becomes
+where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, and $\{\bm{t}_{\epsilon,i}\}_{i=1}^3$ belong to the closures of convex hulls
 :::{math}
-\bm{F}(\epsilon) V(t,\epsilon)&=\bm{t}_n(\epsilon)A_n(t,\epsilon)+\sum_{i=1}^3\bm{t}_i(\epsilon)A_i(t,\epsilon).
+\bm{f}_\epsilon &\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t_\ast)} \mid \bm{y}\in\mathcal{V}_\epsilon\}},\\
+\bm{t}_{\epsilon,n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,n}\}},\\
+\bm{t}_{\epsilon,i}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,-\bm{\hat{e}}_i(\bm{x})) \mid \bm{y}\in\mathcal{A}_{\epsilon,i}\}}.
 :::
-Divide both sides with $A_n(t,\epsilon)$ and choose the parametrization $L_i=\epsilon L_{i,0}$. At the limit $\epsilon\to 0$, the ratio $V(t,\epsilon)/A_n(t,\epsilon)\to 0$ vanishes, the sets $S_i(t,\epsilon)\to\bm{x}$ and $S_n(t,\epsilon)\to\bm{x}$ collapse to point $\bm{x}$, while for the vectors one has $\bm{t}_i(\epsilon)\to \bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x}))$ and $\bm{t}_n(\epsilon)\to\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))$. At the limit, Newton's law for the chosen tetrahedron volume therefore provides the relation
+Dividing {numref}`eq-mean-value-newton-tetra` with the surface area $A_{\epsilon,n}$, and taking the limit $\epsilon\to 0$, the ratio $V_\epsilon/A_{\epsilon,n}\to 0$ vanishes while the vectors appoach $\bm{t}_{\epsilon,n}\to \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))$ and $\bm{t}_{\epsilon,i}\to \bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}(\bm{x}))$. The mean value form of Newton's second law over the tetrahedron therefore leads to the condition
 :::{math}
-\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=-\sum_{i=1}^3\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x}) \,\bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x})).
+\bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))&=-\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}_i(\bm{x}))\\
+&=\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,\bm{\hat{e}}_i(\bm{x}))\\
+&=\left(\sum_{i=1}^3 \bm{t}(\bm{x},t_\ast,\bm{\hat{e}}_i(\bm{x}))\otimes\bm{\hat{e}}_i(\bm{x})\right)\cdot\bm{\hat{n}}(\bm{x},t_\ast)
 :::
-    
-The result established with the cylindrical volume can be applied with respect to any surface. In particular, one could choose to study traction vectors on surfaces aligned with respect to the $\bm{\hat{e}}_i(\bm{x})$ to obtain $\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x}))=-\bm{t}(\bm{x},-\bm{\hat{e}}_i(\bm{x}))$. Now one can write
-:::{math}
-\bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\sum_{i=1}^3\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x}) \,\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x})).
-:::
-With respect to the basis vectors $\bm{\hat{e}}_i(\bm{x})$, the surface normal can be written $\bm{\hat{n}}(\bm{x})=\sum_{i=1}^3n_i(\bm{x})\,\bm{\hat{e}}_i(\bm{x})$ where the coefficients are $n_i(\bm{x})=\bm{\hat{n}}(\bm{x})\cdot\bm{\hat{e}}_i(\bm{x})$. Therefore
-one finds
-:::{math}
-\bm{t}\left(\bm{x},\sum_{i=1}^3n_i(\bm{x})\,\bm{\hat{e}}_i(\bm{x})\right)=\sum_{i=1}^3n_i(\bm{x})\,\bm{t}(\bm{x},\bm{\hat{e}}_i(\bm{x}))
-:::
-This condition on $\bm{t}$ defines it to be a linear relation with respect to the surface normal $\bm{\hat{n}}$. Therefore
+where the second form results from the oddness of traction established in the first phase and the third from using the calculus rules. It is therefore confirmed that the traction vector is a linear map of the surface unit normal vector and can be expressed as
 :::{math}
 \bm{t}(\bm{x},\bm{\hat{n}}(\bm{x}))=\bm{\sigma}(\bm{x})\cdot\bm{\hat{n}}(\bm{x}),
 :::
-where $\bm{\sigma}(\bm{x})$ is a tensor, referred to as stress.
+where $\bm{\sigma}(\bm{x})$ is a tensor field of rank-2, referred to as stress.
 
 (sec-symmetry-of-stress)=
 ## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
