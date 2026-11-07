@@ -1173,7 +1173,7 @@ where $\bm{\sigma}(\bm{x},t)$ is a tensor field of rank-2, referred to as stress
 
 (sec-symmetry-of-stress)=
 ## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
-For point masses, the definition $d\bm{x}(t)/dt=\bm{v}(t)$ for velocity together with Newton's second law $m\,d\bm{v}(t)/dt=\bm{F}(\bm{x}(t),t)$ imply a vector-valued equation $d\bm{L}/dt=\bm{T}$ between the angular momentum vector $\bm{L}=(\bm{x}(t)-\bm{x}_0)\times m\bm{v}(t)$ and the torque vector $\bm{T}=(\bm{x}(t)-\bm{x}_0)\times\bm{F}(\bm{x}(t),t)$ with respect to any stationary point $\bm{x}_0$. This principle of angular momentum balance is required to hold also for continuous matter. Only the torques from forces acting on a material volume may contribute to the time rate of change of angular momentum of the material volume. This requirement is observed to result in an additional restriction on the stress tensor: it must be symmetric.
+For point masses, the definition $d\bm{x}(t)/dt=\bm{v}(t)$ for velocity together with Newton's second law $m\,d\bm{v}(t)/dt=\bm{F}(\bm{x}(t),t)$ imply a vector-valued equation $d\bm{L}/dt=\bm{T}$ between the angular momentum vector $\bm{L}=(\bm{x}(t)-\bm{x}_0)\times m\bm{v}(t)$ and the torque vector $\bm{T}=(\bm{x}(t)-\bm{x}_0)\times\bm{F}(\bm{x}(t),t)$ with respect to any stationary point $\bm{x}_0$. This principle of angular momentum balance is required to hold also for continuous matter. Only the torques from forces acting on a material volume may contribute to the time rate of change of angular momentum of the material volume. As shown next, this requirement imposes an additional restriction on the stress tensor: it must be symmetric.
 
 The differential amount of angular momentum a differential volume $dV$ of fluid carries with respect to a stationary point $\bm{x}_0$ is $\delta\bm{L}=(\bm{x}-\bm{x}_0)\times \rho\bm{v}dV$. With $\delta\bm{F}_b=\rho\bm{g}dV$ the differential body force acting on a differential volume $dV$ and $\delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA$ the differential surface force acting on a differential surface area $dA$, the differential torques with respect to the point $\bm{x}_0$ resulting from body and surface forces are $\delta\bm{T}_b=(\bm{x}-\bm{x}_0)\times\delta\bm{F}_b=(\bm{x}-\bm{x}_0)\times\rho\bm{g}dV$ and $\delta\bm{T}_s=(\bm{x}-\bm{x}_0)\times\delta \bm{F}_s=(\bm{x}-\bm{x}_0)\times\bm{\sigma}\cdot\bm{\hat{n}}dA$ respectively. For the time rate of change of angular momentum of the fluid within a macroscopic material volume $V(t)$ to equal the total torque on the fluid volume, the following condition must then hold
 :::{math}
@@ -1200,10 +1200,91 @@ Using then again the divergence theorem {numref}`eq-divergence-theorem`, the tot
 &=\int_{V(t)}((\bm{x}-\bm{x}_0)\times\rho\bm{g}+\nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T})dV\\
 &=\int_{V(t)}((\bm{x}-\bm{x}_0)\times(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T})-\bm{\varepsilon}:\bm{\sigma})dV.
 :::
-In the last step, the vector calculus identity {numref}`eq-div-a-times-sigma` was used as in the {numref}`example-eq-div-a-times-sigma`. If the time rate of change of angular momentum of the material volume is to equal the total torque acting on it, the stress tensor must satisfy $\bm{\varepsilon}:\bm{\sigma}=\bm{0}$. This can be if and only if the stress tensor is symmetric
+In the last step, the vector calculus identity {numref}`eq-div-a-times-sigma` was used as in the {numref}`example-eq-div-a-times-sigma`. If the time rate of change of angular momentum of every material volume is to equal the total torque acting on it, the stress tensor must satisfy $\bm{\varepsilon}:\bm{\sigma}=\bm{0}$ point-wise. This can be if and only if the stress tensor is symmetric
 :::{math}
 \bm{\sigma}^T=\bm{\sigma}.
 :::
+
+::::{proof:example}
+Consider a cubic material volume of side length $L$, centred at the origin, with no body forces. Suppose that the stress tensor is uniform and given by
+
+:::{math}
+\bm\sigma=\tau\hat{\bm x}\otimes\hat{\bm y},
+:::
+
+where $\tau$ is a constant with units of pressure. The tensor is nonsymmetric, since $\bm\sigma^\mathsf T\neq\bm\sigma$.
+
+The traction acting on a surface with unit normal $\hat{\bm n}$ is
+
+:::{math}
+\bm t=\bm\sigma\cdot\hat{\bm n}
+=\tau(\hat{\bm y}\cdot\hat{\bm n})\hat{\bm x}.
+:::
+
+Consequently, the only nonzero contact forces act on the two faces whose normals are parallel to the $y$-axis. The resultant forces on these faces are
+
+:::{math}
+\begin{aligned}
+\bm F_{+y}&=\tau L^2\hat{\bm x},\\
+\bm F_{-y}&=-\tau L^2\hat{\bm x}.
+\end{aligned}
+:::
+
+The forces are equal and opposite, so their resultant vanishes. However, they act at different positions relative to the centre of the cube. Their position vectors are
+
+:::{math}
+\begin{aligned}
+\bm r_{+y}&=\frac{L}{2}\hat{\bm y},\\
+\bm r_{-y}&=-\frac{L}{2}\hat{\bm y}.
+\end{aligned}
+:::
+
+The resulting torque about the centre of the cube is therefore
+
+:::{math}
+\begin{aligned}
+\bm T
+&=\bm r_{+y}\times\bm F_{+y}
++\bm r_{-y}\times\bm F_{-y}\\
+&=-\frac{\tau L^3}{2}\hat{\bm z}
+-\frac{\tau L^3}{2}\hat{\bm z}\\
+&=-\tau L^3\hat{\bm z}.
+\end{aligned}
+:::
+
+Thus, even though the resultant contact force is zero, the contact forces produce a nonzero torque.
+
+This is incompatible with the balance of angular momentum for a classical continuum without body couples or contact couple stresses. Indeed, since the stress tensor is uniform, its divergence vanishes, and the local momentum balance predicts zero acceleration everywhere:
+
+:::{math}
+\rho\frac{D\bm v}{Dt}
+=\nabla\cdot\bm\sigma^\mathsf T
+=\bm 0.
+:::
+
+The time rate of change of angular momentum must therefore also vanish, contradicting the nonzero torque obtained above. The nonsymmetric stress tensor is consequently inadmissible under the assumptions of the classical continuum model.
+
+For comparison, consider the symmetric stress tensor
+
+:::{math}
+\bm\sigma
+=\tau\left(
+\hat{\bm x}\otimes\hat{\bm y}
++\hat{\bm y}\otimes\hat{\bm x}
+\right).
+:::
+
+The additional term introduces contact forces on the two faces normal to the $x$-axis. Their resultant torque is
+
+:::{math}
+\bm T_{x\text{-faces}}=+\tau L^3\hat{\bm z},
+:::
+
+which exactly cancels the torque from the faces normal to the $y$-axis. The total torque is therefore zero.
+
+This illustrates that stress symmetry does not imply the absence of shear stresses. Rather, it requires the complementary shear components to be equal, so that their torques balance.
+::::
+
 
 ## <span class="elementary"></span> Conservation of energy
 A differential volume 
