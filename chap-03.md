@@ -332,6 +332,7 @@ and particularly the dot product with the identity tensor results in
 :::
 The calculus identity using the above definitions is
 :::{math}
+:label: eq-div-a-times-sigma
 \nabla\cdot(\bm{a}\times\bm{\sigma})^\mathsf{T}&=\bm{a}\times\nabla\cdot\bm{\sigma}^\mathsf{T}-\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{a}),
 :::
 where the rank-3 antisymmetric Levi-Civita tensor $\bm{\varepsilon}$ is defined
@@ -347,6 +348,7 @@ The Levi-Civita symbol $\varepsilon_{ijk}$ is antisymmetric with respect to chan
 \bm{\varepsilon}:\bm{\pi}=\bm{0}.
 :::
 
+(example-eq-div-a-times-sigma)=
 ::::{proof:example}
 Consider the position vector field
 :::{math}
@@ -363,20 +365,20 @@ Its gradient is the identity tensor, since
 \bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
 =\bm{I}.
 :::
-Applying the calculus identity for the divergence of a vector-tensor cross product consequently gives
+Applying the calculus identity {numref}`eq-div-a-times-sigma` for the divergence of a vector-tensor cross product consequently gives
 :::{math}
 :enumerated: false
-\nabla\cdot(\bm{x}\times\bm{\sigma})^\mathsf{T}
-&=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
--\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{x})\\
-&=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
+\nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T}
+&=(\bm{x}-\bm{x}_0)\times(\nabla\cdot\bm{\sigma}^\mathsf{T})\\
+&\qquad -\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla(\bm{x}-\bm{x}_0))\\
+&=(\bm{x}-\bm{x}_0)\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
 -\bm{\varepsilon}:\bm{\sigma}.
 :::
 If the tensor $\bm{\sigma}$ is symmetric, the last term vanishes, leaving
 :::{math}
 :enumerated: false
-\nabla\cdot(\bm{x}\times\bm{\sigma})^\mathsf{T}
-=\bm{x}\times(\nabla\cdot\bm{\sigma}^\mathsf{T}).
+\nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T}
+=(\bm{x}-\bm{x}_0)\times(\nabla\cdot\bm{\sigma}^\mathsf{T}).
 :::
 This observation plays a key role in establishing the symmetry of the stress tensor from the argument that only the torque from forces can change the angular momentum of a body.
 ::::
@@ -975,23 +977,30 @@ On the left, the material derivative identity {numref}`eq-rho-identity`, via set
 :::{math}
 \frac{d}{dt}\int_{V(t)}\rho\bm{v}dV = \int_{V(t)}\rho\frac{D\bm{v}}{Dt}dV.
 :::
-On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in {numref}`sec-conservation-of-mass` in the case of mass conservation. A careful investigation of Newton's second law reveals that the traction acting on arbitrary surface must be expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as Cauchy's stress tensor
+On the right, the total body force is expressed as a volume integral but the total contact force involves a surface integral, which prevents immediately obtaining a local differential equation as in {numref}`sec-conservation-of-mass` in the case of mass conservation. 
+
+A careful investigation of Newton's second law reveals that the traction acting on arbitrary surface must be expressible in terms of a rank-2 tensor $\bm{\sigma}$, referred to as Cauchy's stress tensor
 :::{math}
 \bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
-The requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed arguments leading to these conclusions are presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
-
-With the help of a symmetric stress tensor and the divergence theorem, the total force on a material fluid volume can then be written as a volume integral
+The detailed arguments leading to this conclusion are presented in the advanced {numref}`sec-stress-tensor` for those interested. With the help of the stress tensor and the divergence theorem {numref}`eq-divergence-theorem`, the total force on a material fluid volume can then be written as a volume integral
 :::{math}
 \int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s&=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA\\
-&=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma})dV.
+&=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T})dV.
 :::
 
 Since Newton's second law holds for an arbitrary material volume, the integrands on the left and right sides of it must be equal everywhere. Consequently, the fluid velocity field must satisfy the following local partial differential equation
 :::{math}
+:label: eq-cauchy-without-symmetry
+\rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T}.
+:::
+Finally, the requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed arguments leading to this conclusion are presented in the intermediate {numref}`sec-symmetry-of-stress` for those interested. With respect to a symmetric stress tensor, on obtains
+:::{math}
+:label: eq-cauchy
 \rho\frac{D\bm{v}}{Dt}=\rho\bm{g}+\nabla\cdot\bm{\sigma},
 :::
 commonly referred to as the Cauchy's momentum equation. After introducing a constitutive relation for $\bm{\sigma}$, the Cauchy momentum equation is seen to correspond to the famous Navier-Stokes equation.
+
 ::::{proof:example}
 Recall from {numref}`example-acceleration-of-a-point` that the material derivative of the velocity field $\bm{v}$ at a point $\bm{\phi}_t(\bm{x})$ that moves with the fluid represents the local acceleration of the point $\bm{\phi}_t(\bm{x})$.
 Cauchy's momentum equation then tells that the local acceleration is caused by gravity and divergence of the stress tensor
@@ -1164,7 +1173,37 @@ where $\bm{\sigma}(\bm{x},t)$ is a tensor field of rank-2, referred to as stress
 
 (sec-symmetry-of-stress)=
 ## <span class="intermediate"></span> Conservation of angular momentum and symmetry of the stress tensor
-For point masses, the definition 
+For point masses, the definition $d\bm{x}(t)/dt=\bm{v}(t)$ for velocity together with Newton's second law $m\,d\bm{v}(t)/dt=\bm{F}(\bm{x}(t),t)$ imply a vector-valued equation $d\bm{L}/dt=\bm{T}$ between the angular momentum vector $\bm{L}=(\bm{x}(t)-\bm{x}_0)\times m\bm{v}(t)$ and the torque vector $\bm{T}=(\bm{x}(t)-\bm{x}_0)\times\bm{F}(\bm{x}(t),t)$ with respect to any stationary point $\bm{x}_0$. This principle of angular momentum balance is required to hold also for continuous matter. Only the torques from forces acting on a material volume may contribute to the time rate of change of angular momentum of the material volume. This requirement is observed to result in an additional restriction on the stress tensor: it must be symmetric.
+
+The differential amount of angular momentum a differential volume $dV$ of fluid carries with respect to a stationary point $\bm{x}_0$ is $\delta\bm{L}=(\bm{x}-\bm{x}_0)\times \rho\bm{v}dV$. With $\delta\bm{F}_b=\rho\bm{g}dV$ the differential body force acting on a differential volume $dV$ and $\delta\bm{F}_s=\bm{\sigma}\cdot\bm{\hat{n}}dA$ the differential surface force acting on a differential surface area $dA$, the differential torques with respect to the point $\bm{x}_0$ resulting from body and surface forces are $\delta\bm{T}_b=(\bm{x}-\bm{x}_0)\times\delta\bm{F}_b=(\bm{x}-\bm{x}_0)\times\rho\bm{g}dV$ and $\delta\bm{T}_s=(\bm{x}-\bm{x}_0)\times\delta \bm{F}_s=(\bm{x}-\bm{x}_0)\times\bm{\sigma}\cdot\bm{\hat{n}}dA$ respectively. For the time rate of change of angular momentum of the fluid within a macroscopic material volume $V(t)$ to equal the total torque on the fluid volume, the following condition must then hold
+:::{math}
+\underbrace{\frac{d}{dt}\int_{V(t)}\delta\bm{L}}_{\substack{\text{Time rate of}\\\text{change of angular}\\\text{momentum in}\,V(t)}}=\underbrace{\int_{V(t)}\delta\bm{T}_b}_{\substack{\text{Torque on}\,V(t)\\\text{from body}\\\text{forces}}}+\underbrace{\int_{\partial V(t)}\delta\bm{T}_s}_{\substack{\text{Torque on}\,\partial V(t)\\\text{from surface}\\\text{forces}}}.
+:::
+
+Since $V(t)$ is a material volume and $\delta\bm{L}=(\bm{x}-\bm{x}_0)\times\rho\bm{v}dV$ contains the density $\rho$ as a multiplier, one may use the identity {numref}`eq-rho-identity` with $\bm{f}=(\bm{x}-\bm{x}_0)\times\bm{v}$ to write the time derivative of the total angular momentum of the material volume as
+:::{math}
+\frac{d}{dt}\int_{V(t)}\delta\bm{L}&=\frac{d}{dt}\int_{V(t)}(\bm{x}-\bm{x}_0)\times \rho\bm{v}dV\\
+&=\int_{V(t)}\rho\frac{D}{Dt}[(\bm{x}-\bm{x}_0)\times\bm{v}]dV
+:::
+Since the Material derivative is a scalar-valued differential operator, it obeys the product rule. Since $D\bm{x}_0/Dt=\bm{0}$ and $D\bm{x}/Dt=\bm{v}$, one then finds
+:::{math}
+\rho\frac{D}{Dt}[(\bm{x}-\bm{x}_0)\times\bm{v}]=(\bm{x}-\bm{x}_0)\times\rho\frac{D\bm{v}}{Dt}.
+:::
+Using now the version of Cauchy's momentum equation {numref}`eq-cauchy-without-symmetry` that does not assume a symmetric $\bm{\sigma}$, the time derivative of the angular momentum becomes
+:::{math}
+\frac{d}{dt}\int_{V(t)}\delta\bm{L}=\int_{V(t)}(\bm{x}-\bm{x}_0)\times\left(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T}\right)dV
+:::
+
+Using then again the divergence theorem {numref}`eq-divergence-theorem`, the total torque on the material volume can be written as the following volume integral
+:::{math}
+\int_{V(t)}\delta\bm{T}_b+\int_{\partial V(t)}\delta\bm{T}_s&=\int_{V(t)}(\bm{x}-\bm{x}_0)\times\rho\bm{g}dV+\int_{\partial V(t)}(\bm{x}-\bm{x}_0)\times\bm{\sigma}\cdot\bm{\hat{n}}dA\\
+&=\int_{V(t)}((\bm{x}-\bm{x}_0)\times\rho\bm{g}+\nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T})dV\\
+&=\int_{V(t)}((\bm{x}-\bm{x}_0)\times(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T})-\bm{\varepsilon}:\bm{\sigma})dV.
+:::
+In the last step, the vector calculus identity {numref}`eq-div-a-times-sigma` was used as in the {numref}`example-eq-div-a-times-sigma`. If the time rate of change of angular momentum of the material volume is to equal the total torque acting on it, the stress tensor must satisfy $\bm{\varepsilon}:\bm{\sigma}=\bm{0}$. This can be if and only if the stress tensor is symmetric
+:::{math}
+\bm{\sigma}^T=\bm{\sigma}.
+:::
 
 ## <span class="elementary"></span> Conservation of energy
 A differential volume 
