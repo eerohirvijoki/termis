@@ -979,7 +979,7 @@ On the right, the total body force is expressed as a volume integral but the tot
 :::{math}
 \bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}.
 :::
-The requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed argumentations leading to these conclusions are presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
+The requirement that the time rate of change of angular momentum of a material volume be accounted for solely by the torques of the body and surface forces further restricts the stress tensor to be symmetric, $\bm{\sigma}=\bm{\sigma}^\mathsf{T}$. The detailed arguments leading to these conclusions are presented in the advanced {numref}`sec-stress-tensor` and the intermediate {numref}`sec-symmetry-of-stress` for those interested. 
 
 With the help of a symmetric stress tensor and the divergence theorem, the total force on a material fluid volume can then be written as a volume integral
 :::{math}
@@ -1021,14 +1021,14 @@ Taking the vertical coordinate $z$ to be positive upwards, and assuming gravitat
 
 (sec-stress-tensor)=
 ## <span class="advanced"></span> Cauchy's theorem and emergence of the stress tensor
-In derivation of Cauchy's momentum equation, the traction vector on a surface of a material volume was assumed expressible as $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$ where $\bm{\sigma}$ is a rank-2 tensor referred to as stress and $\bm{\hat{n}}$ is the surface unit normal out from the volume. This assumption is far from trivial, a corner stone for both fluid and solid mechanics, and therefore proved rigorously in this section. The requirement of $\bm{\sigma}$ to be symmetric is explained separately in {numref}`sec-symmetry-of-stress`. 
+In derivation of Cauchy's momentum equation, the traction vector on a surface of a material volume was assumed expressible as $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$ where $\bm{\sigma}$ is a rank-2 tensor referred to as stress and $\bm{\hat{n}}$ is the surface unit normal out from the volume. This assumption is far from trivial, a cornerstone for both fluid and solid mechanics, and therefore proved rigorously in this section. The requirement of $\bm{\sigma}$ to be symmetric is explained separately in {numref}`sec-symmetry-of-stress`. 
 
-To understand why the traction vector must be a function of the unit surface normal in the first place, recall that surface forces represent the point-wise effect of contact between two material volumes. When one material volume causes a contact force on another, Newton's third law states that there must be a counter force of equal magnitude into opposing direction at the exact same location of contact. Since the contact happens on a surface whose orientation is described by the unit outward normal vector, also the force and its counter force must be orientable with respect to the surface unit normal vector. Therefore, the traction generally is assumed to be a smooth vector field that depends on time and position as
+To understand why the traction vector must be a function of the unit surface normal in the first place, recall that surface forces represent the point-wise effect of contact between two material volumes. When one material volume causes a contact force on another, Newton's third law states that there must be a counter force of equal magnitude into the opposite direction at the exact same location of contact. Since the contact happens on a surface whose orientation is described by the unit outward normal vector, also the force and its counter force must be orientable with respect to the surface unit normal vector. Therefore, the traction generally is assumed to be a smooth vector field that depends on time and position as
 :::{math}
 \bm{t}=\bm{t}(\bm{x},t,\bm{\hat{n}}(\bm{x},t)).
 :::
 
-The linear dependency of traction on the unit surface normal is established in two phases. In both phases, the mean value theorem of vector fields is leveraged to express averages of volume and surface integrals in terms of their integrands over two particularly chosen domains. Hence the theorem is stated first. Let $\mathcal{V}$ and $\mathcal{A}$ be a bounded volumetric domain and surface with volume $V$ and area $A$, respectively. Let the vector field $\bm{f}$ be bounded and Riemann integrable on $\mathcal{V}$ and $\mathcal{A}$. The mean value theorem then states that the averages of $\bm{f}$ over $\mathcal{V}$ and $\mathcal{A}$ belong to the closures of the convex hulls of the images of the corresponding domains under the vector field $\bm{f}$, namely
+The linear dependence of traction on the unit surface normal is established in two phases. In both phases, the mean value theorem of vector fields is leveraged to express averages of volume and surface integrals in terms of their integrands over two particularly chosen domains. Hence the theorem is stated first. Let $\mathcal{V}$ and $\mathcal{A}$ be a bounded volumetric domain and surface with volume $V$ and area $A$, respectively. Let the vector field $\bm{f}$ be bounded and Riemann integrable on $\mathcal{V}$ and $\mathcal{A}$. The mean value theorem then states that the averages of $\bm{f}$ over $\mathcal{V}$ and $\mathcal{A}$ belong to the closures of the convex hulls of the images of the corresponding domains under the vector field $\bm{f}$, namely
 :::{math}
 :label: eq-mean-value-theorem
 \frac{1}{V}\int_\mathcal{V}\bm{f}dV &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in \mathcal{V}\})},\\
@@ -1056,9 +1056,9 @@ with each an equal area of $A_1=A_2=A_3=1$.
 Let the vector field $\bm{f}$ be piece-wise constant
 :::{math}
 :enumerated: false
-\bm{f}(\bm{x})=\left\{\begin{aligned}\bm{f}_1&=-\bm{\hat{x}}-\bm{\hat{y}}, && \bm{x}\in A_1,\\
-\bm{f}_2&=2\bm{\hat{y}}, && \bm{x}\in A_2,\\
-\bm{f}_3&=2\bm{\hat{x}}, && \bm{x}\in A_3.\end{aligned}\right.
+\bm{f}(\bm{x})=\left\{\begin{aligned}\bm{f}_1&=-\bm{\hat{x}}-\bm{\hat{y}}, && \bm{x}\in \mathcal{A}_1,\\
+\bm{f}_2&=2\bm{\hat{y}}, && \bm{x}\in \mathcal{A}_2,\\
+\bm{f}_3&=2\bm{\hat{x}}, && \bm{x}\in \mathcal{A}_3.\end{aligned}\right.
 :::
 The average of $\bm{f}$ is then
 :::{math}
@@ -1131,7 +1131,7 @@ In the second phase, to establish the linearity of traction on the unit normal, 
 :label: fig-stress-momentum-tetrahedron
 :align: center
 :width: 85%
-A tetraedric volume with one corner attached to a point $\bm{x}$ and the opposing face oriented with respect to the surface outward unit normal $\bm{x}$.
+A tetrahedral volume with one corner attached to a point $\bm{x}$ and the opposing face oriented with respect to the surface outward unit normal $\bm{n}(\bm{x})$.
 ::::
 
 The tetrahedron boundary $\partial \mathcal{V}_\epsilon$ is split to account for the faces $\{\mathcal{A}_{\epsilon,i}\}_{i=1}^3$ and $\mathcal{A}_{\epsilon,n}$ with areas $\{A_{\epsilon,i}\}_{i=1}^3$ and $A_{\epsilon,n}$ that relate via
@@ -1141,7 +1141,7 @@ A_{\epsilon,i}=\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast)A_{\epsilon
 The mean value form {numref}`eq-mean-value-newton` over the tetrahedron then reads
 :::{math}
 :label: eq-mean-value-newton-tetra
-\bm{f}_\epsilon V_\epsilon&=\bm{t}_nA_{\epsilon,n}+\sum_{i=1}^3\bm{t}_{\epsilon,i}A_{\epsilon,i},\\
+\bm{f}_\epsilon V_\epsilon&=\bm{t}_{\epsilon,n}A_{\epsilon,n}+\sum_{i=1}^3\bm{t}_{\epsilon,i}A_{\epsilon,i},\\
 &=A_{\epsilon,n}\left(\bm{t}_n+\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}_{\epsilon,i}\right)
 :::
 where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, and $\{\bm{t}_{\epsilon,i}\}_{i=1}^3$ belong to the closures of convex hulls
@@ -1150,7 +1150,7 @@ where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, and $\{\bm{t}_{\epsi
 \bm{t}_{\epsilon,n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,n}\}},\\
 \bm{t}_{\epsilon,i}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,-\bm{\hat{e}}_i(\bm{x})) \mid \bm{y}\in\mathcal{A}_{\epsilon,i}\}}.
 :::
-Dividing {numref}`eq-mean-value-newton-tetra` with the surface area $A_{\epsilon,n}$, and taking the limit $\epsilon\to 0$, the ratio $V_\epsilon/A_{\epsilon,n}\to 0$ vanishes while the vectors appoach $\bm{t}_{\epsilon,n}\to \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))$ and $\bm{t}_{\epsilon,i}\to \bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}(\bm{x}))$. The mean value form of Newton's second law over the tetrahedron therefore leads to the condition
+Dividing {numref}`eq-mean-value-newton-tetra` by the surface area $A_{\epsilon,n}$, and taking the limit $\epsilon\to 0$, the ratio $V_\epsilon/A_{\epsilon,n}\to 0$ vanishes while the vectors appoach $\bm{t}_{\epsilon,n}\to \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))$ and $\bm{t}_{\epsilon,i}\to \bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}_i(\bm{x}))$. The mean value form of Newton's second law over the tetrahedron therefore leads to the condition
 :::{math}
 \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))&=-\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}_i(\bm{x}))\\
 &=\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,\bm{\hat{e}}_i(\bm{x}))\\
