@@ -22,6 +22,7 @@ The application of the Leibniz rule to conservation principles involves standard
 
 As supplements to the core knowledge, the chapter includes a full derivation of the Leibniz rule, establishes the stress tensor as a physical necessity dictated by Newton's second law to describe contact forces on surfaces, and justifies the symmetry of the stress tensor by conservation of angular momentum. These intermediate and advanced topics are designed for readers seeking deeper theoretical foundation and are not expected to be fully mastered on a first reading. Readers primarily interested in the core engineering path may skip the intermediate and advanced sections and focus on the derivation process of the evolution equations.
 
+
 ## Learning goals
 
 - This is 
@@ -62,44 +63,54 @@ where a coefficient $\sigma_{ij}(\bm{x},t)$ is again a scalar function but now a
 
 The operator $\otimes$ appearing in the definition of $\bm{\sigma}$ is the tensor product. The tensor product of two vectors $\bm{a}$ and $\bm{b}$ is a dyad $\bm{a}\otimes\bm{b}$. For any three vectors $\bm{a}$, $\bm{b}$, and $\bm{c}$, and a scalar $f$, the tensor product satisfies the dyadic identities
 :::{math}
+\begin{aligned}
 (f\bm{a})\otimes\bm{b}&=f(\bm{a}\otimes\bm{b})=\bm{a}\otimes(f\bm{b}) && \text{Scalar multiplication}\\
 \bm{a} \otimes (\bm{b}+\bm{c}) &= \bm{a} \otimes \bm{b}+\bm{a}\otimes\bm{c} && \text{Right linearity}\\
 (\bm{b}+\bm{c}) \otimes \bm{a} &= \bm{b} \otimes \bm{a}+\bm{c}\otimes\bm{a} && \text{Left linearity}\\
 (\bm{a} \otimes \bm{b}) \cdot \bm{c} &= \bm{a}(\bm{b} \cdot \bm{c}) && \text{Right dyad-vector contraction} \\
 \bm{c} \cdot (\bm{a} \otimes \bm{b}) &= (\bm{c} \cdot \bm{a})\bm{b} && \text{Left vector-dyad contraction}
+\end{aligned}
 :::
 Further, the dyads $\bm{a}\otimes\bm{b}$ and $\bm{b}\otimes\bm{a}$ are equal if and only if $\bm{a}$ and $\bm{b}$ are linearly dependent.
 ::::{proof:example}
 Consider the vectors
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{a}&=2\bm{\hat{x}}-\bm{\hat{y}},\\
 \bm{b}&=-\bm{\hat{x}}+\bm{\hat{y}},\\
 \bm{c}&=3\bm{\hat{y}}+\bm{\hat{z}}.
+\end{aligned}
 :::
 The left and right linearity together with the scalar multiplication rule provide
 :::{math}
 :enumerated:false
+\begin{aligned}
 \bm{a}\otimes\bm{b}&=(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})\\
 &=(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}})+(2\bm{\hat{x}}-\bm{\hat{y}})\otimes\bm{\hat{y}}\\
 &=(2\bm{\hat{x}})\otimes(-\bm{\hat{x}})+(-\bm{\hat{y}})\otimes(-\bm{\hat{x}})+(2\bm{\hat{x}})\otimes\bm{\hat{y}}+(-\bm{\hat{y}})\otimes\bm{\hat{y}}\\
 &=-2\bm{\hat{x}}\otimes\bm{\hat{x}}+\bm{\hat{y}}\otimes\bm{\hat{x}}+2\bm{\hat{x}}\otimes\bm{\hat{y}}-\bm{\hat{y}}\otimes\bm{\hat{y}}.
+\end{aligned}
 :::
 The right dyad-vector contraction rule gives
 :::{math}
 :enumerated: false
+\begin{aligned}
 (\bm{a}\otimes\bm{b})\cdot\bm{c}&=[(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})]\cdot(3\bm{\hat{y}}+\bm{\hat{z}})\\
 &=(2\bm{\hat{x}}-\bm{\hat{y}})[(-\bm{\hat{x}}+\bm{\hat{y}})\cdot(3\bm{\hat{y}}+\bm{\hat{z}})]\\
 &=(2\bm{\hat{x}}-\bm{\hat{y}})(3)\\
 &=6\bm{\hat{x}}-3\bm{\hat{y}},
+\end{aligned}
 :::
 while the left vector-dyad contraction rule gives
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{c}\cdot(\bm{a}\otimes\bm{b})&=(3\bm{\hat{y}}+\bm{\hat{z}})\cdot[(2\bm{\hat{x}}-\bm{\hat{y}})\otimes(-\bm{\hat{x}}+\bm{\hat{y}})]\\
 &=[(3\bm{\hat{y}}+\bm{\hat{z}})\cdot(2\bm{\hat{x}}-\bm{\hat{y}})] (-\bm{\hat{x}}+\bm{\hat{y}})\\
 &=(-\bm{\hat{x}}+\bm{\hat{y}})(-3)\\
 &=3\bm{\hat{x}}-3\bm{\hat{y}},
+\end{aligned}
 :::
 which clearly are two different vectors.
 ::::
@@ -185,37 +196,46 @@ which is a rank-2 tensor field represented by the coefficient functions $\partia
 Consider a scalar field $f$ and a vector field $\bm{a}$ defined in Cartesian coordinates as
 :::{math}
 :enumerated: false
+\begin{aligned}
 f(\bm{x})&=x^2y+yz,\\
 \bm{a}(\bm{x})&=xy\bm{\hat{x}}+yz\bm{\hat{y}}+zx\bm{\hat{z}}.
+\end{aligned}
 :::
 The gradient of the scalar field is a vector field given by
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla f
 &=\frac{\partial f}{\partial x}\bm{\hat{x}}+\frac{\partial f}{\partial y}\bm{\hat{y}}+\frac{\partial f}{\partial z}\bm{\hat{z}}\\
 &=2xy\bm{\hat{x}}+(x^2+z)\bm{\hat{y}}+y\bm{\hat{z}}.
+\end{aligned}
 :::
 The divergence of the vector field returns a scalar field
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla\cdot\bm{a}
 &=\frac{\partial a_x}{\partial x}
 +\frac{\partial a_y}{\partial y}
 +\frac{\partial a_z}{\partial z}\\
 &=y+z+x.
+\end{aligned}
 :::
 whereas its curl returns another vector field
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla\times\bm{a}
 &=\left(\frac{\partial a_z}{\partial y}-\frac{\partial a_y}{\partial z}\right)\bm{\hat{x}}
 +\left(\frac{\partial a_x}{\partial z}-\frac{\partial a_z}{\partial x}\right)\bm{\hat{y}}
 +\left(\frac{\partial a_y}{\partial x}-\frac{\partial a_x}{\partial y}\right)\bm{\hat{z}}\\
 &=-y\bm{\hat{x}}-z\bm{\hat{y}}-x\bm{\hat{z}}.
+\end{aligned}
 :::
 The gradient of the vector field is instead a rank-2 tensor field. Its Cartesian coordinate representation is
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla\bm{a}
 &=\frac{\partial a_x}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{x}}+\frac{\partial a_y}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{y}}+\frac{\partial a_z}{\partial x}\bm{\hat{x}}\otimes\bm{\hat{z}}\\
 &\quad+\frac{\partial a_x}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{x}}+\frac{\partial a_y}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{y}}+\frac{\partial a_z}{\partial y}\bm{\hat{y}}\otimes\bm{\hat{z}}\\
@@ -223,6 +243,7 @@ The gradient of the vector field is instead a rank-2 tensor field. Its Cartesian
 &=y\bm{\hat{x}}\otimes\bm{\hat{x}}+z\bm{\hat{x}}\otimes\bm{\hat{z}}\\
 &\quad+x\bm{\hat{y}}\otimes\bm{\hat{x}}+z\bm{\hat{y}}\otimes\bm{\hat{y}}\\
 &\quad+y\bm{\hat{z}}\otimes\bm{\hat{y}}+x\bm{\hat{z}}\otimes\bm{\hat{z}}.
+\end{aligned}
 :::
 This illustrates how the action of the differential operator $\nabla$ produces different mathematical objects depending on how it is applied to a scalar, vector, or tensor field.
 ::::
@@ -231,15 +252,19 @@ This illustrates how the action of the differential operator $\nabla$ produces d
 The process of converting conservation principle of mass, momentum, and energy into local partial differential equations involves transforming surface integrals to volume integrals. Carrying out such tasks requires the action of $\nabla$ on products containing scalar-, vector-, and tensor-valued fields. The rules most needed are
 :::{math}
 :label: eq-divergence-rules
+\begin{aligned}
 \nabla\cdot(f\bm{a})&=\nabla f\cdot\bm{a}+f\nabla\cdot\bm{a},\\
 \nabla\cdot(\bm{a}\otimes\bm{b})&=(\nabla\cdot\bm{a})\bm{b}+\bm{a}\cdot\nabla\bm{b},\\
 \nabla\cdot(\bm{\sigma}\cdot\bm{a})&=(\nabla\cdot\bm{\sigma})\cdot\bm{a}+\bm{\sigma}:\nabla\bm{a}.
+\end{aligned}
 :::
 They become powerful tools when combined with the divergence theorems for scalar and tensor fields
 :::{math}
 :label: eq-divergence-theorem
+\begin{aligned}
 \int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{a}dV,\\
 \int_{\partial V}\bm{\sigma}\cdot\bm{\hat{n}}dA&=\int_V\nabla\cdot\bm{\sigma}^\mathsf{T}dV,\\
+\end{aligned}
 :::
 that convert a surface integral of a field over the boundary $\partial V$ of a volume $V$ into a volume integral of the field divergence.
 
@@ -257,16 +282,12 @@ where $L$ is the side length of the cube and $A=L^2$ the area of each face. Assu
 The surface integral of $\bm{a}\cdot\bm{\hat{n}}$ over the cube boundary $\partial V$ can be evaluated by considering the six faces of the cube. On each of the three faces at $x=L$, $y=L$, and $z=L$, one has $\bm{a}\cdot\bm{\hat{n}}=L$, whereas on the remaining three faces at $x=0$, $y=0$, and $z=0$, the term is zero. Consequently,
 :::{math}
 :enumerated: false
-\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA&=LA+LA+LA=3L^3.
+\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA=LA+LA+LA=3L^3.
 :::
 Since the divergence of $\bm{a}$ is a constant
 :::{math}
 :enumerated: false
-\nabla\cdot\bm{a}
-=\frac{\partial x}{\partial x}
-+\frac{\partial y}{\partial y}
-+\frac{\partial z}{\partial z}
-=3,
+\nabla\cdot\bm{a}=\frac{\partial x}{\partial x}+\frac{\partial y}{\partial y}+\frac{\partial z}{\partial z}=3,
 :::
 one immediately computes
 :::{math}
@@ -283,10 +304,12 @@ Consider the non-symmetric rank-2 tensor field
 Using the right dyad-vector contraction rule, the surface integral becomes
 :::{math}
 :enumerated: false
+\begin{aligned}
 \int_{\partial V}\bm{\sigma}\cdot\bm{\hat{n}}dA
 &=\int_{\partial V}(\bm{\hat{x}}\otimes\bm{a})\cdot\bm{\hat{n}}dA\\
 &=\bm{\hat{x}}\int_{\partial V}\bm{a}\cdot\bm{\hat{n}}dA\\
 &=3L^3\bm{\hat{x}}.
+\end{aligned}
 :::
 To evaluate the corresponding volume integral, first transpose the tensor:
 :::{math}
@@ -296,10 +319,12 @@ To evaluate the corresponding volume integral, first transpose the tensor:
 Using the product rule for the divergence of a dyad gives
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla\cdot\bm{\sigma}^\mathsf{T}
 &=\nabla\cdot(\bm{a}\otimes\bm{\hat{x}})\\
 &=(\nabla\cdot\bm{a})\bm{\hat{x}}+\bm{a}\cdot\nabla\bm{\hat{x}}\\
 &=3\bm{\hat{x}},
+\end{aligned}
 :::
 where the second term vanishes because $\bm{\hat{x}}$ is a constant basis vector in Cartesian coordinates. Thus,
 :::{math}
@@ -313,14 +338,18 @@ which equals the corresponding surface integral. Notice that $\nabla\cdot\bm{\si
 ## <span class="intermediate"></span> Further identities involving tensors
 Those interested in progressing beyond the core engineering path and to studying the implications of momentum conservation encounter also expressions involving tensor-vector cross products and tensor-tensor single dot-products. To define such operations, the following identities involving dyads, of which rank-2 tensor are linear combinations of, are needed
 :::{math}
+\begin{aligned}
 (\bm{a}\otimes\bm{b})\times\bm{c}&=\bm{a}\otimes(\bm{b}\times\bm{c}) && \text{Right dyad-vector cross product}\\
 \bm{a}\times(\bm{b}\otimes\bm{c})&=(\bm{a}\times\bm{b})\otimes\bm{c} && \text{Left vector-dyad cross product}\\
 (\bm{a}\otimes\bm{b})\cdot(\bm{c}\otimes\bm{d})&=(\bm{b}\cdot\bm{c})(\bm{a}\otimes\bm{d}) && \text{Dyad-dyad dot product}
+\end{aligned}
 :::
 Applying these identities, both the right and left tensor-vector cross-product can be evaluated. The results are new rank-2 tensors with Cartesian coordinate representations given by
 :::{math}
-\bm{\sigma}\times\bm{a}=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell k j}\sigma_{i\ell}a_k\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,\\
-\bm{a}\times\bm{\sigma}=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell ki}a_\ell \sigma_{kj}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j.
+\begin{aligned}
+\bm{\sigma}\times\bm{a}&=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell k j}\sigma_{i\ell}a_k\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j,\\
+\bm{a}\times\bm{\sigma}&=\sum_{i,j,k,\ell=1}^3\varepsilon_{\ell ki}a_\ell \sigma_{kj}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j.
+\end{aligned}
 :::
 Also the tensor-tensor dot-product of two rank-2 tensors $\bm{\sigma}$ and $\bm{\pi}$ results in a new rank-2 tensor
 :::{math}
@@ -333,7 +362,7 @@ and particularly the dot product with the identity tensor results in
 The calculus identity using the above definitions is
 :::{math}
 :label: eq-div-a-times-sigma
-\nabla\cdot(\bm{a}\times\bm{\sigma})^\mathsf{T}&=\bm{a}\times\nabla\cdot\bm{\sigma}^\mathsf{T}-\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{a}),
+\nabla\cdot(\bm{a}\times\bm{\sigma})^\mathsf{T}=\bm{a}\times\nabla\cdot\bm{\sigma}^\mathsf{T}-\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla\bm{a}),
 :::
 where the rank-3 antisymmetric Levi-Civita tensor $\bm{\varepsilon}$ is defined
 :::{math}
@@ -358,21 +387,18 @@ Consider the position vector field
 Its gradient is the identity tensor, since
 :::{math}
 :enumerated: false
-\nabla\bm{x}
-=\sum_{i,j=1}^3\partial_i x_j
-\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
-=\sum_{i,j=1}^3\delta_{ij}
-\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j
-=\bm{I}.
+\nabla\bm{x}=\sum_{i,j=1}^3\partial_i x_j\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j=\sum_{i,j=1}^3\delta_{ij}\bm{\hat{x}}_i\otimes\bm{\hat{x}}_j=\bm{I}.
 :::
 Applying the calculus identity {numref}`eq-div-a-times-sigma` for the divergence of a vector-tensor cross product consequently gives
 :::{math}
 :enumerated: false
+\begin{aligned}
 \nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T}
 &=(\bm{x}-\bm{x}_0)\times(\nabla\cdot\bm{\sigma}^\mathsf{T})\\
 &\qquad -\bm{\varepsilon}:(\bm{\sigma}\cdot\nabla(\bm{x}-\bm{x}_0))\\
 &=(\bm{x}-\bm{x}_0)\times(\nabla\cdot\bm{\sigma}^\mathsf{T})
 -\bm{\varepsilon}:\bm{\sigma}.
+\end{aligned}
 :::
 If the tensor $\bm{\sigma}$ is symmetric, the last term vanishes, leaving
 :::{math}
@@ -420,21 +446,25 @@ For some velocity fields, it is possible to find analytical expressions for the 
 The time-independent vector field $\bm{v}(\bm{x})=\omega(y\bm{\hat{x}}-x\bm{\hat{y}})+v_z\bm{\hat{z}}$, with $\omega$ and $v_z$ constants, has a flow map
 :::{math}
 :enumerated: false
-\bm{\phi}_t(\bm{x})&=\phi_t^x(\bm{x})\bm{\hat{x}}+\phi_t^y(\bm{x})\bm{\hat{y}}+\phi_t^{z}(\bm{x})\bm{\hat{z}},
+\bm{\phi}_t(\bm{x})=\phi_t^x(\bm{x})\bm{\hat{x}}+\phi_t^y(\bm{x})\bm{\hat{y}}+\phi_t^{z}(\bm{x})\bm{\hat{z}},
 :::
 with the following component functions in the $x$-, $y$-, and $z$-directions
 :::{math}
 :enumerated: false
+\begin{aligned}
 \phi_t^x(\bm{x})&=\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y,\\
 \phi_t^y(\bm{x})&=-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y,\\
 \phi_t^z(\bm{x})&=z+v_z(t-t_0).
+\end{aligned}
 :::
 This can be verified by computing the time derivatives of the component functions
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}\phi_t^x(\bm{x})&=\omega[-\sin(\omega(t-t_0))x+\cos(\omega(t-t_0))y]=\omega \phi_t^y(\bm{x}),\\
 \frac{d}{dt}\phi_t^y(\bm{x})&=- \omega[\cos(\omega(t-t_0))x+\sin(\omega(t-t_0))y]=-\omega\phi_t^x(\bm{x}),\\
 \frac{d}{dt}\phi_t^{z}(\bm{x})&=v_z,
+\end{aligned}
 :::
 so that the time derivative of the flow map can be identified as
 :::{math}
@@ -448,16 +478,18 @@ The map describes a helical trajectory with constant angular velocity $\omega$ a
 Being now aware of the effects of vector fields on the movement of sets of points, assume the set of points to be a volume $V(t)$ that follows the flow of the vector field $\bm{u}(\bm{x},t)$ and is enclosed by a boundary $\partial V(t)$. The vector field $\bm{u}(\bm{x},t)$ is not necessarily the velocity of the fluid itself, denoted by $\bm{v}(\bm{x},t)$. For a volume $V(t)$ that follows the fluid, the two fields coincide. For a control volume, the boundary velocity is determined by how the control volume is selected and may differ from the fluid velocity. Assume then the existence of a scalar- or vector-valued field $\bm{f}(\bm{x},t)$. The time derivative of the integral of $\bm{f}$ over the volume $V(t)$ evolving according to $\bm{u}(\bm{x},t)$ is then given by the Leibniz rule
 :::{math}
 :label: eq-leibniz-rule-surface-form
-\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 According to the rule, both the local temporal change in $\bm{f}$ as well as changes in the volume $V(t)$ itself contribute to the time derivative. Notably, even if the field $\bm{f}$ were stationary in time, the integral of it over a volume could still change in time if the volume would move and, at different times, occupy domains in space where the field $\bm{f}$ varies spatially. 
 
 With the help of the divergence theorem {numref}`eq-divergence-theorem` and the vector calculus rules {numref}`eq-divergence-rules` involving the divergence of a rank-2 tensor field $\bm{u}\otimes\bm{f}$, the surface integral in the Leibniz rule {numref}`eq-leibniz-rule-surface-form` can be converted to a volume integral
 :::{math}
+\begin{aligned}
 \int_{\partial V(t)}\bm{f}\bm{u}\cdot\bm{\hat{n}}dA&=\int_{\partial V(t)}(\bm{f}\otimes\bm{u})\cdot\bm{\hat{n}}dA\\
 &=\int_{V(t)}\nabla\cdot(\bm{f}\otimes\bm{u})^\mathsf{T}dV\\
 &=\int_{V(t)}\nabla\cdot(\bm{u}\otimes\bm{f})dV\\
 &=\int_{V(t)}((\nabla\cdot\bm{u})\bm{f}+\bm{u}\cdot\nabla\bm{f})dV,
+\end{aligned}
 :::
 so that the Leibniz rule can be expressed also in a pure volume form
 :::{math}
@@ -483,15 +515,17 @@ It is then a matter of investigating how the integral
 :::
 evolves in time when the volume changes. Graphically, the setting is illustrated below
 :::{image} ./figs/example-fig-moving-rectangle.svg
-align: center
-:width:100%
+:align: center
+:width: 100%
 :::
 Assuming $f(x)$ to have an integral function $F(x)$ such that $dF(x)/dx=f(x)$, a direct computation of the left side of the Leibniz rule then provides
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}\int_{V(t)}fdV&=A\frac{d}{dt}\int_{ut}^{ut+L}f(x)dx\\
 &=A\frac{d}{dt}(F(ut+L)-F(ut))\\
 &=Auf(ut+L)-Auf(ut)
+\end{aligned}
 :::
 The first term on the right corresponds to the rate $Au>0$ at which the moving volume gains volume through the boundary at $x=ut+L$, multiplied by the value of the function $f(x)$ at that boundary. The second term describes the corresponding loss of volume at the rate $-Au<0$ through the trailing boundary at $x=ut$, multiplied by the value of $f(x)$ there.
 
@@ -527,9 +561,7 @@ and a non-differential unit normal vector
 
 Finally, a differential volume element $dV$ can be constructed by considering the volume all three differential line elements span
 :::{math}
-dV&=\left|d\bm{\ell}_{i}\times d\bm{\ell}_{j}\cdot d\bm{\ell}_{k}\right|%\\
-%&=|d\bm{A}_{k}\cdot d\bm{\ell}_{k}|\\
-=\left|\frac{\partial \bm{x}}{\partial \xi_i}\times\frac{\partial \bm{x}}{\partial \xi_j}\cdot\frac{\partial \bm{x}}{\partial \xi_k}\right|d\xi_i d\xi_j d\xi_k.
+dV=\left|d\bm{\ell}_{i}\times d\bm{\ell}_{j}\cdot d\bm{\ell}_{k}\right|=\left|\frac{\partial \bm{x}}{\partial \xi_i}\times\frac{\partial \bm{x}}{\partial \xi_j}\cdot\frac{\partial \bm{x}}{\partial \xi_k}\right|d\xi_i d\xi_j d\xi_k.
 :::
 This construction is free of the way the coordinates $(\xi_1,\xi_2,\xi_3)$ are chosen. They can be the Cartesian coordinates or any curvilinear coordinates. Example coordinate-triplet isolines trough a point $\bm{x}$ and the possible vectors $\partial\bm{x}/\partial \xi_i$ they generate at the point $\bm{x}$ are illustrated in {numref}`fig-coordinate-vectors`. From the figure, one may observe the vectors to span finite areas and a finite volume. The areas and the volume become differential once the length along the vectors are scaled with the associated differentials $d\xi_i$.
 :::{figure} ./figs/fig-coordinate-vectors.svg
@@ -561,8 +593,10 @@ d\bm{\ell}_{x}=\bm{\hat{x}}dx, \quad d\bm{\ell}_{y}=\bm{\hat{y}}dy, \quad d\bm{\
 They generate differential oriented surface elements such as
 :::{math}
 :enumerated: false
+\begin{aligned}
 d\bm{A}_{x}&=d\bm{\ell}_{y}\times d\bm{\ell}_{z}=\bm{\hat{y}}\times\bm{\hat{z}}dydz=\bm{\hat{x}}dydz,\\
 d\bm{A}_{y}&=d\bm{\ell}_{z}\times d\bm{\ell}_{x}=\bm{\hat{z}}\times\bm{\hat{x}}dydz=\bm{\hat{y}}dzdx,
+\end{aligned}
 :::
 and a differential volume element
 :::{math}
@@ -572,23 +606,29 @@ dV=|d\bm{A}_x\cdot d\bm{\ell}_x|=|d\bm{A}_y\cdot d\bm{\ell}_y|=dxdydz.
 In cylindrical coordinates $(r,\vartheta,z)$, the differential line elements are computed to be
 :::{math}
 :enumerated: false
+\begin{aligned}
 d\bm{\ell}_{r}&=(\cos\vartheta\bm{\hat{x}}+\sin\vartheta\bm{\hat{y}})dr,\\
 d\bm{\ell}_{\vartheta}&=(-r\sin\vartheta\bm{\hat{x}}+r\cos\vartheta\bm{\hat{y}})d\vartheta,\\
 d\bm{\ell}_{z}&=\bm{\hat{z}}dz.
+\end{aligned}
 :::
 They generate differential oriented surface elements such as
 :::{math}
 :enumerated: false
+\begin{aligned}
 d\bm{A}_{z}&=d\bm{\ell}_{r}\times d\bm{\ell}_{\vartheta}\\
 &=(\cos\vartheta\bm{\hat{x}}+\sin\vartheta\bm{\hat{y}})\times (-r\sin\vartheta\bm{\hat{x}}+r\cos\vartheta\bm{\hat{y}})drd\vartheta\\
 &=\bm{\hat{z}}rdrd\vartheta,
+\end{aligned}
 :::
 and
 :::{math}
 :enumerated: false
+\begin{aligned}
 d\bm{A}_{r}&=d\bm{\ell}_{\vartheta}\times d\bm{\ell}_{z}\\
 &=(-r\sin\vartheta\bm{\hat{x}}+r\cos\vartheta\bm{\hat{y}})\times \bm{\hat{z}}d\vartheta dz\\
 &=(r\sin\vartheta\bm{\hat{y}}+r\cos\vartheta\bm{\hat{x}})d\vartheta dz,
+\end{aligned}
 :::
 from which a differential volume element can be computed
 :::{math}
@@ -613,9 +653,11 @@ The rate of change of the vectors along the flow can be computed using the chain
 :::
 that defines the flow map $\bm{\psi}_t$ for the vector field $\bm{u}(\bm{x},t)$. At a point $\bm{\psi}_t(\bm{x})$ at time $t$, changing the order of differentiation and applying the chain rule provides
 :::{math}
+\begin{aligned}
 \frac{d}{dt}\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_i}&=\frac{\partial}{\partial \xi_i}\frac{d\bm{\psi}_t(\bm{x})}{dt}=\frac{\partial \bm{u}(\bm{\psi}_t(\bm{x}),t)}{\partial \xi_i}
 =\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_i}\cdot\nabla\bm{u}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\nabla\bm{u}\right)^\mathsf{T}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_i},
+\end{aligned}
 :::
 where $(\nabla\bm{u})^\mathsf{T}|_{(\bm{\psi}_t(\bm{x}),t)}$ is the transpose of the rank-2 tensor field $\nabla\bm{u}$ evaluated at $\bm{\psi}_t(\bm{x})$ at time $t$. 
 ::::{proof:example}
@@ -625,42 +667,52 @@ Provide here a simple example that calculates the time rate of change of the bas
 
 At the same point and time, the differential line, surface, and volume elements are defined
 :::{math}
+\begin{aligned}
 d\bm{\ell}_i\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\frac{\partial \bm{\psi}_t(\bm{x})}{\partial \xi_i}d\xi_i,\\
 d\bm{A}_k\big|_{(\bm{\psi}_t(\bm{x}),t)}&=d\bm{\ell}_i\big|_{(\bm{\psi}_t(\bm{x}),t)}\times d\bm{\ell}_j\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 dV\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left|d\bm{A}_k\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot d\bm{\ell}_k\big|_{(\bm{\psi}_t(\bm{x}),t)}\right|.
+\end{aligned}
 :::
 The time rate of change of the line element only requires the substitution of the the rate of change of the vector generating it, resulting in
 :::{math}
 :label: eq-dl-dt
+\begin{aligned}
 \frac{d}{dt}d\bm{\ell}_{i}\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\frac{d}{dt}\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_i}d\xi_i=\left(\nabla\bm{u}\right)^\mathsf{T}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot\frac{\partial\bm{\psi}_t(\bm{x})}{\partial \xi_i}d\xi_i\\
 &=\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}_{i}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}.
+\end{aligned}
 :::
 One recognizes that the time derivative of the differential line-element is proportional to the element itself but modified by the action of the vector field gradient. This pattern repeats itself also in the time derivatives of the oriented surface element and the volume element. In case of the oriented surface element, the calculation is straightforward, leverages the previous result {numref}`eq-dl-dt`, but requires a bit more algebra, resulting in
 :::{math}
 :label: eq-dA-dt
+\begin{aligned}
 \frac{d}{dt}d\bm{A}_k\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\frac{d}{dt}\left(d\bm{\ell}_i\big|_{(\bm{\psi}_t(\bm{x}),t)}\times d\bm{\ell}_j\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\nonumber\\
 &=\frac{d}{dt}d\bm{\ell}_i\big|_{(\bm{\psi}_t(\bm{x}),t)}\times d\bm{\ell}_j\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &\quad+d\bm{\ell}_i\big|_{(\bm{\psi}_t(\bm{x}),t)}\times \frac{d}{dt}d\bm{\ell}_j\big|_{(\bm{\psi}_t(\bm{x}),t)}\nonumber\\
 &=\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}_{i}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\times d\bm{\ell}_j\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &\quad+d\bm{\ell}_{i}\big|_{(\bm{\psi}_t(\bm{x}),t)}\times\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}_{j}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\nonumber\\
 &=\left(\left((\nabla\cdot\bm{u})\bm{I}-\nabla\bm{u}\right)\cdot d\bm{A}_{k}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+\end{aligned}
 :::
 Again, the time rate of change is proportional to the element itself, operated on with a rank-2 tensor involving the vector field gradient. In case of the volume element, the calculation leverages both previous results {numref}`eq-dl-dt` and {numref}`eq-dA-dt`. Choose the ordering of the coordinate directions such that $d\bm{A}_k\cdot d\bm{\ell}_k>0$ initially. Since the flow map preserves orientation, this scalar product remains positive, and taking the absolute value can be omitted. A direct computation then provides
 :::{math}
 :label: eq-dV-dt
+\begin{aligned}
 \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\frac{d}{dt}\left(d\bm{A}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot d\bm{\ell}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\nonumber\\
 &=\frac{d}{dt}d\bm{A}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot d\bm{\ell}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &\quad+d\bm{A}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot\frac{d}{dt}d\bm{\ell}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\nonumber\\
 &=d\bm{\ell}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot \left(\left((\nabla\cdot\bm{u})\bm{I}-\nabla\bm{u}\right)\cdot d\bm{A}_{k}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &\quad+d\bm{A}_{k}\big|_{(\bm{\psi}_t(\bm{x}),t)}\cdot\left((\nabla\bm{u})^\mathsf{T}\cdot d\bm{\ell}_{k}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\nonumber\\
 &=\left((\nabla\cdot\bm{u})dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+\end{aligned}
 :::
 Since the coordinate system $(\xi_1,\xi_2,\xi_3)$ is arbitrary, it can be chosen locally to be adapted to an arbitrary initial curve or oriented surface. In the case of a curve, one chooses one of the coordinates, for example $\xi_i$, to parametrize the initial curve, while keeping the other two coordinates fixed. In the case of an oriented surface, one chooses two coordinates, for example $\xi_i$ and $\xi_j$, to span the initial surface, while keeping the third coordinate $\xi_k$ fixed. The coordinate direction associated with $\xi_k$ can be chosen to point along the surface normal of the initial surface. The coordinate labels are then held fixed as the flow map $\bm{\psi}_t$ carries the initial curve or surface forward in time. The derived evolution equations therefore apply to differential line and surface elements of arbitrary orientation, independently of the coordinate chart used to represent them. Dropping the explicit coordinate labels, one obtains
 :::{math}
 :label: eq-dl-dA-dV-dt
+\begin{aligned}
 \frac{d}{dt}d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left((\nabla \bm{u})^\mathsf{T}\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \frac{d}{dt}d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left(\left((\nabla\cdot\bm{u})\bm{I}-\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}&=\left((\nabla\cdot\bm{u})dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}.
+\end{aligned}
 :::
 Note, however, that a single coordinate chart is not necessarily sufficient to describe an entire curve or surface. Instead, multiple coordinate patches may need to be used. 
 
@@ -670,8 +722,10 @@ Since $\nabla\cdot\bm{u}=\nabla\bm{u}:\bm{I}$, a common term, the gradient $\nab
 :::
 Here the symmetric and traceless tensor $\bm{D}$ and the antisymmetric tensor $\bm{\Omega}$ are 
 :::{math}
+\begin{aligned}
 \bm{D}&=\frac{1}{2}\left(\nabla\bm{u}+(\nabla\bm{u})^\mathsf{T}\right)-\frac{1}{3}(\nabla\cdot\bm{u})\bm{I},\\
 \bm{\Omega}&=\frac{1}{2}\left(\nabla\bm{u}-(\nabla\bm{u})^\mathsf{T}\right).
+\end{aligned}
 :::
 While the decomposition may appear superficial, each of the parts has a distinct role in generating and characterizing motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{u})\bm{I}$ describes isotropic deformation, the term $\bm{D}$ describes deformation that is non-isotropic but volume-preserving, and the term $\bm{\Omega}$ describes rotation without deformation. This can be verified by tracking the movement of points $\bm{x}(t)$ in the flow of $\bm{u}(\bm{x},t)$.
 
@@ -695,30 +749,38 @@ Running the script results in a figure below that confirms the trajectory for th
 Consider the following three different velocity fields
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{u}_D&=\frac{u_0}{L_0}(x\bm{\hat{x}}-y\bm{\hat{y}}),\\
 \bm{u}_\Omega&=\frac{u_0}{L_0}(-y\bm{\hat{x}}+x\bm{\hat{y}}),\\
 \bm{u}_\text{div}&=\frac{u_0}{L_0}(x\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}}).
+\end{aligned}
 :::
 The field $\bm{u}_D$ pushes points away from the $x=0$ plane and towards the $y=0$ plane with speed proportional to the distance from the planes. The field $\bm{u}_\Omega$ rotates points counter clockwise about the $z$-axis. The field $\bm{u}_\text{div}$ pushes points away from origin with speed proportional to the distance from the origin. For each field, only one contribution to the velocity gradient tensor is non-zero. For the field $\bm{u}_D$, one may compute
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{D}(\bm{u}_D)&=\frac{u_0}{L_0}(\bm{\hat{x}}\otimes\bm{\hat{x}}-\bm{\hat{y}}\otimes\bm{\hat{y}}),\\
 \bm{\Omega}(\bm{u}_D)&=\bm{0},\\
 \nabla\cdot\bm{u}_D&=0.
+\end{aligned}
 :::
 For the field $\bm{u}_\Omega$, one computes instead
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{D}(\bm{u}_\Omega)&=\bm{0},\\
 \bm{\Omega}(\bm{u}_\Omega)&=\frac{u_0}{L_0}(\bm{\hat{x}}\otimes\bm{\hat{y}}-\bm{\hat{y}}\otimes\bm{\hat{x}}),\\
 \nabla\cdot\bm{u}_\Omega&=0.
+\end{aligned}
 :::
 Finally, for the field $\bm{u}_\text{div}$, one obtains
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{D}(\bm{u}_\text{div})&=\bm{0},\\
 \bm{\Omega}(\bm{u}_\text{div})&=\bm{0},\\
 \nabla\cdot\bm{u}_\text{div}&=\frac{3u_0}{L_0}.
+\end{aligned}
 :::
 To demonstrate that each part of the $\nabla\bm{u}$ tensor indeed corresponds to the stated motion, integrate points in space according to the differential equation
 :::{math}
@@ -751,51 +813,65 @@ Equipped with the knowledge of how differential elements change under the flow o
 
 Define a time dependent curve $C(t)$, an oriented surface $S(t)$, and a volume $V(t)$ as images of some initial curve $C(t_0)$, surface $S(t_0)$, and volume $V(t_0)$ with respect to the flow map $\bm{\psi}_t$
 :::{math}
+\begin{aligned}
 C(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in C(t_0)\},\\
 S(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in S(t_0)\},\\
 V(t)&=\{\bm{\psi}_t(\bm{x})|\bm{x}\in V(t_0)\}.
+\end{aligned}
 :::
 Consider the following integrals over the time-dependent curve, surface, and volume
 :::{math}
+\begin{aligned}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}},\\
 \int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}.
+\end{aligned}
 :::
 In the line and surface integrals, the field $\bm{f}$ must be a vector field. In the volume integral, the field $\bm{f}$ can more generally be scalar-, vector-, or even tensor-valued. Here, the integration label $\bm{x}$ is shown explicitly for the differential elements, for book-keeping. 
 
 Perform then a change of integration labels with the help of the flow map so that 
 :::{math}
+\begin{aligned}
 \int_{C(t)}\bm{f}(\bm{x},t)\cdot d\bm{\ell}\big|_{\bm{x}}&=\int_{C(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \int_{S(t)}\bm{f}(\bm{x},t)\cdot d\bm{A}\big|_{\bm{x}}&=\int_{S(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)},\\
 \int_{V(t)}\bm{f}(\bm{x},t)dV\big|_{\bm{x}}&=\int_{V(t_0)}\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}.
+\end{aligned}
 :::
 On the left, the label $\bm{x}$ denotes the time-dependent domains $C(t)$, $S(t)$, and $V(t)$. On the right, the label $\bm{x}$ denotes the time-independent domains $C(t_0)$, $S(t_0)$, $V(t_0)$ instead, and the time dependence has been moved inside the integrals via the change of integration labels with the flow map. Since the integration domains no longer depend on time, computation of time derivatives of the integrals can be performed. Before that, use the chain rule and {numref}`eq-dl-dA-dV-dt` to compute the derivatives
 :::{math}
+\begin{aligned}
 &\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
 &=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}
 +\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+\end{aligned}
 :::
 :::{math}
+\begin{aligned}
 &\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
 &=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}
 +\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot \frac{d}{dt}d\bm{A}\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+(\nabla\cdot\bm{u})\bm{f}-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})-\bm{f}\cdot\nabla\bm{u}\right)\cdot d\bm{A}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+\end{aligned}
 :::
 :::{math}
+\begin{aligned}
 &\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
 &=\frac{d}{dt}\bm{f}(\bm{\psi}_t(\bm{x}),t)dV\big|_{(\bm{\psi}_t(\bm{x}),t)}
 +\bm{f}(\bm{\psi}_t(\bm{x}),t)\frac{d}{dt}dV\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}(\nabla\cdot\bm{u})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\left(\left(\partial_t\bm{f}+\nabla\cdot(\bm{u}\otimes\bm{f})\right)dV\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}
+\end{aligned}
 :::
 In the volume related term, if $\bm{f}$ is a scalar, then $\bm{u}\otimes\bm{f}$ reduces to $\bm{u}f$. Now, with the help of the formula above, calculate the time derivative of the line integral and transforms the integration labels back to the time dependent domain
 :::{math}
 :label: eq-leibniz-rule-line
+\begin{aligned}
 \frac{d}{dt}\int_{C(t)}(\bm{f}\cdot d\bm{\ell})\big|_{(\bm{x},t)}&=\int_{C(t_0)}\frac{d}{dt}\left(\bm{f}(\bm{\psi}_t(\bm{x}),t)\cdot d\bm{\ell}\big|_{(\bm{\psi}_t(\bm{x}),t)}\right)\\
 &=\int_{C(t_0)}\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{\psi}_t(\bm{x}),t)}\\
 &=\int_{C(t)}\left(\left(\partial_t\bm{f}+\bm{u}\cdot\nabla\bm{f}+\bm{f}\cdot(\nabla\bm{u})^\mathsf{T})\right)\cdot d\bm{\ell}\right)\big|_{(\bm{x},t)}.
+\end{aligned}
 :::
 To calculate the time derivative of the surface integral, exactly the same steps are used. Transformation of the labeling to time-independent domain, calculation of the time derivative of the integrand and the surface element, and transformation back to the time-dependent labeling. This process results in
 :::{math}
@@ -813,7 +889,7 @@ Each of the derived integral formulae have their place in fluid mechanics. In th
 
 As in these notes the time derivative of the volume integral has a major role, it is useful to convert the divergence term into a surface term for its physical interpretation. With the divergence theorem, one finds
 :::{math}
-\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}&=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
+\underbrace{\frac{d}{dt}\int_{V(t)}\bm{f}dV}_{\substack{\text{Time rate of change}\\\text{of an integral of}\,\bm{f}\\\text{calculated over the}\\\text{moving volume}}}=\underbrace{\int_{V(t)}\partial_t \bm{f}dV}_{\substack{\text{Integral of the local}\\\text{temporal change}\,\partial_t\bm{f}\\\text{calculated over the}\\\text{moving volume}}} +\underbrace{\int_{\partial V(t)}\bm{f}\underbrace{\bm{u}\cdot\bm{\hat{n}} dA}_{\substack{\text{Local rate of}\\\text{change of the}\\\text{volume from}\\\text{boundary}\\\text{movement}}}}_{\substack{\text{Contribution to the integral}\\\text{from boundary movement}}}.
 :::
 
 ::::{proof:example}
@@ -827,34 +903,44 @@ To differentiate the time-dependent integral
 with $a(t)$ and $b(t)$ some time-dependent, well-behaving functions describing the positions of the integral boundaries in time $t$, assume any point $x\in[a(t),b(t)]$ to move with the speed $u(x,t)$. Let $\psi(x,t)$ be the flow map of $u(x,t)$ so that a point $x_0\in[a(t_0),b(t_0)]$ becomes a point $\psi(x_0,t)=x$ and $\partial_t\psi(x,t)=u(\psi(x,t),t)$. One may now write
 :::{math}
 :enumerated: false
+\begin{aligned}
 \int_{a(t)}^{b(t)} f(x,t) dx&=\int_{\psi(a(t_0),t)}^{\psi(b(t_0),t)}f(x,t)dx=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)d\psi(x_0,t)\\
 &=\int_{a(t_0)}^{b(t_0)}f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0.
+\end{aligned}
 :::
 To proceed, apply the chain rule to the derivative of the flow map
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}&=\frac{\partial^2\psi(x,t)}{\partial x\partial t}\Big|_{(x_0,t)}=\frac{\partial u(\psi(x,t),t)}{\partial x}\Big|_{(x_0,t)}\\
 &=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}.
+\end{aligned}
 :::
 One may now identify that 
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}d\psi(x_0,t)&=\frac{d}{dt}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0\\
 &=\frac{\partial u}{\partial x}\Big|_{(\psi(x_0,t),t)}d\psi(x_0,t),
+\end{aligned}
 :::
 is analogous to the time derivative of a differential volume element with $\partial u/\partial x$ serving the role of velocity divergence. Considering that the time derivative of the composed function $f(\psi(x_0,t),t)$ can be written 
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}f(\psi(x_0,t),t)&=\frac{\partial f}{\partial t}\Big|_{(\psi(x_0,t),t)}+\frac{\partial f}{\partial x}\Big|_{(\psi(x_0,t),t)}\frac{\partial \psi}{\partial t}\Big|_{(x_0,t)}\\
 &=\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}\right)\Big|_{(\psi(x_0,t),t)},
+\end{aligned}
 :::
 the time derivative of the integral becomes
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{d}{dt}\int_{a(t)}^{b(t)} f(x,t) dx&=\int_{a(t_0)}^{b(t_0)}\frac{d}{dt}\left(f(\psi(x_0,t),t)\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}\right)dx_0\\
 &=\int_{a(t_0)}^{b(t_0)}\left(\frac{\partial f}{\partial t}+u\frac{\partial f}{\partial x}+f\frac{\partial u}{\partial x}\right)\Big|_{(\psi(x_0,t),t)}\frac{\partial\psi}{\partial x}\Big|_{(x_0,t)}dx_0\\
 &=\int_{a(t)}^{b(t)}\left(\frac{\partial f}{\partial t}+\frac{\partial(uf)}{\partial x}\right)\Big|_{(x,t)}dx\\
 &=\int_{a(t)}^{b(t)}\frac{\partial f(x,t)}{\partial t}dx+\Big[u(x,t)f(x,t)\Big]_{x=a(t)}^{x=b(t)}.
+\end{aligned}
 :::
 The result is the one-dimensional version of the Leibniz rule. 
 Realizing that the speed function $u(x,t)$ at the boundary points satisfies $u(a(t),t)=da/dt$ and $u(b(t),t)=db/dt$ enables writing
@@ -881,8 +967,10 @@ This conservation of mass within any material volume has consequences for the fl
 :::
 Next apply the Leibniz integral differentiation rule {numref}`eq-leibniz-rule-surface-form` and {numref}`eq-leibniz-rule-volume-form` by setting $\bm{f}=\rho$ and $\bm{u}=\bm{v}$. The time derivative of the mass within a material volume can then be expressed as 
 :::{math}
+\begin{aligned}
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho dV}_{\substack{\text{Rate of change of}\\\text{fluid mass in}\,V(t)}}&=\underbrace{\int_{V(t)}\partial_t\rho \,dV}_{\substack{\text{Contribution from}\\\text{local temporal}\\\text{density change}}}+\underbrace{\int_{\partial V(t)}\rho\underbrace{\bm{v}\cdot\bm{\hat{n}}dA}_{\substack{\text{Local rate of}\\\text{volume change}}}}_{\substack{\text{Contribution from}\\\text{boundary movement}}}\\
 &=\int_{V(t)}\left(\partial_t\rho+\nabla\cdot(\bm{v}\rho)\right)dV.
+\end{aligned}
 :::
 The boundary $\partial V(t)$ moves with the fluid and no fluid crosses it. The surface contribution accounts for the change in the integral caused by movement of the integration domain, not for mass transporting through the surface. Since the time derivative of mass must vanish, the integral on the right must be zero. However, the choice of the initial $V(t_0)$ is arbitrary, and the integral must therefore vanish for every volume $V(t)$. Consequently the integrand must be zero everywhere, which results in the partial differential equation for density
 :::{math}
@@ -913,10 +1001,12 @@ with $\rho_0$ and $v_0$ some constants. If the fluid at some location $z$ flows 
 
 The physical law of mass conservation has a mathematical consequence that is found particularly convenient in sections that follow. According to the Leibniz rule {numref}`eq-leibniz-rule-volume-form` and the continuity equation {numref}`eq-continuity`, the time rate of change of the volume integral of a quantity $\rho\bm{f}$, where $\bm{f}$ may be any scalar, vector, or tensor field, can be computed as
 :::{math}
+\begin{aligned}
 \frac{d}{dt}\int_{V(t)}\rho \bm{f} dV
 &=\int_{V(t)}\left(\partial_t(\rho\bm{f})+\bm{v}\cdot\nabla(\rho\bm{f})+\rho\bm{f}\nabla\cdot\bm{v}\right)dV\\
 &=\int_{V(t)}\left(\bm{f}(\partial_t\rho+\nabla\cdot(\bm{v}\rho))+\rho(\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f})\right)dV\\
 &=\int_{V(t)}\rho(\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f})dV.
+\end{aligned}
 :::
 Physically, the expression $\partial_t\bm{f}+\bm{v}\cdot\nabla\bm{f}$ describes the time rate of change of $\bm{f}$ at a point which moves according to the vector field $\bm{v}$. This can be verified by letting the flow map $\bm{\phi}_t$ of the vector field $\bm{v}$ do its job:
 :::{math}
@@ -985,8 +1075,10 @@ A careful investigation of Newton's second law reveals that the traction acting 
 :::
 The detailed arguments leading to this conclusion are presented in the advanced {numref}`sec-stress-tensor` for those interested. With the help of the stress tensor and the divergence theorem {numref}`eq-divergence-theorem`, the total force on a material fluid volume can then be written as a volume integral
 :::{math}
+\begin{aligned}
 \int_{V(t)}\delta \bm{F}_b+\int_{\partial V(t)}\delta\bm{F}_s&=\int_{V(t)}\rho\bm{g}dV+\int_{\partial V(t)}\bm{\sigma}\cdot\bm{\hat{n}}dA\\
 &=\int_{V(t)}(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T})dV.
+\end{aligned}
 :::
 
 Since Newton's second law holds for an arbitrary material volume, the integrands on the left and right sides of it must be equal everywhere. Consequently, the fluid velocity field must satisfy the following local partial differential equation
@@ -1040,22 +1132,26 @@ To understand why the traction vector must be a function of the unit surface nor
 The linear dependence of traction on the unit surface normal is established in two phases. In both phases, the mean value theorem of vector fields is leveraged to express averages of volume and surface integrals in terms of their integrands over two particularly chosen domains. Hence the theorem is stated first. Let $\mathcal{V}$ and $\mathcal{A}$ be a bounded volumetric domain and surface with volume $V$ and area $A$, respectively. Let the vector field $\bm{f}$ be bounded and Riemann integrable on $\mathcal{V}$ and $\mathcal{A}$. The mean value theorem then states that the averages of $\bm{f}$ over $\mathcal{V}$ and $\mathcal{A}$ belong to the closures of the convex hulls of the images of the corresponding domains under the vector field $\bm{f}$, namely
 :::{math}
 :label: eq-mean-value-theorem
+\begin{aligned}
 \frac{1}{V}\int_\mathcal{V}\bm{f}dV &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in \mathcal{V}\})},\\
 \frac{1}{A}\int_\mathcal{A}\bm{f}dA &\in \overline{\text{conv}(\{\bm{f}(\bm{x})\mid\bm{x}\in \mathcal{A}\})}.
+\end{aligned}
 :::
 The theorem may appear intimidating at first. It nevertheless constitutes a straightforward idea illustrated with the following example.
 ::::{proof:example}
 Consider the two-dimensional domain 
 :::{math}
 :enumerated: false
-	\mathcal{A}=\{(x,y)\in\mathbb{R}^2\mid 0\leq x\leq 3, 0\leq y\leq 1\},
+\mathcal{A}=\{(x,y)\in\mathbb{R}^2\mid 0\leq x\leq 3, 0\leq y\leq 1\},
 :::
 with area $A=3$. Divide it into three non-overlapping subdomains
 :::{math}
 :enumerated: false
+\begin{aligned}
 \mathcal{A}_1&=\{(x,y)\in\mathbb{R}^2\mid 0\leq x < 1, 0\leq y\leq 1\},\\
 \mathcal{A}_2&=\{(x,y)\in\mathbb{R}^2\mid 1\leq x < 2, 0\leq y\leq 1\},\\
 \mathcal{A}_3&=\{(x,y)\in\mathbb{R}^2\mid 2\leq x \leq 3, 0\leq y\leq 1\},
+\end{aligned}
 :::
 with each an equal area of $A_1=A_2=A_3=1$. 
 :::{image} ./figs/example-fig-integral-identity-domain.svg
@@ -1065,15 +1161,19 @@ with each an equal area of $A_1=A_2=A_3=1$.
 Let the vector field $\bm{f}$ be piece-wise constant
 :::{math}
 :enumerated: false
+\begin{aligned}
 \bm{f}(\bm{x})=\left\{\begin{aligned}\bm{f}_1&=-\bm{\hat{x}}-\bm{\hat{y}}, && \bm{x}\in \mathcal{A}_1,\\
 \bm{f}_2&=2\bm{\hat{y}}, && \bm{x}\in \mathcal{A}_2,\\
 \bm{f}_3&=2\bm{\hat{x}}, && \bm{x}\in \mathcal{A}_3.\end{aligned}\right.
+\end{aligned}
 :::
 The average of $\bm{f}$ is then
 :::{math}
 :enumerated: false
+\begin{aligned}
 \frac{1}{A}\int_A\bm{f}dA&=\frac{1}{A}\left(\bm{f}_1 A_1+\bm{f}_2 A_2+\bm{f}_3 A_3\right)\\
 &=\frac{1}{3}\bm{\hat{x}}+\frac{1}{3}\bm{\hat{y}},
+\end{aligned}
 :::
 and belongs to the closure of the convex hull of the set $\{\bm{f}_1,\bm{f}_2,\bm{f}_3\}$ indicated as the orange domain below.
 :::{image} ./figs/example-fig-integral-identity-convex-hull.svg
@@ -1089,8 +1189,10 @@ Next, assume a time-dependent volumetric material domain $\mathcal{V}(t)$ with a
 :::
 separating the volume and surface terms to the different sides. According to the mean value theorem {numref}`eq-mean-value-theorem`, there now exist time-dependent vectors $\bm{f}(t)$ and $\{\bm{t}_i(t)\}_i$ that belong to the closures of convex hulls
 :::{math}
+\begin{aligned}
 \bm{f}(t)&\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t)} \mid \bm{y}\in\mathcal{V}(t)\}},\\
 \bm{t}_i(t)&\in\overline{\text{conv}\{\bm{t}(\bm{y},t,\bm{\hat{n}}(\bm{y},t)) \mid \bm{y}\in\mathcal{A}_i(t)\}},
+\end{aligned}
 :::
 in terms of which the regrouped Newton's second law {numref}`eq-regrouped-newton` can be expressed as 
 :::{math}
@@ -1113,10 +1215,12 @@ With respect to the volume $\mathcal{V}_\epsilon$, the mean value form {numref}`
 :::
 where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, $\bm{t}_{\epsilon,-n}$, and $\bm{t}_{\epsilon,r}$ belong to the closures of the convex hulls
 :::{math}
+\begin{aligned}
 \bm{f}_\epsilon &\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t_\ast)} \mid \bm{y}\in\mathcal{V}_\epsilon\}},\\
 \bm{t}_{\epsilon,n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,n}\}},\\
 \bm{t}_{\epsilon,-n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,-\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,-n}\}},\\
 \bm{t}_{\epsilon,r}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{r}}(\bm{y})) \mid \bm{y}\in\mathcal{A}_{\epsilon,r}\}}.
+\end{aligned}
 :::
 Note that the outward unit normal of the top cylinder surface equals $\bm{\hat{n}}(\bm{x},t_\ast)$ and the outward unit normal of the bottom cylinder surface equals $-\bm{\hat{n}}(\bm{x},t_\ast)$. Then the equation {numref}`eq-mean-value-newton-cylinder` is divided by the area $A_{\epsilon,n}$, resulting in
 :::{math}
@@ -1124,8 +1228,10 @@ Note that the outward unit normal of the top cylinder surface equals $\bm{\hat{n
 :::
 Finally, the limit $\epsilon\to 0$ is taken. At this limit, the domains $\mathcal{V}_\epsilon$, $\mathcal{A}_{\epsilon,n}$, $\mathcal{A}_{\epsilon,-n}$, and $\mathcal{A}_{\epsilon,r}$ all collapse to the single point $\bm{x}$, the ratios $V_\epsilon/A_{\epsilon,n}\to 0$ and $A_{\epsilon,r}/A_{\epsilon,n}\to 0$ vanish, $\bm{f}_\epsilon$ and $\bm{t}_{\epsilon,r}$ remain finite and bounded, and 
 :::{math}
+\begin{aligned}
 \lim_{\epsilon\to 0}\bm{t}_{\epsilon,n}&=\bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)),\\
 \lim_{\epsilon\to 0}\bm{t}_{\epsilon,-n}&=\bm{t}(\bm{x},t_\ast,-\bm{\hat{n}}(\bm{x},t_\ast)).
+\end{aligned}
 :::
 At this limit, Newton's second law therefore provides the condition
 :::{math}
@@ -1150,20 +1256,26 @@ A_{\epsilon,i}=\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast)A_{\epsilon
 The mean value form {numref}`eq-mean-value-newton` over the tetrahedron then reads
 :::{math}
 :label: eq-mean-value-newton-tetra
+\begin{aligned}
 \bm{f}_\epsilon V_\epsilon&=\bm{t}_{\epsilon,n}A_{\epsilon,n}+\sum_{i=1}^3\bm{t}_{\epsilon,i}A_{\epsilon,i},\\
 &=A_{\epsilon,n}\left(\bm{t}_n+\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}_{\epsilon,i}\right)
+\end{aligned}
 :::
 where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, and $\{\bm{t}_{\epsilon,i}\}_{i=1}^3$ belong to the closures of convex hulls
 :::{math}
+\begin{aligned}
 \bm{f}_\epsilon &\in\overline{\text{conv}\{(\rho(D\bm{v}/Dt)-\rho\bm{g})\big|_{(\bm{y},t_\ast)} \mid \bm{y}\in\mathcal{V}_\epsilon\}},\\
 \bm{t}_{\epsilon,n}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast)) \mid \bm{y}\in\mathcal{A}_{\epsilon,n}\}},\\
 \bm{t}_{\epsilon,i}&\in\overline{\text{conv}\{\bm{t}(\bm{y},t_\ast,-\bm{\hat{e}}_i(\bm{x})) \mid \bm{y}\in\mathcal{A}_{\epsilon,i}\}}.
+\end{aligned}
 :::
 Dividing {numref}`eq-mean-value-newton-tetra` by the surface area $A_{\epsilon,n}$, and taking the limit $\epsilon\to 0$, the ratio $V_\epsilon/A_{\epsilon,n}\to 0$ vanishes while the vectors appoach $\bm{t}_{\epsilon,n}\to \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))$ and $\bm{t}_{\epsilon,i}\to \bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}_i(\bm{x}))$. The mean value form of Newton's second law over the tetrahedron therefore leads to the condition
 :::{math}
+\begin{aligned}
 \bm{t}(\bm{x},t_\ast,\bm{\hat{n}}(\bm{x},t_\ast))&=-\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,-\bm{\hat{e}}_i(\bm{x}))\\
 &=\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}(\bm{x},t_\ast,\bm{\hat{e}}_i(\bm{x}))\\
 &=\left(\sum_{i=1}^3 \bm{t}(\bm{x},t_\ast,\bm{\hat{e}}_i(\bm{x}))\otimes\bm{\hat{e}}_i(\bm{x})\right)\cdot\bm{\hat{n}}(\bm{x},t_\ast)
+\end{aligned}
 :::
 where the second form results from the oddness of traction established in the first phase and the third from using the calculus rules. It is therefore confirmed that the traction vector is a linear map of the surface unit normal vector and can be expressed as
 :::{math}
@@ -1182,8 +1294,10 @@ The differential amount of angular momentum a differential volume $dV$ of fluid 
 
 Since $V(t)$ is a material volume and $\delta\bm{L}=(\bm{x}-\bm{x}_0)\times\rho\bm{v}dV$ includes the density $\rho$ as a multiplier, one may use the identity {numref}`eq-rho-identity` with $\bm{f}=(\bm{x}-\bm{x}_0)\times\bm{v}$ to write the time derivative of the total angular momentum of the material volume as
 :::{math}
+\begin{aligned}
 \frac{d}{dt}\int_{V(t)}\delta\bm{L}&=\frac{d}{dt}\int_{V(t)}(\bm{x}-\bm{x}_0)\times \rho\bm{v}dV\\
-&=\int_{V(t)}\rho\frac{D}{Dt}[(\bm{x}-\bm{x}_0)\times\bm{v}]dV
+&=\int_{V(t)}\rho\frac{D}{Dt}[(\bm{x}-\bm{x}_0)\times\bm{v}]dV.
+\end{aligned}
 :::
 Since the material derivative is a scalar-valued differential operator, it acts component-wise on vectors and obeys the ordinary product rule. Since $D\bm{x}_0/Dt=\bm{0}$ and $D\bm{x}/Dt=\bm{v}$, one then finds
 :::{math}
@@ -1196,9 +1310,11 @@ Using now the version of Cauchy's momentum equation {numref}`eq-cauchy-without-s
 
 Using the divergence theorem {numref}`eq-divergence-theorem`, the total torque on the material volume can be written as the following volume integral
 :::{math}
+\begin{aligned}
 \int_{V(t)}\delta\bm{T}_b+\int_{\partial V(t)}\delta\bm{T}_s&=\int_{V(t)}(\bm{x}-\bm{x}_0)\times\rho\bm{g}dV+\int_{\partial V(t)}(\bm{x}-\bm{x}_0)\times\bm{\sigma}\cdot\bm{\hat{n}}dA\\
 &=\int_{V(t)}((\bm{x}-\bm{x}_0)\times\rho\bm{g}+\nabla\cdot((\bm{x}-\bm{x}_0)\times\bm{\sigma})^\mathsf{T})dV\\
 &=\int_{V(t)}((\bm{x}-\bm{x}_0)\times(\rho\bm{g}+\nabla\cdot\bm{\sigma}^\mathsf{T})-\bm{\varepsilon}:\bm{\sigma})dV.
+\end{aligned}
 :::
 In the last step, the vector calculus identity {numref}`eq-div-a-times-sigma` was used as in the {numref}`example-eq-div-a-times-sigma`. If the time rate of change of angular momentum of every material volume is to equal the total torque acting on it, the stress tensor must satisfy $\bm{\varepsilon}:\bm{\sigma}=\bm{0}$ point-wise. This holds if and only if the stress tensor is symmetric
 :::{math}
@@ -1213,21 +1329,25 @@ Consider a material volume $V(t)$, which at time instant $t_\ast$ coincides with
 :::
 where $\sigma$ is a constant with units of pressure. The traction acting on a surface with a unit normal $\bm{\hat{n}}$ is then $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}=\sigma(\bm{\hat{y}}\cdot\bm{\hat{n}})\bm{\hat{x}}$. Consequently, only the faces of the cube with surface normals parallel to the $y$-axis contribute to the contact force and torque. The forces on the faces at $y=L/2$ and $y=-L/2$ with unit normals $\bm{\hat{n}}|_{y=L/2}=\bm{\hat{y}}$ and $\bm{\hat{n}}|_{y=-L/2}=-\bm{\hat{y}}$, respectively, are now straightforward to compute:
 :::{math}
+\begin{aligned}
 \bm{F}|_{y=L/2}&=\int_{\substack{y=L/2,\\ -L/2\leq x,z\leq L/2}}\bm{\sigma}\cdot\bm{\hat{y}}dA\\
 &=\int_{-L/2}^{L/2}\int_{-L/2}^{L/2}\sigma\bm{\hat{x}}dxdz\\
 &=\sigma L^2\bm{\hat{x}},\\
 \bm{F}|_{y=-L/2}&=\int_{\substack{y=-L/2,\\ -L/2\leq x,z\leq L/2}}\bm{\sigma}\cdot(-\bm{\hat{y}})dA\\
 &=\int_{-L/2}^{L/2}\int_{-L/2}^{L/2}(-\sigma\bm{\hat{x}})dxdz\\
 &=-\sigma L^2\bm{\hat{x}}.
+\end{aligned}
 :::
 They are equal in magnitude and opposite in direction, resulting in zero net force on the cube. However, the forces act at different positions relative to the centre of the cube, inducing torque with respect to the origin $\bm{x}_0=\bm{0}$. The torques on the faces at $y=L/2$ and $y=-L/2$ are
 :::{math}
+\begin{aligned}
 \bm{T}|_{y=L/2}&=\int_{\substack{y=L/2,\\ -L/2\leq x,z\leq L/2}}\bm{x}\times\bm{\sigma}\cdot\bm{\hat{y}}dA\\
 &=\int_{-L/2}^{L/2}\int_{-L/2}^{L/2}\sigma\left(z\bm{\hat{y}}-\frac{L}{2}\bm{\hat{z}}\right)dxdz\\
 &=-\frac{\sigma L^3}{2}\bm{\hat{z}}\\
 \bm{T}|_{y=-L/2}&=\int_{\substack{y=-L/2,\\ -L/2\leq x,z\leq L/2}}\bm{x}\times\bm{\sigma}\cdot(-\bm{\hat{y}})dA\\
 &=\int_{-L/2}^{L/2}\int_{-L/2}^{L/2}(-\sigma)\left(z\bm{\hat{y}}+\frac{L}{2}\bm{\hat{z}}\right)dxdz\\
 &=-\frac{\sigma L^3}{2}\bm{\hat{z}}
+\end{aligned}
 :::
 Although the net contact force was zero, the net torque from the forces does not vanish but is instead
 :::{math}
@@ -1236,15 +1356,11 @@ Although the net contact force was zero, the net torque from the forces does not
 
 This is incompatible with the balance of angular momentum. In the absence of body forces, since the divergence of the constant stress tensor vanishes, the time rate of change of the total angular momentum of the cube with respect to the origin at time $t_\ast$ vanishes
 :::{math}
-\frac{d\bm{L}}{dt}=\int_{V(t)}\bm{x}\times(\underbrace{\nabla\cdot\bm{\sigma}^\mathsf{T}}_{=\bm{0}})\big|_{t=t_\ast}dV=\bm{0}.
+\frac{d\bm{L}}{dt}\big|_{t=t_\ast}=\int_{V(t_\ast)}\bm{x}\times(\underbrace{\nabla\cdot\bm{\sigma}^\mathsf{T}}_{=\bm{0}})\big|_{t=t_\ast}dV=\bm{0}.
 :::
 For comparison, a symmetric stress tensor
 :::{math}
-\bm\sigma
-=\sigma\left(
-\hat{\bm x}\otimes\hat{\bm y}
-+\hat{\bm y}\otimes\hat{\bm x}
-\right).
+\bm\sigma=\sigma\left(\hat{\bm x}\otimes\hat{\bm y}+\hat{\bm y}\otimes\hat{\bm x}\right).
 :::
 would introduce additional forces and torques on the faces with normals aligned the $x$-axis that would exactly cancel the torque from the faces normal to the $y$-axis. 
 

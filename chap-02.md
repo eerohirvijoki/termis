@@ -111,34 +111,36 @@ As disccussed in connection with the $p$-$v$-$T$ surface, temperature and pressu
 What changes during a phase transition is the specific volume of a substance, and a quantity referred to as vapor quality. In a volume $V$ containing mass $m$ in a two-phase state, the liquid will occupy a volume $V_\text{liq}$ and have mass $m_\text{liq}$ while the vapor will occupy a volume $V_\text{vap}$ and have mass $m_\text{vap}$. Naturally, the volumes and masses sum together according to
 
 :::{math}
-    V_\text{liq}+V_\text{vap}=V, \qquad 
-    m_\text{liq}+m_\text{vap}=m.
+V_\text{liq}+V_\text{vap}=V, \qquad 
+m_\text{liq}+m_\text{vap}=m.
 :::
 
 On the saturated liquid curve, no vapor exists at all while on the saturated vapor curve, only vapor exists. To reflect this behaviour, vapor quality is defined as the ratio of the vapor mass to the total fluid mass
 
 :::{math}
-    x=\frac{m_\text{vap}}{m}=\frac{m_\text{vap}}{m_\text{liq}+m_\text{vap}}.
+x=\frac{m_\text{vap}}{m}=\frac{m_\text{vap}}{m_\text{liq}+m_\text{vap}}.
 :::
 
 The liquid and vapor parts have specific volumes corresponding to the respective states at the saturated liquid and vapor curves 
 
 :::{math}
-    v_\text{liq}=\frac{V_\text{liq}}{m_\text{liq}}, \qquad 
-    v_\text{vap}&=\frac{V_\text{vap}}{m_\text{vap}}, 
+v_\text{liq}=\frac{V_\text{liq}}{m_\text{liq}}, \qquad 
+v_\text{vap}=\frac{V_\text{vap}}{m_\text{vap}}, 
 :::
 
 and a state in the two-phase region, having vapor quality $x$, has a specific volume of
 
 :::{math}
-	v&=\frac{V}{m}=\frac{V_\text{liq}}{m}+\frac{V_\text{vap}}{m}=\frac{m_\text{liq}}{m}\frac{V_\text{liq}}{m_\text{liq}}+\frac{m_\text{vap}}{m}\frac{V_\text{vap}}{m_\text{vap}}\\
-	&=(1-x)v_\text{liq}+x\,v_\text{vap}
+\begin{aligned}
+v&=\frac{V}{m}=\frac{V_\text{liq}}{m}+\frac{V_\text{vap}}{m}=\frac{m_\text{liq}}{m}\frac{V_\text{liq}}{m_\text{liq}}+\frac{m_\text{vap}}{m}\frac{V_\text{vap}}{m_\text{vap}}\\
+&=(1-x)v_\text{liq}+x\,v_\text{vap}
+\end{aligned}
 :::
 
 Conversely, the vapor quality in the two-phase region can be determined from the specific volume with
 
 :::{math}
-    x=\frac{v-v_\text{liq}}{v_\text{vap}-v_\text{liq}}.
+x=\frac{v-v_\text{liq}}{v_\text{vap}-v_\text{liq}}.
 :::
 
 Chosen isocontours of the vapor quality defined in this manner are drawn in the $p$-$v$ and $v$-$T$ diagrams of water in {numref}`fig-pv-vT-H2O` with black dashed lines. One should remember that the vapor quality is specified only within the two-phase region and with values $x\in[0,1]$.
@@ -149,19 +151,20 @@ Chosen isocontours of the vapor quality defined in this manner are drawn in the 
 Hot steam at $T=150^\circ\text{C}$ is produced for an industrial process by boiling water with an electric resistance heater within a pressure vessel. The pressure vessel has a volume of $1000\,\ell$ and the liquid water inside is observed to occupy a volume of $200\,\ell$. Estimate the mass of water vapor inside the pressure vessel and calculate the vapor quality for the water in the vessel.
 
 From the $p$-$v$ diagram in {numref}`fig-pv-T-H2O`, one can estimate the specific volumes of saturated liquid and saturated vapor using the $150^\circ\text{C}$ isotherm and the saturated liquid and vapor curves:
-$$
-	v_\text{liq}&\approx 1\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}, &
-	v_\text{vap}&\approx 4\times 10^{-1}\,\text{m}^3\,\text{kg}^{-1}.
-$$
+:::{math}
+:enumerated: false
+v_\text{liq}\approx 1\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}, \qquad v_\text{vap}\approx 4\times 10^{-1}\,\text{m}^3\,\text{kg}^{-1}.
+:::
 Using the definition of specific volume, the masses of liquid water and water vapor are then calculated from the volumes and the specific volumes
-$$
-	m_\text{liq}&=\frac{V_\text{liq}}{v_\text{liq}}\approx 200\,\text{kg}, &
-	m_\text{vap}&=\frac{V_\text{vap}}{v_\text{vap}}=\frac{V-V_\text{liq}}{v_\text{vap}}\approx 2\,\text{kg},
-$$
+:::{math}
+:enumerated: false
+m_\text{liq}=\frac{V_\text{liq}}{v_\text{liq}}\approx 200\,\text{kg}, \qquad m_\text{vap}=\frac{V_\text{vap}}{v_\text{vap}}=\frac{V-V_\text{liq}}{v_\text{vap}}\approx 2\,\text{kg},
+:::
 and the total mass of water inside the pressure vessel can be calculated to be $m\approx202\,\text{kg}$. The specific volume for the water inside the vessel is therefore $v=V/m\approx 5\times 10^{-3}\,\text{m}^3\,\text{kg}^{-1}$ and the vapor quality is calculated to be
-$$
-	x=\frac{v-v_\text{liq}}{v_\text{vap}-v_\text{liq}}\approx 0.01.
-$$
+:::{math}
+:enumerated: false
+x=\frac{v-v_\text{liq}}{v_\text{vap}-v_\text{liq}}\approx 0.01.
+:::
 The points from which the values used are obtained are illustrated below.
 
 :::{image} ./figs/example-fig-pv-T-H2O-annotated.svg
@@ -238,14 +241,18 @@ Of these the Van der Waals and Redlich–Kwong models belong to the class of cub
 The cubic nature of the Van der Waals equation is revealed when trying to solve for specific volume from given pressure and temperature values
 :::{math}
 :enumerated: false
+\begin{aligned}
 &p=\frac{R_sT}{v-b_s}-\frac{a_s}{v^2}\\
 &\implies v^3-\left(b_s+\frac{R_sT}{p}\right)v^2+\frac{a_s}{p}v-a_sb_s=0.
+\end{aligned}
 :::
 Similarly for the Redlich-Kwong model, one finds a cubic equation for specific volume
 :::{math}
 :enumerated: false
+\begin{aligned}
 &p=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
 &\implies v^3-\frac{R_sT}{p}v^2+\left(\frac{a_s}{p\sqrt{T}}-\frac{R_sTb_s}{p}-b_s^2\right)v-\frac{a_sb_s}{p\sqrt{T}}=0.
+\end{aligned}
 :::
 ::::
 
@@ -285,6 +292,7 @@ Assuming a gas to obey the Redlich–Kwong equation of state, one may determine 
 
 :::{math}
 :enumerated: false
+\begin{aligned}
 &\left.\begin{aligned}
 p_1&=\frac{R_sT_1}{v-b_s}-\frac{a_s}{\sqrt{T_1} v(v+b_s)}\\
 p_2&=\frac{R_sT_2}{v-b_s}-\frac{a_s}{\sqrt{T_2} v(v+b_s)}
@@ -293,14 +301,15 @@ p_2&=\frac{R_sT_2}{v-b_s}-\frac{a_s}{\sqrt{T_2} v(v+b_s)}
 b_s&=v-\frac{R_sT_1\sqrt{T_1}-R_sT_2\sqrt{T_2} }{p_1\sqrt{T_1}-p_2\sqrt{T_2}}\\
 a_s&=\frac{(p_1T_2-p_2T_1)\sqrt{T_2}\sqrt{T_1}}{T_1\sqrt{T_1}-T_2\sqrt{T_2}} v(v+b_s)
 \end{aligned}
+\end{aligned}
 :::
 
 Once the values for $a_s$ and $b_s$ are known, the critical temperature and pressure predicted by the Redlich-Kwong model are obtained from
 
 :::{math}
 :enumerated: false
-T_\text{crit}&=\left(\frac{3(2^{1/3}-1)^2a_s}{R_sb_s}\right)^{2/3}, &
-p_\text{crit}&=\frac{2^{1/3}-1}{3}\frac{R_sT_\text{crit}}{b_s}
+T_\text{crit}=\left(\frac{3(2^{1/3}-1)^2a_s}{R_sb_s}\right)^{2/3}, \qquad
+p_\text{crit}=\frac{2^{1/3}-1}{3}\frac{R_sT_\text{crit}}{b_s}
 :::
 
 At a specific volume of $v=0.10\,\text{m}^3/\text{kg}$, the pressure of methane at $T_1=-20^\circ\text{C}$ has been measured at $p_1=12.61\,\text{bar}$. At the same volume at temperature $T_2=50^\circ\text{C}$, the pressure has been measured at $p_2=16.40\,\text{bar}$. The Redlich-Kwong model then predicts the critical temperature and pressure of methane to be $T_\text{crit}=-91.54^\circ\text{C}$ and $p_\text{crit}=40.50\,\text{bar}$. The estimates are reasonably close to the experimentally measured values of $T_\text{crit}=-82.59^\circ\text{C}$ and $p_\text{crit}=45.99\,\text{bar}$.
@@ -329,8 +338,10 @@ For the Van der Waals model, the first and second derivatives of pressure with r
 
 :::{math}
 :enumerated: false
+\begin{aligned}
 \left(\frac{\partial p}{\partial v}\right)_T&=-\frac{R_sT}{(v-b_s)^2}+\frac{2a_s}{v^3},\\ 
 \left(\frac{\partial^2 p}{\partial v^2}\right)_T&=\frac{2R_sT}{(v-b_s)^3}-\frac{6a_s}{v^4}.
+\end{aligned}
 :::
 
 Requiring both derivatives to vanish when pressure and temperature correspond to the critical point values, one may solve for
@@ -379,9 +390,11 @@ b_s=\frac{R_sT_\text{crit}}{8p_\text{crit}}.
 The predictive capability of the two-parameter equation-of-state models is improved when they are used together with the so-called Maxwell construction which replaces the unphysical portion of the modeled isotherm with a constant-pressure segment, producing a relation of the form $g(p,T)=0$. The associated constraints for the construction are
 :::{math}
 :label: eq:chap-02:maxwell-construction
+\begin{aligned}
 \int_{v_\text{liq}(T)}^{v_\text{vap}(T)} p(v,T)dv&=p_\text{sat}(T)(v_\text{vap}(T)-v_\text{liq}(T)),\\
 p(v_\text{liq}(T),T)&=p_\text{sat}(T),\\
 p(v_\text{vap}(T),T)&=p_\text{sat}(T),
+\end{aligned}
 :::
 where $p_\text{sat}(T)$ is the model-specific saturation pressure at a temperature $T$ below the critical temperature, reflecting the $g(p,T)=0$ condition. The corresponding model-specific saturated liquid and vapor volumes $v_\text{liq}(T)$ and $v_\text{vap}(T)$ define the phase boundaries between which the two-phase mixture is predicted to exist. Solving the system of equations {eq}`eq:chap-02:maxwell-construction` for a specific equation of state $p(v,T)$ can be performed numerically using iterative methods but the process requires care to avoid the nontrivial solution where $v_\text{vap}(T)=v_\text{liq}(T)$ and $p_\text{sat}(T)$ remains the initial guess. A practical approach involves converting the original system of three equations into a root-finding problem for one equation. 
 
@@ -408,21 +421,27 @@ to check whether $\Delta^\ast(T)=0$. If not, one refines the guess for $p_\text{
 Finding the local minimum and maximum of a Redlich-Kwong isotherm below the critical temperature is equivalent to solving for the roots of a quartic polynomial
 :::{math}
 :enumerated: false
+\begin{aligned}
 &p(v,T)=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
 &\implies \left(\frac{\partial p}{\partial v}\right)_T=-\frac{R_sT}{(v-b_s)^2}+\frac{a_s}{\sqrt{T}}\frac{2v+b_s}{v^2(v+b_s)^2}\\
 &\implies v^4+2\left(b_s-\frac{a_s}{R_sT\sqrt{T}}\right)v^3+b_s^2\left(1+\frac{3a_s}{b_sR_sT\sqrt{T}}\right)v^2-\frac{a_sb_s^3}{R_sT\sqrt{T}}=0.
+\end{aligned}
 :::
 After solving for the roots and selecting $v_{\min(p)}(T)$ and $v_{\max(p)}(T)$ from them, the corresponding pressure values $p_{\min}(T)$ and $p_{\max}(T)$ are obtained. After a value $p_\text{sat}^\ast(T)$ for the saturation pressure has been guessed, the specific volumes satisfying the Redlich-Kwong equation of state are found as roots of a cubic polynomial
 :::{math}
 :enumerated: false
+\begin{aligned}
 &p_\text{sat}^\ast(T)=\frac{R_sT}{v-b_s}-\frac{a_s}{\sqrt{T}v(v+b_s)}\\
 &\implies v^3-\frac{R_sT}{p_\text{sat}^\ast(T)}v^2+\left(\frac{a_s}{p_\text{sat}^\ast(T)\sqrt{T}}-\frac{R_sTb_s}{p_\text{sat}^\ast(T)}-b_s^2\right)v-\frac{a_sb_s}{p_\text{sat}^\ast(T)\sqrt{T}}=0.
+\end{aligned}
 :::
 The roots provide the values $v_\text{liq}^\ast(T)$ and $v_\text{vap}^\ast(T)$. One may then analytically calculate the integral
 :::{math}
 :enumerated: false
+\begin{aligned}
 \int_{v_\text{liq}^\ast(T)}^{v_\text{vap}^\ast(T)} p(v,T)dv&=R_sT\ln\left(\frac{v_\text{vap}^\ast(T)-b_s}{v_\text{liq}(T)-b_s}\right)\\
 &\quad-\frac{a_s}{b_s\sqrt{T}}\ln\left(\frac{v_\text{vap}^\ast(T)}{v_\text{liq}^\ast(T)}\frac{v_\text{liq}^\ast(T)+b_s}{v_\text{vap}^\ast(T)+b_s}\right),
+\end{aligned}
 :::
 and evaluate the expression
 :::{math}
@@ -583,8 +602,10 @@ nevertheless characterises how pressure and temperature vary along the two-phase
 In applications, measured values for the heat expansion and compressibility coefficients can be leveraged also to estimate changes in the state variables. In single phase regions, specific volume can be interpreted as a function $v(p,T)$ of pressure and temperature. Differentiating the function results in the total differential for specific volume
 
 :::{math}
+\begin{aligned}
 dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_Tdp\\
 &=v\beta_pdT-v\kappa_T dp.
+\end{aligned}
 :::
 
 Small changes $\Delta p=p_1-p_0$ and $\Delta T=T_1-T_0$ in pressure and temperature from a reference state $(p_0,T_0,v_0)$ therefore provide a small change $\Delta v=v_1-v_0$ in specific volume, which can be approximated with the relation
@@ -610,8 +631,10 @@ For water at pressure of $225\,\text{bar}$ and temperature of $376^\circ\text{C}
 The isobaric thermal expansion coefficient and the isothermal compressibility coefficient at the specified state are then calculated to be
 :::{math}
 :enumerated: false
+\begin{aligned}
 \beta_p&\approx\frac{1}{v}\frac{\Delta v}{\Delta T}=0.263\,\text{K}^{-1}\\
 \kappa_T&\approx-\frac{1}{v}\frac{\Delta v}{\Delta p}=0.119\,\text{bar}^{-1}
+\end{aligned}
 :::
 ::::
 
@@ -622,14 +645,18 @@ An adjustable cylinder with a reference volume of $V_0=25.8\,\ell$ contains $6\,
 If the cylinder volume is held fixed ($\Delta V=0$) while the temperature increases by $\Delta T=1^\circ\text{C}$, the resulting change in the pressure will be approximately
 :::{math}
 :enumerated: false
+\begin{aligned}
 &\frac{\Delta V}{V_0}=\beta_p\Delta T-\kappa_T\Delta p,\\
 &\implies \Delta p\approx \frac{\beta_p}{\kappa_T}\Delta T=2.067\,\text{bar}.
+\end{aligned}
 :::
 If the cylinder volume is compressed by $\Delta V=-1.3\,\ell$ and the pressure is observed to increase by $\Delta p=8.8\,\text{bar}$, the resulting change in temperature will be approximately
 :::{math}
 :enumerated: false
+\begin{aligned}
 &\frac{\Delta V}{V_0}=\beta_p\Delta T-\kappa_T\Delta p,\\
 &\implies \Delta T=\frac{1}{\beta_p}\frac{\Delta V}{V_0}+\frac{\kappa_T}{\beta_p}\Delta p=2.633^\circ\text{C}.
+\end{aligned}
 :::
 ::::
 
@@ -680,9 +707,11 @@ dT=\left(\frac{\partial T}{\partial p}\right)_vdp+\left(\frac{\partial T}{\parti
 As the differentials $dp$, $dv$, and $dT$ are the same on both sides of the equations, one may algebraically rearrange the equations and find relations between the partial derivatives. For example, one may manipulate the differential resulting from the function $v(T,p)$ into
 
 :::{math}
+\begin{aligned}
 dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_T dp & &\implies & &\left\{\begin{aligned}
 dp&=\frac{1}{\left(\frac{\partial v}{\partial p}\right)_T}dv-\frac{\left(\frac{\partial v}{\partial T}\right)_p}{\left(\frac{\partial v}{\partial p}\right)_T}dT,\\
 dT&=\frac{1}{\left(\frac{\partial v}{\partial T}\right)_p}dv-\frac{\left(\frac{\partial v}{\partial p}\right)_T }{\left(\frac{\partial v}{\partial T}\right)_p}dp.\end{aligned}\right.
+\end{aligned}
 :::
 
 Comparing the manipulated expressions with the differentials resulting directly from differentiation of the functions $p(v,T)$ and $T(p,v)$, one identifies relations between the partial derivatives and confirms them to be expressible in terms of $\beta_p$ and $\kappa_T$. For example the different expressions for pressure differential $dp$ provide
@@ -727,9 +756,11 @@ The formula containing the product of three permuted partial derivatives can be 
 Running the script results in the values
 :::{math}
 :enumerated: false
+\begin{aligned}
 \left(\frac{\partial p}{\partial T}\right)_\rho&=2.25445\,\text{bar}\,\text{K}^{-1}\\
 \left(\frac{\partial T}{\partial \rho}\right)_p&= -0.0153139\,\text{K}\,\text{m}^3\,\text{kg}^{-1}\\
 \left(\frac{\partial \rho}{\partial p}\right)_T& = 28.9651\,\text{kg}\,\text{m}^{-3}\,\text{bar}^{-1}
+\end{aligned}
 :::
 Confirming that the triple product between the partial derivatives is valid
 :::{math}
@@ -774,7 +805,7 @@ This observation is referred to as the principle of corresponding states and it 
 ::::{proof:example}
 In the {numref}`example-vdw-coefficients`, the parameters $a_s$, $b_s$ and the model-specific critical volume $v_\text{crit}$ for the Van der Waals model were shown to be
 :::{math}
-:enumerated: fale
+:enumerated: false
 a_s=\frac{27}{64}\frac{R_s^2T_\text{crit}^2}{p_\text{crit}}, \qquad b_s=\frac{1}{8}\frac{R_sT_\text{crit}}{p_\text{crit}}, \qquad v_\text{crit}=3b_s.
 :::
 Writing the Van der Waals equation in terms of reduced variables provides
@@ -827,9 +858,11 @@ This process is implemented in the script below to estimate the pressure $p_{\te
 Running the script results in the following pressure values for carbon dioxide 
 :::{math}
 :enumerated: false
+\begin{aligned}
 p_{\text{CO}_2,\text{corr. state value}} &= 59.3999\,\text{bar}\\
 p_{\text{CO}_2,\text{accurate value}} &= 57.2904\,\text{bar}\\
 p_{\text{CO}_2,\text{ideal gas value}} &= 127.38\,\text{bar}
+\end{aligned}
 :::
 
 The value estimated with the principle of corresponding states is quite close to the correct value, while the ideal gas estimate is far off.

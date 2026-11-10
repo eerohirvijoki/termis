@@ -209,7 +209,7 @@ where $g(T)$ is a function of temperature (and the gas amount) alone.
 
 One may then choose a reference state for the gas and label its temperature, pressure, and volume as $T_\text{ref}$, $p_\text{ref}$, and $V_\text{ref}$, respectively. For any other state of the gas with pressure $p$ and volume $V$, the temperature $T$ then satisfies
 :::{math}
-    \frac{g(T)}{g(T_\text{ref})} = \frac{pV}{p_\text{ref}V_\text{ref}}.
+\frac{g(T)}{g(T_\text{ref})} = \frac{pV}{p_\text{ref}V_\text{ref}}.
 :::
 Since the zeroth law does not uniquely determine a numerical temperature scale, one may choose the scale so that $g(T)$ is proportional to $T$: 
 :::{math}
@@ -217,7 +217,7 @@ Since the zeroth law does not uniquely determine a numerical temperature scale, 
 :::
 This choice defines a temperature scale such that the temperature of the system can be determined by measuring the pressure and volume of the gas and comparing them to the reference values
 :::{math}
-    \frac{T}{T_\text{ref}} = \frac{pV}{p_\text{ref}V_\text{ref}}.
+\frac{T}{T_\text{ref}} = \frac{pV}{p_\text{ref}V_\text{ref}}.
 :::
 
 A convenient reference temperature is the temperature of the triple state of water, at which solid, liquid, and gaseous water coexist in equilibrium. Historically, this temperature was assigned the exact value $T_\text{ref}=273.16\,\text{K}$, providing a reference for the Kelvin temperature scale. Another commonly used temperature scale is the Celsius scale, related to the Kelvin scale by
@@ -235,10 +235,10 @@ To determine the sample temperature, one calculates the pressure inside the ther
 
 :::{math}
 :enumerated: false
-
+\begin{aligned}
 p_\text{ref} & =p_\text{atm}+\rho_\text{Hg} g h_\text{ref}=1.132\,\text{bar}\\
 p & =p_\text{atm}+\rho_\text{Hg} g h=1.073\,\text{bar}
-
+\end{aligned}
 :::
 
 The change in the gas volume from the reference state \(V_\text{ref}\) is calculated from the capillary cross sectional area and the change in the mercury column height
@@ -292,7 +292,7 @@ In the Lagrangian description, the trajectory $\bm{x}(t)$ of a material point is
 The solution specifies the position of the material point at each time, given its initial position. For a steady velocity field, these trajectories coincide with the integral curves of the field. For an unsteady field, the trajectories depend on the time evolution of the field. Differentiating the velocity along a trajectory gives the material acceleration,
 
 :::{math}
-\frac{d^2\bm{x}(t)}{dt^2}&=\frac{d}{dt}\bm{v}(\bm{x}(t),t)=(\partial_t\bm{v}+(\bm{v}\cdot\nabla)\bm{v})\big|_{(\bm{x}(t),t)},
+\frac{d^2\bm{x}(t)}{dt^2}=\frac{d}{dt}\bm{v}(\bm{x}(t),t)=(\partial_t\bm{v}+(\bm{v}\cdot\nabla)\bm{v})\big|_{(\bm{x}(t),t)},
 :::
 
 where the notation indicates the fields on the right-hand side are evaluated at $(\bm{x}(t),t)$. The first term $\partial_t\bm{v}$ describes the local Eulerian time rate of change of the velocity, at a fixed spatial location. The second term, $(\bm{v}\cdot\nabla)\bm{v}$, accounts for spatial variation of the velocity field along the trajectory needed in addition to the Eulerian rate to describe the Lagrangian rate of change of velocity. Notably, the material acceleration can be nonzero even when the velocity field does not change with time at any fixed location ($\bm{v}=\bm{v}(\bm{x})$), illustrating the differences between the Eulerian and Lagrangian viewpoints.
