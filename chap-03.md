@@ -1369,7 +1369,83 @@ This illustrates that stress symmetry does not imply the absence of shear stress
 
 
 ## <span class="elementary"></span> Conservation of energy
-A differential volume 
+Two physics principles, namely the conservation of mass and momentum, have been used so far, resulting in partial differential equations that describe the evolution of fluid's density and velocity. The fluid's thermodynamic state, however, cannot be described by density alone. Instead, either temperature or pressure is needed to accompany it. The final physics principle left to investigate is the energy balance. It turns out that no direct equation for temperature or pressure is found but an equation is obtained for the fluid's specific internal energy instead.
+
+A differential volume $dV$ of fluid contains a differential amount $\tfrac{1}{2}\rho|\bm{v}|^2dV$ of kinetic energy. Using the material derivative identity {numref}`eq-rho-identity` with $\bm{f}=\tfrac{1}{2}|\bm{v}|^2$, the rate of change of fluid's kinetic energy in a material volume $V(t)$ then becomes
+:::{math}
+\frac{d}{dt}\int_{V(t)}\frac{1}{2}\rho|\bm{v}|^2dV=\int_{V(t)}\rho\frac{D}{Dt}\frac{1}{2}|\bm{v}|^2dV=\int_{V(t)}\rho\bm{v}\cdot\frac{D\bm{v}}{Dt}dV.
+:::
+Substituting the Cauchy momentum equation {numref}`eq-cauchy` for the material derivative of the velocity field, one may further write
+:::{math}
+\begin{aligned}
+\rho \bm{v}\cdot\frac{D\bm{v}}{Dt}&=\bm{v}\cdot\rho\bm{g}+\bm{v}\cdot\nabla\cdot\bm{\sigma}\\
+&=\bm{v}\cdot\rho\bm{g}+\nabla\cdot(\bm{\sigma}\cdot\bm{v})-\bm{\sigma}:\nabla\bm{v},
+\end{aligned}
+:::
+where the last step follows from the vector identity {numref}`eq-divergence-rules`. Then using the divergence theorem {numref}`eq-divergence-theorem` to convert the volume integral of $\nabla\cdot(\bm{\sigma}\cdot\bm{v})$ into a surface integral, one identifies the driving mechanisms for the rate of change of fluid's kinetic energy
+:::{math}
+:label: eq-material-rate-of-change-of-kinetic-energy
+\begin{aligned}
+\underbrace{\frac{d}{dt}\int_{V(t)}\frac{1}{2}\rho|\bm{v}|^2dV}_{\substack{\text{Rate of change}\\\text{of kinetic energy}}}&=\int_{V(t)}\bm{v}\cdot\rho\bm{g}dV+\int_{\partial V(t)}\bm{v}\cdot\bm{\sigma}\cdot\bm{\hat{n}}dA-\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV\\
+&=\underbrace{\int_{V(t)}\bm{v}\cdot\delta\bm{F}_b}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by body forces}}}+\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
+\end{aligned}
+:::
+The rate of change of the fluid's kinetic energy therefore does not equal simply the rate of work done by the body and surface forces. Instead, it includes also an additional volumetric term originating from the rate of deformation of the fluid's local velocity field, represented by the velocity gradient tensor $\nabla\bm{v}$, against the stress tensor $\bm{\sigma}$.
+
+Since the body force $\delta\bm{F}_b=\rho\bm{g}dV$ is assumed to originate from gravity alone, and the gravitational acceleration $\bm{g}=-\nabla G$ can be written as the negative gradient of a gravitational potential function $G(\bm{x})$ that represents gravitational energy per unit mass, it is possible to express the work rate from the gravitational body force as a time derivative of the fluid's gravitational potential energy. To see this, note that a differential volume $dV$ of the fluid contains a differential amount $\rho G dV$ of gravitational potential energy. Using the material derivative identity {numref}`eq-rho-identity` with $\bm{f}=G$, the time rate of change of the gravitational potential energy of the fluid in a material volume $V(t)$ then becomes
+:::{math}
+:label: eq-material-rate-of-change-of-potenial-energy
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho G dV}_{\substack{\text{Time rate of change}\\\text{of gravitational}\\\text{potential energy}}}=\int_{V(t)}\rho\frac{DG}{Dt}dV=-\int_{V(t)}\bm{v}\cdot\rho\bm{g}dV=-\underbrace{\int_{V(t)}\bm{v}\cdot\delta\bm{F}_b}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by gravitational}\\\text{body force}}},
+:::
+where $DG/Dt=\bm{v}\cdot\nabla G=-\bm{v}\cdot\bm{g}$ was used. The result illustrates that the effect of gravity can be interpreted equivalently either through the action of graviational force or the change in the gravitational potential energy, just like in the mechanics of point masses. Combining this result with the time rate of change of kinetic energy, the time rate of change of the sum of kinetic and potential energy in a material volume of fluid becomes
+:::{math}
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho(\tfrac{1}{2}|\bm{v}|^2+G)dV}_{\substack{\text{Time rate of change of}\\\text{kinetic and potential energy}}}=\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
+:::
+Unlike what is typically observed in mechanics of point masses, this time the sum of kinetic and gravitational potential energy is not a constant in time. Instead, it changes due to contact interaction at the volume surface and due to local deformation throughout the entire fluid volume.
+
+The component of energy that has not been considered yet involves the microscopic structure of the fluid. Because of the microscopic structure, the fluid has internal energy $u(\bm{x},t)$ per unit mass, representing the microscopic rest-frame kinetic and potential energy of the particles of which the fluid consists of and the bonds between the particles. The total energy the fluid contains is therefore the sum of the microscopic internal energy, the macroscopic kinetic energy, and the macroscopic gravitational potential energy. In {numref}`sec-boundary-heat-work`, the types of energy transferred through the boundary of a material volume were classified either as mechanical work or heat. Since the mechanical work rate from the gravitational body forces corresponds to the time rate of change of gravitational potential energy, it should be included into the total energy balance either as a potential term or as a body force term but not as both. Heat transfer through a volume surface can be generally be denoted with a heat flux vector $\bm{q}(\bm{x},t)$ that describes the direction of heat transfer and the rate of it per unit area. Additionally, heat could be absorbed or emitted locally within the volume with a rate $q_V(\bm{x},t)$ per unit volume. Treating the effect of gravity via the body forces, and considering that a differential volume $dV$ contains a differential amount $\rho u dV$ of internal energy, the energy balance for a material volume $V(t)$ then reads
+:::{math}
+:label: eq-total-energy-balance-material-volume
+\begin{aligned}
+\underbrace{\frac{d}{dt}\int_{V(t)}(\rho(u+\frac{1}{2}|\bm{v}|^2)dV}_{\substack{\text{Rate of change of kinetic}\\\text{and internal energy}}}
+&=
+\underbrace{\int_{\partial V(t)}(-\bm{q})\cdot\bm{\hat{n}}dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}}\nonumber\\
+&+\underbrace{\int_{V(t)}\bm{v}\cdot\delta\bm{F}_b}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by body forces}}}+\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}.
+\end{aligned}
+:::
+The negative sign in the heat rate over the surface accounts for the sufrace normal $\bm{\hat{n}}$ pointing outwards from the volume $V(t)$. Subtracting then the time rate of change of kinetic energy {numref}`eq-material-rate-of-change-of-kinetic-energy`, the time rate of change of fluids internal energy becomes 
+:::{math}
+:label: eq-energy-balance-material-volume
+\underbrace{\frac{d}{dt}\int_{V(t)}\rho udV}_{\substack{\text{Rate of change}\\\text{of internal energy}}}=\underbrace{\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}}+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
+:::
+and consists of heat rate and the mechanical deformation energy change. Using the material derivative identity {numref}`eq-rho-identity` with $\bm{f}=u$ for the time derivative on the left
+:::{math}
+\frac{d}{dt}\int_{V(t)}\rho udV=\int_{V(t)}\rho\frac{Du}{Dt}dV,
+:::
+the divergence theorem {numref}`eq-divergence-theorem` for the heat flux term on the right
+:::{math}
+\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA=\int_{V(t)}(-\nabla\cdot\bm{q})dV,
+:::
+and requiring energy balance {numref}`eq-energy-balance-material-volume` to hold for every material volume $V(t)$, one finds the local partial differential equation for the specific internal energy
+:::{math}
+:label: eq-internal-energy-equation
+\rho\frac{Du}{Dt}=-\nabla\cdot\bm{q}+q_V+\bm{\sigma}:\nabla\bm{v}.
+:::
+This equation is often referred to as the fluid's internal energy equation.
+
+::::{proof:example}
+The local kinetic-energy equation obtained above shows that changes in kinetic energy are caused by mechanical work performed by body and surface forces,
+:::{math}
+:enumerated: false
+\rho\frac{D}{Dt}\frac{1}{2}|\bm{v}|^2=\bm{v}\cdot(\rho\bm{g}+\nabla\cdot\bm{\sigma}).
+:::
+In a still fluid, $\bm{v}=0$ and hence $D/Dt=\partial_t$ and $\nabla\bm{v}=0$. In such case, the kinetic energy therefore cannot change, while the equation for internal energy reduces to
+:::{math}
+:enumerated: false
+\rho\partial_t u=-\nabla\cdot\bm{q}+q_V.
+:::
+Changes in internal energy can thus occur through heat transfer even when the fluid has no macroscopic motion. The coupling between macroscopic mechanical and microscopic internal energy occurs throughthe deformation of the fluid, encoded in the term $\bm{\sigma}:\nabla\bm{v}$.
+::::
 
 ## <span class="elementary"></span> Constitutive relations for stress and heat flux
 The conservation principles of mass, momentum, and energy discussed above lead to local differential equations from which the local time rate of change of fluid's density, velocity, and internal energy ought to be computed. 

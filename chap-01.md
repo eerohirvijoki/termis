@@ -63,7 +63,7 @@ As the particles move and interact, they exchange energy and momentum. A collect
 
 As internal energy describes the total microscopic kinetic and interaction potential energy in the particle collection's centre-of-mass frame, it does not, by itself, specify how that energy is distributed among the particles. Consequently, internal energy can be defined for both equilibrium and non-equilibrium particle collections.
 
-
+(sec-boundary-heat-work)=
 ## <span class="elementary"></span> Boundary types, heat, and work
 
 Consider two collections of particles, each of which has settled into its own equilibrium state. Regard each collection as a system. A boundary separates a system from its surroundings or another system and determines the mechanisms by which energy can be transferred across it.
