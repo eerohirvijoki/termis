@@ -1396,10 +1396,10 @@ The rate of change of the fluid's kinetic energy therefore does not equal simply
 
 Since the body force $\delta\bm{F}_b=\rho\bm{g}dV$ is assumed to originate from gravity alone, and the gravitational acceleration $\bm{g}=-\nabla G$ can be written as the negative gradient of a gravitational potential function $G(\bm{x})$ that represents gravitational energy per unit mass, it is possible to express the work rate from the gravitational body force as a time derivative of the fluid's gravitational potential energy. To see this, note that a differential volume $dV$ of the fluid contains a differential amount $\rho G dV$ of gravitational potential energy. Using the material derivative identity {numref}`eq-rho-identity` with $\bm{f}=G$, the time rate of change of the gravitational potential energy of the fluid in a material volume $V(t)$ then becomes
 :::{math}
-:label: eq-material-rate-of-change-of-potenial-energy
+:label: eq-material-rate-of-change-of-potential-energy
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho G dV}_{\substack{\text{Time rate of change}\\\text{of gravitational}\\\text{potential energy}}}=\int_{V(t)}\rho\frac{DG}{Dt}dV=-\int_{V(t)}\bm{v}\cdot\rho\bm{g}dV=-\underbrace{\int_{V(t)}\bm{v}\cdot\delta\bm{F}_b}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by gravitational}\\\text{body force}}},
 :::
-where $DG/Dt=\bm{v}\cdot\nabla G=-\bm{v}\cdot\bm{g}$ was used. The result illustrates that the effect of gravity can be interpreted equivalently either through the action of graviational force or the change in the gravitational potential energy, just like in the mechanics of point masses. Combining this result with the time rate of change of kinetic energy, the time rate of change of the sum of kinetic and potential energy in a material volume of fluid becomes
+where $DG/Dt=\bm{v}\cdot\nabla G=-\bm{v}\cdot\bm{g}$ was used. The result illustrates that the effect of gravity can be interpreted equivalently either through the action of gravitational force or the change in the gravitational potential energy, just like in the mechanics of point masses. Combining this result with the time rate of change of kinetic energy, the time rate of change of the sum of kinetic and potential energy in a material volume of fluid becomes
 :::{math}
 :label: eq-material-rate-of-change-of-kinetic-and-potential-energy
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho\left(\frac{1}{2}|\bm{v}|^2+G\right)dV}_{\substack{\text{Time rate of change of}\\\text{kinetic and potential energy}}}=\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
@@ -1408,7 +1408,7 @@ Unlike in mechanics of point masses, in continuum fluid mechanics the sum of kin
 
 The component of energy that has not been considered yet involves the microscopic structure of the fluid. Because of the microscopic structure, the fluid has internal energy $u(\bm{x},t)$ per unit mass, representing the microscopic rest-frame kinetic and potential energy of the particles of which the fluid consists of and of the bonds between the particles. The total energy the fluid contains is therefore the sum of the microscopic internal energy, the macroscopic kinetic energy, and the macroscopic gravitational potential energy. In {numref}`sec-boundary-heat-work`, the types of energy transferred through the boundary of a material volume were classified either as mechanical work or heat. The time rate of change of energy within a material volume should therefore equal the mechanical work rate of the forces acting on it supplemented with the rate of heat flowing into and getting absorbed within the volume. 
 
-Heat transfer through a surface can be generally be denoted with a heat flux vector $\bm{q}(\bm{x},t)$ that describes the direction of heat transfer and the rate of it per unit area. Local heat absorption or emission within the volume can be denoted with $q_V(\bm{x},t)$ denoting the rate per unit volume. Since the mechanical work rate from the gravitational body force exactly corresponds to the time rate of change of gravitational potential energy, the effect of gravity should be included into the total energy balance either as a potential energy term or as a mechanical work rate term but not as both, to avoid double counting. This is analogous with the energy balance of point masses where one may either write the time derivative of the sum of kinetic and potential energy to equal zero, or write the time derivative of the kinetic energy to equal the work rate from gravitational force. Accounting for gravity through the potential energy term, the mechanical work rate left in the energy balance results from the surface forces alone. Considering that a differential volume $dV$ contains a differential amount $\rho u dV$ of internal energy, the energy balance for a material volume $V(t)$ then reads
+Heat transfer through a surface can generally be denoted with a heat flux vector $\bm{q}(\bm{x},t)$ that describes the direction of heat transfer and the rate of it per unit area. Local heat absorption or emission within the volume can be denoted with $q_V(\bm{x},t)$ denoting the rate per unit volume. Since the mechanical work rate from the gravitational body force exactly corresponds to the time rate of change of gravitational potential energy, the effect of gravity should be included into the total energy balance either as a potential energy term or as a mechanical work rate term but not as both, to avoid double counting. This is analogous with the energy balance of point masses where one may either write the time derivative of the sum of kinetic and potential energy to equal zero, or write the time derivative of the kinetic energy to equal the work rate from gravitational force. Accounting for gravity through the potential energy term, the mechanical work rate left in the energy balance results from the surface forces alone. Considering that a differential volume $dV$ contains a differential amount $\rho u dV$ of internal energy, the energy balance for a material volume $V(t)$ then reads
 :::{math}
 :label: eq-total-energy-balance-material-volume
 \begin{aligned}
@@ -1416,7 +1416,7 @@ Heat transfer through a surface can be generally be denoted with a heat flux vec
 &=\underbrace{\int_{\partial V(t)}(-\bm{q})\cdot\bm{\hat{n}}dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}} +\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}.
 \end{aligned}
 :::
-The negative sign multiplying the heat flux $\bm{q}$ in the surface integral term accounts for the sufrace normal $\bm{\hat{n}}$ pointing outwards from the material volume $V(t)$. Heat flowing in per unit area is given by $-\bm{q}\cdot\bm{\hat{n}}$. Subtracting the time rate of change of kinetic and gravitational potential energy {numref}`eq-material-rate-of-change-of-kinetic-and-potential-energy` from the time rate of change of total energy {numref}`eq-total-energy-balance-material-volume`, the time rate of change of internal energy for the material volume becomes 
+The negative sign multiplying the heat flux $\bm{q}$ in the surface integral term accounts for the surface normal $\bm{\hat{n}}$ pointing outwards from the material volume $V(t)$. Heat flowing in per unit area is given by $-\bm{q}\cdot\bm{\hat{n}}$. Subtracting the time rate of change of kinetic and gravitational potential energy {numref}`eq-material-rate-of-change-of-kinetic-and-potential-energy` from the time rate of change of total energy {numref}`eq-total-energy-balance-material-volume`, the time rate of change of internal energy for the material volume becomes 
 :::{math}
 :label: eq-energy-balance-material-volume
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho udV}_{\substack{\text{Time rate of change}\\\text{of internal energy}}}=\underbrace{\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}}+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
@@ -1434,7 +1434,7 @@ and requiring the energy balance {numref}`eq-energy-balance-material-volume` to 
 :label: eq-internal-energy-equation
 \rho\frac{Du}{Dt}=-\nabla\cdot\bm{q}+q_V+\bm{\sigma}:\nabla\bm{v}.
 :::
-This equation is often referred to as the fluid's internal energy equation.
+This equation is often referred to as the fluid internal energy equation.
 
 ::::{proof:example}
 The local kinetic-energy equation {numref}`eq-local-rate-of-change-of-kinetic-energy` shows that changes in the local kinetic energy density are caused by mechanical work performed by body and surface forces,
@@ -1449,6 +1449,25 @@ In a fluid at rest, $\bm{v}=0$ and hence $D/Dt=\partial_t$ and $\nabla\bm{v}=0$.
 :::
 Changes in internal energy can thus occur through heat transfer even when the fluid has no macroscopic motion. The coupling between macroscopic mechanical and microscopic internal energy occurs through the term $\bm{\sigma}:\nabla\bm{v}$ representing the mechanical energy change rate from deformation of the fluid. The term appears both in the local equation {numref}`eq-local-rate-of-change-of-kinetic-energy` for kinetic energy and {numref}`eq-internal-energy-equation` for the specific internal energy but with opposing signs. It therefore locally converts macroscopic kinetic energy into internal energy and back, depending on sign.
 ::::
+
+::::{proof:example}
+Consider a fluid undergoing free fall in a uniform gravitational field $\bm g=-g\bm{\hat z}$. Suppose that its velocity is spatially uniform, $\bm v(\bm x,t)=v(t)\bm{\hat z}$, with $dv/dt=-g$ constant, and that its stress tensor is spatially uniform. Also assume that there is no heat transfer or volumetric heating, $\bm q=\bm 0$ and $q_V=0$. Then
+:::{math}
+\nabla\bm v=\bm 0,\qquad
+\nabla\cdot\bm\sigma=\bm 0.
+:::
+The momentum equation is therefore satisfied, while the internal energy equation reduces to
+:::{math}
+\frac{Du}{Dt}=0.
+:::
+Consequently, the specific internal energy in each material point moving with the fluid remains constant, even though its kinetic energy changes. In fact, with the gravitational potential being $G=gz$, the kinetic and gravitational potential energies satisfy
+:::{math}
+\frac{D}{Dt}\left(\frac{1}{2}|\bm v|^2+G\right)
+=v\frac{dv}{dt}+gv=0.
+:::
+The increase in kinetic energy is thus exactly balanced by the decrease in gravitational potential energy, without any change in internal energy. In the absence of local deformation, a fluid can undergo macroscopic acceleration without any mechanical energy transfer to its internal energy.
+::::
+
 
 ## <span class="elementary"></span> Constitutive relations for stress and heat flux
 The conservation principles of mass, momentum, and energy discussed led to local partial differential equations from which the local time rate of change of fluid's density, velocity, and specific internal energy ought to be computed. To evaluate these expressions, additional relations are nevertheless needed to describe how stress $\bm{\sigma}$ and heat flux $\bm{q}$ depend on the local state and motion of the fluid. Such relations are called constitutive. The form of a constitutive relation is restricted by physical principles such as invariance with respect to the choice of reference frame and the principle of isotropy in a fluid at rest, while the remaining constitutive behavior is typically be determined experimentally.
