@@ -745,6 +745,7 @@ Running the script results in a figure below that confirms the trajectory for th
 :::
 ::::
 
+(example-velocity-gradient-decomposition)=
 ::::{proof:example}
 Consider the following three different velocity fields
 :::{math}
@@ -1450,48 +1451,62 @@ Changes in internal energy can thus occur through heat transfer even when the fl
 ::::
 
 ## <span class="elementary"></span> Constitutive relations for stress and heat flux
-The conservation principles of mass, momentum, and energy discussed above lead to local differential equations from which the local time rate of change of fluid's density, velocity, and internal energy ought to be computed. To evaluate these expressions, additional relations are needed to describe how stress $\bm{\sigma}$ and heat flux $\bm{q}$ depend on the local state and motion of the fluid. Such relations are called constitutive. The form of a constitutive relation is restricted by physical principles such as invariance with respect to the choice of reference frame and the principle of isotropy in a still fluid, while the remaining constitutive behavior must typically be determined experimentally.
+The conservation principles of mass, momentum, and energy discussed led to local partial differential equations from which the local time rate of change of fluid's density, velocity, and specific internal energy ought to be computed. To evaluate these expressions, additional relations are nevertheless needed to describe how stress $\bm{\sigma}$ and heat flux $\bm{q}$ depend on the local state and motion of the fluid. Such relations are called constitutive. The form of a constitutive relation is restricted by physical principles such as invariance with respect to the choice of reference frame and the principle of isotropy in a fluid at rest, while the remaining constitutive behavior is typically be determined experimentally.
 
-For non-relativistic motion obeying Newton's laws, the principle of Galilean invariance requires the laws of motion to be invariant in all inertial frames. A uniform translational $\bm{v} \to \bm{v} + \bm{v}_0$ between two inertial frames moving with relative velocity $\bm{v}_0$ with respect to each other must therefore leave the momentum equation {numref}`eq-cauchy` invariant. As the material derivative of a constant velocity vector is zero, $D\bm{v}_0/Dt=\bm{0}$, the stress tensor must also remain invariant under such translation. Otherwise additional terms would be introduced into the Cauchy's momentum equation describing non-physical forces. This requirement with respect to all constant velocities $\bm{v}_0$ forces the stress to be independent of the absolute velocity $\bm{v}$. For a simple fluid, whose stress is assumed to be determined locally by the thermodynamic state and the local velocity gradient, its constitutive dependence may consequently be written as
+For non-relativistic mechanics obeying Newton's laws, the principle of Galilean invariance requires the laws of motion to be invariant in all inertial frames. Consequently, a uniform translation $\bm{v} \to \bm{v} + \bm{v}_0$ between two inertial frames moving with relative velocity $\bm{v}_0$ with respect to each other must leave Cauchy's momentum equation {numref}`eq-cauchy` invariant. As the material derivative of a constant velocity vector is zero, $D\bm{v}_0/Dt=\bm{0}$, the stress tensor must also remain invariant under such translation. Otherwise additional terms would be introduced into the Cauchy's momentum equation describing non-physical forces. This requirement with respect to all constant velocities $\bm{v}_0$ forces the stress to be independent of the absolute velocity $\bm{v}$ but not of the spatial details of the velocity field that are represented by the velocity gradient tensor $\nabla\bm{v}$. For a simple fluid, whose stress is assumed to be determined locally by the thermodynamic state variables $(\rho,T,p)$ and the local information of the velocity field, the constitutive dependence may consequently be written as
 :::{math}
 \bm{\sigma} = \bm{\sigma}(\rho, p, T, \nabla\bm{v}).
 :::
-In principle, the stress could depend also on higher derivatives of the velocity field, and on the spatial derivatives of the thermodynamic state variables, but experimental observations of simple fluids can be explained to good accuracy with stress assumed to depend on the thermodynamic state and the velocity gradient only. 
+In principle, the stress could depend also on higher derivatives of the velocity field, and on the spatial derivatives of the thermodynamic state variables, but experimental observations of simple fluids can be explained to good accuracy with stress assumed to depend on the thermodynamic state and the velocity gradient only. Essentially, this representation is a modeling choice, not a physical law.
 
-Consider fluid confined in a cylindrical annulus. Rotate both the inner and outer walls of the annulus with the same and constant angular velocity in the same direction as in {numref}`fig-cylinder-flow-rotation`. The fluid within is observed to rotate with exactly the same angular velocity at every point. In other words, the fluid undergoes rigid rotation. 
+In the advanced {numref}`sec-differential-elements-evolution`, a detailed analysis of how points and differential elements such as line, surface and volume elements evolve along the flow of the velocity field $\bm{v}$ were given. It was concluded that the velocity gradient tensor encoding fluid motion could be described in three parts
+:::{math}
+:label: eq-velocity-gradient-decomposition
+\nabla\bm{v}=\bm{D}+\frac{1}{3}(\nabla\cdot\bm{v})\bm{I}+\bm{\Omega},
+:::
+where the symmetric and traceless rank-2 tensor $\bm{D}$ and the antisymmetric rank-2 tensor $\bm{\Omega}$ are
+:::{math}
+\begin{aligned}
+\bm{D}&=\frac{1}{2}\left(\nabla\bm{v}+(\nabla\bm{v})^\mathsf{T}\right)-\frac{1}{3}(\nabla\cdot\bm{v})\bm{I}\\
+\bm{\Omega}&=\frac{1}{2}\left(\nabla\bm{v}-(\nabla\bm{v})^\mathsf{T}\right)
+\end{aligned}
+:::
+By tracking the evolution of points that define lines, surfaces, and volumes, the {numref}`example-velocity-gradient-decomposition` then illustrated how each of the parts of $\nabla\bm{v}$ corresponded to different type of motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$ encoded the rate of isotropic volumetric expansion and shrinking, the term $\bm{D}$ the rate of non-isotropic but volume-preserving shearing deformation, and the term $\bm{\Omega}$ the rate of volume and area preserving rotation. It turns out that only two of the three parts of $\nabla\bm{v}$ contribute to stress.
+
+To understand this, consider a fluid confined in a cylindrical annulus. Rotate both the inner and outer walls of the annulus with the same and constant angular velocity in the same direction as in {numref}`fig-cylinder-flow-rotation`. The fluid within is observed to rotate with exactly the same angular velocity at every point. In other words, the fluid undergoes rigid rotation. If one were to observe the fluid from a frame rotating at the same angular velocity, the fluid would appear perfectly still, regardless of the magnitude of the angular velocity. The resulting centrifugal force would introduce a pressure gradient in the radial direction the same way gravity normally induces hydrostatic pressure, but no other forces would appear measurable on the cylindrical walls. The stress must therefore be independent of the rigid rotation of the observer's frame, implying that the antisymmetric part $\bm{\Omega}$ of the velocity gradient tensor that describes rotation cannot contribute to the stress. 
 :::{figure} ./figs/fig-rotation.svg
 :label: fig-cylinder-flow-rotation
 :align: center
 :width: 100%
 Fluid flow in cylindrical annulus with walls co-rotating with the same angular velocity. Only rigid rotation characterized by $\bm{\Omega}$ is present, and no torque on the walls is required to maintain the fluid flow.
 :::
-If one were to observe the fluid from a frame rotating at the same angular velocity, the fluid would appear perfectly still, regardless of the magnitude of the angular velocity. Resulting centrifugal force would introduce a pressure gradient in the radial direction the same way gravity normally induces hydrostatic pressure, but no other forces would appear measurable on the cylindrical walls. The stress must therefore be independent of the rigid rotation of the observer's frame, implying that the antisymmetric part $\bm{\Omega}$ of the velocity gradient tensor cannot contribute to the stress. Consequently, the dependency of stress on the velocity gradient can appear only through the symmetric traceless tensor $\bm{D}$ describing the rate of shear in non-isotropic deformation and the isotropic part $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$ describing the rate of volumetric deformation. In an undeforming fluid, the stress is isotropic and represented by the thermodynamic pressure. The stress can consequently be decomposed as
+Consequently, the dependency of stress on the velocity gradient can appear only through the symmetric traceless tensors $\bm{D}$ and $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$. Further, in an undeforming fluid, the stress is isotropic and represented by the thermodynamic pressure. The stress can consequently be decomposed as
 :::{math}
 :label: eq-stress
 \bm{\sigma} = -p\bm{I} + \bm{\tau}(\rho, p, T, \bm{D}, \nabla\cdot\bm{v}),
 :::
 with $\bm{\tau}$ referred to as the deviatoric stress tensor. The minus sign for pressure accounts for the outward unit normal of the surface on which the traction must counter the pressure in undeforming fluid.
 
-If only the outer wall of the cylindrical annulus is spun as in {numref}`fig-cylinder-flow-shear`, or both walls spun but in opposite directions, shear is observed to develop into the flow, and a constant torque at the annulus walls proportional to the shear rate is required to maintain the flow. 
+Further details are revealed if only the outer wall of the cylindrical annulus is spun as in {numref}`fig-cylinder-flow-shear`, or both walls are spun but in opposite directions. In such case, shear is observed to develop into the flow, and a constant torque at the annulus walls proportional to the shearing rate is required to maintain the flow. 
 :::{figure} ./figs/fig-shear.svg
 :label: fig-cylinder-flow-shear
 :align: center
 :width: 100%
 Fluid flow in a cylindrical annulus with fixed inner and rotating outer cylindrical walls. Constant torque is required on the walls to maintain the flow, proportional to the shear rate characterized by the tensor $\bm{D}$.
 :::
-This indicates that, for sufficiently small deformation rates, the deviatoric stress depends approximately linearly on $\bm{D}$. Studying then the travel of sound waves in a pipe as illustrated in {numref}`fig-pipe-wave`, measurements of the wave amplitude attenuation over distance can be associated with a traction force caused by volumetric deformation. 
+This indicates that, for sufficiently small deformation rates, the deviatoric stress depends approximately linearly on $\bm{D}$. Similarly, studying the travel of sound waves in a pipe as illustrated in {numref}`fig-pipe-wave`, measurements of the wave amplitude attenuation over distance can be associated with a traction force caused by volumetric deformation. 
 :::{figure} ./figs/fig-wave.svg
 :label: fig-pipe-wave
 :align: center
 :width: 100%
-A traveling wave in a fluid. The flow is characterized by $\nabla\cdot\bm{v}$, related to the volumetric deformation. The deformation attenuates in a long pipe, decreasing the wave amplitude.
+A traveling wave in a fluid. The flow is characterized by $\nabla\cdot\bm{v}$, related to the volumetric deformation. The deformation attenuates in a long pipe, decreasing the wave amplitude. 
 :::
-In this case as well, the force deduced to have a linear dependency on the volumetric deformation rate characterized by $\nabla\cdot\bm{v}$. Together, the measurements inducate the following expression for the deviatoric stress tensor
+In this case as well, the force is deduced to have a linear dependency on the volumetric deformation rate characterized by $\nabla\cdot\bm{v}$. Together, experiments and measurements therefore indicate the following expression for the deviatoric stress tensor
 :::{math}
 :label: eq-deviatoric-stress
 \bm{\tau} = 2\mu \bm{D} + \zeta(\nabla \cdot \bm{v})\bm{I},
 :::
-which is symmetric and therefore compatible with the requirement of angular momentum conservation. Fluids obeying this linear relationship are classified as Newtonian fluids, with the viscous proportionality coefficients $\mu$ and $\zeta$ being properties of the fluid and generally functions of the thermodynamic state $(\rho, p, T)$. In contrast, non-Newtonian fluids exhibit a more complex, non-linear dependency on the rates of deformation.
+which is symmetric and therefore compatible with the requirement of angular momentum conservation discussed in the intermediate {numref}`sec-symmetry-of-stress`. Fluids obeying this linear relationship are classified as Newtonian fluids, with the viscous proportionality coefficients $\mu$ and $\zeta$ being properties of the fluid and generally functions of the thermodynamic state $(\rho, p, T)$. In contrast, non-Newtonian fluids exhibit a more complex, non-linear dependency on the rates of deformation.
 
 The heat flux $\bm{q}$ describes the local transfer of energy mediated by microscopic motion of particles relative to the local motion of the fluid, i.e., the transfer of heat. Expressing it in terms of the fluid's variables requires a constitutive relation of its own that is determined experimentally. If a fluid is confined between two surfaces that are maintained at different temperatures, heat is observed to flow from the warmer surface toward the colder surface. Reversing the temperatures on the plates reverses the direction of the heat transfer. If the plates are oriented so that temperature-induced density changes do not couple with gravity to drive buoyancy-related flow, then the fluid remains still and the heat transfer occurs by conduction, as in solids. For sufficiently small temperature gradients, the heat flux is observed to be approximately proportional to the temperature gradient, providing the constitutive relation
 :::{math}
