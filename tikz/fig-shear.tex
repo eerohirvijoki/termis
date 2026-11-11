@@ -1,0 +1,66 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage{bm,amsmath}
+\usetikzlibrary{patterns,decorations.pathmorphing,decorations.text}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+    \def\ri{2.0};
+    \def\rii{2.7};
+    \def\ro{4.0};
+    \def\roo{3.3};
+
+    \def\angi{135};
+    \def\angii{125};
+    \def\ango{45};
+    \def\angoo{105};
+
+    \def\angd{-30};
+    \def\angdd{-50};
+    
+    \coordinate (A)  at (0,0);
+    \coordinate (B)  at (7,0);
+
+    \node[centered] at (0,5) {Time $t$};
+    \node[centered] at (7,5) {Time $t+\Delta t$};
+    \node[centered] at ($(A)!0.5!(B)+(0,4)$) {$\bm{\Omega}$ and $\bm{D}$};
+    
+    \begin{scope}[shift={(A)}]
+        \fill[blue, opacity=0.2] (\angi:\ri) arc (\angi:\ango:\ri) -- (\ango:\ro) arc (\ango:\angi:\ro) -- cycle;
+
+        \draw[thick] (\angi:\ri) arc (\angi:\ango:\ri);
+        \draw[thick] (\angi:\ro) arc (\angi:\ango:\ro);
+
+        \fill[blue,opacity=0.3] (\angii:\rii) arc (\angii:\angoo:\rii)--(\angoo:\roo) arc (\angoo:\angii:\roo)--cycle;
+
+        \draw ({0.5*(\angii+\angoo)}:\ri)+({0.5*(\angii+\angoo)}:-0.1)--+({0.5*(\angii+\angoo)}:0.1);
+        \draw ({0.5*(\angii+\angoo)}:\ro)+({0.5*(\angii+\angoo)}:-0.1)--+({0.5*(\angii+\angoo)}:0.1);      
+
+        \draw[-latex] ({0.5*(\angii+\angoo)}:\ro*1.1) arc ({0.5*(\angii+\angoo)}:{0.5*(\angii+\angoo)+\angdd}:\ro*1.1);
+        
+    \end{scope}
+
+    \begin{scope}[shift={(B)}]
+        \fill[blue, opacity=0.2] (\angi:\ri) arc (\angi:\ango:\ri) -- (\ango:\ro) arc (\ango:\angi:\ro) -- cycle;
+
+        \draw[thick] (\angi:\ri) arc (\angi:\ango:\ri);
+        \draw[thick] (\angi:\ro) arc (\angi:\ango:\ro);
+
+        \draw[dashed] (\angii:\rii) arc (\angii:\angoo:\rii)--(\angoo:\roo) arc (\angoo:\angii:\roo)--cycle;
+
+        \fill[blue,opacity=0.3] (\angii+\angd:\rii) arc (\angii+\angd:\angoo+\angd:\rii)--(\angoo+\angdd:\roo) arc (\angoo+\angdd:\angii+\angdd:\roo)--cycle;
+
+        \draw ({0.5*(\angii+\angoo)}:\ri)+({0.5*(\angii+\angoo)}:-0.1)--+({0.5*(\angii+\angoo)}:0.1);
+        
+        \draw ({0.5*(\angii+\angoo)-60}:\ro)+({0.5*(\angii+\angoo)-60}:-0.1)--+({0.5*(\angii+\angoo)-60}:0.1);
+
+        \draw[-latex] ({0.5*(\angii+\angoo)}:\ro*1.1) arc ({0.5*(\angii+\angoo)}:{0.5*(\angii+\angoo)-60}:\ro*1.1);
+        
+    \end{scope}    
+    
+                
+\end{tikzpicture}
+\end{document}
