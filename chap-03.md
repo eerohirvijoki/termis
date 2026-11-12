@@ -660,10 +660,45 @@ that defines the flow map $\bm{\psi}_t$ for the vector field $\bm{u}(\bm{x},t)$.
 \end{aligned}
 :::
 where $(\nabla\bm{u})^\mathsf{T}|_{(\bm{\psi}_t(\bm{x}),t)}$ is the transpose of the rank-2 tensor field $\nabla\bm{u}$ evaluated at $\bm{\psi}_t(\bm{x})$ at time $t$. 
-::::{proof:example}
-Provide here a simple example that calculates the time rate of change of the basis vectors explicitly and via the vector field gradient observing them to be equal. 
-::::
 
+::::{proof:example}
+Consider the time-independent vector field $\bm{u}(\bm{x},t)=ay\bm{\hat{x}}$, where $a$ is a constant with units of inverse time. The flow map $\bm{\psi}_t$ for this field is
+:::{math}
+:enumerated: false
+\bm{\psi}_t(\bm{x})
+=\left(x+ay(t-t_0)\right)\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}},
+:::
+where $\bm{x}=x\bm{\hat{x}}+y\bm{\hat{y}}+z\bm{\hat{z}}$ denotes the initial position at time $t_0$. The vectors generating the differential line, surface, and volume elements are initially the Cartesian basis vectors. Their evolution can be computed by differentiating the flow map with respect to the initial coordinates:
+:::{math}
+:enumerated: false
+\frac{\partial\bm{\psi}_t}{\partial x}
+=\bm{\hat{x}},\qquad 
+\frac{\partial\bm{\psi}_t}{\partial y}=a(t-t_0)\bm{\hat{x}}+\bm{\hat{y}},\qquad \frac{\partial\bm{\psi}_t}{\partial z}=\bm{\hat{z}}.
+:::
+Taking the time derivatives gives
+:::{math}
+:enumerated: false
+\frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial x}=\bm{0},\qquad \frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial y}=a\bm{\hat{x}},\qquad \frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial z}=\bm{0}.
+:::
+The same result should follow from the velocity gradient tensor. Since the vector field is $\bm{u}=ay\bm{\hat{x}}$, its gradient and transpose are
+:::{math}
+:enumerated: false
+\nabla\bm{u}=a\bm{\hat{y}}\otimes\bm{\hat{x}},
+\qquad
+(\nabla\bm{u})^\mathsf{T}=a\bm{\hat{x}}\otimes\bm{\hat{y}}.
+:::
+Using the evolution equation for the coordinate-generating vectors then gives
+:::{math}
+:enumerated: false
+\begin{aligned}
+\frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial x}&=(\nabla\bm{u})^\mathsf{T}\cdot\bm{\hat{x}}=\bm{0},\\
+\frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial y}&=(\nabla\bm{u})^\mathsf{T}\cdot\left(a(t-t_0)\bm{\hat{x}}+\bm{\hat{y}}\right)
+=a\bm{\hat{x}},\\\frac{d}{dt}\frac{\partial\bm{\psi}_t}{\partial z}&=(\nabla\bm{u})^\mathsf{T}\cdot\bm{\hat{z}}
+=\bm{0}.
+\end{aligned}
+:::
+Both approaches therefore give identical rates of change for the three coordinate-generating vectors. In this example, the vector initially aligned with the $y$-axis progressively tilts towards the $x$-axis, while its length increases. The vectors initially aligned with the $x$- and $z$-axes remain unchanged.
+::::
 
 At the same point and time, the differential line, surface, and volume elements are defined
 :::{math}
@@ -1652,15 +1687,43 @@ The heat flux is constant throughout the fluid layer and directed downwards, fro
 Thus, the heat transfer rate increases with the thermal conductivity, the plate area, and the temperature difference, while decreasing with the distance between the plates.
 ::::
 
-
-<!--
-The heat flux $\bm{q}$ describes the local transfer of energy mediated by microscopic motion of particles relative to the local motion of the fluid, i.e., the transfer of heat. Expressing it in terms of the fluid's variables requires a constitutive relation of its own that is determined experimentally. If a fluid is confined between two surfaces that are maintained at different temperatures, heat is observed to flow from the warmer surface toward the colder surface. Reversing the temperatures on the plates reverses the direction of the heat transfer. If the plates are oriented so that temperature-induced density changes do not couple with gravity to drive buoyancy-related flow, then the fluid remains still and the heat transfer occurs by conduction, as in solids. For sufficiently small temperature gradients, the heat flux is observed to be approximately proportional to the temperature gradient, providing the constitutive relation
-:::{math}
-:label: eq-fourier-law
-\bm{q}=-\lambda\nabla T,
-:::
-where $\lambda$ is the thermal conductivity of the fluid with a value that depends on the thermodynamic state of the fluid. The negative sign indicates that heat is transported from high temperature toward low temperature. 
--->
-
 ## Summary
-The motion of a fluid can be described by following individual points along the flow and studying how differential line, surface, and volume elements evolve. 
+The motion of a fluid can be described by following individual material points along the flow and studying how differential line, surface, and volume elements evolve. The velocity gradient tensor $\nabla\bm{v}$ describes the local evolution of these differential elements and can be decomposed into isotropic deformation, volume-preserving deformation, and rotation. The Leibniz integral differentiation rule then provides the connection between the local evolution of the fluid and conservation laws applied over finite material volumes.
+
+Conservation of mass, momentum, and energy leads to the local equations
+:::{math}
+:label:eq-fluid-equations
+\begin{aligned}
+\frac{1}{\rho}\frac{D\rho}{Dt}&= -\nabla\cdot\bm{v},\\
+\rho\frac{D\bm{v}}{Dt}&= \rho\bm{g}+\nabla\cdot\bm{\sigma},\\
+\rho\frac{Du}{Dt}&= -\nabla\cdot\bm{q}+q_V+\bm{\sigma}:\nabla\bm{v},
+\end{aligned}
+:::
+where the material derivative is defined as the differential operator
+:::{math}
+\frac{D}{Dt}= \frac{\partial}{\partial t}+\bm{v}\cdot\nabla.
+:::
+Conservation of angular momentum further requires the stress tensor to be symmetric $\bm{\sigma}^\mathsf{T}=\bm{\sigma}$. For a simple, Newtonian fluid, the stress and heat flux are described by the constitutive relations
+:::{math}
+:label: eq-constitutive-relations
+\begin{aligned}
+\bm{\sigma}&=-p\bm{I}+\bm{\tau},\\
+\bm{\tau}&=2\mu\bm{D}+\zeta(\nabla\cdot\bm{v})\bm{I},\\
+\bm{q}&=-\lambda\nabla T,
+\end{aligned}
+:::
+where the traceless symmetric part of the velocity gradient tensor
+:::{math}
+:label: eq-D-tensor
+\bm{D}=\frac{1}{2}\left(\nabla\bm{v}+(\nabla\bm{v})^{\mathsf T}\right)-\frac{1}{3}(\nabla\cdot\bm{v})\bm{I},
+:::
+describes the non-isotropic rate of deformation. The coefficients $\mu$ and $\zeta$ are referred to as shear and bulk viscosity, respectively, while $\lambda$ is the heat conductivity that all depend on the local thermodynamic state of the fluid.
+
+
+The differential equations describe the evolution of density, velocity, and specific internal energy once the fluid state and its spatial gradients are known. Assuming an equation of state of the form $p=p(\rho,T)$ to exist, the equations provide a calculation method
+:::{math}
+\rho,\ T,\ u,\ \bm{v}
+\quad\implies\quad
+\partial_t\rho,\ \partial_t\bm{v},\ \partial_tu.
+:::
+However, the equations are not yet closed. The four unknown field quantities are density, velocity, specific internal energy, and temperature, but the conservation equations provide evolution equations only for the first three. The time evolution of temperature, $\partial_tT$, is missing. A further thermodynamic relation of the form $u=u(\rho,T)$ is therefore needed to connect the specific internal energy, density, and temperature. Together with the equation of state $p=p(\rho,T)$, this provides the thermodynamic closure of the conservation equations, which is the subject of the next chapter.
