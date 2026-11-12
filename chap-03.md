@@ -25,9 +25,33 @@ As supplements to the core knowledge, the chapter includes a full derivation of 
 
 ## Learning goals
 
-- This is 
-- a list of
-- learning goals
+The learning goals for this chapter are listed below. The goals to support the core path include the following.
+
+- <span class="elementary"></span> The reader constructs a rank-2 tensor from two vectors and computes its transpose, left and right contractions with a vector, and double contraction with another rank-2 tensor in Cartesian coordinates.
+- <span class="elementary"></span> The reader calculates the gradient of a vector field and the divergence of vector and rank-2 tensor fields in Cartesian coordinates.
+- <span class="elementary"></span> The reader transforms a surface integral of a vector and a tensor field into a volume integral using the divergence theorem.
+- <span class="elementary"></span> The reader verifies that a given flow map satisfies the initial-value problem associated with a specified vector field.
+- <span class="elementary"></span> The reader identifies and interprets the terms appearing in the Leibniz rule for volume integrals over time-dependent domains.
+- <span class="elementary"></span> The reader computes the time derivative of a volume integral using the Leibniz rule.
+- <span class="elementary"></span> The reader distinguishes between material and control volumes based on the motion of their boundaries relative to the fluid.
+- <span class="elementary"></span> The reader identifies and interprets the terms appearing in the integral balances for mass and momentum, and in the integral energy balances for kinetic, gravitational potential, total, and internal energy over a material volume.
+- <span class="elementary"></span> The reader identifies and interprets the terms appearing in the local continuity equation, Cauchy's momentum equation, and the fluid's internal energy equation
+- <span class="elementary"></span> The reader derives a local partial differential equation from a stated integral balance over a material volume.
+- <span class="elementary"></span> The reader states the constitutive relations for the stress tensor of a Newtonian fluid and Fourier's law for heat conduction.
+- <span class="elementary"></span> The reader explains the physical significance of the pressure and viscous contributions to the stress tensor and the relationship between heat flux and temperature gradient.
+- <span class="elementary"></span> The reader identifies an equation of state and a relation between specific internal energy, density, and temperature as necessary ingredients for thermodynamic closure of the local fluid equations.
+
+
+The goals to support the intermediate and advanced paths are:
+
+- <span class="intermediate"></span> The reader applies the additional tensor calculus identities involving tensor-vector cross products and tensor divergence used in the angular-momentum balance.
+- <span class="intermediate"></span> The reader constructs differential line, surface, and volume elements for a given curvilinear coordinate parametrization.
+- <span class="intermediate"></span> The reader demonstrates, using a suitable material volume, how a nonsymmetric stress tensor can violate the angular-momentum balance.
+
+- <span class="advanced"></span> The reader programs a python script using scipy to numerically construct and visualize the flow map associated with a given vector field.
+- <span class="advanced"></span> The reader rewrites integrals over time-dependent domains as integrals over fixed reference domains using the flow map, enabling differentiation with respect to time.
+- <span class="advanced"></span> The reader applies the general Leibniz rules to compute time derivatives of line, surface, and volume integrals over domains moving with a given vector field.
+- <span class="advanced"></span> The reader evaluates the momentum balance over a finite trirectangular tetrahedron subject to a prescribed nonlinear traction law and determines the limiting restriction imposed on the traction law as the tetrahedron shrinks to a point.
 
 
 ## <span class="elementary"></span> Tensors of rank-2
@@ -1294,7 +1318,7 @@ The mean value form {numref}`eq-mean-value-newton` over the tetrahedron then rea
 :label: eq-mean-value-newton-tetra
 \begin{aligned}
 \bm{f}_\epsilon V_\epsilon&=\bm{t}_{\epsilon,n}A_{\epsilon,n}+\sum_{i=1}^3\bm{t}_{\epsilon,i}A_{\epsilon,i},\\
-&=A_{\epsilon,n}\left(\bm{t}_n+\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}_{\epsilon,i}\right)
+&=A_{\epsilon,n}\left(\bm{t}_{\epsilon,n}+\sum_{i=1}^3 (\bm{\hat{e}}_i(\bm{x})\cdot\bm{\hat{n}}(\bm{x},t_\ast))\bm{t}_{\epsilon,i}\right)
 \end{aligned}
 :::
 where the vectors $\bm{f}_\epsilon$, $\bm{t}_{\epsilon,n}$, and $\{\bm{t}_{\epsilon,i}\}_{i=1}^3$ belong to the closures of convex hulls
@@ -1688,9 +1712,7 @@ Thus, the heat transfer rate increases with the thermal conductivity, the plate 
 ::::
 
 ## Summary
-The motion of a fluid can be described by following individual material points along the flow and studying how differential line, surface, and volume elements evolve. The velocity gradient tensor $\nabla\bm{v}$ describes the local evolution of these differential elements and can be decomposed into isotropic deformation, volume-preserving deformation, and rotation. The Leibniz integral differentiation rule then provides the connection between the local evolution of the fluid and conservation laws applied over finite material volumes.
-
-Conservation of mass, momentum, and energy leads to the local equations
+For a material volume of fluid, analysis of mass, momentum, and energy conservation leads to the following local partial differential equations
 :::{math}
 :label:eq-fluid-equations
 \begin{aligned}
@@ -1726,4 +1748,4 @@ The differential equations describe the evolution of density, velocity, and spec
 \quad\implies\quad
 \partial_t\rho,\ \partial_t\bm{v},\ \partial_tu.
 :::
-However, the equations are not yet closed. The four unknown field quantities are density, velocity, specific internal energy, and temperature, but the conservation equations provide evolution equations only for the first three. The time evolution of temperature, $\partial_tT$, is missing. A further thermodynamic relation of the form $u=u(\rho,T)$ is therefore needed to connect the specific internal energy, density, and temperature. Together with the equation of state $p=p(\rho,T)$, this provides the thermodynamic closure of the conservation equations, which is the subject of the next chapter.
+However, the equations are not yet closed. The four unknown field quantities are density, velocity, specific internal energy, and temperature, but the partial differential provide evolution only for the first three. The time evolution of temperature, $\partial_tT$, is missing. A further thermodynamic relation of the form $u=u(\rho,T)$ is therefore needed to connect the specific internal energy, density, and temperature. Together with the equation of state $p=p(\rho,T)$, this provides the thermodynamic closure of the conservation equations, which is the subject of the next chapter.
