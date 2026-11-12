@@ -1404,7 +1404,7 @@ where $DG/Dt=\bm{v}\cdot\nabla G=-\bm{v}\cdot\bm{g}$ was used. The result illust
 :label: eq-material-rate-of-change-of-kinetic-and-potential-energy
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho\left(\frac{1}{2}|\bm{v}|^2+G\right)dV}_{\substack{\text{Time rate of change of}\\\text{kinetic and potential energy}}}=\underbrace{\int_{\partial V(t)}\bm{v}\cdot\delta\bm{F}_s}_{\substack{\text{Rate of mechanical}\\\text{work performed}\\\text{by surface forces}}}-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}},
 :::
-Unlike in mechanics of point masses, in continuum fluid mechanics the sum of kinetic and gravitational potential energy is not a constant in time. Instead, it changes due to contact interaction at the volume surface and due to local deformation throughout the entire fluid volume.
+In contrast to a point mass acted on only by gravity, the sum of kinetic and gravitational potential energy of a material volume of fluid is not generally constant. Surface forces and local deformations thoughout the entire fluid volume can transfer mechanical energy across the boundary and within the fluid.
 
 The component of energy that has not been considered yet involves the microscopic structure of the fluid. Because of the microscopic structure, the fluid has internal energy $u(\bm{x},t)$ per unit mass, representing the microscopic rest-frame kinetic and potential energy of the particles of which the fluid consists of and of the bonds between the particles. The total energy the fluid contains is therefore the sum of the microscopic internal energy, the macroscopic kinetic energy, and the macroscopic gravitational potential energy. In {numref}`sec-boundary-heat-work`, the types of energy transferred through the boundary of a material volume were classified either as mechanical work or heat. The time rate of change of energy within a material volume should therefore equal the mechanical work rate of the forces acting on it supplemented with the rate of heat flowing into and getting absorbed within the volume. 
 
@@ -1437,7 +1437,7 @@ and requiring the energy balance {numref}`eq-energy-balance-material-volume` to 
 This equation is often referred to as the fluid internal energy equation.
 
 ::::{proof:example}
-The local kinetic-energy equation {numref}`eq-local-rate-of-change-of-kinetic-energy` shows that changes in the local kinetic energy density are caused by mechanical work performed by body and surface forces,
+The local kinetic-energy equation {numref}`eq-local-rate-of-change-of-kinetic-energy` shows that the rate of change of the fluid's specific kinetic energy along its motion originates from mechanical work performed by body and surface forces,
 :::{math}
 :enumerated: false
 \rho\frac{D}{Dt}\frac{1}{2}|\bm{v}|^2=\bm{v}\cdot(\rho\bm{g}+\nabla\cdot\bm{\sigma}).
@@ -1465,20 +1465,42 @@ Consequently, the specific internal energy in each material point moving with th
 \frac{D}{Dt}\left(\frac{1}{2}|\bm v|^2+G\right)
 =v\frac{dv}{dt}+gv=0.
 :::
-The increase in kinetic energy is thus exactly balanced by the decrease in gravitational potential energy, without any change in internal energy. In the absence of local deformation, a fluid can undergo macroscopic acceleration without any mechanical energy transfer to its internal energy.
+The material rates of change of kinetic and gravitational potential energy are therefore equal in magnitude and opposite in sign, without any change in internal energy. In the absence of local deformation, a fluid can undergo macroscopic acceleration without any mechanical energy transfer to its internal energy.
 ::::
 
+## <span class="elementary"></span> Constitutive relation for stress
+The conservation principles of mass, momentum, and energy discussed so far have led to local partial differential equations from which the local time rates of change of fluid density, velocity, and specific internal energy can be computed. To evaluate these expressions, additional relations are nevertheless needed to describe how stress $\bm{\sigma}$ and heat flux $\bm{q}$ depend on the local state and motion of the fluid. Such relations are called constitutive. Their form is restricted by physical principles such as invariance with respect to the choice of reference frame and the principle of isotropy in a fluid at rest, while the remaining constitutive behavior is typically determined experimentally.
 
-## <span class="elementary"></span> Constitutive relations for stress and heat flux
-The conservation principles of mass, momentum, and energy discussed led to local partial differential equations from which the local time rate of change of fluid's density, velocity, and specific internal energy ought to be computed. To evaluate these expressions, additional relations are nevertheless needed to describe how stress $\bm{\sigma}$ and heat flux $\bm{q}$ depend on the local state and motion of the fluid. Such relations are called constitutive. The form of a constitutive relation is restricted by physical principles such as invariance with respect to the choice of reference frame and the principle of isotropy in a fluid at rest, while the remaining constitutive behavior is typically be determined experimentally.
+For non-relativistic mechanics obeying Newton's laws, the principle of Galilean invariance requires the laws of motion to be invariant in all inertial frames. Consider two inertial observers whose reference frames move with constant relative velocity $\bm{v}_0$. If the position and velocity fields measured by the second observer are denoted with primes, the corresponding coordinates and velocity are related by
+:::{math}
+\bm{x}'=\bm{x}-\bm{v}_0t,\qquad
+\bm{v}'=\bm{v}-\bm{v}_0.
+:::
+The material derivative is unchanged by this transformation,
+:::{math}
+\begin{aligned}
+\frac{D'}{Dt'}
+&=\frac{\partial}{\partial t'}+\bm{v}'\cdot\nabla'\\
+&=\frac{\partial}{\partial t}+\bm{v}_0\cdot\nabla
++(\bm{v}-\bm{v}_0)\cdot\nabla\\
+&=\frac{D}{Dt},
+\end{aligned}
+:::
+so the material acceleration is the same in both frames. Consequently, Newton's laws require the physical forces acting on a given material volume to be the same in both frames. In particular, the contact force acting on a given surface, and hence the traction $\bm{t}=\bm{\sigma}\cdot\bm{\hat{n}}$, must remain unchanged. Since a uniform translation does not change the surface normal or area, the stress tensor itself must also remain unchanged. This requirement forces the stress to be independent of the absolute velocity $\bm{v}$, but not of the spatial variations of the velocity field that are represented by the velocity gradient tensor $\nabla\bm{v}$.
 
-For non-relativistic mechanics obeying Newton's laws, the principle of Galilean invariance requires the laws of motion to be invariant in all inertial frames. Consequently, a uniform translation $\bm{v} \to \bm{v} + \bm{v}_0$ between two inertial frames moving with relative velocity $\bm{v}_0$ with respect to each other must leave Cauchy's momentum equation {numref}`eq-cauchy` invariant. As the material derivative of a constant velocity vector is zero, $D\bm{v}_0/Dt=\bm{0}$, the stress tensor must also remain invariant under such translation. Otherwise additional terms would be introduced into the Cauchy's momentum equation describing non-physical forces. This requirement with respect to all constant velocities $\bm{v}_0$ forces the stress to be independent of the absolute velocity $\bm{v}$ but not of the spatial details of the velocity field that are represented by the velocity gradient tensor $\nabla\bm{v}$. For a simple fluid, whose stress is assumed to be determined locally by the thermodynamic state variables $(\rho,T,p)$ and the local information of the velocity field, the constitutive dependence may consequently be written as
+Another physical restriction follows from the isotropy of a fluid at rest. Since no spatial direction is distinguished in an undeforming fluid, the stress tensor must be isotropic and can therefore be represented as
+:::{math}
+\bm{\sigma}=-p\bm{I},
+:::
+where $p$ is the thermodynamic pressure. The minus sign accounts for the outward unit normal of the surface on which the traction must counter the compressive pressure in an undeforming fluid.
+
+For a simple fluid, whose stress is assumed to be determined locally by the thermodynamic state variables $(\rho,T,p)$ and the local information of the velocity field, the constitutive dependence may consequently be written as
 :::{math}
 \bm{\sigma} = \bm{\sigma}(\rho, p, T, \nabla\bm{v}).
 :::
-In principle, the stress could depend also on higher derivatives of the velocity field, and on the spatial derivatives of the thermodynamic state variables, but experimental observations of simple fluids can be explained to good accuracy with stress assumed to depend on the thermodynamic state and the velocity gradient only. Essentially, this representation is a modeling choice, not a physical law.
+In principle, the stress could depend also on higher derivatives of the velocity field and on the spatial derivatives of the thermodynamic state variables, but experimental observations of simple fluids can be explained to good accuracy with stress assumed to depend on the thermodynamic state and the velocity gradient only. Essentially, this representation is a modeling choice, not a physical law.
 
-In the advanced {numref}`sec-differential-elements-evolution`, a detailed analysis of how points and differential elements such as line, surface and volume elements evolve along the flow of the velocity field $\bm{v}$ were given. It was concluded that the velocity gradient tensor encoding fluid motion could be described in three parts
+In the advanced {numref}`sec-differential-elements-evolution`, a detailed analysis of how points and differential elements such as line, surface, and volume elements evolve along the flow of the velocity field $\bm{v}$ was given. It was concluded that the velocity gradient tensor encoding fluid motion could be described in three parts
 :::{math}
 :label: eq-velocity-gradient-decomposition
 \nabla\bm{v}=\bm{D}+\frac{1}{3}(\nabla\cdot\bm{v})\bm{I}+\bm{\Omega},
@@ -1486,54 +1508,159 @@ In the advanced {numref}`sec-differential-elements-evolution`, a detailed analys
 where the symmetric and traceless rank-2 tensor $\bm{D}$ and the antisymmetric rank-2 tensor $\bm{\Omega}$ are
 :::{math}
 \begin{aligned}
-\bm{D}&=\frac{1}{2}\left(\nabla\bm{v}+(\nabla\bm{v})^\mathsf{T}\right)-\frac{1}{3}(\nabla\cdot\bm{v})\bm{I}\\
-\bm{\Omega}&=\frac{1}{2}\left(\nabla\bm{v}-(\nabla\bm{v})^\mathsf{T}\right)
+\bm{D}&=\frac{1}{2}\left(\nabla\bm{v}+(\nabla\bm{v})^\mathsf{T}\right)-\frac{1}{3}(\nabla\cdot\bm{v})\bm{I},\\
+\bm{\Omega}&=\frac{1}{2}\left(\nabla\bm{v}-(\nabla\bm{v})^\mathsf{T}\right).
 \end{aligned}
 :::
-By tracking the evolution of points that define lines, surfaces, and volumes, the {numref}`example-velocity-gradient-decomposition` then illustrated how each of the parts of $\nabla\bm{v}$ corresponded to different type of motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$ encoded the rate of isotropic volumetric expansion and shrinking, the term $\bm{D}$ the rate of non-isotropic but volume-preserving shearing deformation, and the term $\bm{\Omega}$ the rate of volume and area preserving rotation. It turns out that only two of the three parts of $\nabla\bm{v}$ contribute to stress.
+By tracking the evolution of points that define lines, surfaces, and volumes, the {numref}`example-velocity-gradient-decomposition` then illustrated how each of the parts of $\nabla\bm{v}$ corresponds to a different type of motion. The term $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$ encodes the rate of isotropic volumetric expansion or shrinking, the term $\bm{D}$ the rate of non-isotropic, volume-preserving deformation, including shearing, and the term $\bm{\Omega}$ the rate of volume- and area-preserving rotation.
 
-To understand this, consider a fluid confined in a cylindrical annulus. Rotate both the inner and outer walls of the annulus with the same and constant angular velocity in the same direction as in {numref}`fig-cylinder-flow-rotation`. The fluid within is observed to rotate with exactly the same angular velocity at every point. In other words, the fluid undergoes rigid rotation. If one were to observe the fluid from a frame rotating at the same angular velocity, the fluid would appear perfectly still, regardless of the magnitude of the angular velocity. The resulting centrifugal force would introduce a pressure gradient in the radial direction the same way gravity normally induces hydrostatic pressure, but no other forces would appear measurable on the cylindrical walls. The stress must therefore be independent of the rigid rotation of the observer's frame, implying that the antisymmetric part $\bm{\Omega}$ of the velocity gradient tensor that describes rotation cannot contribute to the stress. 
+Of the decomposition for $\nabla\bm{v}$ only the deformation rates $\bm{D}$ and $\nabla\cdot\bm{v}$ can contribute to stress. To understand why the rotational part $\bm{\Omega}$ cannot, consider a fluid confined in a cylindrical annulus. Rotate both the inner and outer walls of the annulus with the same and constant angular velocity in the same direction as in {numref}`fig-cylinder-flow-rotation`. The fluid within is observed to rotate with exactly the same angular velocity at every point. In other words, the fluid undergoes rigid-body rotation, for which $\bm{D}=\bm{0}$ and $\nabla\cdot\bm{v}=0$ while only the antisymmetric part $\bm{\Omega}$ is non-zero. 
 :::{figure} ./figs/fig-rotation.svg
 :label: fig-cylinder-flow-rotation
 :align: center
 :width: 100%
-Fluid flow in cylindrical annulus with walls co-rotating with the same angular velocity. Only rigid rotation characterized by $\bm{\Omega}$ is present, and no torque on the walls is required to maintain the fluid flow.
+Fluid flow in a cylindrical annulus with walls co-rotating with the same angular velocity. The fluid undergoes rigid-body rotation characterized by $\bm{\Omega}$, without tangential traction or torque at the walls being required to maintain the motion.
 :::
-Consequently, the dependency of stress on the velocity gradient can appear only through the symmetric traceless tensors $\bm{D}$ and $\tfrac{1}{3}(\nabla\cdot\bm{v})\bm{I}$. Further, in an undeforming fluid, the stress is isotropic and represented by the thermodynamic pressure. The stress can consequently be decomposed as
+If one observes the fluid from a frame rotating with the same angular velocity, the fluid appears at rest. Although this is a non-inertial frame, the centrifugal force acting on the fluid can be balanced by a radial pressure gradient, in the same way that gravity normally induces a hydrostatic pressure difference in a column of still fluid. The stress therefore remains isotropic, and the traction on the cylindrical wall is purely normal. No tangential traction, and hence no torque about the cylinder axis, is required to maintain the steady rigid-body rotation. This illustrates the principle of material frame indifference: the physical stress response cannot depend on the rigid-body rotation of the observer. Consequently, the dependency of stress on the velocity gradient can appear only through $\bm{D}$ and $\nabla\cdot\bm{v}$, and the stress can therefore be decomposed as
 :::{math}
 :label: eq-stress
 \bm{\sigma} = -p\bm{I} + \bm{\tau}(\rho, p, T, \bm{D}, \nabla\cdot\bm{v}),
 :::
-with $\bm{\tau}$ referred to as the deviatoric stress tensor. The minus sign for pressure accounts for the outward unit normal of the surface on which the traction must counter the pressure in undeforming fluid.
+where $\bm{\tau}$ represents the contribution associated with deformation and must vanish when both $\bm{D}$ and $\nabla\cdot\bm{v}$ are zero.
 
-Further details are revealed if only the outer wall of the cylindrical annulus is spun as in {numref}`fig-cylinder-flow-shear`, or both walls are spun but in opposite directions. In such case, shear is observed to develop into the flow, and a constant torque at the annulus walls proportional to the shearing rate is required to maintain the flow. 
+Further details are revealed if only the outer wall of the cylindrical annulus is spun as in {numref}`fig-cylinder-flow-shear`, or both walls are spun but in opposite directions. In such a case, shear is observed to develop in the flow, and a constant torque at the annulus walls proportional to the shearing rate is required to maintain the flow. This indicates that, for sufficiently small deformation rates, the additional stress contribution depends approximately linearly on $\bm{D}$. 
 :::{figure} ./figs/fig-shear.svg
 :label: fig-cylinder-flow-shear
 :align: center
 :width: 100%
-Fluid flow in a cylindrical annulus with fixed inner and rotating outer cylindrical walls. Constant torque is required on the walls to maintain the flow, proportional to the shear rate characterized by the tensor $\bm{D}$.
+Fluid flow in a cylindrical annulus with fixed inner and rotating outer cylindrical walls. A constant torque is required on the walls to maintain the flow, proportional to the shear rate characterized by the tensor $\bm{D}$.
 :::
-This indicates that, for sufficiently small deformation rates, the deviatoric stress depends approximately linearly on $\bm{D}$. Similarly, studying the travel of sound waves in a pipe as illustrated in {numref}`fig-pipe-wave`, measurements of the wave amplitude attenuation over distance can be associated with a traction force caused by volumetric deformation. 
+Similarly, studying the travel of sound waves in a pipe as illustrated in {numref}`fig-pipe-wave`, measurements of the wave amplitude attenuation over distance provide information about the stress response to volumetric deformation. In this case as well, the force is deduced to have a linear dependency on the volumetric deformation rate characterized by $\nabla\cdot\bm{v}$.
 :::{figure} ./figs/fig-wave.svg
 :label: fig-pipe-wave
 :align: center
 :width: 100%
-A traveling wave in a fluid. The flow is characterized by $\nabla\cdot\bm{v}$, related to the volumetric deformation. The deformation attenuates in a long pipe, decreasing the wave amplitude. 
+A traveling wave in a fluid. The flow is characterized by $\nabla\cdot\bm{v}$, related to the volumetric deformation. The deformation attenuates in a long pipe, decreasing the wave amplitude.
 :::
-In this case as well, the force is deduced to have a linear dependency on the volumetric deformation rate characterized by $\nabla\cdot\bm{v}$. Together, experiments and measurements therefore indicate the following expression for the deviatoric stress tensor
+Together, experiments and measurements therefore indicate the following expression for the deformation-related contribution to the stress tensor
 :::{math}
-:label: eq-deviatoric-stress
-\bm{\tau} = 2\mu \bm{D} + \zeta(\nabla \cdot \bm{v})\bm{I},
+:label: eq-viscous-stress
+\bm{\tau} = 2\mu \bm{D} + \zeta(\nabla \cdot \bm{v})\bm{I}.
 :::
-which is symmetric and therefore compatible with the requirement of angular momentum conservation discussed in the intermediate {numref}`sec-symmetry-of-stress`. Fluids obeying this linear relationship are classified as Newtonian fluids, with the viscous proportionality coefficients $\mu$ and $\zeta$ being properties of the fluid and generally functions of the thermodynamic state $(\rho, p, T)$. In contrast, non-Newtonian fluids exhibit a more complex, non-linear dependency on the rates of deformation.
+The expression is symmetric and therefore compatible with the requirement of angular momentum conservation discussed in the intermediate {numref}`sec-symmetry-of-stress`. Generally, $\bm{\tau}$ is called the viscous stress, and fluids obeying this linear relationship are classified as Newtonian fluids, with the viscous proportionality coefficients $\mu$ and $\zeta$ being properties of the fluid and generally functions of the thermodynamic state $(\rho, p, T)$. In contrast, non-Newtonian fluids exhibit a more complex, non-linear dependency on the rates of deformation.
 
+::::{proof:example}
+Consider a Newtonian fluid undergoing simple shear flow between two parallel plates separated by a distance $H$. The lower plate is stationary, while the upper plate moves with constant velocity $U\bm{\hat{x}}$. Neglecting edge effects, the velocity field is
+:::{math}
+:enumerated: false
+\bm{v}=\dot{\gamma}y\bm{\hat{x}}, \qquad \dot{\gamma}=\frac{U}{H},
+:::
+where $\dot{\gamma}$ is the constant shear rate. The velocity gradient tensor is
+:::{math}
+:enumerated: false
+\nabla\bm{v}=\dot{\gamma}\bm{\hat{y}}\otimes\bm{\hat{x}},
+:::
+and its decomposition into symmetric and antisymmetric parts gives
+:::{math}
+:enumerated: false
+\begin{aligned}
+\bm{D}&=\frac{\dot{\gamma}}{2}\left(\bm{\hat{x}}\otimes\bm{\hat{y}}+\bm{\hat{y}}\otimes\bm{\hat{x}}\right),\\
+\bm{\Omega}&=\frac{\dot{\gamma}}{2}\left(\bm{\hat{y}}\otimes\bm{\hat{x}}-\bm{\hat{x}}\otimes\bm{\hat{y}}\right).
+\end{aligned}
+:::
+Since $\nabla\cdot\bm{v}=0$, the Newtonian constitutive relation becomes
+:::{math}
+:enumerated: false
+\bm{\sigma}=-p\bm{I}+\mu\dot{\gamma}\left(\bm{\hat{x}}\otimes\bm{\hat{y}}+\bm{\hat{y}}\otimes\bm{\hat{x}}\right).
+:::
+For example, the traction acting on a surface with unit normal $\bm{\hat{y}}$ is
+:::{math}
+:enumerated: false
+\bm{t}=\bm{\sigma}\cdot\bm{\hat{y}}=-p\bm{\hat{y}}+\mu\dot{\gamma}\bm{\hat{x}}.
+:::
+The shear stress is therefore proportional to the shear rate, with
+proportionality coefficient $\mu$. The complementary shear component
+has the same magnitude, as required by the symmetry of the stress
+tensor.
+
+Finally, the stress power per unit volume is
+:::{math}
+:enumerated: false
+\bm{\sigma}:\nabla\bm{v}=\mu\dot{\gamma}^{2}.
+:::
+It is positive and contributes to an increase in internal energy. In the absence of heat transfer and volumetric heating, the internal
+energy equation consequently reduces to 
+:::{math}
+:enumerated: false
+\rho\frac{Du}{Dt}=\mu\dot{\gamma}^{2}.
+:::
+Thus, mechanical energy supplied to maintain the shearing motion is converted into internal energy within the fluid.
+::::
+
+
+## <span class="elementary"></span> Constitutive relation for heat flux
+Recall from {numref}`sec-boundary-heat-work` that heat is energy transferred through microscopic interactions between particles, and distinct from energy transferred through macroscopic mechanical work. In a fluid, the heat flux $\bm{q}$ describes the direction and rate per unit area of this energy transfer, measured in the frame moving with the fluid. It therefore describes heat transfer independently of the energy transported along with the macroscopic motion of the fluid.
+
+To investigate how the heat flux depends on the thermodynamic state of the fluid, consider a fluid confined between two parallel surfaces maintained at different temperatures. Arrange the experiment so that the fluid remains at rest despite the temperature difference. For example, the surfaces may be horizontal, with the warmer surface above the colder one, so that the resulting density stratification is stable against buoyancy-driven motion. Even though the fluid remains stationary, heat is observed to flow from the warmer surface toward the colder one, as in {numref}`fig-heat-flux` below.
+
+:::{figure} ./figs/fig-heat-flux.svg
+:label: fig-heat-flux
+:align: center
+:width: 60%
+Heat flows from higher to lower temperatures, with the local direction and rate per unit area indicated by the heat flux vector $\bm{q}$.
+:::
+
+
+By varying the temperatures of the surfaces and their separation, experiments further show that, for sufficiently small temperature differences, the magnitude of the heat flux is approximately proportional to the temperature difference divided by the separation distance, while the proportionality coefficient depends on the average fluid thermodynamics state between the plates surfaces. When interpreted locally, the ratio of temperature difference to the distance between the surfaces becomes the temperature gradient in the direction normal to the surfaces. Since an isotropic fluid has no preferred spatial direction, the proportionality relationship applies irrespective of the orientation of the temperature gradient. The resulting constitutive relation is therefore
+:::{math}
+:label: eq-fourier-law
+\bm{q}=-\lambda\nabla T,
+:::
+where $\lambda$ is the thermal conductivity of the fluid and generally depends on its thermodynamic state. The thermal conductivity is positive for ordinary fluids, and the negative sign indicates that heat is transported from high temperature toward low temperature. This experimental constitutive relation is known as Fourier's law of heat conduction.
+
+::::{proof:example}
+Consider a stationary fluid layer between two parallel plates separated by a distance $H$. The lower plate is maintained at temperature $T_\text{low}$, while the upper plate is maintained at a higher temperature $T_\text{high}$. Assume that the arrangement is such that the resulting density stratification is stable and no macroscopic fluid motion occurs. After a while, also the thermodynamic properties of the settle and no longer change over time. 
+
+Let the $y$-axis point vertically upwards, with the lower and upper plates located at $y=0$ and $y=H$, respectively. Also assume that there is no volumetric heating, $q_V=0$, and that the thermal conductivity $\lambda$ is constant. Since the fluid and its properties are stationary in time, the internal energy equation {numref}`eq-internal-energy-equation` reduces to
+:::{math}
+:enumerated: false
+0=-\nabla\cdot\bm{q}.
+:::
+Combining this result with Fourier's law {numref}`eq-fourier-law` gives
+:::{math}
+:enumerated: false
+\nabla\cdot(\nabla T)=0.
+:::
+Since the temperature varies only in the $y$-direction, the solution
+satisfying the prescribed temperatures at the plates is
+:::{math}
+:enumerated: false
+T(y)=T_\text{low}+\frac{T_\text{high}-T_\text{low}}{H}y, \quad y\in[0,H].
+:::
+The resulting heat flux is therefore
+:::{math}
+:enumerated: false
+\bm{q}
+=-\lambda\nabla T
+=-\lambda\frac{T_\text{high}-T_\text{low}}{H}\bm{\hat{y}}.
+:::
+The heat flux is constant throughout the fluid layer and directed downwards, from the warmer upper plate toward the colder lower plate. The magnitude of the heat transfer rate through the upper plate of area $A$ into the fluid is consequently
+:::{math}
+:enumerated: false
+\dot{Q}\big|_{y=H}=\lambda A\frac{T_\text{high}-T_\text{low}}{H}.
+:::
+Thus, the heat transfer rate increases with the thermal conductivity, the plate area, and the temperature difference, while decreasing with the distance between the plates.
+::::
+
+
+<!--
 The heat flux $\bm{q}$ describes the local transfer of energy mediated by microscopic motion of particles relative to the local motion of the fluid, i.e., the transfer of heat. Expressing it in terms of the fluid's variables requires a constitutive relation of its own that is determined experimentally. If a fluid is confined between two surfaces that are maintained at different temperatures, heat is observed to flow from the warmer surface toward the colder surface. Reversing the temperatures on the plates reverses the direction of the heat transfer. If the plates are oriented so that temperature-induced density changes do not couple with gravity to drive buoyancy-related flow, then the fluid remains still and the heat transfer occurs by conduction, as in solids. For sufficiently small temperature gradients, the heat flux is observed to be approximately proportional to the temperature gradient, providing the constitutive relation
 :::{math}
 :label: eq-fourier-law
 \bm{q}=-\lambda\nabla T,
 :::
-where $\lambda$ is the thermal conductivity of the fluid with a value that depends on the thermodynamic state of the fluid. The negative sign indicates that heat is transported from high temperature toward low temperature. The thermal conductivity, together with the viscosity coefficients $\mu$ and $\zeta$, is referred to as a transport coefficient. These coefficients depend on the fluid and its thermodynamic state and are generally determined experimentally.
-
+where $\lambda$ is the thermal conductivity of the fluid with a value that depends on the thermodynamic state of the fluid. The negative sign indicates that heat is transported from high temperature toward low temperature. 
+-->
 
 ## Summary
 The motion of a fluid can be described by following individual points along the flow and studying how differential line, surface, and volume elements evolve. 
