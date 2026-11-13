@@ -9,6 +9,7 @@ project:
     - file: chap-01.md
     - file: chap-02.md
     - file: chap-03.md
+    - file: chap-04.md
 
 site:
   template: book-theme
