@@ -172,20 +172,18 @@ While the macroscopic contact force per unit area acting across an imaginary sur
 
 The tensor $\bm{\sigma}$ enables the directions of the surface normal vector $\bm{\hat{n}}$ and the contact force $\bm{F}$ to differ and, through that, description of forces that, for example, resist shearing in a flowing liquid and result from material anisotropy or from nonuniform loading in solids. 
 
-It is typically difficult to interpret stress as a physical concept at first. Consider therefore a layer of liquid or elastic body between two parallel plates. If both plates are horizontal, the weight of the upper plate causes the liquid or the body to experience a force normal to the plate surface that can often be interpreted as pressure. If the plates are tilted instead, the upper plate's weight exerts a force on the the liquid or body that has components both normal and tangential to the plate surface. An elastic body will then deform and accommodate a new shape to balance the forces, while the liquid layer would begin to flow and upper plate slide down. In the tilted case, the force at the contact point deviates from the normal direction of the body or liquid surface but can be connected to it with a tensor that acts like a rotation matrix. 
+It is typically difficult to interpret stress as a physical concept at first. Consider therefore a layer of liquid or elastic body between two parallel plates as in {numref}`fig-jello-between-plates`. If both plates are horizontal, the weight of the upper plate causes the liquid or the elastic body to experience a force normal to the plate surface that can often be interpreted as pressure. If the plates are tilted instead, the upper plate's weight exerts a force on the the liquid or the elastic body that has components both normal and tangential to the plate surface. An elastic body will then deform and accommodate a new shape to balance the forces, while a liquid layer would begin to flow and the upper plate slide down along the flow. In the tilted case, the force at the contact point deviates from the normal direction of the body or liquid surface but can be connected back to it with a tensor that acts like a rotation matrix. 
 
 ::::{figure}
 :label: fig-jello-between-plates
 :align: center
 :width: 100%
 
-(pressure-piston)=
 :::{image} ./figs/fig-jello-between-plates-horizontal.svg
 :alt: Horizontal plates
 :width: 50%
 :::
 
-(pressure-cylinder)=
 :::{image} ./figs/fig-jello-between-plates-tilted.svg
 :alt: Tilted plates
 :width: 50%
