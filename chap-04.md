@@ -7,7 +7,7 @@ numbering:
 ---
 
 # 4 Thermodynamic closure
-This chapter establishes the thermodynamic framework that culminates in the Helmholtz and Gibbs specific free energy functions $f$ and $g$ for pure substances. Once these functions are known in terms of their natural variables, the other thermodynamic properties can be obtained through differentiation. This provides the theoretical foundation for thermodynamic property libraries such as pyromat and coolprop. More fundamentally, the differential relations connecting  the specific internal energy $u$, enthalpy $h$, and entropy $s$ to the fluid's state variables temperature $T$, density $\rho$ or specific volume $v$, and pressure $p$ provide the thermodynamic closure required by the fluid equations. The resulting theory is later put to work in deriving convenient engineering relations. The positioning of this chapter within the overall roadmap is illustrated in {numref}`fig-roadmap-chap-04`.
+This chapter establishes the thermodynamic framework that culminates in the Helmholtz and Gibbs specific free energy functions $f$ and $g$ for pure substances. Once these functions are known in terms of their natural variables, the other thermodynamic properties can be obtained through differentiation. This provides the theoretical foundation for thermodynamic property libraries such as pyromat and coolprop. More fundamentally, the differential relations connecting  the specific internal energy $u$, enthalpy $h$, and entropy $s$ to the fluid's state variables temperature $T$, density $\rho$ or specific volume $v$, and pressure $p$ provide the thermodynamic closure required by the fluid equations. The resulting theory is later put to work in deriving convenient engineering relations, and the positioning of this chapter within the overall roadmap is illustrated in {numref}`fig-roadmap-chap-04`.
 
 :::{figure} ./figs/fig-roadmap-chap-04.svg
 :label: fig-roadmap-chap-04
@@ -20,7 +20,7 @@ Establishing this framework involves considering a restricted class of quasistat
 
 An observation that, in every neighbourhood of an equilibrium state, there exist states that cannot be reached from it through a quasistatic process without addition or removal of heat, together with Carathéodory's theorem from mathematics, establishes the existence of entropy as a state function. This provides the foundation for the second law of thermodynamics. Although the mathematical argument establishing the existence of entropy is treated as an advanced topic, entropy and the second law are core results of thermodynamics. Once entropy has been introduced, the differential relations between the thermodynamic state functions and their natural variables lead to the specific Helmholtz and Gibbs free energies.
 
-The chapter also develops supplementary theoretical foundations underlying these results. The fluid energy balance is first rearranged to distinguish mechanical and thermal contributions, providing a basis for defining quasistatic processes. The path dependence of heat and work, together with the path independence of the change in internal energy in quasistatic processes, then provide the mathematical justification for internal energy to be a state function. These arguments are discussed in detail in the intermediate and advanced sections, while their results are summarized in the core sections. Readers primarily interested in the core engineering path may therefore skip the intermediate and advanced sections and focus on using the resulting thermodynamic relations to compute properties for a given state.
+The chapter also develops supplementary theoretical foundations underlying these results. The fluid energy balance is first rearranged to classify mechanical contributions volumetric work pressure perturbations, and viscous dissipation, providing a basis for defining quasistatic processes. The path dependence of heat and volumetric work, together with the path independence of the change in internal energy in quasistatic processes, then provide the mathematical justification for internal energy to be a state function. These arguments are discussed in detail in the intermediate and advanced sections, while their results are summarized in the core sections. Readers primarily interested in the core engineering path may therefore skip the intermediate and advanced sections and focus on using the resulting thermodynamic relations to compute properties for a given state.
 
 ## Learning goals
 
@@ -34,192 +34,64 @@ The goals to support the intermediate and advanced paths are:
 
 - <span class="advanced"></span> This is an advanced learning goal.
 
-## <span class="advanced"></span> Rearrangement of the energy balance
-The conservation laws investigated over an arbitrary material volume provide local equations for the time rate of change of density, velocity, and specific internal energy. These equations involve four local quantities, ($\rho,T,u,\bm v$), but provide evolution equations for only three of them ($\rho,u,\bm v$). An additional relation connecting the internal energy to the thermodynamic state is therefore required to close the equations. The purpose of this section is to rearrange the energy balance to enable construction of such a relation from experimentally measurable data.
+## <span class="elementary"></span> Quasistatic processes and the first law of thermodynamics
+The investigation of three fundamental physics principles over a material volume, namely the conservation of mass, momentum, and energy, provided local partial differential equations {numref}`eq-fluid-equations` for the time rate of change of density, velocity, and specific internal energy. Assuming an equation of state of the form $p=p(\rho,T)$ to exists, these equations involve four local quantities, ($\rho,T,u,\bm v$), but provide evolution equations for only three of them ($\rho,u,\bm v$). An additional relation connecting the internal energy to the thermodynamic state is therefore required to close the equations. The first step in finding such a relation involves identifying different contributions to the fluid's energy balance and defining quasistatic processes, during which certain terms in the energy balance can be neglected.
 
-The energy balance over a material volume $V(t)$ links heat rate and mechanical deformation work rate to the rate at which internal energy of the volume changes
+Over a time-dependent material volume $V(t)$, the energy balance {numref}`eq-energy-balance-material-volume` links the heat rate and the mechanical deformation work rate to the rate at which the internal energy of the material volume changes
 :::{math}
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho udV}_{\substack{\text{Rate of change}\\\text{of internal energy}}}=\underbrace{\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}}+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}.
 :::
-As the mass $m=\int_{V(t)}\rho dV$ of the material volume $V(t)$ is constant in time, the time rate of change of the total internal energy on the left side of the energy balance becomes
+On the right, recall the expression {numref}`eq-constitutive-relations` for stress $\bm{\sigma}=-p\bm{I}+\bm{\tau}$. Using the vector identity $\bm{I}:\nabla\bm{v}=\nabla\cdot\bm{v}$ enables one to write
 :::{math}
-\frac{d}{dt}\int_{V(t)}\rho udV=m\frac{d\bar{u}}{dt},
+\bm{\sigma}:\nabla\bm{v}=-p(\nabla\cdot\bm{v})+\bm{\tau}:\nabla\bm{v}.
 :::
-where $\bar{u}$ is the density-weighted volume average of the local internal energy field, defined
+Using the identity {numref}`eq-rho-identity` with $\bm{f}=1/\rho$, and the equation {numref}`eq-fluid-equations` for density, reveals the time rate of change of a macroscopic material volume to correspond to the volume integral of the velocity field divergence
 :::{math}
-\bar{u}=\frac{1}{m}\int_{V(t)}\rho u dV.
+\frac{dV(t)}{dt}=\frac{d}{dt}\int_{V(t)}dV=\frac{d}{dt}\int_{V(t)}\rho\frac{1}{\rho}dV=\int_{V(t)}\nabla\cdot\bm{v}dV
 :::
-Associating the heat and mechanical deformation work rates on the right of the energy balance with the values and time rates change of volume-averaged state variables and excess terms, provides a link between internal energy and experimentally measurable state variables. Further inspection of the energy balance at a limit where the excess terms can be considered negligible, and assuming the reduced energy balance to hold regardless of the material volume chosen, provides a relation for internal energy in terms of state variables, which can then be interpreted as a local thermodynamic relation.
+Defining the average pressure $\bar{p}(t)$ over the material volume $V(t)$ as
+:::{math}
+\bar{p}(t)=\frac{1}{V(t)}\int_{V(t)}pdV,
+:::
+then let's one classify the contribution from the local deformations to the energy balance into three different terms
+:::{math}
+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}&=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}+\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
+:::
+where $\delta p=\bar{p}-p$ is the local pressure deviation from the volumetric average. The terms involve contributions from viscous effects, from local pressure variations that couple to the local rate of volumetric expansion, and from the average pressure and the overall rate of volumetric expansion.
 
-This process begins with associating local field values to volume averages. Over a time-dependent material volume $V(t)$, the Neumann Green's function $G_N(\bm{x},\bm{x}',t)$ is defined as the solution to the time-dependent boundary-value problem
+
+Denoting with $U$ and $\dot{Q}$ the total internal energy of the material volume and the rate of heat into the volume, and with $\dot{W}_{\delta p}$ and $\dot{W}_{\tau}$ the rates of mechanical energy change from pressure variations and viscous effects, respectively
 :::{math}
 \begin{aligned}
-    \nabla'^2G_N(\bm{x}',\bm{x},t)
-    &=
-    \frac{1}{V(t)}-\delta^3(\bm{x}'-\bm{x}),
-    &&
-    \bm{x},\bm{x}'\in V(t),\\
-    \nabla'G_N(\bm{x}',\bm{x},t)\cdot\bm{\hat n}(\bm{x}',t)
-    &=0,
-    &&
-    \bm{x}'\in\partial V(t).
+U&=\int_{V(t)}\rho udV,\\
+\dot{Q}&=\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA+\int_{V(t)}q_VdV,\\
+\dot{W}_{\delta p}&=\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV,\\
+\dot{W}_{\tau}&=\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV,
 \end{aligned}
 :::
-For a sufficiently smooth scalar field $f(\bm{x},t)$, the function $G_N$ provides the following identity between the function value and it's volume average $\bar{f}(t)=(1/V(t))\int_{V(t)}f(\bm{x},t)dV$
+the energy balance over the material volume can now be expressed as
 :::{math}
-:label: eq-field-average-deviation
-f(\bm{x},t)-\bar{f}(t)=\int_{V(t)}\nabla'G_N(\bm{x}',\bm{x},t)\cdot \nabla'f(\bm{x}',t)\,dV'.
+\frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt}-\dot{W}_{\delta p}-\dot{W}_{\tau}.
 :::
-According to the identity, the local deviation of a scalar field from its volume averaged value relates to the field gradient in the entire volume, and is bounded by the maximum value of the gradient within the volume and a geometric factor
-:::{math}
-    |f(\bm{x},t)-\bar{f}(t)|\leq \int_{V(t)}|\nabla G_N|dV\,\max_{V(t)}|\nabla f|.
-:::
-::::{proof:example}
-Verifying the identity~\eqref{eq:field-average-deviation} proceeds by multiplying the defining equation for $G_N$ and by $f$ and integrating it over the volume:
-:::{math}
-:enumerated: false
-\begin{align*}
-f(\bm{x},t)-\frac{1}{V(t)}
-\int_{V(t)}f(\bm{x}',t)\,dV'
-&=
-\int_{V(t)}
-	f(\bm{x}',t)
-        \left[
-            \delta^3(\bm{x}'-\bm{x})-\frac{1}{V(t)}
-        \right]dV'\\
-        &=
-        -\int_{V(t)}
-        f(\bm{x}',t)
-        \nabla'^2G_N(\bm{x}',\bm{x},t)\,dV'\\
-        &=
-        -\int_{\partial V(t)}
-        f(\bm{x}',t)
-        \nabla'G_N(\bm{x}',\bm{x},t)
-        \cdot\bm{\hat n}(\bm{x}',t)\,dA\\
-        &\qquad
-        +\int_{V(t)}
-        \nabla'G_N(\bm{x}',\bm{x},t)
-        \cdot\nabla'f(\bm{x}',t)\,dV'\\
-        &=
-        \int_{V(t)}
-        \nabla'G_N(\bm{x}',\bm{x},t)
-        \cdot\nabla'f(\bm{x}',t)\,dV'.
-    \end{align*}
-:::
-On the second to last line, the boundary term vanishes because of the normal derivative of $G_N$ vanishes on the boundary.
-::::
 
-With the help of the Neumann Green's function, one is able to separate the mechanical deformation work rate in the energy balance into a term expressible in terms of volume-averaged state variables and their rates, and excess terms. For this to work, use first the identities $\bm{I}:\nabla\bm{v}=\nabla\cdot\bm{v}$, $\bm{I}:\bm{I}=3$, and $\bm{D}:\bm{I}=0$ to express the term $\bm{\sigma}:\nabla\bm{v}$ as
+Quasistatic processes are defined as processes in which the spatial variations in pressure and the velocity field relax on time scales much shorter than the time scale on which the volume-averaged state evolves, while thin layers on the boundary of the volume may remain with finite temperature gradients to enable heat transfer into the volume from its surroundings. In such processes, the volume-averaged state approaches the experimentally measured equilibrium equation of state
 :::{math}
-:label: eq-stress-work-decomposition
-\bm{\sigma}:\nabla\bm{v}=-p\nabla\cdot\bm{v}+2\mu\bm{D}:\bm{D}+\zeta(\nabla\cdot\bm{v})^2,
+\bar{p}(t)\to p(\bar{\rho}(t),\bar{T}(t)),
 :::
-so that the mechanical deformation work rate in the energy balance is split into pressure and viscosity related contributions
-\begin{align}
-    \underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Mechanical deformation}\\\text{work rate}}}=-\underbrace{\int_{V(t)}p\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure related}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\left(2\mu\bm{D}:\bm{D}
-    +\zeta(\nabla\cdot\bm{v})^2\right)dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}}
-\end{align}
-Next use the Leibniz rule to realize that the divergence of the velocity is related to the rate of change of volume-averaged specific volume or density via
-\begin{align}
-    \int_{V(t)}\nabla\cdot\bm{v}\,dV
-    =
-    \frac{dV(t)}{dt}
-    =
-    m\frac{d\bar v(t)}{dt}
-    =
-    -\frac{m}{\bar{\rho}^2}
-    \frac{d\bar{\rho}(t)}{dt},
-\end{align}
-where $\bar v(t)=V(t)/m$ is the volume-averaged specific volume and $\bar{\rho}(t)=1/\bar{v}(t)$ the corresponding volume-averaged density. If the pressure were constant over the volume $V(t)$, it could be directly pulled out of the integral of $p\nabla\cdot\bm{v}$, resulting in a term expressible in volume averages only. Generally this is not true, though, and a trick involving the Neumann Green's function is needed. For the trick, define the volume-averaged pressure
-\begin{align}
-    \bar{p}(t)=\frac{1}{V(t)}\int_{V(t)}p\,dV,
-\end{align}
-with the deviation in the local value from the volume average $\bar{p}$ being expressible in terms of the Neumann Green's function
-\begin{align}
-    p(\bm{x},t)-\bar{p}(t)=\int_{V(t)}\nabla'G_N(\bm{x}',\bm{x},t)\cdot\nabla'p(\bm{x}',t)\,dV'.
-\end{align}
-Then formally decompose the local pressure into average and a pressure deviation according to $p=\bar p+(p-\bar p)$. The average part can now be pulled out of the integral while the deviation provides a gradient-related correction term, resulting in
-\begin{align}
-    \underbrace{\int_{V(t)}p\nabla\cdot\bm v\,dV}_{\substack{\text{Pressure related}\\\text{deformation work rate}}}
-    &=
-    \bar p\int_{V(t)}\nabla\cdot\bm v\,dV
-    +
-    \int_{V(t)}(p-\bar p)\nabla\cdot\bm v\,dV\\
-    &=
-    \underbrace{m\bar p\frac{d\bar v}{dt}}_{\substack{\text{Average}\\\text{pressure}\\\text{related}\\\text{deformation}\\\text{work rate}}}
-    +
-    \underbrace{\int_{V(t)}
-    \int_{V'(t)}
-    (\nabla\cdot\bm v)
-    \nabla'G_N\cdot\nabla'p\,
-    dV'\,dV}_{\substack{\text{Local pressure deviation related}\\\text{deformation work rate}}}.
-\end{align}
+and the mechanical work rates related to pressure deviation and viscous effects are small compared to the heat rate, the expansion work rate, or both
+:::{math}
+\frac{|\dot{W}_{\delta p}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0,\qquad \frac{|\dot{W}_{\tau}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0.
+:::
+In such case, the quasistatic energy equation reads
+:::{math}
+\frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt},
+:::
+and is referred to as the first law of thermodynamics. In textbooks, this equation is often presented in time-integrated form
+:::{math}
+\Delta U=Q-W
+:::
+with the terms corresponding to integrals between two time instants $t_0$ and $t_1$
+:::{math}
+\Delta U=\int_{t_0}^{t_1}\frac{dU}{dt}dt,\qquad Q=\int_{t_0}^{t_1}\dot{Q}dt,\qquad W=\int_{t_0}^{t_1}\bar{p}(t)\frac{dV}{dt}dt.
+:::
 
-Denote the mass-specific average pressure deformation work rate, the pressure variation related deformation work rate, and the viscous contribution to the deformation work rate with
-\begin{align}
-    \label{eq:dot-w_p-expressions}
-    \dot{\bar w}_p
-    &=
-    \bar p\frac{d\bar v}{dt}
-    =
-    -\frac{\bar p}{\bar{\rho}^2}
-    \frac{d\bar{\rho}}{dt},\\
-    \dot{\mathcal W}_{\delta p}
-    &=
-    \int_{V(t)}
-    \int_{V'(t)}
-    (\nabla\cdot\bm v)
-    \nabla'G_N\cdot\nabla'p\,
-    dV'\,dV,\\
-    \dot{\mathcal W}_{\mu,\zeta}
-    &=
-    -\int_{V(t)}
-    \left(
-        2\mu\bm D:\bm D
-        +
-        \zeta(\nabla\cdot\bm v)^2
-    \right)dV,
-\end{align}
-and the total deformation work rate contributing to the energy balance is then expressed
-\begin{align}
-    \int_{V(t)}
-    \bm{\sigma}:\nabla\bm v\,dV
-    =
-    -m\dot{\bar w}_p
-    -\dot{\mathcal W}_{\delta p}
-    -\dot{\mathcal W}_{\mu,\zeta},
-    \label{eq:stress-work-averaged}
-\end{align}
-The deformation work rate is now separated into a contribution expressed entirely in terms of volume-averaged state variables and two correction terms associated with spatial non-uniformity. The pressure-deviation term involves a product of the pressure and velocity gradients, while the viscous contribution is quadratic in the velocity gradient. Furthermore, since $\bm{D}:\bm{D}=\sum_{ij}D_{ij}^2\geq 0$, $(\nabla\cdot\bm{v})^2\geq 0$, and the viscous coefficients $\mu$ and $\zeta$ are non-negative, the viscous deformation work rate $\dot{\mathcal{W}}_{\mu,\zeta}$ is always non-positive. The pressure-deviation contribution $\dot{\mathcal{W}}_{\delta p}$, in contrast, may be positive or negative.
-For the heat rate terms on the right of the energy balance, denote the total rate of heat received by the fluid as
-\begin{align}
-    \dot{\mathcal Q}
-    &=
-    \int_{\partial V(t)}
-    \bm{q}\cdot(-\bm{\hat{n}})dA
-    +
-    \int_{V(t)}q_V\,dV=
-    \int_{\partial V(t)}
-    \lambda\nabla T\cdot\bm{\hat n}\,dA
-    +
-    \int_{V(t)}q_V\,dV.
-\end{align}
-The dependence of this functional on the state variables enters both through the thermal conductivity $\lambda$ and through the local volumetric energy-transfer rate $q_V$. Substituting the above expressions into the material-volume energy balance finally provides
-\begin{align}
-    \underbrace{m\frac{d\bar u}{dt}}
-    _{\substack{\text{Rate of}\\\text{internal}\\\text{energy}\\\text{change}}}
-    =
-    \underbrace{\dot{\mathcal Q}}
-    _{\substack{\text{Net rate}\\\text{of heat}\\\text{into the}\\\text{fluid}}}
-    -
-    \underbrace{m\dot{\bar w}_p}
-    _{\substack{\text{Rate of}\\\text{work by}\\\text{average}\\\text{pressure}}}
-    -
-    \underbrace{\dot{\mathcal W}_{\delta p}}
-    _{\substack{\text{Rate of}\\\text{work by}\\\text{pressure}\\\text{variations}}}
-    -
-    \underbrace{\dot{\mathcal W}_{\mu,\zeta}}
-    _{\substack{\text{Rate of}\\\text{work by}\\\text{viscous}\\\text{forces}}}.
-    \label{eq:energy-balance-macroscopic}
-\end{align}
-The important feature of this decomposition is that the first work term depends only on the macroscopic state variables, whereas the remaining terms are explicitly controlled by spatial gradients that can be assessed in an appropriate limit. As the next step, one this limit is considered to connect the heat rate $\dot{\mathcal{Q}}$ into rates of change of the volume-averaged state variables.
