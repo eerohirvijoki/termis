@@ -65,8 +65,8 @@ Denoting with $U$ and $\dot{Q}$ the total internal energy of the material volume
 \begin{aligned}
 U&=\int_{V(t)}\rho udV,\\
 \dot{Q}&=\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA+\int_{V(t)}q_VdV,\\
-\dot{W}_{\delta p}&=\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV,\\
-\dot{W}_{\tau}&=\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV,
+\dot{W}_{\delta p}&=-\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV,\\
+\dot{W}_{\tau}&=-\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV,
 \end{aligned}
 :::
 the energy balance over the material volume can now be expressed as
@@ -150,7 +150,7 @@ where $t_\text{vicous}\sim \zeta/\bar{p}$ is a characteristic viscous time scale
 
 
 ## <span class="elementary"></span> Specific heats and heat rate in quasistatic processes
-The second step in the process to establish a relation between the specific internal energy and the state variables to close the fluid equations involves expressing the specific heat rate in single-phase quasistatic processes in terms of the fluid state variables and their rates of change. More specifically, in experiments that approximate quasistatic processes, the specific heat rate is observed to be linear with respect to the rates of change of the state variables.
+The second step in the process to establish a relation between the specific internal energy and the state variables to close the fluid equations involves expressing the specific heat rate in single-phase quasistatic processes in terms of the fluid state variables and their rates of change. More specifically, in experiments that approximate quasistatic processes, the specific heat rate is observed to be well approximated by a linear expression in the rates of change of the state variables.
 
 To formalize the idea, define a general quasistatic process in the space of state variables, represented in terms of the pair $(\rho,T)$, $(T,p)$, or $(\rho,p)$, over a time interval $t\in[t_0,t_1]$ as the curve
 :::{math}
@@ -178,10 +178,10 @@ Therefore for example
 \begin{aligned}
 q_{T,\rho}\frac{dT}{dt}+q_{\rho,T}\frac{d\rho}{dt}&=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\frac{1}{\rho}\frac{d\rho}{dt}\\
 &=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\left(-\beta_p\frac{dT}{dt}+\kappa_T\frac{dp}{dt}\right)\\
-&=(q_{T,\rho}-\rho q_{\rho,T}\beta_p)\frac{dT}{dt}+\rho q_{\rho,T}\kappa_T\frac{dp}{dt}\
+&=(q_{T,\rho}-\rho q_{\rho,T}\beta_p)\frac{dT}{dt}+\rho q_{\rho,T}\kappa_T\frac{dp}{dt}.
 \end{aligned}
 :::
-which shows the coefficient functions $q_{T,\rho}$, $q_{\rho,T}$ etc. that appear in the specific heat rate to depend on each other. Overall one finds the relations
+This shows that the coefficient functions appearing in the different representations of the specific heat rate are related through the equation of state. Overall one finds the relations
 :::{math}
 :label: eq-q-Tprho-relations
 \begin{aligned}
