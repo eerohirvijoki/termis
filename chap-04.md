@@ -35,7 +35,7 @@ The goals to support the intermediate and advanced paths are:
 - <span class="advanced"></span> This is an advanced learning goal.
 
 ## <span class="elementary"></span> Quasistatic processes and the first law of thermodynamics
-The investigation of three fundamental physics principles over a material volume, namely the conservation of mass, momentum, and energy, provided local partial differential equations {numref}`eq-fluid-equations` for the time rate of change of density, velocity, and specific internal energy. Assuming an equation of state of the form $p=p(\rho,T)$ to exists, these equations involve four local quantities, ($\rho,T,u,\bm v$), but provide evolution equations for only three of them ($\rho,u,\bm v$). An additional relation connecting the internal energy to the thermodynamic state is therefore required to close the equations. The first step in finding such a relation involves identifying different contributions to the fluid's energy balance and defining quasistatic processes, during which certain terms in the energy balance can be neglected.
+The application of three fundamental conservation principles over a material volume, namely the conservation of mass, momentum, and energy, provided local partial differential equations {numref}`eq-fluid-equations` for the time rate of change of density, velocity, and specific internal energy. Assuming an equation of state of the form $p=p(\rho,T)$ to exist, pressure can be expressed in terms of density and temperature. The fluid equations then involve four local unknown fields, ($\rho,T,u,\bm v$), but provide evolution equations for only three of them ($\rho,u,\bm v$). An additional relation expressing the specific internal energy in terms of the thermodynamic state variables is therefore required to close the equations. The first step in finding such a relation involves identifying different contributions to the fluid's energy balance and defining quasistatic processes, during which certain terms in the energy balance can be neglected.
 
 Over a time-dependent material volume $V(t)$, the energy balance {numref}`eq-energy-balance-material-volume` links the heat rate and the mechanical deformation work rate to the rate at which the internal energy of the material volume changes
 :::{math}
@@ -47,17 +47,17 @@ On the right, recall the expression {numref}`eq-constitutive-relations` for stre
 :::
 Using the identity {numref}`eq-rho-identity` with $\bm{f}=1/\rho$, and the equation {numref}`eq-fluid-equations` for density, reveals the time rate of change of a macroscopic material volume to correspond to the volume integral of the velocity field divergence
 :::{math}
-\frac{dV(t)}{dt}=\frac{d}{dt}\int_{V(t)}dV=\frac{d}{dt}\int_{V(t)}\rho\frac{1}{\rho}dV=\int_{V(t)}\nabla\cdot\bm{v}dV
+\frac{dV(t)}{dt}=\frac{d}{dt}\int_{V(t)}dV=\int_{V(t)}\rho\frac{D\rho^{-1}}{Dt}dV=\int_{V(t)}\nabla\cdot\bm{v}dV
 :::
-Defining the average pressure $\bar{p}(t)$ over the material volume $V(t)$ as
+Defining the volume-averaged pressure $\bar{p}(t)$ over the material volume $V(t)$ as
 :::{math}
 \bar{p}(t)=\frac{1}{V(t)}\int_{V(t)}pdV,
 :::
-then let's one classify the contribution from the local deformations to the energy balance into three different terms
+then allows one to decompose the contribution from the local deformations to the energy balance into three different terms
 :::{math}
 \underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}&=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}+\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
 :::
-where $\delta p=\bar{p}-p$ is the local pressure deviation from the volumetric average. The terms involve contributions from viscous effects, from local pressure variations that couple to the local rate of volumetric expansion, and from the average pressure and the overall rate of volumetric expansion.
+where $\delta p=\bar{p}-p$ is the local pressure deviation from the volumetric average. The three contributions represent rates of mechanical energy change associated with the average pressure and overall volumetric expansion, local pressure variations coupled to local volumetric deformation, and viscous stresses acting during deformation.
 
 
 Denoting with $U$ and $\dot{Q}$ the total internal energy of the material volume and the rate of heat into the volume, and with $\dot{W}_{\delta p}$ and $\dot{W}_{\tau}$ the rates of mechanical energy change from pressure variations and viscous effects, respectively
@@ -74,24 +74,159 @@ the energy balance over the material volume can now be expressed as
 \frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt}-\dot{W}_{\delta p}-\dot{W}_{\tau}.
 :::
 
-Quasistatic processes are defined as processes in which the spatial variations in pressure and the velocity field relax on time scales much shorter than the time scale on which the volume-averaged state evolves, while thin layers on the boundary of the volume may remain with finite temperature gradients to enable heat transfer into the volume from its surroundings. In such processes, the volume-averaged state approaches the experimentally measured equilibrium equation of state
-:::{math}
-\bar{p}(t)\to p(\bar{\rho}(t),\bar{T}(t)),
-:::
-and the mechanical work rates related to pressure deviation and viscous effects are small compared to the heat rate, the expansion work rate, or both
+Quasistatic processes are then theoretical limit processes in which the contributions from $\dot{W}_{\delta p}$ and $\dot{W}_\tau$ to the energy balance are required to vanish compared to the contribution from $\bar{p}dV/dt$ or $\dot{Q}$. Stated mathematically, the theoretical quasistatic limit requires
 :::{math}
 \frac{|\dot{W}_{\delta p}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0,\qquad \frac{|\dot{W}_{\tau}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0.
 :::
-In such case, the quasistatic energy equation reads
+Physically, this corresponds to processes in which mechanical equilibration occurs on time scales much shorter than the time scale on which the volume-averaged thermodynamic state evolves. Pressure disturbances, such as pressure waves, therefore relax rapidly, leaving the pressure nearly uniform throughout the material volume. The fluid may still undergo deformation to enable a change in its overall volume, but its rate of deformation is sufficiently small for the viscous contribution to the energy balance to become negligible. The temperature need not be exactly uniform. Small temperature gradients may persist to enable heat transfer, while the relative temperature variation throughout the bulk of the fluid remains small. Thus, the volume-averaged thermodynamic state remains close to an experimentally measurable equilibrium state. As the spatial variations in pressure, density, and temperature become negligible, their volume averages approach the corresponding uniform values. The experimentally measured equilibrium equation of state is therefore approached in the form
+:::{math}
+\bar{p}(t)\to p(\bar{\rho}(t),\bar{T}(t)),
+:::
+where $\bar{\rho}(t)$ and $\bar{T}(t)$ are the macroscopically measurable volume-averaged density and temperature
+:::{math}
+\bar{\rho}(t)=\frac{1}{V(t)}\int_{V(t)}\rho\,dV=\frac{m}{V(t)}, \qquad \bar{T}(t)=\frac{1}{V(t)}\int_{V(t)}T\,dV.
+:::
+An example process approximating the quasitatic limit is illustrated in {numref}`fig-quasistatic-process`. 
+:::{figure} ./figs/fig-quasistatic-process.svg
+:label: fig-quasistatic-process
+:align: center
+:width: 90%
+Sand is slowly poured from a beaker onto the piston-like lid of a cylinder containing gas, gradually increasing the external load. Heating or cooling may be applied simultaneously. The slow loading allows the gas to remain close to mechanical and thermodynamical equilibrium, with nearly uniform pressure and small spatial variations in its thermodynamic state.
+::::
+At the quasistatic limit, the energy balance reduces to
 :::{math}
 \frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt},
 :::
-and is referred to as the first law of thermodynamics. In textbooks, this equation is often presented in time-integrated form
+and is referred to as the first law of thermodynamics. Since the mass of the fluid within the material is constant over time, defining the density-weighted specific internal energy over the material volume and the heat rate per unit mass into the volume with 
 :::{math}
-\Delta U=Q-W
+\bar{u}(t)=\frac{1}{m}\int_{V(t)}\rho u dV, \qquad \dot{\bar{q}}(t)=\frac{\dot{Q}(t)}{m},
 :::
-with the terms corresponding to integrals between two time instants $t_0$ and $t_1$
+the first law can be stated also per unit mass as
 :::{math}
-\Delta U=\int_{t_0}^{t_1}\frac{dU}{dt}dt,\qquad Q=\int_{t_0}^{t_1}\dot{Q}dt,\qquad W=\int_{t_0}^{t_1}\bar{p}(t)\frac{dV}{dt}dt.
+:label: first-law-per-unit-mass
+\frac{d\bar{u}}{dt}=\dot{\bar{q}}-\bar{p}\frac{d\bar{v}}{dt},
+:::
+where $\bar{v}(t)=V(t)/m=1/\bar{\rho}(t)$ is the average specific volume. In textbooks, the first law is often presented in its time-integrated form
+:::{math}
+\Delta U=Q-W_p,
+:::
+where the terms correspond to integrals between two time instants $t_0$ and $t_1$
+:::{math}
+\Delta U=\int_{t_0}^{t_1}\frac{dU}{dt}dt, \qquad Q=\int_{t_0}^{t_1}\dot{Q}dt, \qquad W_p=\int_{t_0}^{t_1}\bar{p}(t)\frac{dV}{dt}dt.
+:::
+The following sections in this chapter will discuss exclusively limiting quasistatic processes. With $\bar{\rho}$, $\bar{v}$, $\bar{T}$, $\bar{p}$, $\bar{u}$, and $\dot{\bar{q}}$ understood to denote the average fluid state, the average specific internal energy, and the specific heat rate in such processes, the explicit overbar notation will be dropped for clarity until further notice. 
+
+
+::::{proof:example}
+For a class of gravity-free, isotropic flows with no heat transfer, the fluid equations reduce from the spatio-temporal partial differential equations to time-dependent ordinary differential equations for spatially homogeneous fluid variables. The ratio of viscous work rate to the average-pressure work rate is then observed to be proportional to the ratio of viscous relaxation time and the macroscopic time scale of the fluid motion.
+    
+Assume the fluid velocity field to be isotropic and given by
+:::{math}
+:enumerated: false
+\bm{v}(\bm{x},t)=\frac{v(t)}{L}\bm{x},
+:::
+with $v(t)$ a time-dependent function. Assume further density $\rho(\bm{x},t)=\bar{\rho}(t)$, temperature $T(\bm{x},t)=\bar{T}(t)$, pressure $p(\bm{x},t)=\bar{p}(t)$, and specific internal energy $u(\bm{x},t)=\bar{u}(t)$ all to be spatially homogeneous but time-dependent. Since $\nabla\cdot\bm{v}=3(v/L)$, substituting the ansatz to equation for density results in
+:::{math}
+:enumerated: false
+\frac{1}{\rho}\frac{D\rho}{dt}=-\nabla\cdot\bm{v}\quad \implies \quad \frac{1}{\bar{\rho}}\frac{d\bar{\rho}}{dt}=-3\frac{v}{L}.
+:::
+Since $\nabla\bm{x}=(\nabla\bm{x})^T=\bm{I}$, one observes $\bm{D}=\bm{0}$, and the stress tensor becomes isotropic $\bm{\sigma}=(-p+3\zeta (v/L))\bm{I}$ and spatially homogeneous. Under the ansatz, the gravity-free Cauchy's momentum equation then results in
+:::{math}
+:enumerated: false
+\rho\frac{D\bm{v}}{Dt}=\nabla\cdot\bm{\sigma} \quad \implies \quad \left(\frac{1}{L}\frac{dv}{dt}+\frac{v^2}{L^2}\right)\bm{x}=\bm{0} \quad\implies\quad \frac{dv}{dt}+\frac{v^2}{L}=0.
+:::
+Using the equation for density, the equation for specific internal energy then becomes
+:::{math}
+:enumerated: false
+\rho\frac{Du}{Dt}=\bm{\sigma}:\nabla\bm{v} \quad \implies\quad \frac{d\bar{u}}{dt}=\frac{\bar{p}}{\bar{\rho}^2}\frac{d\bar{\rho}}{dt}+9\frac{\zeta}{\bar{\rho}}\frac{v^2}{L^2}
+:::
+The original system of partial differential equation has now been reduced to a system of ordinary differential equations. Further, the ratio of viscous work rate to the average-pressure work rate now becomes
+:::{math}
+:enumerated: false
+\frac{|\dot{W}_{\tau}|}{|\bar{p}\,dV/dt|}=3\frac{\zeta}{\bar{p}}\frac{|v|}{L}\sim \frac{t_\text{viscous}}{t_\text{macro}},
+:::
+where $t_\text{vicous}\sim \zeta/\bar{p}$ is a characteristic viscous time scale for the problem and $t_\text{macro}\sim L/|v|$ is the time scale associated with the macroscopic motion of the fluid. As long as the macroscopic time scale is much longer than the viscous time scale, the viscous work rate can be neglected, leading to a quasistatic limiting description of the fluid.
+::::
+
+
+## <span class="elementary"></span> Specific heats and heat rate in quasistatic processes
+The second step in the process to establish a relation between the specific internal energy and the state variables to close the fluid equations involves expressing the specific heat rate in single-phase quasistatic processes in terms of the fluid state variables and their rates of change. More specifically, in experiments that approximate quasistatic processes, the specific heat rate is observed to be linear with respect to the rates of change of the state variables.
+
+To formalize the idea, define a general quasistatic process in the space of state variables, represented in terms of the pair $(\rho,T)$, $(T,p)$, or $(\rho,p)$, over a time interval $t\in[t_0,t_1]$ as the curve
+:::{math}
+t\mapsto c(t)=\left\{\begin{aligned}
+&(\rho(t),T(t))\\
+&(T(t),p(t))\\
+&(\rho(t),p(t))
+\end{aligned}\right.
+:::
+Only two of the variables are ever needed to define the state and the curve $c(t)$ in single phase since the equation of state provides the third. Along such quasistatic process curves, there are three different representations for the specific heat rate linear in the rates of change of the state variables
+:::{math}
+\dot{q}=\left\{\begin{aligned}
+&q_{T,\rho}(T,\rho)\frac{dT}{dt}+q_{\rho,T}(T,\rho)\frac{d\rho}{dt},\\
+&q_{T,p}(T,p)\frac{dT}{dt}+q_{p,T}(T,p)\frac{dp}{dt},\\
+&q_{\rho,p}(\rho,p)\frac{d\rho}{dt}+q_{p,\rho}(\rho,p)\frac{dp}{dt}.
+\end{aligned}\right.
+:::
+The reason again is the equation of state that determines the time rate of change the third variable in terms of the time rates of the other two state variables. Differentiating an equation of state $\rho(p,T)$ with respect to time and using the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compression coefficient $\kappa_T$ leads to
+:::{math}
+:label: eq-differential-equation-of-state
+\frac{1}{\rho}\frac{d\rho}{dt}=-\beta_p\frac{dT}{dt}+\kappa_T\frac{dp}{dt}.
+:::
+Therefore for example 
+:::{math}
+\begin{aligned}
+q_{T,\rho}\frac{dT}{dt}+q_{\rho,T}\frac{d\rho}{dt}&=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\frac{1}{\rho}\frac{d\rho}{dt}\\
+&=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\left(-\beta_p\frac{dT}{dt}+\kappa_T\frac{dp}{dt}\right)\\
+&=(q_{T,\rho}-\rho q_{\rho,T}\beta_p)\frac{dT}{dt}+\rho q_{\rho,T}\kappa_T\frac{dp}{dt}\
+\end{aligned}
+:::
+which shows the coefficient functions $q_{T,\rho}$, $q_{\rho,T}$ etc. that appear in the specific heat rate to depend on each other. Overall one finds the relations
+:::{math}
+:label: eq-q-Tprho-relations
+\begin{aligned}
+q_{T,p}&=q_{T,\rho}-\rho\beta_p q_{\rho,T}=-\rho\beta_p q_{\rho,p},\\
+q_{p,T}&=\rho\kappa_T q_{\rho,T}=q_{p,\rho}+\rho\kappa_T q_{\rho,p}.
+\end{aligned}
+:::
+
+With understanding of how the specific heat rate can generally appear, one may inspect specific quasistatic processes. A quasistatic heating process that keeps the density $\rho$ (and the specific volume $v$) constant over time is most conveniently described with the curve $c(t)=(\rho,T(t))$ and illustrated in {numref}`fig-quasistatic-heating-isochoric`. In such case, the experimentally measurable response of the fluid to the heat it receives reduces to
+:::{math}
+\dot{q}=q_{T,\rho}\frac{dT}{dt}.
+:::
+Under such processes, the ratio of the measured heat rate per unit mass to the measured rate of temperature change is referred to as isochoric specific heat $c_v(\rho,T)$, meaning $q_{T,\rho}=c_v$. If the pressure $p$ in a quasistatic heating process is kept constant instead of density,  as in {numref}`fig-quasistatic-heating-isobaric`, the most convenient curve for the process description is $c(t)=(p,T(t))$. In such case, the experimentally measurable response of the fluid to the heat it receives then reduces to
+:::{math}
+\dot{q}=q_{T,p}\frac{dT}{dt},
+:::
+and the ratio of the measured heat rate per unit mass to the measured rate of temperature change is referred to as isobaric specific heat $c_p(\rho,T)$, meaning $q_{T,p}=c_p$. 
+
+::::{figure}
+:label: fig-quasistatic-heating
+:align: center
+:width: 100%
+
+(fig-quasistatic-heating-isochoric)=
+:::{image} ./figs/fig-quasistatic-heating-isochoric.svg
+:alt: Isochoric quasistatic heating process.
+:width: 80%
+:::
+
+(fig-quasistatic-heating-isobaric)=
+:::{image} ./figs/fig-quasistatic-heating-isobaric.svg
+:alt: Isobaric quasistatic heating process.
+:width: 80%
+:::
+
+Two common quasistatic heating processes. In an isochoric process, the volume is constant. In an isobaric process, pressure remains constant instead.
+::::
+
+With $q_{T,\rho}=c_v$ and $q_{T,p}=c_p$ inferred from measurements, the equations {numref}`eq-q-Tprho-relations` then provide the rest of the proportionality coefficients, and the response of the fluid to the heat it receives while remaining in single phase is expressed can be expressed through
+:::{math}
+:label: eq-dot-q-expressions}
+\dot{q}=\left\{\begin{aligned}
+&c_v\frac{dT}{dt}+\frac{c_v-c_p}{\rho\beta_p}\frac{d\rho}{dt},\\
+&c_p\frac{dT}{dt}+(c_v-c_p)\frac{\kappa_T}{\beta_p}\frac{dp}{dt},\\
+&-\frac{c_p}{\rho\beta_p}\frac{d\rho}{dt}+c_v\frac{\kappa_T}{\beta_p}\frac{dp}{dt}.
+\end{aligned}\right.
 :::
 
