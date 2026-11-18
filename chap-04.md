@@ -55,7 +55,7 @@ Defining the volume-averaged pressure $\bar{p}(t)$ over the material volume $V(t
 :::
 then allows one to decompose the contribution from the local deformations to the energy balance into three different terms
 :::{math}
-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}&=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}+\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}+\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
 :::
 where $\delta p=\bar{p}-p$ is the local pressure deviation from the volumetric average. The three contributions represent rates of mechanical energy change associated with the average pressure and overall volumetric expansion, local pressure variations coupled to local volumetric deformation, and viscous stresses acting during deformation.
 
@@ -230,3 +230,35 @@ With $q_{T,\rho}=c_v$ and $q_{T,p}=c_p$ inferred from measurements, the equation
 \end{aligned}\right.
 :::
 
+The specific heats $c_v$ and $c_p$ for water are illustrated in {numref}`fig-cv-cp-H2O` and can be computed with both pyromat and coolprop libraries. The values of $c_v$ and $c_p$ are defined only in the single-phase regions, not in the phase-change regions. In {numref}`fig-cv-cp-H2O`, one recognizes the isocontours of both $c_v$ and $c_p$ for water to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range.
+
+::::{figure}
+:label: fig-cv-cp-H2O
+:align: center
+:width: 100%
+
+(fig-cv-H2O)=
+:::{image} ./figs/fig-cv-H2O.svg
+:alt: Isochoric specific heat for water.
+:width: 80%
+:::
+
+(fig-cp-H2O)=
+:::{image} ./figs/fig-cp-H2O.svg
+:alt: Isobaric specific heat for water.
+:width: 80%
+:::
+
+Isocontours of specific heats $c_v$ and $c_p$ for water in a $v$-$T$ diagram.
+::::
+
+::::{proof:example}
+The specific heats can be computed with both the pyromat and coolprop libraries. The script below serves as a demonstration:
+```{literalinclude} python/example-cv-cp-evaluation.py
+:language: python
+:start-line: 0
+:end-line: 35
+:linenos:
+```
+At the requested state poin both pyromat and coolprop return $c_v=2.23\,\text{kJ}/\text{kg}/\text{K}$ and $c_p=4.00\,\text{kJ}/\text{kg}/\text{K}$. The values can be confirmed from {numref}`fig-cv-cp-H2O`.
+::::
