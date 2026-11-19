@@ -41,44 +41,44 @@ Over a time-dependent material volume $V(t)$, the energy balance {numref}`eq-ene
 :::{math}
 \underbrace{\frac{d}{dt}\int_{V(t)}\rho udV}_{\substack{\text{Rate of change}\\\text{of internal energy}}}=\underbrace{\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA}_{\substack{\text{Net rate of heat received}\\\text{through the boundary}}}+\underbrace{\int_{V(t)}q_VdV}_{\substack{\text{Net rate of heat}\\\text{absorbed}\\\text{volumetrically}}}+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}.
 :::
-On the right, recall the expression {numref}`eq-constitutive-relations` for stress $\bm{\sigma}=-p\bm{I}+\bm{\tau}$. Using the vector identity $\bm{I}:\nabla\bm{v}=\nabla\cdot\bm{v}$ enables one to write
+On the right, recall the expression {numref}`eq-constitutive-relations` for stress $\bm{\sigma}=-p\bm{I}+\bm{\tau}$. Using the vector identity $\bm{I}:\nabla\bm{v}=\nabla\cdot\bm{v}$, one may write
 :::{math}
 \bm{\sigma}:\nabla\bm{v}=-p(\nabla\cdot\bm{v})+\bm{\tau}:\nabla\bm{v}.
 :::
-Using the identity {numref}`eq-rho-identity` with $\bm{f}=1/\rho$, and the equation {numref}`eq-fluid-equations` for density, reveals the time rate of change of a macroscopic material volume to correspond to the volume integral of the velocity field divergence
+Using the identity {numref}`eq-rho-identity` with $\bm{f}=1/\rho$, and the equation {numref}`eq-fluid-equations` for density, one fids that the time rate of change of a macroscopic material volume to corresponds to the volume integral of the velocity field divergence
 :::{math}
-\frac{dV(t)}{dt}=\frac{d}{dt}\int_{V(t)}dV=\int_{V(t)}\rho\frac{D\rho^{-1}}{Dt}dV=\int_{V(t)}\nabla\cdot\bm{v}dV
+\frac{dV(t)}{dt}=\frac{d}{dt}\int_{V(t)}dV=\int_{V(t)}\rho\frac{D\rho^{-1}}{Dt}dV=\int_{V(t)}\nabla\cdot\bm{v}dV.
 :::
-Defining the volume-averaged pressure $\bar{p}(t)$ over the material volume $V(t)$ as
+Defining then the volume-averaged pressure $\bar{p}(t)$ over the material volume $V(t)$ as
 :::{math}
 \bar{p}(t)=\frac{1}{V(t)}\int_{V(t)}pdV,
 :::
-then allows one to decompose the contribution from the local deformations to the energy balance into three different terms
+allows one to decompose the contribution from the local deformations to the energy balance into three different terms
 :::{math}
-\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}+\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
+\underbrace{\int_{V(t)}\bm{\sigma}:\nabla\bm{v}dV}_{\substack{\text{Rate of mechanical}\\\text{energy change from}\\\text{local deformation}}}=-\underbrace{\bar{p}\frac{dV}{dt}}_{\substack{\text{Expansion}\\\text{work rate}}}-\underbrace{\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV}_{\substack{\text{Pressure deviation}\\\text{deformation work rate}}}+\underbrace{\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV}_{\substack{\text{Viscosity related}\\\text{deformation work rate}}},
 :::
-where $\delta p=\bar{p}-p$ is the local pressure deviation from the volumetric average. The three contributions represent rates of mechanical energy change associated with the average pressure and overall volumetric expansion, local pressure variations coupled to local volumetric deformation, and viscous stresses acting during deformation.
+where $\delta p=p-\bar{p}$ is the local pressure deviation from the volumetric average. The three contributions represent rates of mechanical energy change associated with the average pressure and overall volumetric expansion, local pressure variations coupled to local volumetric deformation, and viscous stresses acting during deformation.
 
 
-Denoting with $U$ and $\dot{Q}$ the total internal energy of the material volume and the rate of heat into the volume, and with $\dot{W}_{\delta p}$ and $\dot{W}_{\tau}$ the rates of mechanical energy change from pressure variations and viscous effects, respectively
+Denoting with $U$ and $\dot{Q}$ the total internal energy of the material volume and the net rate of heat into the volume, and with $\dot{W}_{\delta p}$ and $\dot{W}_{\tau}$ the rates of mechanical energy change from pressure variations and viscous effects, respectively
 :::{math}
 \begin{aligned}
 U&=\int_{V(t)}\rho udV,\\
 \dot{Q}&=\int_{\partial V(t)}\bm{q}\cdot(-\bm{\hat{n}})dA+\int_{V(t)}q_VdV,\\
-\dot{W}_{\delta p}&=-\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV,\\
-\dot{W}_{\tau}&=-\int_{V(t)}\bm{\tau}:\nabla\bm{v}dV,
+\dot{W}_{\delta p}&=\int_{V(t)}\delta p\,\nabla\cdot\bm{v}dV,\\
+\dot{W}_{\tau}&=\int_{V(t)}(-\bm{\tau}):\nabla\bm{v}dV,
 \end{aligned}
 :::
-the energy balance over the material volume can now be expressed as
+the energy balance over the material volume can be expressed as
 :::{math}
 \frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt}-\dot{W}_{\delta p}-\dot{W}_{\tau}.
 :::
 
-Quasistatic processes are then theoretical limit processes in which the contributions from $\dot{W}_{\delta p}$ and $\dot{W}_\tau$ to the energy balance are required to vanish compared to the contribution from $\bar{p}dV/dt$ or $\dot{Q}$. Stated mathematically, the theoretical quasistatic limit requires
+Quasistatic processes are then theoretical limit processes in which the fluid state remains close to homogenous and contributions from $\dot{W}_{\delta p}$ and $\dot{W}_\tau$ to the energy balance become vanishingly small compared to the contribution from $\bar{p}dV/dt$ or $\dot{Q}$. Essentially, at the theoretical quasistatic limit
 :::{math}
 \frac{|\dot{W}_{\delta p}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0,\qquad \frac{|\dot{W}_{\tau}|}{\max(|\dot{Q}|,|\bar{p}\frac{dV}{dt}|)}\to 0.
 :::
-Physically, this corresponds to processes in which mechanical equilibration occurs on time scales much shorter than the time scale on which the volume-averaged thermodynamic state evolves. Pressure disturbances, such as pressure waves, therefore relax rapidly, leaving the pressure nearly uniform throughout the material volume. The fluid may still undergo deformation to enable a change in its overall volume, but its rate of deformation is sufficiently small for the viscous contribution to the energy balance to become negligible. The temperature need not be exactly uniform. Small temperature gradients may persist to enable heat transfer, while the relative temperature variation throughout the bulk of the fluid remains small. Thus, the volume-averaged thermodynamic state remains close to an experimentally measurable equilibrium state. As the spatial variations in pressure, density, and temperature become negligible, their volume averages approach the corresponding uniform values. The experimentally measured equilibrium equation of state is therefore approached in the form
+Physically this corresponds to processes in which mechanical equilibration occurs on time scales much shorter than the time scale on which the volume-averaged thermodynamic state of the fluid evolves. Pressure disturbances are assumed to relax rapidly, leaving the pressure nearly uniform throughout the material volume. The fluid may still undergo deformation to enable a change in its overall volume, but its rate of deformation is sufficiently small for the viscous contribution to the energy balance to become negligible. Small temperature gradients may persist to enable heat transfer but the relative temperature variation throughout the bulk of the fluid remains small. Thus, the volume-averaged thermodynamic state remains close to an experimentally measurable equilibrium state. Even the gravity induced hydrostatic pressure gradient could be removed by conducting the processes in space or on the low Earth orbit. As the spatial variations in pressure, density, and temperature become negligible, their volume averages approach the corresponding uniform values. The experimentally measured equilibrium equation of state is therefore approached in the form
 :::{math}
 \bar{p}(t)\to p(\bar{\rho}(t),\bar{T}(t)),
 :::
@@ -91,22 +91,22 @@ An example process approximating the quasitatic limit is illustrated in {numref}
 :label: fig-quasistatic-process
 :align: center
 :width: 90%
-Sand is slowly poured from a beaker onto the piston-like lid of a cylinder containing gas, gradually increasing the external load. Heating or cooling may be applied simultaneously. The slow loading allows the gas to remain close to mechanical and thermodynamical equilibrium, with nearly uniform pressure and small spatial variations in its thermodynamic state.
+Sand is slowly poured from a beaker onto the piston-like lid of a cylinder containing gas, gradually increasing the external load. Heating or cooling may be applied simultaneously. The slow loading and moderate heating or cooling allows the gas to remain close to mechanical and thermodynamical equilibrium, with nearly uniform pressure and only small spatial variations in its thermodynamic state.
 ::::
-At the quasistatic limit, the energy balance reduces to
+At the quasistatic limit, the energy balance simplifies greatly and reduces to
 :::{math}
 \frac{dU}{dt}=\dot{Q}-\bar{p}\frac{dV}{dt},
 :::
-and is referred to as the first law of thermodynamics. Since the mass of the fluid within the material is constant over time, defining the density-weighted specific internal energy over the material volume and the heat rate per unit mass into the volume with 
+In this form, the energy balance is referred to as the first law of thermodynamics. Since the mass of the fluid within the material is constant over time, defining the density-weighted specific internal energy over the material volume and the heat rate per unit mass into the volume with 
 :::{math}
 \bar{u}(t)=\frac{1}{m}\int_{V(t)}\rho u dV, \qquad \dot{\bar{q}}(t)=\frac{\dot{Q}(t)}{m},
 :::
-the first law can be stated also per unit mass as
+the first law can be stated also per unit mass in the form
 :::{math}
-:label: first-law-per-unit-mass
-\frac{d\bar{u}}{dt}=\dot{\bar{q}}-\bar{p}\frac{d\bar{v}}{dt},
+:label: eq-first-law-per-unit-mass
+\frac{d\bar{u}}{dt}=\dot{\bar{q}}-\bar{p}\frac{d\bar{v}}{dt}=\dot{\bar{q}}+\frac{\bar{p}}{\bar{\rho}^2}\frac{d\bar{\rho}}{dt},
 :::
-where $\bar{v}(t)=V(t)/m=1/\bar{\rho}(t)$ is the average specific volume. In textbooks, the first law is often presented in its time-integrated form
+where $\bar{v}(t)=V(t)/m=1/\bar{\rho}(t)$ is the average specific volume. In textbooks, the first law is often presented in time-integrated form
 :::{math}
 \Delta U=Q-W_p,
 :::
@@ -114,6 +114,7 @@ where the terms correspond to integrals between two time instants $t_0$ and $t_1
 :::{math}
 \Delta U=\int_{t_0}^{t_1}\frac{dU}{dt}dt, \qquad Q=\int_{t_0}^{t_1}\dot{Q}dt, \qquad W_p=\int_{t_0}^{t_1}\bar{p}(t)\frac{dV}{dt}dt.
 :::
+
 The following sections in this chapter will discuss exclusively limiting quasistatic processes. With $\bar{\rho}$, $\bar{v}$, $\bar{T}$, $\bar{p}$, $\bar{u}$, and $\dot{\bar{q}}$ understood to denote the average fluid state, the average specific internal energy, and the specific heat rate in such processes, the explicit overbar notation will be dropped for clarity until further notice. 
 
 
@@ -150,25 +151,28 @@ where $t_\text{vicous}\sim \zeta/\bar{p}$ is a characteristic viscous time scale
 
 
 ## <span class="elementary"></span> Specific heats and heat rate in quasistatic processes
-The second step in the process to establish a relation between the specific internal energy and the state variables to close the fluid equations involves expressing the specific heat rate in single-phase quasistatic processes in terms of the fluid state variables and their rates of change. More specifically, in experiments that approximate quasistatic processes, the specific heat rate is observed to be well approximated by a linear expression in the rates of change of the state variables.
+The second step in the process of establishing a relation between the specific internal energy and the state variables involves experimentally relating the specific heat rate $\dot{q}$ to the volume averaged fluid state variables. In that case, the entire right side of the first law {numref}`eq-first-law-per-unit-mass` becomes free of the details of fluid motion, at the quasistatic limit. More specifically, experiments with fluids restricted to single phase states that approximate quasistatic processes show that the specific heat rate can be well approximated by a linear expression in the rates of change of the state variables. At the quasistatic limit this experimental observation from approximate quasistatic processes is then assumed to hold accurately. Ultimately, the observation enables a lift-off from the temporal realm and construction of a thermodynamic theory framework.
 
-To formalize the idea, define a general quasistatic process in the space of state variables, represented in terms of the pair $(\rho,T)$, $(T,p)$, or $(\rho,p)$, over a time interval $t\in[t_0,t_1]$ as the curve
+To formalize the idea, define a general single-phase quasistatic process in the space of state variables, represented in terms of the pair $(\rho,T)$, $(T,p)$, or $(\rho,p)$, over a time interval $t\in[t_0,t_1]$ as the curve
 :::{math}
 t\mapsto c(t)=\left\{\begin{aligned}
 &(\rho(t),T(t))\\
 &(T(t),p(t))\\
 &(\rho(t),p(t))
-\end{aligned}\right.
+\end{aligned}\right..
 :::
-Only two of the variables are ever needed to define the state and the curve $c(t)$ in single phase since the equation of state provides the third. Along such quasistatic process curves, there are three different representations for the specific heat rate linear in the rates of change of the state variables
+Only two of the state variables are ever needed to define the state and the curve $c(t)$ in single phase since the equation of state provides the third. Such a process can be visualized by drawing a curve in a $v$-$T$ or $p$-$v$ diagram and letting the time variable $t$ serve as the path parameter. 
+
+Along such quasistatic process curves, there are three different representations for the specific heat rate that remain linear in the rates of change of the state variables
 :::{math}
+:label: eq-dot-q-initial-representations
 \dot{q}=\left\{\begin{aligned}
 &q_{T,\rho}(T,\rho)\frac{dT}{dt}+q_{\rho,T}(T,\rho)\frac{d\rho}{dt},\\
 &q_{T,p}(T,p)\frac{dT}{dt}+q_{p,T}(T,p)\frac{dp}{dt},\\
 &q_{\rho,p}(\rho,p)\frac{d\rho}{dt}+q_{p,\rho}(\rho,p)\frac{dp}{dt}.
 \end{aligned}\right.
 :::
-The reason again is the equation of state that determines the time rate of change the third variable in terms of the time rates of the other two state variables. Differentiating an equation of state $\rho(p,T)$ with respect to time and using the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compression coefficient $\kappa_T$ leads to
+The reason again is the equation of state that determines the time rate of change the third variable in terms of the time rates of change of the other two state variables. Differentiating an equation of state $\rho(p,T)$ with respect to time and using the isobaric thermal expansion coefficient $\beta_p$ and the isothermal compression coefficient $\kappa_T$ as in {numref}`eq-dv-pT-differential` leads to a relation between the time derivatives of the state variables
 :::{math}
 :label: eq-differential-equation-of-state
 \frac{1}{\rho}\frac{d\rho}{dt}=-\beta_p\frac{dT}{dt}+\kappa_T\frac{dp}{dt}.
@@ -178,10 +182,10 @@ Therefore for example
 \begin{aligned}
 q_{T,\rho}\frac{dT}{dt}+q_{\rho,T}\frac{d\rho}{dt}&=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\frac{1}{\rho}\frac{d\rho}{dt}\\
 &=q_{T,\rho}\frac{dT}{dt}+\rho q_{\rho,T}\left(-\beta_p\frac{dT}{dt}+\kappa_T\frac{dp}{dt}\right)\\
-&=(q_{T,\rho}-\rho q_{\rho,T}\beta_p)\frac{dT}{dt}+\rho q_{\rho,T}\kappa_T\frac{dp}{dt}.
+&=\underbrace{(q_{T,\rho}-\rho q_{\rho,T}\beta_p)}_{=q_{T,p}}\frac{dT}{dt}+\underbrace{\rho q_{\rho,T}\kappa_T}_{=q_{p,T}}\frac{dp}{dt}.
 \end{aligned}
 :::
-This shows that the coefficient functions appearing in the different representations of the specific heat rate are related through the equation of state. Overall one finds the relations
+This shows that the coefficient functions appearing in the different representations {numref}`eq-dot-q-initial-representations` for the specific heat rate are related through the equation of state. Overall, one finds the relations
 :::{math}
 :label: eq-q-Tprho-relations
 \begin{aligned}
@@ -190,15 +194,15 @@ q_{p,T}&=\rho\kappa_T q_{\rho,T}=q_{p,\rho}+\rho\kappa_T q_{\rho,p}.
 \end{aligned}
 :::
 
-With understanding of how the specific heat rate can generally appear, one may inspect specific quasistatic processes. A quasistatic heating process that keeps the density $\rho$ (and the specific volume $v$) constant over time is most conveniently described with the curve $c(t)=(\rho,T(t))$ and illustrated in {numref}`fig-quasistatic-heating-isochoric`. In such case, the experimentally measurable response of the fluid to the heat it receives reduces to
+Understanding how a specific heat rate linear in the rates of state variables can generally appear, one may then inspect specific quasistatic processes. A quasistatic heating process that keeps the density $\rho$ (and the specific volume $v$) constant over time is most conveniently described with the curve $c(t)=(\rho,T(t))$ and illustrated in {numref}`fig-quasistatic-heating-isochoric`. In such case, the experimentally measurable response of the fluid to the heat it receives reduces to
 :::{math}
 \dot{q}=q_{T,\rho}\frac{dT}{dt}.
 :::
 Under such processes, the ratio of the measured heat rate per unit mass to the measured rate of temperature change is referred to as isochoric specific heat $c_v(\rho,T)$, meaning $q_{T,\rho}=c_v$. If the pressure $p$ in a quasistatic heating process is kept constant instead of density,  as in {numref}`fig-quasistatic-heating-isobaric`, the most convenient curve for the process description is $c(t)=(p,T(t))$. In such case, the experimentally measurable response of the fluid to the heat it receives then reduces to
 :::{math}
-\dot{q}=q_{T,p}\frac{dT}{dt},
+\dot{q}=q_{T,p}\frac{dT}{dt}.
 :::
-and the ratio of the measured heat rate per unit mass to the measured rate of temperature change is referred to as isobaric specific heat $c_p(\rho,T)$, meaning $q_{T,p}=c_p$. 
+In such case, the ratio of the measured heat rate per unit mass to the measured rate of temperature change is referred to as isobaric specific heat $c_p(\rho,T)$, meaning $q_{T,p}=c_p$. 
 
 ::::{figure}
 :label: fig-quasistatic-heating
@@ -220,7 +224,7 @@ and the ratio of the measured heat rate per unit mass to the measured rate of te
 Two common quasistatic heating processes. In an isochoric process, the volume is constant. In an isobaric process, pressure remains constant instead.
 ::::
 
-With $q_{T,\rho}=c_v$ and $q_{T,p}=c_p$ inferred from measurements, the equations {numref}`eq-q-Tprho-relations` then provide the rest of the proportionality coefficients, and the response of the fluid to the heat it receives while remaining in single phase is expressed can be expressed through
+With $q_{T,\rho}=c_v$ and $q_{T,p}=c_p$ inferred from measurements, the equations {numref}`eq-q-Tprho-relations` then provide the rest of the proportionality coefficients, and the response of the fluid to the heat it receives in a quasistatic process while remaining in single phase can be expressed as
 :::{math}
 :label: eq-dot-q-expressions}
 \dot{q}=\left\{\begin{aligned}
@@ -230,7 +234,7 @@ With $q_{T,\rho}=c_v$ and $q_{T,p}=c_p$ inferred from measurements, the equation
 \end{aligned}\right.
 :::
 
-The specific heats $c_v$ and $c_p$ for water are illustrated in {numref}`fig-cv-cp-H2O` and can be computed with both pyromat and coolprop libraries. The values of $c_v$ and $c_p$ are defined only in the single-phase regions, not in the phase-change regions. In {numref}`fig-cv-cp-H2O`, one recognizes the isocontours of both $c_v$ and $c_p$ for water to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range.
+The specific heats $c_v$ and $c_p$ for water are illustrated in {numref}`fig-cv-cp-H2O`, and one recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The specific heats can be computed with both pyromat and coolprop libraries, and only in the single-phase regions. They are not defined in the phase-change regions.
 
 ::::{figure}
 :label: fig-cv-cp-H2O

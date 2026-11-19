@@ -574,7 +574,7 @@ Running the script results in a figure shown below:
 
 Unlike pyromat, coolprop does not support numpy-arrays. Hence all inputs and outputs are always scalar-valued. On the other hand, coolprop provides a large collection of different substances while pyromat presently has only a few different substances implemented. Both libraries have their uses, and are best learned by practicing.
 
-
+(sec-beta-kappa)=
 ## <span class="elementary"></span> Thermal expansion and compressibility coefficients
 The relations between the state variables $p$, $v$, and $T$ can be approximated with the simple equations of state from {numref}`sec-simple-equations-of-state` or evaluated accurately with the data libraries introduced in {numref}`sec-pyromat-coolprop`. The framework outlined in {numref}`fig-roadmap`, however, contains not only $p$, $v$, and $T$ but also energy-related quantities such as internal energy $u$, enthalpy $h$, and entropy $s$ that are needed in practical calculations involving power plants and heat pumps. Unlike $p$, $v$, and $T$, the energy-related quantities cannot be obtained from direct measurements. Instead, their experimental determination relies on observing how the measurable variables $p$, $v$, and $T$ change relative to each other when a substance is heated or compressed. 
 
@@ -602,6 +602,7 @@ nevertheless characterises how pressure and temperature vary along the two-phase
 In applications, measured values for the heat expansion and compressibility coefficients can be leveraged also to estimate changes in the state variables. In single phase regions, specific volume can be interpreted as a function $v(p,T)$ of pressure and temperature. Differentiating the function results in the total differential for specific volume
 
 :::{math}
+:label: eq-dv-pT-differential
 \begin{aligned}
 dv&=\left(\frac{\partial v}{\partial T}\right)_pdT+\left(\frac{\partial v}{\partial p}\right)_Tdp\\
 &=v\beta_pdT-v\kappa_T dp.
