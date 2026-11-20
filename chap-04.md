@@ -35,15 +35,29 @@ The goals to support the intermediate and advanced paths are:
 - <span class="advanced"></span> This is an advanced learning goal.
 
 ## <span class="elementary"></span> Specific heats
+The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. To illustrate them consider two different processes described in {numref}`fig-heating-cylinder-constant-v` and {numref}`fig-heating-cylinder-constant-p`.
+
+::::{figure} ./figs/fig-heating-cylinder-constant-v.svg
+:label: fig-heating-cylinder-constant-v
+:align: center
+:width: 100%
+Substance heated in a constant volume cylinder with spatially homogenous initial and final states between which the pressure, temperature, density, and fluid velocity within may vary spatially and temporally. The load to keep the piston in place varies over time.
+::::
+
+::::{figure} ./figs/fig-heating-cylinder-constant-p.svg
+:label: fig-heating-cylinder-constant-p
+:align: center
+:width: 100%
+Substance heated in a cylinder with spatially homogenous initial and final states that share a common pressure. The external load on the piston is kept constant and equal to the initial equilibrium value. Consequently, the cylinder volume changes over time due to force imbalance on the piston. Between the initial and final time, pressure, temperature, density, and fluid velocity within may vary spatially and temporally.
+::::
+
+In the first case, substance
+
+## <span class="elementary"></span> First law
 The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. Heating a gas in a rigid bottle increases the gas temperature while its volume remains constant. If the gas is initially in a thermal equilibrium state, and is let to achieve a new thermal equilibrium state after heating has been cut off, the material volume of the gas has not changed. Therefore, no mechanical work is performed, and the applied heat is converted primarily into internal energy, and into gravitational potential energy to a minor degree. Heating a soft elastic gas balloon, on the other hand, causes the balloon to expand while the temperature increases. As the balloon expands, the material volume of the gas changes over time, and the forces causing the volume change do mechanical work. Once a new equilibrium state is eventually achieved after cutting the heat off, the total heat applied is distributed between a change in the gas internal energy and work performed, and to a small degree a change in the gravitation potential energy. In both cases, valuable information of the subtances response to heating can be obtained by careful design of the heating experiment.
 
 Consider the experiment illustrated in {numref}`fig-heating-cylinder` that is performed in outer space to eliminate gravitational effects. Fluid is enclosed into a cylinder with a movable piston of mass $m_p$. Denote the fluid surface height at the piston level with $z_p(t)$, the piston velocity with $v_p(t)=dz_p/dt$, the contact surface with the fluid with $A_p(t)$, and the fluid volume material volume with $V(t)$. Let $F_\text{f}(t)$ denote the friction force between the piston and the cylinder surface. Assume that a perfectly controllable external force of magnitude of $F_\text{ext}(t)$ can be exerted to the piston perpendicular to its surface from the outside. 
-::::{figure} ./figs/fig-heating-cylinder.svg
-:label: fig-heating-cylinder
-:align: center
-:width: 100%
-Gas within a cylinder with a controllable piston. In the absence of gravitational effects the initial and final states at $t_0$ and $t_1$ are homogenous equilibrium states. During heating, the state is non-homogenous and the gas may expand causing a non-homogenous velocity field.
-::::
+
 Denote with $U(t)$ and $KE(t)$ the total internal and kinetic energy of the fluid within $V(t)$ at time $t$
 :::{math}
 U(t)=\int_{V(t)}\rho u dV, \qquad KE(t)=\int_{V(t)}\frac{1}{2}\rho|\bm{v}|^2dV,

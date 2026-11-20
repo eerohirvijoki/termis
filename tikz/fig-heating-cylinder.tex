@@ -71,31 +71,119 @@
   }
 }
 
+% constant volume heating
 \begin{tikzpicture}
 
- 
-  % initial time
-  \pic[scale=1.5] at (0,0) {vial={water height=0.6}};
-  \node[anchor=center] at (0,5) {$t_0$};
-  \node[anchor=center] at (0,0.7) {$\begin{aligned}T(\bm{x},t_0)&=T_0\\p(\bm{x},t_0)&=p_0\\\rho(\bm{x},t_0)&=\rho_0\\\bm{v}(\bm{x},t_0)&=\bm{0}\end{aligned}$};
-  \node[anchor=center,rotate=-5] at (-0.8,0.6*1.5*2.6) {$A_p(t_0)$};
-  \node[anchor=center,rotate=90] at (-2,0.6*1.5*2.6) {$z_p(t_0)$};
+    \def\scale{1.3};
+    \def\H{2.6};
+    \def\dH{0.25*\H};
 
-  % intermediate
-  \pic[scale=0.3,anchor=center] at (5, -1.5) {flame};
-  \pic[scale=1.5] at (5,0) {vial={water height=0.7, water color bottom=red!100!white}};
-  \node[anchor=center] at (5,5) {$t\in[t_0,t_\ast]$};
-  \node[anchor=center] at (5,0.85) {$\begin{aligned}&T(\bm{x},t)\\&p(\bm{x},t)\\&\rho(\bm{x},t)\\&\bm{v}(\bm{x},t)\end{aligned}$};
-  \node[anchor=center,rotate=-5] at (5-0.8,0.7*1.5*2.6) {$A_p(t)$};
-  \node[anchor=center,rotate=90] at (5-2,0.7*1.5*2.6) {$z_p(t)$};
+  \draw[-latex,thick] (-2,2)--++(0,1) node[pos=0.5,left] {$\bm{\hat{z}}$};
+  \draw[-latex,thick] (-1,-2)--(13,-2) node[pos=1,below] {$t$};
+  
+  % initial time
+  \pic[scale=1.3] at (0,0) {vial={water height=0.7}};
+  \draw (0,-1.8)--++(0,-0.4) node[below] {$t_0$};
+  \node[anchor=center] at (0,0.7) {$(T_0,p_0,V_0)$};
+  \node[anchor=center] at (0,0.3) {$\bm{v}=\bm{0}$};
+  \draw[latex-,thick,black] (0,{\scale*(0.7*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_0A_p$};
+
+  % heating
+  \pic[scale=0.3,anchor=center] at (4, -1.5) {flame};
+  \pic[scale=1.3] at (4,0) {vial={water height=0.7, water color bottom=red!80!white!80!orange}};
+  \draw (4,-1.8)--++(0,-0.4) node[below] {$t\in[t_0,t_\ast]$};
+  \node[anchor=center] at (4,0.7) {$(T,p)(\bm{x},t),V_0$};
+  \node[anchor=center] at (4,0.3) {$\bm{v}(\bm{x},t)\neq\bm{0}$};
+  \draw[latex-,thick,black] (4,{\scale*(0.7*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=-\bm{\hat{z}}\cdot\int_{A_p}\bm{t}dA$};
+ 
+  % settling
+  \pic[scale=1.3] at (8,0) {vial={water height=0.7, water color bottom=red!100!white}};
+  \draw (8,-1.8)--++(0,-0.4) node[below] {$t\in[t_\ast,t_1]$};
+  \node[anchor=center] at (8,0.7) {$(T,p)(\bm{x},t),V_0$};
+  \node[anchor=center] at (8,0.3) {$\bm{v}(\bm{x},t)\neq\bm{0}$};
+  \draw[latex-,thick,black] (8,{\scale*(0.7*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=-\bm{\hat{z}}\cdot\int_{A_p}\bm{t}dA$};
 
 
   % final time
-  \pic[scale=1.5] at (10,0) {vial={water height=0.8, water color=red!50!white, water color bottom=red!60!white!90!black}};
-  \node[anchor=center] at (10,5) {$t_1\gg t_\ast$};
-  \node[anchor=center] at (10,1) {$\begin{aligned}T(\bm{x},t_1)&=T_1\\p(\bm{x},t_1)&=p_0\\\rho(\bm{x},t_1)&=\rho_1\\\bm{v}(\bm{x},t_1)&=\bm{0}\end{aligned}$};
-  \node[anchor=center,rotate=-5] at (10-0.8,0.8*1.5*2.6) {$A_p(t_1)$};
-  \node[anchor=center,rotate=90] at (10-2,0.8*1.5*2.6) {$z_p(t_1)$};
+  \pic[scale=1.3] at (12,0) {vial={water height=0.7, water color=red!50!white, water color bottom=red!60!white!90!black}};
+  \draw (12,-1.8)--++(0,-0.4) node[below]  {$t_1\gg t_\ast$};
+  \node[anchor=center] at (12,0.7) {$(T_1,p_1,V_0)$};
+  \node[anchor=center] at (12,0.3) {$\bm{v}=\bm{0}$};
+  \draw[latex-,thick,black] (12,{\scale*(0.7*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_1A_p$};
+
    
 \end{tikzpicture}
+
+% heating against constant loading
+\begin{tikzpicture}
+
+    \def\scale{1.3};
+    \def\H{2.6};
+    \def\dH{0.25*\H};
+    
+  \draw[-latex,thick] (-2,2)--++(0,1) node[pos=0.5,left] {$\bm{\hat{z}}$};
+  \draw[-latex,thick] (-1,-2)--(13,-2) node[pos=1,below] {$t$};
+
+  % initial time
+  \pic[scale=\scale] at (0,0) {vial={water height=0.5}};
+  \draw (0,-1.8)--++(0,-0.4) node[below] {$t_0$};
+  \node[anchor=center] at (0,0.7) {$(T_0,p_0,V_0)$};
+  \node[anchor=center] at (0,0.3) {$\bm{v}=\bm{0}$};
+  \draw[latex-,thick,black] (0,{\scale*(0.5*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_0A_p$};
+
+  % heating
+  \pic[scale=0.3,anchor=center] at (4, -1.5) {flame};
+  \pic[scale=\scale] at (4,0) {vial={water height=0.6, water color bottom=red!80!white!80!orange}};
+  \draw (4,-1.8)--++(0,-0.4) node[below] {$t\in[t_0,t_\ast]$};
+  \node[anchor=center] at (4,0.7) {$(T,p)(\bm{x},t), V(t)$};
+  \node[anchor=center] at (4,0.3) {$\bm{v}(\bm{x},t)\neq\bm{0}$};
+  \draw[latex-,thick,black] (4,{\scale*(0.6*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_0A_p$};
+ 
+  % settling
+  \pic[scale=\scale] at (8,0) {vial={water height=0.7, water color bottom=red!100!white}};
+  \draw (8,-1.8)--++(0,-0.4) node[below] {$t\in[t_\ast,t_1]$};
+  \node[anchor=center] at (8,0.7) {$(T,p)(\bm{x},t), V(t)$};
+  \node[anchor=center] at (8,0.3) {$\bm{v}(\bm{x},t)\neq\bm{0}$};
+  \draw[latex-,thick,black] (8,{\scale*(0.7*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_0A_p$};
+
+
+  % final time
+  \pic[scale=1.3] at (12,0) {vial={water height=0.8, water color=red!50!white, water color bottom=red!60!white!90!black}};
+  \draw (12,-1.8)--++(0,-0.4) node[below]  {$t_1\gg t_\ast$};
+  \node[anchor=center] at (12,0.7) {$(T_1,p_0,V_1)$};
+  \node[anchor=center] at (12,0.3) {$\bm{v}=\bm{0}$};
+  \draw[latex-,thick,black] (12,{\scale*(0.8*\H+\dH)})--++(0,1) node[pos=1,above] {$F_\text{load}=p_0A_p$};
+
+   
+\end{tikzpicture}
+
+% \begin{tikzpicture}
+
+%   % initial time
+%   \pic[scale=1.5] at (0,0) {vial={water height=0.6}};
+%   \node[anchor=center] at (0,5) {$t_0$};
+%   \node[anchor=center] at (0,0.7) {$\begin{aligned}T(\bm{x},t_0)&=T_0\\p(\bm{x},t_0)&=p_0\\\rho(\bm{x},t_0)&=\rho_0\\\bm{v}(\bm{x},t_0)&=\bm{0}\end{aligned}$};
+%   \node[anchor=center,rotate=-5] at (-0.8,0.6*1.5*2.6) {$A_p(t_0)$};
+%   \node[anchor=center,rotate=90] at (-2,0.6*1.5*2.6) {$z_p(t_0)$};
+
+%   % intermediate
+%   \pic[scale=0.3,anchor=center] at (5, -1.5) {flame};
+%   \pic[scale=1.5] at (5,0) {vial={water height=0.7, water color bottom=red!100!white}};
+%   \node[anchor=center] at (5,5) {$t\in[t_0,t_\ast]$};
+%   \node[anchor=center] at (5,0.85) {$\begin{aligned}&T(\bm{x},t)\\&p(\bm{x},t)\\&\rho(\bm{x},t)\\&\bm{v}(\bm{x},t)\end{aligned}$};
+%   \node[anchor=center,rotate=-5] at (5-0.8,0.7*1.5*2.6) {$A_p(t)$};
+%   \node[anchor=center,rotate=90] at (5-2,0.7*1.5*2.6) {$z_p(t)$};
+
+
+%   % final time
+%   \pic[scale=1.5] at (10,0) {vial={water height=0.8, water color=red!50!white, water color bottom=red!60!white!90!black}};
+%   \node[anchor=center] at (10,5) {$t_1\gg t_\ast$};
+%   \node[anchor=center] at (10,1) {$\begin{aligned}T(\bm{x},t_1)&=T_1\\p(\bm{x},t_1)&=p_0\\\rho(\bm{x},t_1)&=\rho_1\\\bm{v}(\bm{x},t_1)&=\bm{0}\end{aligned}$};
+%   \node[anchor=center,rotate=-5] at (10-0.8,0.8*1.5*2.6) {$A_p(t_1)$};
+%   \node[anchor=center,rotate=90] at (10-2,0.8*1.5*2.6) {$z_p(t_1)$};
+   
+% \end{tikzpicture}
+
+
+
 \end{document}
