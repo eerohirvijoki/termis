@@ -1,0 +1,101 @@
+\documentclass[tikz]{standalone}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+\usepgflibrary{shadings} 
+
+\pgfdeclareradialshading{myflameshade}{\pgfpoint{0}{0.05cm}}{%
+  color(0.0cm)=(white); color(0.5cm)=(red!40!yellow);
+  color(0.7cm)=(red!50!yellow); color(0.9cm)=(white)
+}
+
+\tikzset{
+  vial/.cd,
+  water height/.initial=0.74,
+  water color/.initial=cyan!60!blue!20!white,
+  water color bottom/.initial=cyan!60!blue!20!white!60!black,
+  locked/.is choice,
+  locked/true/.code={\def\islocked{1}},
+  locked/false/.code={\def\islocked{0}},
+  locked=false,
+  %
+  /tikz/flame/.pic={
+    \def\wflame{1.0}\def\hflame{6.0}
+    % transform shape here ensures the flame itself can be scaled
+    \begin{scope}[transform shape]
+      \clip (0,-0.1*\hflame) to[out=0, in=-90] (\wflame,0) 
+            arc (0:180:\wflame\space and \hflame) to[out=-90,in=180] cycle;
+      \shade[shading=myflameshade] (0,0) ellipse ({\wflame} and {\hflame});
+    \end{scope}
+  },
+  %
+  /tikz/vial/.pic={
+    \tikzset{vial/.cd, #1}
+    \pgfkeysgetvalue{/tikz/vial/water height}{\ratio}
+    \pgfkeysgetvalue{/tikz/vial/water color}{\vcol}
+    \pgfkeysgetvalue{/tikz/vial/water color bottom}{\vcolbot}
+    
+    % Geometry Constants
+    \def\Rx{1.1} \def\Ry{0.2} \def\H{2.6}
+    \def\h{\ratio*\H}
+    \def\pt{0.07*\H} \def\prx{0.040*\H} \def\pry{0.006*\H} \def\pl{0.25*\H}
+    
+    % transform shape is the magic key here
+    \begin{scope}[transform shape]
+        \colorlet{mydarkblue}{blue!50!black}
+        \colorlet{darkwatercol}{\vcol}
+        \colorlet{watercolorbottom}{\vcolbot}
+        \colorlet{metalcol}{blue!40!black!10!white}
+        \tikzstyle{dark water}=[draw=mydarkblue, top color=darkwatercol, bottom color=watercolorbottom]
+        \tikzstyle{metal}=[draw=metalcol!20!black, top color=metalcol, bottom color=metalcol!90!black]
+
+        
+        \draw[dark water] (-\Rx,\h) -- (-\Rx,0) arc (180:360:{\Rx} and {\Ry}) -- (\Rx,\h);
+        \draw[metal] (-\Rx,\h) --++ (0,-\pt) arc (180:360:{\Rx} and {\Ry}) --++ (0,\pt);
+        \draw[metal] (0,\h) ellipse ({\Rx} and {\Ry});
+        \draw[metal] (-\prx,\h+\pl) --++ (0,-\pl) arc (180:360:{\prx} and {\pry}) --++ (0,\pl);
+        \draw[metal](0,\h+\pl) ellipse ({\prx} and {\pry});
+        \draw[thick] (-\Rx,\H) -- (-\Rx,0) arc (180:360:{\Rx} and {\Ry}) -- (\Rx,\H) (0,\H) ellipse ({\Rx} and {\Ry});
+
+        \ifnum\islocked=1
+          \fill[black!70] (-\Rx-0.1, \h+0.1) rectangle (-\Rx+0.1, \h+0.2);
+          \fill[black!70] (\Rx-0.1, \h+0.1) rectangle (\Rx+0.1, \h+0.2);
+        \fi
+
+
+    \end{scope}
+  }
+}
+
+\begin{tikzpicture}
+
+ 
+  % initial time
+  \pic[scale=1.5] at (0,0) {vial={water height=0.6}};
+  \node[anchor=center] at (0,5) {$t_0$};
+  \node[anchor=center] at (0,0.7) {$\begin{aligned}T(\bm{x},t_0)&=T_0\\p(\bm{x},t_0)&=p_0\\\rho(\bm{x},t_0)&=\rho_0\\\bm{v}(\bm{x},t_0)&=\bm{0}\end{aligned}$};
+  \node[anchor=center,rotate=-5] at (-0.8,0.6*1.5*2.6) {$A_p(t_0)$};
+  \node[anchor=center,rotate=90] at (-2,0.6*1.5*2.6) {$z_p(t_0)$};
+
+  % intermediate
+  \pic[scale=0.3,anchor=center] at (5, -1.5) {flame};
+  \pic[scale=1.5] at (5,0) {vial={water height=0.7, water color bottom=red!100!white}};
+  \node[anchor=center] at (5,5) {$t\in[t_0,t_\ast]$};
+  \node[anchor=center] at (5,0.85) {$\begin{aligned}&T(\bm{x},t)\\&p(\bm{x},t)\\&\rho(\bm{x},t)\\&\bm{v}(\bm{x},t)\end{aligned}$};
+  \node[anchor=center,rotate=-5] at (5-0.8,0.7*1.5*2.6) {$A_p(t)$};
+  \node[anchor=center,rotate=90] at (5-2,0.7*1.5*2.6) {$z_p(t)$};
+
+
+  % final time
+  \pic[scale=1.5] at (10,0) {vial={water height=0.8, water color=red!50!white, water color bottom=red!60!white!90!black}};
+  \node[anchor=center] at (10,5) {$t_1\gg t_\ast$};
+  \node[anchor=center] at (10,1) {$\begin{aligned}T(\bm{x},t_1)&=T_1\\p(\bm{x},t_1)&=p_0\\\rho(\bm{x},t_1)&=\rho_1\\\bm{v}(\bm{x},t_1)&=\bm{0}\end{aligned}$};
+  \node[anchor=center,rotate=-5] at (10-0.8,0.8*1.5*2.6) {$A_p(t_1)$};
+  \node[anchor=center,rotate=90] at (10-2,0.8*1.5*2.6) {$z_p(t_1)$};
+   
+\end{tikzpicture}
+\end{document}

@@ -34,6 +34,72 @@ The goals to support the intermediate and advanced paths are:
 
 - <span class="advanced"></span> This is an advanced learning goal.
 
+## <span class="elementary"></span> Specific heats
+The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. Heating a gas in a rigid bottle increases the gas temperature while its volume remains constant. If the gas is initially in a thermal equilibrium state, and is let to achieve a new thermal equilibrium state after heating has been cut off, the material volume of the gas has not changed. Therefore, no mechanical work is performed, and the applied heat is converted primarily into internal energy, and into gravitational potential energy to a minor degree. Heating a soft elastic gas balloon, on the other hand, causes the balloon to expand while the temperature increases. As the balloon expands, the material volume of the gas changes over time, and the forces causing the volume change do mechanical work. Once a new equilibrium state is eventually achieved after cutting the heat off, the total heat applied is distributed between a change in the gas internal energy and work performed, and to a small degree a change in the gravitation potential energy. In both cases, valuable information of the subtances response to heating can be obtained by careful design of the heating experiment.
+
+Consider the experiment illustrated in {numref}`fig-heating-cylinder` that is performed in outer space to eliminate gravitational effects. Fluid is enclosed into a cylinder with a movable piston of mass $m_p$. Denote the fluid surface height at the piston level with $z_p(t)$, the piston velocity with $v_p(t)=dz_p/dt$, the contact surface with the fluid with $A_p(t)$, and the fluid volume material volume with $V(t)$. Let $F_\text{f}(t)$ denote the friction force between the piston and the cylinder surface. Assume that a perfectly controllable external force of magnitude of $F_\text{ext}(t)$ can be exerted to the piston perpendicular to its surface from the outside. 
+::::{figure} ./figs/fig-heating-cylinder.svg
+:label: fig-heating-cylinder
+:align: center
+:width: 100%
+Gas within a cylinder with a controllable piston. In the absence of gravitational effects the initial and final states at $t_0$ and $t_1$ are homogenous equilibrium states. During heating, the state is non-homogenous and the gas may expand causing a non-homogenous velocity field.
+::::
+Denote with $U(t)$ and $KE(t)$ the total internal and kinetic energy of the fluid within $V(t)$ at time $t$
+:::{math}
+U(t)=\int_{V(t)}\rho u dV, \qquad KE(t)=\int_{V(t)}\frac{1}{2}\rho|\bm{v}|^2dV,
+:::
+During a time interval $t\in[t_0,t_1]$, denote with $\dot{Q}$ and $Q$ the heat rate and the total heat applied into the fluid
+:::{math}
+\dot{Q}(t)=\int_{\partial V(t)}(-\bm{q})\cdot\bm{\hat{n}}dA+\int_{V(t)}q_VdV, \qquad Q=\int_{t_0}^{t_1}\dot{Q}dt,
+:::
+and with $\dot{W}$ and $W$ the mechanical work rate and the total work performed by the fluid
+:::{math}
+\dot{W}(t)=-\int_{\partial V(t)}\bm{v}\cdot\bm{\sigma}\cdot\bm{\hat{n}}dA=-\int_{A_p(t)}v_p \sigma_{zz}dA, \qquad W=\int_{t_0}^{t_1}\dot{W}dt.
+:::
+The second follows from the fluid velocity on a solid surface mathching the surface velocity, meaning $\bm{v}|_{A_p(t)}=v_p(t)\bm{\hat{z}}$. In the absence of gravity, the energy balance {numref}`eq-total-energy-balance-material-volume` integrated over a time interval $t\in[t_0,t_1]$ then reads
+:::{math}
+\Delta U+\Delta KE=Q-W,
+:::
+where $\Delta U=U(t_1)-U(t_0)$ and $\Delta KE=KE(t_1)-KE(t_0)$ are the changes in the total internal energy and kinetic energy over the time interval $t\in[t_0,t_1]$.
+
+Initially, at time $t_0$, the substance is in a thermal equilibrium state with a uniform temperature $T(\bm{x},t_0)=T_0$, pressure $p(\bm{x},t_0)=p_0$, density $\rho(\bm{x},t_0)=\rho_0$, and a zero velocity $\bm{v}(\bm{x},t_0)=\bm{0}$. The external force on the piston is set to exactly balance the force the fluid exerts to the piston due to pressure $F_\text{ext}(t_0)=p_0A_p$ and the friction force is balanced out $F_\text{f}(t_0)=0$. Once heating is applied over the time interval $t\in[t_0,t_\ast]$, temperature, density, and pressure within the fluid become non-homogenous, and the increased pressure within the fluid pushes the piston into motion. After the heating is stopped at time $t_\ast$, the fluid takes a while to find a new equilibrium state at time $t_1$, and the piston moves to a point where the new fluid equilibrium pressure again balances the external force. 
+
+The piston movement during the interval $t\in[t_0,t_1]$ obeys Newton's second law
+:::{math}
+m\underbrace{\frac{dv_p}{dt}}_{\substack{\text{piston}\\\text{accele-}\\\text{ration}}}=\overbrace{-\underbrace{\int_{A_p(t)}\sigma_{zz}dA}_{\substack{\text{Total contact force}\\\text{from the piston}\\\text{to the fluid}}}}^{\substack{\text{Total contact force}\\\text{from the fluid}\\\text{to the piston}}}-F_\text{ext}-F_f
+:::
+The change in the kinetic energy of the piston over the interval $t\in[t_0,t_1]$ is computed to be
+:::{math}
+\begin{aligned}
+\frac{m_p}{2}\left(v_p(t_1)^2-v_p(t_0)^2\right)&=\int_{t_0}^{t_1}m\frac{dv_p}{dt}v_pdt\\
+&=\int_{t_0}^{t_1}\left[-\int_{A_p(t)}\sigma_{zz}dA-(F_\text{ext}+F_\text{f})\right]v_pdt\\
+&=-\int_{t_0}^{t_1}\int_{A_p(t)}v_p\sigma_{zz}dAdt-\int_{t_0}^{t_1}(F_\text{ext}+F_\text{f})v_pdt
+\end{aligned}
+:::
+Since the piston velocity at the beginning and at the end is zero, the change in the kinetic energy over the interval $t\in[t_0,t_1]$ vanishes and one finds
+:::{math}
+\int_{t_0}^{t_1}(F_\text{ext}+F_\text{f})v_p(t)dt=-\int_{t_0}^{t_1}\int_{A_p(t)}v_p\sigma_{zz}dAdt=W.
+:::
+If the external force is adjusted so that the sum of it and the friction force, throughout the interval $t\in[t_0,t_1]$, equals the force from the initial fluid equilibrium pressure, then 
+:::{math}
+F_\text{ext}+F_\text{f}=p_0A \quad \implies \quad \int_{t_0}^{t_1}(F_\text{ext}+F_\text{f})v_p(t)dt=p_0(V(t_1)-V(t_0)).
+:::
+Since the fluid velocity at the beginning and end of the interval vanishes, also the change in the total kinetic energy vanishes. In this specially tailored case, the change in the fluids internal energy is seen to equal
+:::{math}
+\Delta U=Q-p_0(V(t_1)-V(t_0)), \qquad \text{expansion against constant force}. 
+:::
+If the external force instead is controlled to retain the piston in place at all times, then no work is performed and the time integrated energy balance reduces to
+:::{math}
+\Delta U=Q, \qquad \text{no surface movement}. 
+:::
+
+In these specically controlled experiments, one has managed to convert the difficult looking stress contribution into a simple expression involving only equilibrium fluid variables. If also the total heat applied $Q$ could be related to the fluids equilibrium state variables, the path to associating internal energy in terms of state variables would be open. This can be done in terms of specific heats.
+
+
+
+
+
+
 ## <span class="elementary"></span> Quasistatic processes and the first law of thermodynamics
 The application of three fundamental conservation principles over a material volume, namely the conservation of mass, momentum, and energy, provided local partial differential equations {numref}`eq-fluid-equations` for the time rate of change of density, velocity, and specific internal energy. Assuming an equation of state of the form $p=p(\rho,T)$ to exist, pressure can be expressed in terms of density and temperature. The fluid equations then involve four local unknown fields, ($\rho,T,u,\bm v$), but provide evolution equations for only three of them ($\rho,u,\bm v$). An additional relation expressing the specific internal energy in terms of the thermodynamic state variables is therefore required to close the equations. The first step in finding such a relation involves identifying different contributions to the fluid's energy balance and defining quasistatic processes, during which certain terms in the energy balance can be neglected.
 
@@ -148,6 +214,7 @@ The original system of partial differential equation has now been reduced to a s
 :::
 where $t_\text{vicous}\sim \zeta/\bar{p}$ is a characteristic viscous time scale for the problem and $t_\text{macro}\sim L/|v|$ is the time scale associated with the macroscopic motion of the fluid. As long as the macroscopic time scale is much longer than the viscous time scale, the viscous work rate can be neglected, leading to a quasistatic limiting description of the fluid.
 ::::
+
 
 
 ## <span class="elementary"></span> Specific heats and heat rate in quasistatic processes
