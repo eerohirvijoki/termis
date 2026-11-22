@@ -37,21 +37,85 @@ The goals to support the intermediate and advanced paths are:
 ## <span class="elementary"></span> Specific heats
 The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. To illustrate them consider two different processes described in {numref}`fig-heating-cylinder-constant-v` and {numref}`fig-heating-cylinder-constant-p`.
 
-::::{figure} ./figs/fig-heating-cylinder-constant-v.svg
-:label: fig-heating-cylinder-constant-v
+::::{figure}
+:label: fig-heating-cylinder
 :align: center
 :width: 100%
-Substance heated in a constant volume cylinder with spatially homogenous initial and final states between which the pressure, temperature, density, and fluid velocity within may vary spatially and temporally. The load to keep the piston in place varies over time.
+
+(fig-heating-cylinder-constant-v)=
+:::{image} ./figs/fig-heating-cylinder-constant-v.svg
+:alt: Substance heated in a constant volume cylinder with spatially homogenous initial and final states between which the pressure, temperature, density, and fluid velocity within may vary spatially and temporally. The load to keep the piston in place varies over time.
+:width: 90%
+:::
+
+(fig-heating-cylinder-constant-p)=
+:::{image} ./figs/fig-heating-cylinder-constant-p.svg
+:alt: Substance heated in a cylinder with spatially homogenous initial and final states that share a common pressure. The external load on the piston is kept constant and equal to the initial equilibrium value. Consequently, the cylinder volume changes over time due to force imbalance on the piston. Between the initial and final time, pressure, temperature, density, and fluid velocity within may vary spatially and temporally.
+:width: 90%
+:::
+
+Two different ways to heat a fluid.
 ::::
 
-::::{figure} ./figs/fig-heating-cylinder-constant-p.svg
-:label: fig-heating-cylinder-constant-p
+
+The resulting responses in the water temperature with respect to heat added per unit mass when progressing through subsequent equilibrium states.
+
+::::{figure} ./figs/fig-heat-delta-T-isochoric.svg
+:label: fig-heat-delta-T-isochoric
 :align: center
-:width: 100%
-Substance heated in a cylinder with spatially homogenous initial and final states that share a common pressure. The external load on the piston is kept constant and equal to the initial equilibrium value. Consequently, the cylinder volume changes over time due to force imbalance on the piston. Between the initial and final time, pressure, temperature, density, and fluid velocity within may vary spatially and temporally.
+:width: 80%
+Water temperature when heated from $T=0^\circ\text{C}$ through equilibrium states with constant volume.
 ::::
 
 In the first case, substance
+::::{figure} ./figs/fig-heat-delta-T-isobaric.svg
+:label: fig-heat-delta-T-isobaric
+:align: center
+:width: 80%
+Water temperature when heated from $T=0^\circ\text{C}$ through equilibrium states with constant pressure.
+::::
+
+Definitions for the specific heat capacities
+:::{math}
+\begin{aligned}
+c_v&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant volume},\\
+c_p&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant pressure}.
+\end{aligned}
+:::
+
+The specific heats $c_v$ and $c_p$ for water are illustrated in {numref}`fig-cv-cp-H2O`, and one recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The specific heats can be computed with both pyromat and coolprop libraries, and only in the single-phase regions. They are not defined in the phase-change regions.
+
+::::{figure}
+:label: fig-cv-cp-H2O
+:align: center
+:width: 100%
+
+(fig-cv-H2O)=
+:::{image} ./figs/fig-cv-H2O.svg
+:alt: Isochoric specific heat for water.
+:width: 80%
+:::
+
+(fig-cp-H2O)=
+:::{image} ./figs/fig-cp-H2O.svg
+:alt: Isobaric specific heat for water.
+:width: 80%
+:::
+
+Isocontours of specific heats $c_v$ and $c_p$ for water in a $v$-$T$ diagram.
+::::
+
+::::{proof:example}
+The specific heats can be computed with both the pyromat and coolprop libraries. The script below serves as a demonstration:
+```{literalinclude} python/example-cv-cp-evaluation.py
+:language: python
+:start-line: 0
+:end-line: 35
+:linenos:
+```
+At the requested state point both pyromat and coolprop return $c_v=2.23\,\text{kJ}/\text{kg}/\text{K}$ and $c_p=4.00\,\text{kJ}/\text{kg}/\text{K}$. The values can be confirmed from {numref}`fig-cv-cp-H2O`.
+::::
+
 
 ## <span class="elementary"></span> First law
 The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. Heating a gas in a rigid bottle increases the gas temperature while its volume remains constant. If the gas is initially in a thermal equilibrium state, and is let to achieve a new thermal equilibrium state after heating has been cut off, the material volume of the gas has not changed. Therefore, no mechanical work is performed, and the applied heat is converted primarily into internal energy, and into gravitational potential energy to a minor degree. Heating a soft elastic gas balloon, on the other hand, causes the balloon to expand while the temperature increases. As the balloon expands, the material volume of the gas changes over time, and the forces causing the volume change do mechanical work. Once a new equilibrium state is eventually achieved after cutting the heat off, the total heat applied is distributed between a change in the gas internal energy and work performed, and to a small degree a change in the gravitation potential energy. In both cases, valuable information of the subtances response to heating can be obtained by careful design of the heating experiment.
