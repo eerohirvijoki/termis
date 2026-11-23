@@ -35,7 +35,7 @@ The goals to support the intermediate and advanced paths are:
 - <span class="advanced"></span> This is an advanced learning goal.
 
 ## <span class="elementary"></span> Specific heats
-The first step in the process of uncovering the thermodynamic framework involves relating heat applied to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling of it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. In generally, heating can result in temperature, pressure, and volumetric changes and cause the fluid to flow in complicated patterns due to buoyancy effects driven by gravity and spatial variations in density. However, to study the role of heat in thermodynamics, one considers heating processess that begin and end in stationary and homogenous equilibrium states as described in {numref}`fig-heating-cylinder`. In practice, the equilibrium effects of gravity are limited to the hydrodynamic pressure and density gradient and typically small and neglected. In theory, these effects can be eliminated by taking experiments and measurements into space and weightlessness.
+The first step in the process of uncovering the thermodynamic framework involves relating heat applied to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling of it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. In general, heating can result in temperature, pressure, and volumetric changes and cause the fluid to flow in complicated patterns due to buoyancy effects driven by gravity and spatial variations in density that emerge due to temperature variations. However, to study the role of heat in thermodynamics, one considers heating processess that begin and end in stationary and homogenous equilibrium states as described in {numref}`fig-heating-cylinder`. In such case, the equilibrium effects of gravity, the hydrodynamic pressure and density gradient, are typically small and neglected. In theory, these effects can be eliminated by taking experiments and measurements into space and weightlessness.
 
 ::::{figure}
 :label: fig-heating-cylinder
@@ -54,11 +54,11 @@ The first step in the process of uncovering the thermodynamic framework involves
 :width: 90%
 :::
 
-Heating a substance in a cylinder. The initial and final states of the substance are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium.
+Heating a substance in a cylinder. The initial and final states of the substance are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium but can move and have spatially variying properties.
 ::::
 
 
-When pure water is heated at constant volume as in {numref}`fig-heating-cylinder-constant-v` through subsequent equilibrium states that are close to each other, the diagram shown in {numref}`fig-heat-delta-T-isochoric` is observed. Starting from the triple line $T=0.01^\circ\text{C}$ at the saturated liquid state ($v=0.001\,\text{m}^3/\text{kg}$), the temperature of the liquid water begins to increase in proportion to the heat per unit mass ($Q/m$) that is added. If the starting point for heating is shifted from the saturated liquid state towards the saturated vapor end of the triple line ($v=206\,\text{m}^3/\text{kg}$), the behaviour differs. First the curve behaves smoothly, then a sharp reversal happens, after which the curve again behaves smoothly. The initial state for such curves lies in the liquid-vapor two-phase region, and the change in the curve behaviour corresponds to crossing either the saturated liquid or vapor curve and entering into a single phase region. Similar behaviour is observed for other pure substances as well.
+When pure water is heated at constant volume as in {numref}`fig-heating-cylinder-constant-v` through subsequent equilibrium states that are close to each other, the temperate is observed to change as shown in {numref}`fig-heat-delta-T-isochoric`. Starting from the triple line $T=0.01^\circ\text{C}$ at the saturated liquid state ($v=0.001\,\text{m}^3/\text{kg}$), the temperature of the liquid water begins to increase in reaction to the heat added per unit mass ($Q/m$). If the starting point for heating is shifted from the saturated liquid state towards the saturated vapor end of the triple line ($v=206\,\text{m}^3/\text{kg}$), the behaviour differs. First the curve behaves smoothly, then a sharp reversal happens, after which the curve again behaves smoothly. The initial state for such curves lies in the liquid-vapor two-phase region, and the change in the curve behaviour corresponds to crossing either the saturated liquid or saturated vapor curve into the single phase region. Similar behaviour is observed for other pure substances as well.
 
 ::::{figure} ./figs/fig-heat-delta-T-isochoric.svg
 :label: fig-heat-delta-T-isochoric
@@ -67,7 +67,7 @@ When pure water is heated at constant volume as in {numref}`fig-heating-cylinder
 Water temperature when heated from temperature of $T=0.01^\circ\text{C}$ through subsequent equilibrium states close to each other that all share the same volume.
 ::::
 
-If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead, through subsequent equilibrium states that are close to each other and share the same pressure, the temperature response to the heat applied changes. As shown in {numref}`fig-heat-delta-T-isobaric`, for pressure values below that of the critical point, the temperature first increases as heat is added per unit mass but then suddenly flattens out completely, before continuing to rise again. For pressure values above that of the critical point, the curve rises constantly instead, with no flat segment. The part of the curve before the flat segment corresponds to temperature rise in the liquid phase, the flat segment to the phase change from saturated liquid to saturated vapor that happens at constant temperature and pressure, and the rising curve after the flat segment to temperature rise in gaseous phase.
+If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead, through subsequent equilibrium states that are close to each other and share the same pressure, the temperature response to the applied heat per unit mass changes. As shown in {numref}`fig-heat-delta-T-isobaric`, for pressure values below that of the critical point, the temperature first increases as heat is added but then suddenly flattens out completely, before continuing to rise again. For pressure values above that of the critical point, the curve rises constantly instead, with no flat segment. The part of the curve before the flat segment corresponds to temperature rise in the liquid phase, the flat segment to the phase change from saturated liquid to saturated vapor that happens at constant temperature and pressure, and the rising curve after the flat segment to temperature rise in gaseous phase.
 
 ::::{figure} ./figs/fig-heat-delta-T-isobaric.svg
 :label: fig-heat-delta-T-isobaric
@@ -76,17 +76,14 @@ If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead,
 Water temperature when heated from $T=0.01^\circ\text{C}$ for through equilibrium states with constant pressure.
 ::::
 
-In both cases observes, one observes...
-
-Definitions for the specific heat capacities
+The temperature rise due to addition of heat between two equilibrium states in single phase that share either common volume or pressure is characterized by the local slope of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric`. Usually one is instead interested on the amount of heat per unit mass one needs to add to increase the temperature of a substance by one Kelvin. Therefore the response is described in with the inverse of the local slope, which defines the specific heats
 :::{math}
 \begin{aligned}
 c_v&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant volume},\\
 c_p&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant pressure}.
 \end{aligned}
 :::
-
-The specific heats $c_v$ and $c_p$ for water are illustrated in {numref}`fig-cv-cp-H2O`, and one recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The specific heats can be computed with both pyromat and coolprop libraries, and only in the single-phase regions. They are not defined in the phase-change regions.
+These values are functions of the fluid's thermodynamic state and describe how much heat a substance can absorb or yield via temperature change. For water, the specific heats $c_v$ and $c_p$ are illustrated in {numref}`fig-cv-cp-H2O`. One recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The specific heats can be computed with both pyromat and coolprop libraries, and only in the single-phase regions. They are not defined in the phase-change regions.
 
 ::::{figure}
 :label: fig-cv-cp-H2O
