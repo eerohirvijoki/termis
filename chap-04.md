@@ -34,7 +34,7 @@ The goals to support the intermediate and advanced paths are:
 
 - <span class="advanced"></span> This is an advanced learning goal.
 
-## <span class="elementary"></span> Specific heats
+## <span class="elementary"></span> Specific heats and preliminary differential for heat
 The first step in the process of uncovering the thermodynamic framework involves relating heat applied to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling of it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. In general, heating can result in temperature, pressure, and volumetric changes and cause the fluid to flow in complicated patterns due to buoyancy effects driven by gravity and spatial variations in density that emerge due to temperature variations. However, to study the role of heat in thermodynamics, one considers heating processess that begin and end in stationary and homogenous equilibrium states as described in {numref}`fig-heating-cylinder`. In such case, the equilibrium effects of gravity, the hydrodynamic pressure and density gradient, are typically small and neglected. In theory, these effects can be eliminated by taking experiments and measurements into space and weightlessness.
 
 ::::{figure}
@@ -76,14 +76,16 @@ If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead,
 Water temperature when heated from $T=0.01^\circ\text{C}$ for through equilibrium states with constant pressure.
 ::::
 
-The temperature rise due to addition of heat between two equilibrium states in single phase that share either common volume or pressure is characterized by the local slope of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric`. Usually one is instead interested on the amount of heat per unit mass one needs to add to increase the temperature of a substance by one Kelvin. Therefore the response is described in with the inverse of the local slope, which defines the specific heats
+The temperature rise due to addition of heat between two equilibrium states in single phase that share either common volume or pressure is characterized by the local slope of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric`. Usually one is instead interested on the amount of heat per unit mass one needs to add to increase the temperature of a substance by one Kelvin. Therefore, the response to heating is described with the inverse of the local slope, which defines the specific heats
 :::{math}
 \begin{aligned}
 c_v&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant volume},\\
 c_p&=\lim_{\Delta T\to 0}\frac{Q/m}{\Delta T}, \qquad \text{heat added at constant pressure}.
 \end{aligned}
 :::
-These values are functions of the fluid's thermodynamic state and describe how much heat a substance can absorb or yield via temperature change. For water, the specific heats $c_v$ and $c_p$ are illustrated in {numref}`fig-cv-cp-H2O`. One recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The specific heats can be computed with both pyromat and coolprop libraries, and only in the single-phase regions. They are not defined in the phase-change regions.
+These values are functions of the fluid's thermodynamic state and describe how much heat a substance can absorb or yield via temperature change in single phase. They are not defined in the phase-change regions. 
+
+For water, the specific heats $c_v$ and $c_p$ are illustrated in {numref}`fig-cv-cp-H2O`. One recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The accurate values of the specific heats can be computed with both pyromat and coolprop libraries.
 
 ::::{figure}
 :label: fig-cv-cp-H2O
@@ -116,8 +118,22 @@ The specific heats can be computed with both the pyromat and coolprop libraries.
 At the requested state point both pyromat and coolprop return $c_v=2.23\,\text{kJ}/\text{kg}/\text{K}$ and $c_p=4.00\,\text{kJ}/\text{kg}/\text{K}$. The values can be confirmed from {numref}`fig-cv-cp-H2O`.
 ::::
 
+As a limiting case, consider adding an infinitesimal amount of heat $\delta Q$ to a mass $m$ of substance in a single phase state. Add the heat in two phases, one keeping the volume constant, the other keeping the pressure constant for the ensuing equilibrium states. Temperature will rise in both cases by infinitesimal amounts $dT_v$ and $dT_p$, with the total temperature increase being $dT=dT_v+dT_p$. The heat needed is given by
+:::{math}
+\delta Q=mc_vdT_v+mc_pdT_p=mc_vdT+m(c_p-c_v)dT_p
+:::
+In the part where heat is added at constant pressure, the infinitesimal temperature change relates to an infinitesimal volume chance through
+:::{math}
+dT_p=\left(\frac{\partial T}{\partial v}\right)_pdv=\frac{dv}{v\beta_p}.
+:::
+Therefore the total amount of heat added per unit mass can be expressed via the total infinitesimal temperature and volume changes
+:::{math}
+\frac{\delta Q}{m}=c_vdT+m\frac{(c_p-c_v)}{v\beta_p}dv.
+:::
 
-## <span class="elementary"></span> First law
+
+
+## <span class="elementary"></span> The first law
 The first step in the process of uncovering the thermodynamic framework involves relating heat to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. Heating a gas in a rigid bottle increases the gas temperature while its volume remains constant. If the gas is initially in a thermal equilibrium state, and is let to achieve a new thermal equilibrium state after heating has been cut off, the material volume of the gas has not changed. Therefore, no mechanical work is performed, and the applied heat is converted primarily into internal energy, and into gravitational potential energy to a minor degree. Heating a soft elastic gas balloon, on the other hand, causes the balloon to expand while the temperature increases. As the balloon expands, the material volume of the gas changes over time, and the forces causing the volume change do mechanical work. Once a new equilibrium state is eventually achieved after cutting the heat off, the total heat applied is distributed between a change in the gas internal energy and work performed, and to a small degree a change in the gravitation potential energy. In both cases, valuable information of the subtances response to heating can be obtained by careful design of the heating experiment.
 
 Consider the experiment illustrated in {numref}`fig-heating-cylinder` that is performed in outer space to eliminate gravitational effects. Fluid is enclosed into a cylinder with a movable piston of mass $m_p$. Denote the fluid surface height at the piston level with $z_p(t)$, the piston velocity with $v_p(t)=dz_p/dt$, the contact surface with the fluid with $A_p(t)$, and the fluid volume material volume with $V(t)$. Let $F_\text{f}(t)$ denote the friction force between the piston and the cylinder surface. Assume that a perfectly controllable external force of magnitude of $F_\text{ext}(t)$ can be exerted to the piston perpendicular to its surface from the outside. 
