@@ -34,7 +34,85 @@ The goals to support the intermediate and advanced paths are:
 
 - <span class="advanced"></span> This is an advanced learning goal.
 
+## <span class="elementary"></span> Energy balance between two equilibrium states
+As the first step in the process of uncovering the thermodynamic framework, one investigates the time integral of the total energy balance {numref}`eq-total-energy-balance-material-volume` over a material volume from one spatially homogenous equlibrium state to another equilibrium state. During the investigated processes from the initial to the final state, arbitrary heating or cooling of the volume is allowed, the fluid may move in complicated patterns inside the volume, but the movement of the volume boundary is controlled by an external force. A relation is then discovered that associates the change internal energy to the heat applied and to the change in the substance volume against the substance pressure. During such investigation, gravitational acceleration is omitted to allow formation of spatially homogenous equilibrium states. If necessary, such investigations could be conducted in zero gravity in space. 
+
+Consider the experiments illustrated in {numref}`fig-heating-cylinder`. A fluid is confined in a cylinder with a movable piston. Initially, at time $t_0$, the fluid is at rest and in a thermodynamic equilibrium state with spatially homogenous temperature and pressure. The external force needed to maintain the piston in place corresponds to the equilibrium pressure of the fluid. Heating (or cooling) is then applied at the fluid boundary which causes the temperature inside the fluid to become non-homogeous. Through local thermal expansion (or shrinking) also density becomes non-homogenous, the fluid begins to move a little, and small pressure variations develop. Depending on whether the external force is adjusted or not, the piston may stay in place as in {numref}`fig-heating-cylinder-constant-v` or move as in {numref}`fig-heating-cylinder-constant-p`. Once heat is turned off the fluid begins to settle, until a new spatially homogenous equilibrium state is reached at time $t_1$.
+::::{figure}
+:label: fig-heating-cylinder
+:align: center
+:width: 100%
+
+(fig-heating-cylinder-constant-v)=
+:::{image} ./figs/fig-heating-cylinder-constant-v.svg
+:alt: Cylinder volume kept constant. The external force to keep the piston in place varies over time.
+:width: 90%
+:::
+
+(fig-heating-cylinder-constant-p)=
+:::{image} ./figs/fig-heating-cylinder-constant-p.svg
+:alt: Cylinder volume allowed to expand and the external force controlled so that the sum of it and the friction force between the piston and the cylinder surface are constant throughout the expansion.
+:width: 90%
+:::
+
+Heating a substance in a cylinder. The initial and final states of the substance are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium but can move and have spatially variying properties.
+::::
+
+To analyze such processes between equilibrium states in detail, denote with $U(t)$ and $KE(t)$ the total internal and kinetic energy of a material volume
+:::{math}
+U(t)=\int_{V(t)}\rho u dV, \qquad KE(t)=\int_{V(t)}\frac{1}{2}\rho|\bm{v}|^2dV.
+:::
+Denote with $\dot{Q}$ and $Q$ the heat rate and the total heat applied into the fluid
+:::{math}
+\dot{Q}(t)=\int_{\partial V(t)}(-\bm{q})\cdot\bm{\hat{n}}dA+\int_{V(t)}q_VdV, \qquad Q=\int_{t_0}^{t_1}\dot{Q}dt,
+:::
+and with $\dot{W}$ and $W$ the mechanical work rate and the total work performed by the fluid at its surface
+:::{math}
+\dot{W}(t)=-\int_{\partial V(t)}\bm{v}\cdot\bm{t}dA, \qquad W=\int_{t_0}^{t_1}\dot{W}dt.
+:::
+In the absence of gravity, the energy balance {numref}`eq-total-energy-balance-material-volume` integrated over a time interval $t\in[t_0,t_1]$ then reads
+:::{math}
+\Delta U+\Delta KE=Q-W,
+:::
+where $\Delta U=U(t_1)-U(t_0)$ and $\Delta KE=KE(t_1)-KE(t_0)$ are the changes in the total internal energy and kinetic energy over the time interval $t\in[t_0,t_1]$.
+
+As the fluid in the initial and final states is assumed to be at rest. The change in the total kinetic energy is exactly zero, meaning $\Delta KE=0$. On solid surfaces, the fluid velocity $\bm{v}|_{\partial V(t)}$ matches the surface velocity. If the external force $F_\text{ext}$ exerted onto the piston is carefully adjusted to exactly match the surface force the fluid exerts to the piston as in {numref}`fig-heating-cylinder-constant-v`, the piston stays in place and does not move. In such case the surface velocity is zero all the time and the fluid performs no work. In such case the energy balance between the initial and final equilibrium states reduces to
+:::{math}
+\Delta U=Q,
+:::
+meaning that all heat applied is converted to fluid's internal energy. If the external force does not match the surface force, the piston begins to move. Consequently, the part of fluid surface touching the piston moves as well, with velocity $\bm{v}|_{A_p}=v_p\bm{\hat{z}}$ where $v_p$ denotes the velocity of the piston in the $\bm{\hat{z}}$ direction denoting the orientation of the cylinder. Neither the work $W$ nor the work rate $W(t)$ the fluid does no longer are zero. According to Newton's law, the piston velocity $v_p$ follows the equation
+:::{math}
+m_p\underbrace{\frac{dv_p}{dt}}_{\substack{\text{Piston}\\\text{accele-}\\\text{ration}}}=\overbrace{-\bm{\hat{z}}\cdot\underbrace{\int_{A_p(t)}\bm{t}dA}_{\substack{\text{Contact force}\\\text{exerted by}\\\text{piston to}\\\text{the fluid}}}}^{\substack{\text{Component of the}\\\text{contact force exerted}\\\text{by the fluid to the}\\\text{piston into the direction}\\\text{of the piston movement}}}-\underbrace{(F_\text{ext}+F_\mu)}_{\substack{\text{Sum of external}\\\text{and friction}\\\text{force exerted}\\\text{onto the piston}}}.
+:::
+and the change in the kinetic energy of the piston over the interval $t\in[t_0,t_1]$ can be computed as the time integral
+:::{math}
+\begin{aligned}
+\frac{m_p}{2}\left(v_{p,1}^2-v_{p,0}^2\right)&=\int_{t_0}^{t_1}m_p\frac{dv_p}{dt}v_pdt\\
+&=\int_{t_0}^{t_1}\left[-\bm{\hat{z}}\cdot\int_{A_p(t)}\bm{t}dA-(F_\text{ext}+F_\text{f})\right]v_pdt\\
+&=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt-\int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt
+\end{aligned}
+:::
+Since the piston velocity at the beginning and at the end is zero, the change in the kinetic energy over the interval $t\in[t_0,t_1]$ vanishes and
+:::{math}
+\int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt=W.
+:::
+If the external force is adjusted so that the sum of it and the friction force, throughout the interval $t\in[t_0,t_1]$, equals the force from the initial fluid equilibrium pressure, then 
+:::{math}
+F_\text{ext}+F_\mu=p_0A_p \quad \implies \quad W=\int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt=p_0(V_1-V_0).
+:::
+Consequently, the change in the fluids internal energy equals
+:::{math}
+\Delta U=Q-p_0(V_1-V_0), 
+:::
+meaning that the applied heat is divided between the resulting change in the internal energy and volumetric expansion work.
+
+## <span class="elementary"></span> The first law of thermodynamics
+The two specific heating processes in {numref}`fig-heating-cylinder` enable constructing more general processes for a material volume that proceed through subsequent equilibrium states. One may first apply heat at constant volume to increase the equilibrium pressure, and then allow the volume to expand to reach a new equilibrium state that corresponds to both new volume and pressure compared to the initial state. In this manner a chain of subsequent equilibrium states can be constructed.
+
+Once changes in the state variables between the equilibrium states are taken to be infinitesimally small, the first law of thermodynamics is uncovered. Between two equilibrium states, it relates the change in the internal energy to the heat applied and the change in the substance volume against the substance pressure. During such investigation, gravitational acceleration is omitted to allow formation of spatially homogenous equilibrium states. If necessary, such investigations could be conducted in zero gravity in space. 
+
 ## <span class="elementary"></span> Specific heats and preliminary differential for heat
+<!--
 The first step in the process of uncovering the thermodynamic framework involves relating heat applied to the fluid's state variables. Typically, one associates heating a substance with an increase in the substance temperature or boiling of it at constant temperature. Conversely, cooling a substance is associated with either reducing its temperature or causing it to condense at constant temperature. The specific details of a heating or a cooling process vary, though. In general, heating can result in temperature, pressure, and volumetric changes and cause the fluid to flow in complicated patterns due to buoyancy effects driven by gravity and spatial variations in density that emerge due to temperature variations. However, to study the role of heat in thermodynamics, one considers heating processess that begin and end in stationary and homogenous equilibrium states as described in {numref}`fig-heating-cylinder`. In such case, the equilibrium effects of gravity, the hydrodynamic pressure and density gradient, are typically small and neglected. In theory, these effects can be eliminated by taking experiments and measurements into space and weightlessness.
 
 ::::{figure}
@@ -56,7 +134,7 @@ The first step in the process of uncovering the thermodynamic framework involves
 
 Heating a substance in a cylinder. The initial and final states of the substance are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium but can move and have spatially variying properties.
 ::::
-
+-->
 
 When pure water is heated at constant volume as in {numref}`fig-heating-cylinder-constant-v` through subsequent equilibrium states that are close to each other, the temperate is observed to change as shown in {numref}`fig-heat-delta-T-isochoric`. Starting from the triple line $T=0.01^\circ\text{C}$ at the saturated liquid state ($v=0.001\,\text{m}^3/\text{kg}$), the temperature of the liquid water begins to increase in reaction to the heat added per unit mass ($Q/m$). If the starting point for heating is shifted from the saturated liquid state towards the saturated vapor end of the triple line ($v=206\,\text{m}^3/\text{kg}$), the behaviour differs. First the curve behaves smoothly, then a sharp reversal happens, after which the curve again behaves smoothly. The initial state for such curves lies in the liquid-vapor two-phase region, and the change in the curve behaviour corresponds to crossing either the saturated liquid or saturated vapor curve into the single phase region. Similar behaviour is observed for other pure substances as well.
 
