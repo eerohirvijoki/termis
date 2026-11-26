@@ -35,9 +35,9 @@ The goals to support the intermediate and advanced paths are:
 - <span class="advanced"></span> This is an advanced learning goal.
 
 ## <span class="elementary"></span> Energy balance between two equilibrium states
-As the first step in the process of uncovering the thermodynamic framework, one investigates the time integral of the total energy balance {numref}`eq-total-energy-balance-material-volume` over a material volume from one spatially homogenous equlibrium state to another equilibrium state. Between the initial and final equilibrium states, heating or cooling of the volume is allowed. The fluid may also move in complicated patterns inside the volume, but the movement of the volume boundary is controlled by a specifically tailored external force. A relation is then discovered that associates the change in internal energy to the heat applied and to the changes in state variables. Gravitational acceleration is omitted to allow formation of spatially homogenous equilibrium states. If necessary, investigations could be conducted in zero gravity in space. 
+As the first step in the process of uncovering the thermodynamic framework, one investigates the time integral of the total energy balance {numref}`eq-total-energy-balance-material-volume` over a material volume from one spatially homogenous equlibrium state to another equilibrium state. Between the initial and final equilibrium states, heating or cooling of the volume is allowed. The fluid may also move in complicated patterns inside the volume, but the movement of the volume boundary is controlled by a specifically tailored external force. A relation is then discovered that associates the change in fluid's internal energy to the heat applied and the changes in the state variables. In this analysis, gravitational acceleration is omitted to allow formation of spatially homogenous equilibrium states. If necessary, investigations could be conducted in space for zero gravitational effects. 
 
-Consider the two experiments illustrated in {numref}`fig-heating-cylinder`. A fluid is confined in a cylinder with a movable piston. Initially, at time $t_0$, the fluid is at rest and in a thermodynamic equilibrium state with spatially homogenous temperature and pressure. The external force needed to maintain the piston in place corresponds to the equilibrium pressure of the fluid. Heating (or cooling) is then applied at the fluid boundary which causes the temperature inside the fluid to become non-homogeous. Through local thermal expansion (or shrinking), density becomes non-homogenous, the fluid begins to move a little, and small pressure variations develop. Depending on whether the external force is adjusted or not, the piston may stay in place as in {numref}`fig-heating-cylinder-constant-v` or move as in {numref}`fig-heating-cylinder-constant-p`. Once heat is turned off the fluid begins to settle as viscous effects and heat conductivity locally turn kinetic energy and temperature variations into internal energy, until a new spatially homogenous equilibrium state is reached at time $t_1$.
+Consider the two experiments illustrated in {numref}`fig-heating-cylinder`. A fluid is confined in a cylinder with a movable piston. Initially, at time $t_0$, the fluid is at rest and in a thermodynamic equilibrium state with spatially homogenous temperature and pressure. The external force needed to maintain the piston in place corresponds to the equilibrium pressure of the fluid. Heating (or cooling) is then applied at the fluid boundary which causes the temperature inside the fluid to become non-homogeous. Through local thermal expansion (or shrinking), density becomes non-homogenous, the fluid begins to move a little, and small pressure variations develop. Depending on whether the external force is adjusted over time or not, the piston may stay in place as in {numref}`fig-heating-cylinder-constant-v` or move as in {numref}`fig-heating-cylinder-constant-p`. Once heat is turned off the fluid begins to settle as viscous effects and heat conductivity locally turn kinetic energy and temperature variations into internal energy, until a new spatially homogenous equilibrium state is reached at some later time $t_1$.
 ::::{figure}
 :label: fig-heating-cylinder
 :align: center
@@ -51,11 +51,11 @@ Consider the two experiments illustrated in {numref}`fig-heating-cylinder`. A fl
 
 (fig-heating-cylinder-constant-p)=
 :::{image} ./figs/fig-heating-cylinder-constant-p.svg
-:alt: Cylinder volume allowed to expand and the external force controlled so that the sum of it and the friction force between the piston and the cylinder surface are constant throughout the expansion.
+:alt: Cylinder volume is allowed to change. The external force is controlled so that the sum of it and the friction force between the piston and the cylinder surface remain constant throughout the volume change.
 :width: 90%
 :::
 
-Heating a substance in a cylinder. The initial and final states of the substance are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium but can move and have spatially variying properties.
+Heating a substance in a cylinder. The initial and final states of the substance at times $t_0$ and $t_1$ are stationary and homogenous equilibrium states. Between the initial and final states, the substance is not necessarily in thermodynamical or mechanical equilibrium but can move and have spatially variying properties.
 ::::
 
 To investigate flow processes within a material volume from one homogenous stationary equilibrium state to another, denote with $U(t)$ and $KE(t)$ the total internal and kinetic energy of the material volume at instant $t$
@@ -74,41 +74,40 @@ In the absence of gravity, the energy balance {numref}`eq-total-energy-balance-m
 :::{math}
 \Delta U=Q-W,
 :::
-where $\Delta U=U(t_1)-U(t_0)$ is the change in the total internal energy. Notably, the change in the total kinetic energy vanishes identically, $\Delta KE=KE(t_1)-KE(t_0)=0$, as the fluid is assumed to be at rest in both the initial and final equilibrium states.
+where $\Delta U=U(t_1)-U(t_0)$ is the change in the total internal energy. The change in the total kinetic energy $\Delta KE=KE(t_1)-KE(t_0)=0$ vanishes for the fluid is assumed to be at rest in both the initial and final equilibrium states.
 
-On solid surfaces, the fluid velocity $\bm{v}|_{\partial V(t)}$ matches the surface velocity. If the external force $F_\text{ext}$ exerted onto the piston is carefully adjusted to exactly match the surface force the fluid exerts to the piston as in {numref}`fig-heating-cylinder-constant-v`, the piston stays in place and does not move. In such case the surface velocity is zero at all times and the fluid performs no work. In such case the energy balance between the initial and final equilibrium states reduces to
+On solid surfaces, the fluid velocity $\bm{v}|_{\partial V(t)}$ matches the surface velocity. If the external force $F(t)$ exerted onto the piston is carefully adjusted to exactly match the surface force the fluid exerts to the piston as in {numref}`fig-heating-cylinder-constant-v`, no net force is applied to the piston and it stays put and does not move. In such case the surface velocity of the fluid is zero at all times and the fluid performs no work. The energy balance between the initial and final equilibrium states reduces to
 :::{math}
 :label: eq-delta-U-constant-V
-(\Delta U)_V=(Q)_V,
+(\Delta U)_{v_0}=(Q)_{v_0},
 :::
-where the notation $(\cdot)_V$ refers to a process where volume remains constant. This means that all heat applied in such process is converted to fluid's internal energy. If the external force does not match the surface force, the piston begins to move. Consequently, the part of the fluid's surface touching the piston moves as well, with velocity $\bm{v}|_{A_p}=v_p\bm{\hat{z}}$ where $v_p(t)$ denotes the velocity of the piston with respect to the cylinder axis of orientation. Neither the total work $W$ nor the work rate $\dot{W}(t)$ the fluid does remain zero. To calculate it, one may use Newton's second law, according to which the piston velocity $v_p$ follows the equation
+where the notation $(\cdot)_{v}$ refers to a flow process where the average specific volume over the material volume remains constant (both mass and total volume remain fixed). This means that all of the heat applied is converted into fluid's internal energy. If the external force does not match the surface force, the piston experience a non-zero net force and begins to move. Consequently, the part of the fluid's surface touching the piston moves as well, with velocity $\bm{v}|_{A_p}=v_p\bm{\hat{z}}$ where $v_p(t)$ denotes the velocity of the piston with respect to the cylinder axis of orientation. Neither the work rate $\dot{W}(t)$ nor the total work $W$ the fluid does remain zero. To calculate the work, one may use Newton's second law, according to which the piston velocity $v_p$ satisfies the differential equation
 :::{math}
-m_p\underbrace{\frac{dv_p}{dt}}_{\substack{\text{Piston}\\\text{accele-}\\\text{ration}}}=\overbrace{-\bm{\hat{z}}\cdot\underbrace{\int_{A_p(t)}\bm{t}dA}_{\substack{\text{Contact force}\\\text{exerted by}\\\text{piston to}\\\text{the fluid}}}}^{\substack{\text{Component of the}\\\text{contact force exerted}\\\text{by the fluid to the}\\\text{piston into the direction}\\\text{of the piston movement}}}-\underbrace{(F_\text{ext}+F_\mu)}_{\substack{\text{Sum of external}\\\text{and friction}\\\text{force exerted}\\\text{onto the piston}}}.
+m_p\underbrace{\frac{dv_p}{dt}}_{\substack{\text{Piston}\\\text{accele-}\\\text{ration}}}=\overbrace{-\bm{\hat{z}}\cdot\underbrace{\int_{A_p(t)}\bm{t}dA}_{\substack{\text{Contact force}\\\text{exerted by}\\\text{the piston}\\\text{to the fluid}}}}^{\substack{\text{Component of the}\\\text{contact force exerted}\\\text{by the fluid to the}\\\text{piston into the direction}\\\text{of the piston movement}}}-F.
 :::
 A change in the kinetic energy of the piston over the interval $t\in[t_0,t_1]$ can then be computed as the time integral
 :::{math}
 \begin{aligned}
-\frac{m_p}{2}\left(v_{p,1}^2-v_{p,0}^2\right)&=\int_{t_0}^{t_1}m_p\frac{dv_p}{dt}v_pdt\\
-&=\int_{t_0}^{t_1}\left[-\bm{\hat{z}}\cdot\int_{A_p(t)}\bm{t}dA-(F_\text{ext}+F_\mu)\right]v_pdt\\
-&=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt-\int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt,
+\frac{m_p}{2}\left(v_{p,1}^2-v_{p,0}^2\right)&=\int_{t_0}^{t_1}m_p\frac{dv_p}{dt}v_pdt=\int_{t_0}^{t_1}\left[-\bm{\hat{z}}\cdot\int_{A_p(t)}\bm{t}dA-F\right]v_pdt\\
+&=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt-\int_{t_0}^{t_1}Fv_pdt,
 \end{aligned}
 :::
 where the condition $\bm{v}|_{A_p}=v_p\bm{\hat{z}}$ for the fluid velocity at the piston boundary was used. Since the piston velocity at the beginning and at the end is zero, the change in its kinetic energy over the interval $t\in[t_0,t_1]$ vanishes and
 :::{math}
-\int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt=W.
+\int_{t_0}^{t_1}Fv_pdt=-\int_{t_0}^{t_1}\int_{A_p(t)}\bm{v}\cdot\bm{t}dAdt=W.
 :::
-If the external force is carefully adjusted so that the sum of it and the friction force, throughout the interval $t\in[t_0,t_1]$, equals the force from the initial fluid equilibrium pressure, then 
+If the external force, throughout the interval $t\in[t_0,t_1]$, equals the force from the initial fluid equilibrium pressure, then 
 :::{math}
-F_\text{ext}+F_\mu=p_0A_p \quad \implies \quad \int_{t_0}^{t_1}(F_\text{ext}+F_\mu)v_pdt=p_0(V_1-V_0).
+F(t)=p_0A_p \quad \implies \quad \int_{t_0}^{t_1}Fv_pdt=p_0A_p\int_{t_0}^{t_1}v_pdt=p_0(V_1-V_0).
 :::
 Consequently, the change in the fluids internal energy equals
 :::{math}
 :label: eq-delta-U-constant-p
-(\Delta U)_p=(Q)_p-p(\Delta V)_p, 
+(\Delta U)_{p_0}=(Q)_{p_0}-p_0(\Delta V)_{p_0}, 
 :::
-where the notation $(\cdot)_p$ refers to a process between two equilibrium states that have the same pressure. In such process the applied heat is divided between a change in the internal energy and volumetric expansion work.
+where the notation $(\cdot)_p$ refers to a process between two equilibrium states against a constant external force that equals the force from fluid's initial and final equilibrium pressure. In such process the applied heat is divided between a change in the internal energy and volumetric expansion work.
 
-As the initial and final states in the expreriments illustrated in {numref}`fig-heating-cylinder`, are spatially homogenous equilibrium states, and the experiments can be carried out for arbitrary amounts of fluid mass, the results from the experiments can be expressed also in terms of intensive quantities. Defining heat added per unit mass as $q=Q/m$, one then has
+As the initial and final states in the expreriments illustrated in {numref}`fig-heating-cylinder`, are spatially homogenous equilibrium states, and the experiments can be carried out for arbitrary amounts of fluid mass, the results from the two experiments can be expressed also in terms of equilibrium state intensive quantities. Defining heat added per unit mass as $q=Q/m$, one then has
 :::{math}
 :label: eq-delta-u-specific-constant-v-p
 \begin{aligned}
@@ -116,14 +115,14 @@ As the initial and final states in the expreriments illustrated in {numref}`fig-
 (\Delta u)_p&=(q)_p-p(\Delta v)_p.
 \end{aligned}
 :::
-The two experiments also describe two very specific processes. The other happens at constant volume, in the other the initial and final pressure are equal, while in general processes between two equilibrium states both volume and pressure can vary. Nevertheless, the changes in the state quantities between two general equilibrium states can be described in terms of the changes in the two specific processes. To understand this, consider two equlibrium states
+General flow processes between two equilibrium states do not happen at constant volume or against a constant external force. Instead, both volume and pressure of the final equilibrium state can differ from the initial state values. Nevertheless, the changes in the state quantities between two general equilibrium states can be constructed from the changes in subsequent constant volume and constant external force processes. To understand this, consider a general heating process between two equlibrium states
 :::{math}
 \begin{pmatrix}
 T\\
 p\\
 v\\
 u
-\end{pmatrix}, \qquad 
+\end{pmatrix} \underset{q}{\to} 
 \begin{pmatrix}
 T+\Delta T\\
 p+\Delta p\\
@@ -131,7 +130,7 @@ v+\Delta v\\
 u+\Delta u
 \end{pmatrix}.
 :::
-Investigate then a two-stage process that first heats the substance so that the pressure is constant, and then heats the substance at constant volume
+Construct then a two-stage process that first heats the substance so that the external pressure is constant, and then heats the substance at constant volume
 :::{math}
 \begin{pmatrix}
 T\\
@@ -149,33 +148,37 @@ u+(\Delta u)_p
 \underset{(q)_{v+\Delta v}}{\to}
 \begin{pmatrix}
 T+(\Delta T)_p+(\Delta T)_{v+\Delta v}\\
-p+(\Delta p)_v\\
+p+(\Delta p)_{v+\Delta v}\\
 v+(\Delta v)_p\\
 u+(\Delta u)_p+(\Delta u)_{v+\Delta v}
 \end{pmatrix}
 :::
 
-Over the entire process, the total change in temperature satisfies $\Delta T=(\Delta T)_{v+\Delta v}+(\Delta T)_p$, and the total change in the specific internal energy can be expressed
+For the two-stage process to end up in the same state as the single-stage general heating process, the total changes in the temperature and specific internal energy must satisfy
 :::{math}
 \begin{aligned}
-\Delta u&=(\Delta u)_{v+\Delta v}+(\Delta u)_p\\
-&=\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}(\Delta T)_{v+\Delta v}+\frac{(\Delta u)_p}{(\Delta T)_p}(\Delta T)_p\\
-&=\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}[\Delta T-(\Delta T)_p]+\frac{(\Delta u)_p}{(\Delta T)_p}(\Delta T)_p\\
-&=\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\Delta T+\left[\frac{(\Delta u)_p}{(\Delta T)_p}-\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\right](\Delta T)_p\\
+\Delta T&=(\Delta T)_{v+\Delta v}+(\Delta T)_p,\\
+\Delta u&=(\Delta u)_{v+\Delta v}+(\Delta u)_p,
+\end{aligned}
+:::
+while $(\Delta p)_{v+\Delta v}=\Delta p$ and $(\Delta v)_{p}=\Delta v$. Specifically, the total change in the specific internal energy can then be manipulated into
+:::{math}
+\begin{aligned}
+\Delta u&=\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}(\Delta T)_{v+\Delta v}+\frac{(\Delta u)_p}{(\Delta T)_p}(\Delta T)_p\\
 &=\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\Delta T+\left[\frac{(\Delta u)_p}{(\Delta T)_p}-\frac{(\Delta u)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\right]\frac{(\Delta T)_p}{(\Delta v)_p}\Delta v,
 \end{aligned}
 :::
-where $(\Delta v)_p=\Delta v$ was used in the last step. Substituting {numref}`eq-delta-u-specific-constant-v-p`, one finds an expression for the total change in the specific internal energy in a general process that is proportional to the total change in the temperature and total change in the specific volume
+Substituting {numref}`eq-delta-u-specific-constant-v-p`, one finds an expression for the total change in the specific internal energy in a general process that is proportional to the total change in the temperature and the total change in the specific volume
 :::{math}
 :label: eq-delta-u-delta-T-delta-v
-\Delta u=\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\Delta T+\left[\frac{(q)_p}{(\Delta T)_p}-\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}-p\frac{(\Delta v)_p}{(\Delta T)_p}\right]\frac{(\Delta T)_p}{(\Delta v)_p}\Delta v.
+\Delta u=\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\Delta T+\left[\left(\frac{(q)_p}{(\Delta T)_p}-\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\right)\frac{(\Delta T)_p}{(\Delta v)_p}-p\right]\Delta v.
 :::
 This is the first clue that changes in the specific internal energy could potentially be related purely to the fluid's state variables and changes in them. 
 
 ## <span class="elementary"></span> Specific heats
 The second step towards the thermodynamics framework involves relating the heat applied during a process from one equilibrium state to another to the state variables and the changes in them. This is achieved with quantities referred to as specific heats.
 
-When pure water is heated at constant volume as in {numref}`fig-heating-cylinder-constant-v` from one equilibrium state to another, the temperature is observed to change as shown in {numref}`fig-heat-delta-T-isochoric`. Starting from the triple line $T=0.01^\circ\text{C}$ at the saturated liquid state ($v=0.001\,\text{m}^3/\text{kg}$), the temperature of the liquid water begins to increase in reaction to the added heat per unit mass. If the starting point for heating is shifted from the saturated liquid state towards the saturated vapor end of the triple line ($v=206\,\text{m}^3/\text{kg}$), the behaviour differs. The curve behaves first smoothly, then a sharp reversal happens, after which the curve again behaves smoothly. The initial state for such curves lies in the liquid-vapor two-phase region, and the change in the curve behaviour corresponds to crossing either the saturated liquid or saturated vapor curve into the single phase region. Similar behaviour is observed for other pure substances as well.
+When pure water is heated at constant volume as in {numref}`fig-heating-cylinder-constant-v` from one equilibrium state to another, the temperature is observed to change as shown in {numref}`fig-heat-delta-T-isochoric`. Starting from the triple line $T=0.01^\circ\text{C}$ at the saturated liquid state ($v=0.001\,\text{m}^3/\text{kg}$), the temperature of the liquid water begins to increase in reaction to the added heat per unit mass. If the starting point for heating is shifted from the saturated liquid state towards the saturated vapor end of the triple line ($v=206\,\text{m}^3/\text{kg}$), the behaviour differs. The curve behaves first smoothly, then a sharp turn appears, after which the curve behaves smoothly again. The initial state for such curves lies in the liquid-vapor two-phase region, and the change in the curve behaviour corresponds to crossing either the saturated liquid or saturated vapor curve into the single phase region. Similar behaviour is observed for other pure substances as well.
 
 ::::{figure} ./figs/fig-heat-delta-T-isochoric.svg
 :label: fig-heat-delta-T-isochoric
@@ -184,7 +187,7 @@ When pure water is heated at constant volume as in {numref}`fig-heating-cylinder
 Water temperature when heated from temperature of $T=0.01^\circ\text{C}$ through subsequent equilibrium states close to each other that all share the same volume.
 ::::
 
-If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead, from one equilibrium state to another that share the same pressure, the temperature response to the applied heat per unit mass differs. As shown in {numref}`fig-heat-delta-T-isobaric`, for pressure values below that of the critical point, the temperature first increases as heat is added but then suddenly flattens out completely, before continuing to rise again. For pressure values above that of the critical point, the curve rises constantly instead, with no flat segment. The part of the curve before the flat segment corresponds to temperature rise in the liquid phase, the flat segment to the phase change from saturated liquid to saturated vapor that happens at constant temperature and pressure, and the rising curve after the flat segment to temperature rise in gaseous phase.
+If pure water is heated as in {numref}`fig-heating-cylinder-constant-p` instead, from one equilibrium state to another against a constant external pressure, the temperature response to the applied heat per unit mass differs. As shown in {numref}`fig-heat-delta-T-isobaric`, for pressure values below that of the critical point, the temperature first increases as heat is added but then suddenly flattens out completely, before continuing to rise again. For pressure values above that of the critical point, the curve rises constantly instead, with no flat segment. The part of the curve before the flat segment corresponds to temperature rise in the liquid phase, the flat segment to the phase change from saturated liquid to saturated vapor that happens at constant temperature and pressure, and the rising curve after the flat segment to temperature rise in gaseous phase.
 
 ::::{figure} ./figs/fig-heat-delta-T-isobaric.svg
 :label: fig-heat-delta-T-isobaric
@@ -197,7 +200,7 @@ Water temperature when heated from $T=0.01^\circ\text{C}$ through subsequent equ
 From {numref}`fig-heat-delta-T-isobaric` one may observe that it requires approximately $420\,\text{kJ}$ of heat to increase the temperature of $1\,\text{kg}$ of liquid water from $0^\circ\text{C}$ to $100^\circ\text{C}$ at a pressure of $1\,\text{bar}$. After the temperature of $100^\circ\text{C}$ has been achieved, boiling the $1\,\text{kg}$ of water then takes approximately an additional $2260\,\text{kJ}$ of heat. 
 ::::
 
-The temperature rise between two adjacent equilibrium states in single phase that share either common volume or pressure is characterized by the local slope of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric`. It is appealing to consider the heat per unit mass one needs to increase the temperature of a substance by one Kelvin, and the response to heating is therefore described with the inverse of the local slope, which defines the specific heats
+The temperature rise between two equilibrium states in single phase, either at common volume or against a constant external pressure, is characterized by the local slope of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric`. It is appealing to consider the heat per unit mass one needs to increase the temperature of a substance by one Kelvin, and the response to heating is therefore described with the inverse of the local slope, which defines the specific heats
 :::{math}
 :label: eq-specific-heats-definitions
 \begin{aligned}
@@ -242,8 +245,18 @@ At the requested state point both pyromat and coolprop return $c_v=2.23\,\text{k
 
 
 ## <span class="elementary"></span> Quasistatic processes
-The two-stage equation {numref}`eq-delta-u-delta-T-delta-v` for the change in the specific internal energy between two general equilibrium states involves changes in the state variables but also ratios of the heat applied over the corresponding temperature changes in the two-stage process. The specific heats {numref}`eq-specific-heats-definitions` that characterize these ratios are defined as limits when the temperature changes vanish. The third step towards the thermodynamic framework resolves this issue by expressing the finite change in the specific internal energy as a sum of infinitely many infinitesimally small changes between successive equilibrium states. In the limit, this leads to the definition of a quasistatic process as a smooth path through the thermodynamic manifold of equilibrium states, and to the indtrouction of preliminary differential forms for the specific internal energy and heat. Later, the resulting differential form for heat enables the discovery of entropy and the refinement of these preliminary differential forms.
+The two-stage equation {numref}`eq-delta-u-delta-T-delta-v` for the change in the specific internal energy between two general equilibrium states involves changes in the state variables but also ratios of the heat applied over the corresponding temperature changes in the two-stage process. The specific heats {numref}`eq-specific-heats-definitions` that characterize these ratios are defined as limits at which the temperature changes vanish. The third step towards the thermodynamic framework resolves this issue by expressing the finite change in the specific internal energy as a sum of infinitely many infinitesimally small changes between successive equilibrium states. In the limit, this leads to the definition of a quasistatic process as a smooth path through the thermodynamic manifold of equilibrium states, and to the indtrouction of preliminary differential forms for the specific internal energy and heat. Later, the resulting differential form for heat enables the discovery of entropy and the refinement of these preliminary differential forms.
 
+
+:::{math}
+\begin{aligned}
+\Delta u&=\lim_{N\to\infty}\sum_{i=1}^{N-1}\Bigg(\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\Delta T_i\\
+&\quad+\left[\left(\frac{(q)_{p_i}}{(\Delta T)_{p_i}}-\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\right)\frac{(\Delta T)_{p_i}}{(\Delta v)_{p_i}}-p_i\right]\Delta v_i\Bigg)\\
+&=\int_c\left[c_vdT+\left((c_p-c_v)\left(\frac{\partial T}{\partial v}\right)_p-p\right)dv\right] 
+\end{aligned}
+:::
+
+At the limit $N\to \infty$, the total changes $\Delta T=\sum_{i=0}^{N-1}[(\Delta T)_{v_i+\Delta v_i}+(\Delta T)_{p_i}]$, 
 
 :::{figure} ./figs/fig-quasistatic-process.svg
 :label: fig-quasistatic-process
