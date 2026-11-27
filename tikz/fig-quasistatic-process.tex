@@ -1,4 +1,7 @@
 \documentclass[tikz]{standalone}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usetikzlibrary{calc}
 
 \begin{document}
@@ -14,11 +17,12 @@
   vial/.cd,
   water height/.initial=0.74,
   water color/.initial=cyan!60!blue!20!white,
-  flame scale/.initial=0.15,
-  locked/.is choice,
-  locked/true/.code={\def\islocked{1}},
-  locked/false/.code={\def\islocked{0}},
-  locked=false,
+  water color bottom/.initial=cyan!60!blue!20!white!60!black,
+  %
+  sand peaker/.is choice,
+  sand peaker/true/.code={\def\issandpeaker{1}},
+  sand peaker/false/.code={\def\issandpeaker{0}},
+  sand peaker=true,
   %
   /tikz/flame/.pic={
     \def\wflame{1.0}\def\hflame{6.0}
@@ -34,23 +38,22 @@
     \tikzset{vial/.cd, #1}
     \pgfkeysgetvalue{/tikz/vial/water height}{\ratio}
     \pgfkeysgetvalue{/tikz/vial/water color}{\vcol}
-    \pgfkeysgetvalue{/tikz/vial/flame scale}{\fscale}
+    \pgfkeysgetvalue{/tikz/vial/water color bottom}{\vcolbot}
     
     % Geometry Constants
     \def\Rx{1.1} \def\Ry{0.2} \def\H{2.6}
     \def\h{\ratio*\H}
-    \def\pt{0.05*\H} \def\prx{0.040*\H} \def\pry{0.006*\H} \def\pl{0.25*\H}
+    \def\pt{0.07*\H} \def\prx{0.040*\H} \def\pry{0.006*\H} \def\pl{0.25*\H}
     
     % transform shape is the magic key here
     \begin{scope}[transform shape]
         \colorlet{mydarkblue}{blue!50!black}
         \colorlet{darkwatercol}{\vcol}
+        \colorlet{watercolorbottom}{\vcolbot}
         \colorlet{metalcol}{blue!40!black!10!white}
-        \tikzstyle{dark water}=[draw=mydarkblue, top color=darkwatercol, bottom color=darkwatercol!80!black]
+        \tikzstyle{dark water}=[draw=mydarkblue, top color=darkwatercol, bottom color=watercolorbottom]
         \tikzstyle{metal}=[draw=metalcol!20!black, top color=metalcol, bottom color=metalcol!90!black]
 
-        % The nested flame now inherits the vial's scale
-        \pic[scale=\fscale] at (0, -1) {flame};
         
         \draw[dark water] (-\Rx,\h) -- (-\Rx,0) arc (180:360:{\Rx} and {\Ry}) -- (\Rx,\h);
         \draw[metal] (-\Rx,\h) --++ (0,-\pt) arc (180:360:{\Rx} and {\Ry}) --++ (0,\pt);
@@ -60,36 +63,52 @@
 
         % sand  
         \fill[orange!40!white] ({-0.6*(1-0.5*\ratio)},\h) .. controls (-0.0,\h+0.3*\H-0.3*\h+0.4) and (0.3,\h+0.3*\H-0.3*\h+0.4) .. ({0.6*(1-0.5*\ratio)},\h) coordinate[pos=0.55] (A) to[bend left=20] cycle;
-        \draw[ultra thick, orange!40!white] (A.center) to [bend left=10](0.8,4); 
+
+        % flowing sand and sand peaker
+        \ifnum\issandpeaker=1
+        \draw[ultra thick, orange!40!white] (A.center) to [bend left=10](0.8,4);
         \fill[orange!40!white] (0.8,4)--(2,3)--(2.4,3.4)--(1.4,4.3)--cycle;
         \draw[rounded corners, very thick] (0.8,4)--(2,3)--(2.4,3.4)--(1.2,4.5);
-
+        \fi
         % top edge
         \draw[thick] (-\Rx,\H) -- (-\Rx,0) arc (180:360:{\Rx} and {\Ry}) -- (\Rx,\H) (0,\H) ellipse ({\Rx} and {\Ry});
-
-
-        \ifnum\islocked=1
-          \fill[black!70] (-\Rx-0.1, \h+0.1) rectangle (-\Rx+0.1, \h+0.2);
-          \fill[black!70] (\Rx-0.1, \h+0.1) rectangle (\Rx+0.1, \h+0.2);
-        \fi
-
 
     \end{scope}
   }
 }
 
+
+% a new figure of heating against a constant force
 \begin{tikzpicture}
 
-  \pic[scale=1.3] at (0,0) {vial={water height=0.8}};
-  \node[anchor=center] at (0,1) {$(p_0,T_0,v_0,u_0)$}; 
-  \node[anchor=center] at (-1,-1) {$\dot{Q}(t_0)$}; 
-  \pic[scale=1.3] at (4,0) {vial={water height=0.6, water color=orange!20!white}};
-  \node[anchor=center] at (4,0.5) {$(p_i,T_i,v_i,u_i)$};      
-  \node[anchor=center] at (3,-1) {$\dot{Q}(t_i)$};
-  \pic[scale=1.3] at (8,0) {vial={water height=0.4, water color=red!80!orange!40!white}};
-  \node[anchor=center] at (8,0.25) {$p_N,T_N,v_N,u_N$};      
-  \node[anchor=center] at (7,-1) {$\dot{Q}(t_N)$};    
- 
+    \def\scale{1.3};
+    \def\H{2.6};
+    \def\dH{0.25*\H};
+
+  % initial time
+  %\pic[scale=0.3,anchor=center] at (0, -1.5) {flame};
+  \pic[scale=\scale] at (0,0) {vial={water height=0.8, sand peaker=false}};
+  %\node[anchor=center] at (0,0.55) {$(p_0,T_0,v_0,u_0)$};
+  %\node[anchor=center] at (0,0.2) {$\bm{v}=\bm{0}$};
+  \node[anchor=center] at (0,0.2) {Initial};
+
+  \node[anchor=center] at (2,1) {$\dots$};
+  
+  % heating
+  \pic[scale=0.3,anchor=center] at (4, -1.5) {flame};
+  \pic[scale=\scale] at (4,0) {vial={water height=0.6, water color=orange!20!white, water color bottom=orange!20!white}};
+  %\node[anchor=center] at (4,0.55) {$(p_i,T_i,v_i,u_i)$};
+  %\node[anchor=center] at (4,0.2) {$\bm{v}=\bm{0}$};
+
+  \node[anchor=center] at (6,1) {$\dots$};
+  
+  % final time
+  %\pic[scale=0.3,anchor=center] at (8, -1.5) {flame};
+  \pic[scale=1.3] at (8,0) {vial={water height=0.4, water color=red!80!orange!40!white, water color bottom=red!80!orange!40!white, sand peaker = false}};
+  %\node[anchor=center] at (8,0.55) {$(p_N,T_N,v_N,u_N)$};
+  %\node[anchor=center] at (8,0.2) {$\bm{v}=\bm{0}$};
+  \node[anchor=center] at (8,0.2) {Final};
    
 \end{tikzpicture}
+
 \end{document}
