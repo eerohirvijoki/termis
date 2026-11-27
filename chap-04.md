@@ -34,6 +34,7 @@ The goals to support the intermediate and advanced paths are:
 
 - <span class="advanced"></span> This is an advanced learning goal.
 
+(sec-energy-balance-between-equilibrium-states)=
 ## <span class="elementary"></span> Energy balance between two equilibrium states and the first law
 As the first step in the process of uncovering the thermodynamic framework, one investigates the time integral of the total energy balance {numref}`eq-total-energy-balance-material-volume` over a material volume from one spatially homogenous stationary equilibrium state to another. Between the initial and final states, heating or cooling of the volume is allowed. The fluid may also move in complicated patterns inside the volume, but the movement of the volume boundary is controlled by a specifically tailored external force. A relation is then discovered that associates the change in fluid's specific internal energy to the heat applied per unit mass and the changes in the state variables. In this analysis, gravitational acceleration is omitted to allow formation of spatially homogenous equilibrium states. If necessary, experiments could be conducted in space to suppress gravitational effects on equilibrium states. 
 
@@ -181,6 +182,7 @@ Substituting {numref}`eq-delta-u-specific-constant-v-p`, one finds an expression
 :::
 This is the first clue that changes in specific internal energy between two equilibrium states could potentially be related purely to the fluid's state variables and changes in them. 
 
+(sec-cp-cv)=
 ## <span class="elementary"></span> Specific heats
 The second step towards the thermodynamics framework involves relating the heat applied during a process from one equilibrium state to another to the state variables and the changes in them. This is achieved with quantities referred to as specific heats.
 
@@ -214,7 +216,34 @@ c_v&=\lim_{(\Delta T)_v\to 0}\frac{(q)_v}{(\Delta T)_v},\\
 c_p&=\lim_{(\Delta T)_p\to 0}\frac{(q)_p}{(\Delta T)_p}.
 \end{aligned}
 :::
-Since the slopes of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric` are not constant, both $c_v$ and $c_p$ are functions of the fluid's thermodynamic state. They describe the heat required per unit temperature change under the specified constraint, and are not defined in the phase-change regions. 
+Since the slopes of the curves in {numref}`fig-heat-delta-T-isochoric` and {numref}`fig-heat-delta-T-isobaric` are not constant, both $c_v$ and $c_p$ are functions of the fluid's thermodynamic state. They describe the heat required per unit temperature change under the specified constraint, and are not defined in the phase-change regions. Notably, the specific heats as such do not provide the total heat applied to transition from one equlibrium state to another. Following {numref}`sec-energy-balance-between-equilibrium-states`, and considering again the two-stage process 
+:::{math}
+\begin{pmatrix}
+T\\
+p\\
+v\\
+u
+\end{pmatrix}
+\underset{(q)_p}{\to}
+\begin{pmatrix}
+T+(\Delta T)_p\\
+p\\
+v+(\Delta v)_p\\
+u+(\Delta u)_p
+\end{pmatrix}
+\underset{(q)_{v+\Delta v}}{\to}
+\begin{pmatrix}
+T+(\Delta T)_p+(\Delta T)_{v+\Delta v}\\
+p+(\Delta p)_{v+\Delta v}\\
+v+(\Delta v)_p\\
+u+(\Delta u)_p+(\Delta u)_{v+\Delta v}
+\end{pmatrix}
+:::
+one finds that the total heat applied per unit mass in the two-stage process equals
+:::{math}
+:label: eq-q-delta-T-delta-v
+q=\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\Delta T+\left[\frac{(q)_p}{(\Delta T)_p}-\frac{(q)_{v+\Delta v}}{(\Delta T)_{v+\Delta v}}\right]\frac{(\Delta T)_p}{(\Delta v)_p}\Delta v.
+:::
 
 For water, the specific heats $c_v$ and $c_p$ are illustrated in {numref}`fig-cv-cp-H2O`. One recognizes the isocontours of both $c_v$ and $c_p$ to be almost perfectly vertical in a region where temperature is high enough and water vapor is dilute enough (low density, high specific volume). This indicates that the specific heats in the ideal gas region approximately depend on temperature only. For gases, this is a commonly used approximation, and often even a constant value is sufficient over a large temperature range. The accurate values of the specific heats can be computed with both pyromat and coolprop libraries.
 
@@ -249,11 +278,10 @@ The specific heats can be computed with both the pyromat and coolprop libraries.
 At the requested state point both pyromat and coolprop return $c_v=2.23\,\text{kJ}/\text{kg}/\text{K}$ and $c_p=4.00\,\text{kJ}/\text{kg}/\text{K}$. The values can be confirmed from {numref}`fig-cv-cp-H2O`.
 ::::
 
-
 ## <span class="elementary"></span> Quasistatic processes and preliminary differential forms for specific internal energy and heat
-The equation {numref}`eq-delta-u-delta-T-delta-v` for the change in the specific internal energy between two stationary homogenous equilibrium states involves changes in the state variables but also ratios of the heat applied per unit mass to the corresponding two-stage temperature changes. The specific heats {numref}`eq-specific-heats-definitions` that characterize these ratios are defined as limits at which the temperature changes vanish. The third step towards the thermodynamic framework resolves this conflict by constructing the finite change in the specific internal energy between two equilibrium states as a sum of many small changes between sequential equilibrium states that are close to each other. In the limit where the small changes shrink to infinitesimal ones, and their number grows towards infinity, the sequential equilibrium states form a continuous path through the thermodynamic manifold of equilibrium states, and the finite change in the specific internal energy becomes a path integral. Consequently, preliminary differential forms for the specific internal energy and heat are introduced. Later, the preliminary differential form for heat enables the discovery of entropy and the development of the thermodynamic framework.
+The expressions {numref}`eq-delta-u-delta-T-delta-v` and {numref}`eq-q-delta-T-delta-v` derived in {numref}`sec-energy-balance-between-equilibrium-states` and {numref}`sec-cp-cv` relate the change in specific internal energy between two equilibrium and the heat needed for such process to changes in temperature and specific volume. The propotionality coefficients in the expressions unfortunately involve ratios of finite heat increments to finite temperature increments that are not expressible with state variables as such. The specific heats are the limiting values of these ratios when the temperature increments vanish. The third step towards the thermodynamic framework is therefore to construct a sequence of increasingly small changes between equilibrium states. In the limit that the sequential changes become infinitesimal, the change in specific internal energy and the associated heat can then be expressed as a path integrals involving only the specific heats and local changes in the state variables.
 
-Assume that a material volume of fluid is subjected to a sequence of changes that all start and end up in stationary and homogenous equilibrium states that are close to each other. 
+Consider a material volume of fluid subjected to a sequence of processes, each beginning and ending in a stationary and spatially homogeneous equilibrium state. The ending equilibrium state of each process serves as the initial equilibrium state of the next according to
 :::{math}
 \begin{pmatrix}
 T_0\\
@@ -280,9 +308,9 @@ T_N\\
 p_N\\
 v_N\\
 u_N
-\end{pmatrix}
+\end{pmatrix},
 :::
-Let the process between two sequential states $i$ and $i+1$ be contain two stages, the first a process against a constant external pressure and the second a process at constant volume
+until the final equilibrium state is achieved. Each process between two successive equilibrium states, denoted by $i$ and $i+1$, is constructed in two stages. First, the substance is heated or cooled against a constant external pressure $p_i$. Second, it is heated or cooled at constant volume $v_{i+1}$ as 
 :::{math}
 \begin{pmatrix}
 T_i\\
@@ -312,28 +340,30 @@ v_{i+1}\\
 u_{i+1}
 \end{pmatrix}.
 :::
-The total changes in temperature and specific internal energy are sums of the changes between the subsequent states
+This construction is identical to the two-stage process introduced in {numref}`sec-energy-balance-between-equilibrium-states`, and therefore the finite-change relations {numref}`eq-delta-u-delta-T-delta-v` and {numref}`eq-q-delta-T-delta-v` apply to every successive pair of equilibrium states.
+The total changes in temperature and specific internal energy and the accumulated heat over the entire sequence are obtained by adding the corresponding changes and accumulations between successive equilibrium states
 :::{math}
 \begin{aligned}
-\Delta T&=\sum_{i=0}^{N-1}\Delta T_i=\sum_{i=0}^{N-1}\left[(\Delta T)_{v_i+\Delta v_i}+(\Delta T)_{p_i}\right]\\
-\Delta u&=\sum_{i=0}^{N-1}\Delta u_i=\sum_{i=0}^{N-1}\left[(\Delta u)_{v_i+\Delta v_i}+(\Delta u)_{p_i}\right]
+\Delta T&=\sum_{i=0}^{N-1}\Delta T_i=\sum_{i=0}^{N-1}\left[(\Delta T)_{v_i+\Delta v_i}+(\Delta T)_{p_i}\right],\\
+\Delta u&=\sum_{i=0}^{N-1}\Delta u_i=\sum_{i=0}^{N-1}\left[(\Delta u)_{v_i+\Delta v_i}+(\Delta u)_{p_i}\right],\\
+q&=\sum_{i=0}^{N-1}q_i=\sum_{i=0}^{N-1}\left[(q)_{v_i+\Delta v_i}+(q)_{p_i}\right]
 \end{aligned}
 :::
-and the changes is pressure and specific between each state satisfy
+while the changes in specific volume and pressure during any of the two-stage steps satisfy
 :::{math}
 \begin{aligned}
 (\Delta v)_{p_i}&=\Delta v_i,\\
 (\Delta p)_{v_i+\Delta v_i}&=\Delta p_i.
 \end{aligned}
 :::
-One may then apply equation {numref}`eq-delta-u-delta-T-delta-v` for each process from state $i$ to state $i+1$, and the total change in the specific internal energy can be written
+Applying {numref}`eq-delta-u-delta-T-delta-v` and {numref}`eq-q-delta-T-delta-v` to each successive pair of equilibrium states then gives
 :::{math}
 \begin{aligned}
-\Delta u&=\sum_{i=1}^{N-1}\Bigg(\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\Delta T_i\\
-&\quad+\left[\left(\frac{(q)_{p_i}}{(\Delta T)_{p_i}}-\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\right)\frac{(\Delta T)_{p_i}}{(\Delta v)_{p_i}}-p_i\right]\Delta v_i\Bigg)
+q&=\sum_{i=0}^{N-1}\left[\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\Delta T_i+\left(\frac{(q)_{p_i}}{(\Delta T)_{p_i}}-\frac{(q)_{v_i+\Delta v_i}}{(\Delta T)_{v_i+\Delta v_i}}\right)\frac{(\Delta T)_{p_i}}{(\Delta v)_{p_i}}\Delta v_i\right],\\
+\Delta u&=q-\sum_{i=0}^{N-1}p_i\Delta v_i.
 \end{aligned}
 :::
-At the limit where the number of sequential equilibrium states $N\to \infty$ grows to infinity, the changes $(\Delta T)_{p_i}\to 0$, $(\Delta T)_{v_i+\Delta v_i}\to 0$, $\Delta v_i$ all become infinitesimal. Consequently
+Now consider a sequence of increasingly refined constructions in which the maximum change in the state variables between successive equilibrium states approaches zero. In particular, the temperature changes during both stages and the changes in specific volume approach zero. The ratios appearing in the summation consequently approach the specific heats and the local derivative of temperature with respect to specific volume at constant pressure:
 :::{math}
 \begin{aligned}
 \frac{(q)_{p_i}}{(\Delta T)_{p_i}}&\to c_p, 
@@ -341,23 +371,27 @@ At the limit where the number of sequential equilibrium states $N\to \infty$ gro
 &\frac{(\Delta T)_{p_i}}{(\Delta v)_{p_i}}&\to\left(\frac{\partial T}{\partial v}\right)_p
 \end{aligned}
 :::
-The sum of the changes in the state variables nevertheless remain finite. Consequently, the change in the internal energy become a path integral over a curve $C(t)\mapsto(p(t),T(t),v(t))$ that describes a path in the thermodynamic state variable space solely trough equilibrium states.
-:::{math}
-\Delta u\to \int_C\left[c_vdT+\left((c_p-c_v)\left(\frac{\partial T}{\partial v}\right)_p-p\right)dv\right] 
-:::
+Although the individual contribution approach zero, their accumulated sums remain finite. The sum for the accumulated heat per unit mass and the change in specific internal energy therefore becomes a line integrals along a continuous path $C$ through equilibrium states
 :::{math}
 \begin{aligned}
-\Delta p&\to \int_C dp\\
-\Delta T&\to \int_C dT\\
-\Delta v&\to \int_C dv\\
+q&=\int_C\left[c_vdT+(c_p-c_v)\left(\frac{\partial T}{\partial v}\right)_pdv\right]\\
+\Delta u&= q-\int_Cpdv 
 \end{aligned}
 :::
-In thermodynamics, such process is referred to as quasistatic. No real quasistatic processes exist in reality, though. An example that approximates such process is illustrated in {numref}`fig-quasistatic-process`.
+Similarly, the accumulated changes in pressure, temperature and specific volume become the line integrals
+:::{math}
+\Delta p=\int_C dp, \quad \Delta T=\int_C dT, \quad \Delta v=\int_C dv,
+:::
+where the differentials $dv$, $dp$, and $dT$ are related through the equilibrium equation of state as in {numref}`sec-beta-kappa`
+:::{math}
+dv=v\beta_pdT-v\kappa_Tdp.
+:::
+A process described by a continuous path through equilibrium states is referred to as a *quasistatic process*. It represents an idealization in which the substance passes through a continuous succession of equilibrium states. Such a process can be approximated experimentally by sufficiently slow changes in the external conditions, allowing the substance to remain close to equilibrium throughout the process. An example of an experimental arrangement that approximates a quasistatic process is illustrated in {numref}`fig-quasistatic-process`. 
 :::{figure} ./figs/fig-quasistatic-process.svg
 :label: fig-quasistatic-process
 :align: center
 :width: 90%
-Sand is slowly poured from a beaker onto the piston-like lid of a cylinder containing a substance, gradually increasing the external load. Heating or cooling may be applied simultaneously. The slow loading and moderate heating or cooling allows the substance to remain close to mechanical and thermodynamical equilibrium at all times, with nearly uniform pressure and only small spatial variations in its thermodynamic state.
+Sand is slowly poured from a beaker onto the piston-like lid of a cylinder containing a substance, gradually increasing the external load. Heating or cooling may be applied simultaneously. If the loading and heating or cooling are sufficiently gradual, the substance remains close to mechanical and thermodynamic equilibrium, with nearly uniform pressure and only small spatial variations in its thermodynamic state.
 ::::
 
 
